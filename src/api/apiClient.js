@@ -42,10 +42,10 @@ apiClient.interceptors.response.use(
           });
 
           // Save new tokens
-          setTokens(data.token, data.refresh);
-          
+          setTokens(data?.access?.token, data?.refresh?.token);
+
           // Retry the original request with new access token
-          originalRequest.headers["Authorization"] = `Bearer ${data.token}`;
+          originalRequest.headers["Authorization"] = `Bearer ${data?.access?.token}`;
           return apiClient(originalRequest);
         } catch (refreshError) {
           // Clear tokens if refresh fails and redirect to login
