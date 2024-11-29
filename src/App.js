@@ -99,8 +99,9 @@ export default function App() {
     document.scrollingElement.scrollTop = 0;
   }, [pathname]);
 
+  const language = localStorage.getItem("language");
+
   useEffect(() => {
-    const language = localStorage.getItem("language");
     if (language === "ar" || language === "fr") {
       i18n.changeLanguage(language);
     }
@@ -110,7 +111,7 @@ export default function App() {
     } else {
       setDirection(dispatch, "rtl");
     }
-  }, [])
+  }, [language])
 
   const getRoutes = (allRoutes) =>
     allRoutes.map((route) => {

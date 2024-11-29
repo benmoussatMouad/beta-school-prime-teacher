@@ -15,7 +15,7 @@ export const AuthProvider = ({ children }) => {
   const [isLoading, setLoading] = useState(true);
 
   const token = getAccessToken()
-  const { data } = useProfile(token)
+  const { data, isLoading: dataLoading } = useProfile(token)
 
 
   const [user, setUser] = useState(null);
@@ -30,11 +30,15 @@ export const AuthProvider = ({ children }) => {
     setIsAuthenticated(false)
   };
 
+  useEffect(() => {
+    if (!dataLoading) {
+      setLoading(false)
+    }
+  }, [dataLoading])
 
   useEffect(() => {
     if (data?.user) {
       setUser(data);
-      setLoading(false)
       setIsAuthenticated(true)
     }
   }, [data])
