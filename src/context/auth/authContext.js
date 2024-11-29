@@ -1,4 +1,3 @@
-import { useCheckToken } from "api/auth/checkToken";
 import { useProfile } from "api/teacher/profile";
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
@@ -12,33 +11,37 @@ const AuthContext = createContext(undefined);
 export const AuthProvider = ({ children }) => {
   // Initialize state with user data from localStorage (if it exists)
 
-  const history = useHistory();
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isLoading, setLoading] = useState(true);
+
   const token = getAccessToken()
-  const { data, isLoading } = useProfile(token)
+  const { data } = useProfile(token)
 
 
   const [user, setUser] = useState(null);
 
   const login = (userData) => {
     setUser(userData);
-    history.push("/dashboard");
+    setIsAuthenticated(true)
   };
 
   const logout = () => {
     setUser(null);
-    history.push("/");
+    setIsAuthenticated(false)
   };
 
 
   useEffect(() => {
-    if (data) {
+    if (data?.user) {
       setUser(data);
+      setLoading(false)
+      setIsAuthenticated(true)
     }
   }, [data])
 
 
   return (
-    <AuthContext.Provider value={{ user, login, logout, isLoading }}>
+    <AuthContext.Provider value={{ user, login, logout, isLoading, isAuthenticated }}>
       {children}
     </AuthContext.Provider>
   );
