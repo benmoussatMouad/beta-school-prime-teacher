@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import { Card, IconButton, Grid, Switch } from "@mui/material";
+import { Card, IconButton, Grid } from "@mui/material";
 import VuiBox from "components/VuiBox";
 import VuiTypography from "components/VuiTypography";
 import VuiInput from "components/VuiInput";
@@ -15,7 +15,6 @@ const UpdateProfile = () => {
 	const { t } = useTranslation();
 
 	const [showPassword, setShowPassword] = useState(false);
-	const [rememberMe, setRememberMe] = useState(false);
 
 	const {
 		handleSubmit,
@@ -38,11 +37,6 @@ const UpdateProfile = () => {
 		// Add your API call or logic here
 	};
 
-	const handleSetRememberMe = () => {
-		setRememberMe(!rememberMe);
-	};
-
-
 	return (
 		<Card
 			sx={({ breakpoints }) => ({
@@ -63,7 +57,7 @@ const UpdateProfile = () => {
 				<VuiBox component="form" onSubmit={handleSubmit(onSubmit)} role="form">
 					<Grid container spacing={2}>
 						{/* Email Field */}
-						<Grid item xs={4}>
+						<Grid item xs={12} sm={6} md={4}>
 							<VuiBox>
 								<VuiTypography
 									component="label"
@@ -75,8 +69,10 @@ const UpdateProfile = () => {
 								</VuiTypography>
 								<VuiInput
 									{...register("email", {
-										required: t("validation.required_email"),
-										pattern: { value: /^\S+@\S+$/, message: t("validation.invalid_email") },
+										pattern: {
+											value: /^\S+@\S+$/,
+											message: t("validation.invalid_email"),
+										},
 									})}
 									placeholder={t("placeholder.email")}
 									type="email"
@@ -90,10 +86,8 @@ const UpdateProfile = () => {
 							</VuiBox>
 						</Grid>
 
-
-
 						{/* First Name Field */}
-						<Grid item xs={4}>
+						<Grid item xs={12} sm={6} md={4}>
 							<VuiBox>
 								<VuiTypography
 									component="label"
@@ -104,23 +98,16 @@ const UpdateProfile = () => {
 									{t("forms.firstName")}
 								</VuiTypography>
 								<VuiInput
-									{...register("firstName", {
-										required: t("validation.required_firstName"),
-									})}
+									{...register("firstName")}
 									placeholder={t("placeholder.firstName")}
 									type="text"
 									error={!!errors.firstName}
 								/>
-								{errors.firstName && (
-									<VuiTypography variant="caption" color="error">
-										{errors.firstName.message}
-									</VuiTypography>
-								)}
 							</VuiBox>
 						</Grid>
 
 						{/* Last Name Field */}
-						<Grid item xs={4}>
+						<Grid item xs={12} sm={6} md={4}>
 							<VuiBox>
 								<VuiTypography
 									component="label"
@@ -131,23 +118,16 @@ const UpdateProfile = () => {
 									{t("signup.forms.lastName")}
 								</VuiTypography>
 								<VuiInput
-									{...register("lastName", {
-										required: t("validation.required_lastName"),
-									})}
+									{...register("lastName")}
 									placeholder={t("placeholder.lastName")}
 									type="text"
 									error={!!errors.lastName}
 								/>
-								{errors.lastName && (
-									<VuiTypography variant="caption" color="error">
-										{errors.lastName.message}
-									</VuiTypography>
-								)}
 							</VuiBox>
 						</Grid>
 
 						{/* Password Field */}
-						<Grid item xs={4}>
+						<Grid item xs={12} sm={6} md={4}>
 							<VuiBox>
 								<VuiTypography
 									component="label"
@@ -159,8 +139,10 @@ const UpdateProfile = () => {
 								</VuiTypography>
 								<VuiInput
 									{...register("password", {
-										required: t("validation.required_password"),
-										minLength: { value: 6, message: t("validation.min_length_password") },
+										minLength: {
+											value: 6,
+											message: t("validation.min_length_password"),
+										},
 									})}
 									placeholder={t("placeholder.password")}
 									type={showPassword ? "text" : "password"}
@@ -187,7 +169,7 @@ const UpdateProfile = () => {
 						</Grid>
 
 						{/* Phone Field */}
-						<Grid item xs={4}>
+						<Grid item xs={12} sm={6} md={4}>
 							<VuiBox>
 								<VuiTypography
 									component="label"
@@ -206,7 +188,7 @@ const UpdateProfile = () => {
 						</Grid>
 
 						{/* Institution Field */}
-						<Grid item xs={4}>
+						<Grid item xs={12} sm={6} md={4}>
 							<VuiBox>
 								<VuiTypography
 									component="label"
@@ -223,7 +205,6 @@ const UpdateProfile = () => {
 								/>
 							</VuiBox>
 						</Grid>
-
 
 						{/* Submit Button */}
 						<Grid item xs={12}>

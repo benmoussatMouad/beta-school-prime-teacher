@@ -84,7 +84,7 @@ function ResetPassword() {
                         <VuiInput
                             {...register("password", {
                                 required: "Password is required",
-                                minLength: { value: 6, message: "Password must be at least 6 characters long" },
+                                minLength: { value: 6, message: "Le mot de passe doit comporter au moins 6 caractères" },
                             })}
                             type={showPassword ? "text" : "password"}
                             placeholder={t('placeholder.password')}
@@ -109,7 +109,7 @@ function ResetPassword() {
                         <VuiInput
                             {...register("confirmPassword", {
                                 required: "Confirm password is required",
-                                minLength: { value: 6, message: "Password must be at least 6 characters long" },
+                                minLength: { value: 6, message: "Le mot de passe doit comporter au moins 6 caractères" },
                             })}
                             type={showConfirmPassword ? "text" : "password"}
                             placeholder={t('placeholder.password')}

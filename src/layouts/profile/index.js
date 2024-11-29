@@ -42,7 +42,7 @@ import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
 import Header from "layouts/profile/components/Header";
 import PlatformSettings from "layouts/profile/components/PlatformSettings";
 import Welcome from "../profile/components/Welcome/index";
-import CarInformations from "./components/UpdateProfile";
+import UpdateInformations from "./components/UpdateProfile";
 import { useAuth } from "context/auth/authContext";
 import { useTranslation } from "react-i18next";
 import { Chip } from "@mui/material";
@@ -91,7 +91,7 @@ function Overview() {
               },
             })}
           >
-            <CarInformations />
+            <UpdateInformations />
           </Grid>
           <Grid
             item

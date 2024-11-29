@@ -161,7 +161,7 @@ function SignUp() {
             <VuiInput
               {...register("password", {
                 required: "Le mot de passe est requis.",
-                minLength: { value: 6, message: "Password must be at least 6 characters." },
+                minLength: { value: 6, message: "Le mot de passe doit comporter au moins 6 caractères" },
               })}
               placeholder={t("signup.placeholder.password")}
               type={showPassword ? "text" : "password"}
