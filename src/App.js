@@ -102,6 +102,11 @@ export default function App() {
   const language = localStorage.getItem("language");
 
   useEffect(() => {
+
+    if (!language) {
+      localStorage.setItem("language", "fr")
+    }
+
     if (language === "ar" || language === "fr") {
       i18n.changeLanguage(language);
     }
