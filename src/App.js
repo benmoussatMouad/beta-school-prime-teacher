@@ -49,6 +49,7 @@ import { useTranslation } from "react-i18next";
 import { useAuth } from "context/auth/authContext";
 import { Box, CircularProgress } from "@mui/material";
 import colors from "assets/theme/base/colors";
+import { setDirection } from "context";
 
 const { dark } = colors
 
@@ -103,6 +104,12 @@ export default function App() {
     if (language === "ar" || language === "fr") {
       i18n.changeLanguage(language);
     }
+
+    if (language === "fr") {
+      setDirection(dispatch, "ltr");
+    } else {
+      setDirection(dispatch, "rtl");
+    }
   }, [])
 
   const getRoutes = (allRoutes) =>
@@ -149,13 +156,11 @@ export default function App() {
 
       return null;
     });
-
   if (isLoading) {
     return <Box sx={{ display: "flex", background: dark.body, alignItems: "center", justifyContent: "center", position: "fixed", zIndex: 30, top: 0, left: 0, width: "100%", height: "100%" }} >
       <CircularProgress color={"info"} />
     </Box>
   }
-
   return direction === "rtl" ? (
     <CacheProvider value={rtlCache}>
       <ThemeProvider theme={themeRTL}>

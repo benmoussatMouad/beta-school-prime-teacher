@@ -60,6 +60,7 @@ import team2 from "assets/images/team-2.jpg";
 import logoSpotify from "assets/images/small-logos/logo-spotify.svg";
 import { useLogout } from "api";
 import { getRefreshToken } from "utils";
+import i18n from "i18n";
 
 function DashboardNavbar({ absolute, light, isMini, pageName }) {
   const [navbarType, setNavbarType] = useState();
@@ -147,8 +148,12 @@ function DashboardNavbar({ absolute, light, isMini, pageName }) {
   const translate = () => {
     if (controller.direction === "rtl") {
       setDirection(dispatch, "ltr");
+      i18n.changeLanguage("fr");
+      localStorage.setItem('language', "fr");
     } else {
       setDirection(dispatch, "rtl");
+      i18n.changeLanguage("ar");
+      localStorage.setItem('language', "ar");
     }
   };
 

@@ -55,6 +55,7 @@
     "description": "Entrez et confirmez votre nouveau mot de passe"
   },
   "forms": {
+    "fullName":"Nom complet",
     "firstName": "Prénom",
     "lastName": "Nom de famille",
     "email": "Email",
@@ -63,12 +64,22 @@
     "newPassword": "Nouveau mot de passe",
     "subject": "Matière",
     "school": "L'établissement",
+    "institution": "L'établissement",
     "years": "Années d'expérience ",
-    "upload": "Charger un avatar"
+    "upload": "Charger un avatar",
+    "yearsOfExperience":"Années d'expérience",
+    "phone": "mobile",
+    "isEmailVerified":"Email vérifié"
   },
   "placeholder": {
+    "firstName": "Votre prénom",
+    "lastName": "Votre nom de famille",
     "email": "Votre email",
-    "password": "Votre mot de passe"
+    "password": "Votre password",
+    "subject": "Votre matière",
+    "school": "Votre l'établissement",
+    "years": "Votre années d'expérience",
+    "phone": "Votre mobile"
   },
   "button": {
     "next": "Suivant",
@@ -78,5 +89,16 @@
     "forgetButton01": "Réessayez dans",
     "forgetButton02": "Envoyer le lien de réinitialisation",
     "reset": "Réinitialiser le mot de passe"
+  },
+  "profile": {
+    "title": "Mettre à jour les informations",
+    "subtitle": "Vous pouvez mettre à jour en remplissant le formulaire",
+    "welcome": "Bienvenue !",
+    "description": "Mise à jour de l'image",
+    "card": {
+      "title": "Informations sur le profil",
+      "unVerified": "Non vérifié",
+      "Verified": "Vérifié"
+    }
   }
 }

@@ -1,4 +1,5 @@
 import { useCheckToken } from "api/auth/checkToken";
+import { useProfile } from "api/teacher/profile";
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { getAccessToken } from "utils";
@@ -13,7 +14,7 @@ export const AuthProvider = ({ children }) => {
 
   const history = useHistory();
   const token = getAccessToken()
-  const { data, isLoading } = useCheckToken(token)
+  const { data, isLoading } = useProfile(token)
 
 
   const [user, setUser] = useState(null);
@@ -31,7 +32,7 @@ export const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     if (data) {
-      setUser(data.user);
+      setUser(data);
     }
   }, [data])
 

@@ -42,9 +42,17 @@ import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
 import Header from "layouts/profile/components/Header";
 import PlatformSettings from "layouts/profile/components/PlatformSettings";
 import Welcome from "../profile/components/Welcome/index";
-import CarInformations from "./components/CarInformations";
+import CarInformations from "./components/UpdateProfile";
+import { useAuth } from "context/auth/authContext";
+import { useTranslation } from "react-i18next";
+import { Chip } from "@mui/material";
 
 function Overview() {
+
+  const { t } = useTranslation()
+  const context = useAuth()
+
+
   return (
     <DashboardLayout>
       <Header pageName={"Profile"} />
@@ -97,31 +105,16 @@ function Overview() {
             })}
           >
             <ProfileInfoCard
-              title="profile information"
+              title={t('profile.card.title')}
               description="Hi, I’m Mark Johnson, Decisions: If you can’t decide, the answer is no. If two equally difficult paths, choose the one more painful in the short term (pain avoidance is creating an illusion of equality)."
               info={{
-                fullName: "Mark Johnson",
-                mobile: "(44) 123 1234 123",
-                email: "mark@simmmple.com",
-                location: "United States",
+                [t('forms.fullName')]: `${context.user.user.firstName}  ${context.user.user.lastName}`,
+                [t('forms.email')]: context.user.user.email,
+                [t('forms.institution')]: context.user.teacher.institution,
+                [t('forms.subject')]: context.user.teacher.subject,
+                [t('forms.yearsOfExperience')]: context.user.teacher.yearsOfExperience,
+                [t('forms.isEmailVerified')]: context.user.user.isEmailVerified ? t('profile.card.Verified') : t('profile.card.unVerified'),
               }}
-              social={[
-                {
-                  link: "https://www.facebook.com/CreativeTim/",
-                  icon: <FacebookIcon />,
-                  color: "facebook",
-                },
-                {
-                  link: "https://twitter.com/creativetim",
-                  icon: <TwitterIcon />,
-                  color: "twitter",
-                },
-                {
-                  link: "https://www.instagram.com/creativetimofficial/",
-                  icon: <InstagramIcon />,
-                  color: "instagram",
-                },
-              ]}
             />
           </Grid>
         </Grid>

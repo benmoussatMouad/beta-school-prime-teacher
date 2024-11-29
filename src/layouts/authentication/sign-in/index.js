@@ -156,7 +156,8 @@ function SignIn() {
               </VuiTypography>
             </VuiTypography>
           </VuiBox>
-        </VuiBox>}
+        </VuiBox>
+      }
     </CoverLayout>
   );
 }

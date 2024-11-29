@@ -1,28 +1,52 @@
-/*!
-
-=========================================================
-* Vision UI Free React - v1.0.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/vision-ui-free-react
-* Copyright 2021 Creative Tim (https://www.creative-tim.com/)
-* Licensed under MIT (https://github.com/creativetimofficial/vision-ui-free-react/blob/master LICENSE.md)
-
-* Design and Coded by Simmmple & Creative Tim
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-*/
-
-import React from "react";
-import { Card, Icon } from "@mui/material";
+import React, { useState } from "react";
+import { Avatar, Box, Card, Popover, Typography, MenuItem } from "@mui/material";
 import welcome from "assets/images/welcome-profile.png";
-import VuiTypography from "components/VuiTypography/index";
-import VuiBox from "components/VuiBox/index";
+import VuiTypography from "components/VuiTypography";
+import VuiBox from "components/VuiBox";
+import { FaRegEdit } from "react-icons/fa";
+import avatar1 from "assets/images/avatar1.png";
+import VuiButton from "components/VuiButton";
+import colors from "assets/theme/base/colors";
+import { useTranslation } from "react-i18next";
+
+const { dark } = colors;
 
 const Welcome = () => {
+  const [anchorEl, setAnchorEl] = useState(null); // Popover state
+  const [image, setImage] = useState(avatar1); // State to store the image
+  const [selectedFile, setSelectedFile] = useState(null); // To keep track of the selected file
+	const { t } = useTranslation();
+
+  const handleOpen = (event) => {
+    setAnchorEl(event.currentTarget); // Set the element that opens the popover
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null); // Close the popover
+  };
+
+  const open = Boolean(anchorEl); // Check if the popover is open
+
+  const handleUpdate = () => {
+    // Trigger file input when "Update Picture" is clicked
+    document.getElementById("file-input").click();
+  };
+
+  const handleFileChange = (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      // Create an object URL to display the image
+      setImage(URL.createObjectURL(file));
+      setSelectedFile(file);
+      handleClose(); // Close popover after selecting the image
+    }
+  };
+
+  const handleDelete = () => {
+    setImage(avatar1); // Reset to default image
+    handleClose();
+  };
+
   return (
     <Card
       sx={({ breakpoints }) => ({
@@ -35,45 +59,62 @@ const Welcome = () => {
         },
       })}
     >
-      <VuiBox display="flex" flexDirection="column" sx={{ height: "100%" }}>
-        <VuiBox display="flex" flexDirection="column" mb="auto">
+      <VuiBox display="flex" flexDirection="column">
+        <VuiBox display="flex" flexDirection="column">
           <VuiTypography color="white" variant="h3" fontWeight="bold" mb="3px">
-            Welcome back!
+            {t('profile.welcome')}
           </VuiTypography>
           <VuiTypography color="white" variant="button" fontWeight="regular">
-            Nice to see you, Mark Johnson!
-          </VuiTypography>
-        </VuiBox>
-        <VuiBox justifySelf="flex-end">
-          <VuiTypography
-            component="a"
-            href="#"
-            variant="button"
-            color="white"
-            fontWeight="regular"
-            sx={{
-              mr: "5px",
-              display: "inline-flex",
-              alignItems: "center",
-              justifySelf: "flex-end",
-              cursor: "pointer",
-
-              "& .material-icons-round": {
-                fontSize: "1.125rem",
-                transform: `translate(2px, -0.5px)`,
-                transition: "transform 0.2s cubic-bezier(0.34,1.61,0.7,1.3)",
-              },
-
-              "&:hover .material-icons-round, &:focus  .material-icons-round": {
-                transform: `translate(6px, -0.5px)`,
-              },
-            }}
-          >
-            Tap to record
-            <Icon sx={{ fontWeight: "bold", ml: "5px" }}>arrow_forward</Icon>
+          {t('profile.description')}
           </VuiTypography>
         </VuiBox>
       </VuiBox>
+      <Box sx={{ height: "100%", display: "flex", alignItems: "center", justifyContent: "center" }}>
+        <Box sx={{ display: "flex", alignItems: "center", justifyContent: "center", position: "relative" }}>
+          <Avatar sx={{ width: "70%", height: "75%" }} src={image} />
+          <VuiButton
+            style={{
+              position: "absolute",
+              width: "10px",
+              right: "20%",
+              bottom: 0,
+            }}
+            color="info"
+            onClick={handleOpen}
+          >
+            <FaRegEdit />
+          </VuiButton>
+
+          {/* Popover for update/delete options */}
+          <Popover
+            open={open}
+            anchorEl={anchorEl}
+            onClose={handleClose}
+            anchorOrigin={{
+              vertical: "top",
+              horizontal: "center",
+            }}
+            transformOrigin={{
+              vertical: "bottom",
+              horizontal: "center",
+            }}
+          >
+            <VuiBox bgColor={dark.body} style={{ borderRadius: "10px", padding: "5px" }} p={2}>
+              <MenuItem onClick={handleUpdate}>Update Picture</MenuItem>
+              <MenuItem onClick={handleDelete}>Delete Picture</MenuItem>
+            </VuiBox>
+          </Popover>
+        </Box>
+      </Box>
+
+      {/* Hidden file input for image selection */}
+      <input
+        type="file"
+        id="file-input"
+        style={{ display: "none" }}
+        accept="image/*"
+        onChange={handleFileChange}
+      />
     </Card>
   );
 };

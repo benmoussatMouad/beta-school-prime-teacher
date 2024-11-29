@@ -65,7 +65,7 @@ function Header({ pageName }) {
   return (
     <VuiBox position="relative">
       <DashboardNavbar pageName={pageName} light />
-      <Card
+      {/*<Card
         sx={{
           px: 3,
           mt: 2,
@@ -147,7 +147,7 @@ function Header({ pageName }) {
             </AppBar>
           </Grid>
         </Grid>
-      </Card>
+      </Card>*/}
     </VuiBox>
   );
 }

@@ -40,7 +40,7 @@ function ProfileInfoCard({ title, description, info, social }) {
   Object.keys(info).forEach((el) => {
     if (el.match(/[A-Z\s]+/)) {
       const uppercaseLetter = Array.from(el).find((i) => i.match(/[A-Z]+/));
-      const newElement = el.replace(uppercaseLetter, ` ${uppercaseLetter.toLowerCase()}`);
+      const newElement = el.replace(uppercaseLetter, ` ${uppercaseLetter?.toLowerCase()}`);
 
       labels.push(newElement);
     } else {
@@ -63,23 +63,6 @@ function ProfileInfoCard({ title, description, info, social }) {
     </VuiBox>
   ));
 
-  // Render the card social media icons
-  const renderSocial = social.map(({ link, icon, color }) => (
-    <VuiBox
-      key={color}
-      component="a"
-      href={link}
-      target="_blank"
-      rel="noreferrer"
-      fontSize={size.lg}
-      color="white"
-      pr={1}
-      pl={0.5}
-      lineHeight={1}
-    >
-      {icon}
-    </VuiBox>
-  ));
 
   return (
     <Card
@@ -103,17 +86,6 @@ function ProfileInfoCard({ title, description, info, social }) {
         </VuiBox>
         <VuiBox>
           {renderItems}
-          <VuiBox display="flex" py={1} pr={2} color="white">
-            <VuiTypography
-              variant="button"
-              fontWeight="regular"
-              color="text"
-              textTransform="capitalize"
-            >
-              social: &nbsp;
-            </VuiTypography>
-            {renderSocial}
-          </VuiBox>
         </VuiBox>
       </VuiBox>
     </Card>
