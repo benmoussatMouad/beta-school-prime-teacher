@@ -117,7 +117,7 @@ const Welcome = () => {
       </VuiBox>
       <Box sx={{ height: "100%", display: "flex", alignItems: "center", justifyContent: "center" }}>
         <Box sx={{ display: "flex", alignItems: "center", justifyContent: "center", position: "relative", width: "70%", height: "210px" }}>
-          <Avatar sx={{ width: "100%", height: "100%", '& img': { height: "100%", objectFit: 'cover' } }} src={avatarUrl} />
+          <Avatar sx={{ width: "100%", height: "100%", maxWidth: '210px', '& img': { height: "100%", objectFit: 'cover' } }} src={avatarUrl} />
           <VuiButton
             style={{
               position: "absolute",

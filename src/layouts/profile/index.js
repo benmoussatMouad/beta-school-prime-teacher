@@ -83,19 +83,6 @@ function Overview() {
           <Grid
             item
             xs={12}
-            xl={5}
-            xxl={6}
-            sx={({ breakpoints }) => ({
-              [breakpoints.only("xl")]: {
-                gridArea: "2 / 1 / 3 / 3",
-              },
-            })}
-          >
-            <UpdateInformations />
-          </Grid>
-          <Grid
-            item
-            xs={12}
             xl={3}
             xxl={3}
             sx={({ breakpoints }) => ({
@@ -116,6 +103,19 @@ function Overview() {
                 [t('forms.isEmailVerified')]: context.user.user.isEmailVerified ? t('profile.card.Verified') : t('profile.card.unVerified'),
               }}
             />
+          </Grid>
+          <Grid
+            item
+            xs={12}
+            xl={5}
+            xxl={6}
+            sx={({ breakpoints }) => ({
+              [breakpoints.only("xl")]: {
+                gridArea: "2 / 1 / 3 / 3",
+              },
+            })}
+          >
+            <UpdateInformations />
           </Grid>
         </Grid>
       </VuiBox>

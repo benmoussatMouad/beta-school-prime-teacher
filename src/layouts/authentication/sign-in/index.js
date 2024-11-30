@@ -8,6 +8,7 @@ import VuiButton from "components/VuiButton";
 import VuiSwitch from "components/VuiSwitch";
 import CoverLayout from "layouts/authentication/components/CoverLayout";
 import bgSignIn from "assets/images/signInImage.png";
+import logo from "assets/images/logos/logo-white.png";
 import IconButton from "@mui/material/IconButton";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import Visibility from "@mui/icons-material/Visibility";
@@ -58,7 +59,6 @@ function SignIn() {
         </VuiBox> :
         <VuiBox component="form" onSubmit={handleSubmit(onSubmit)} role="form">
           {/* Email Field */}
-
           <Translator />
           <VuiBox mb={2}>
             <VuiBox>

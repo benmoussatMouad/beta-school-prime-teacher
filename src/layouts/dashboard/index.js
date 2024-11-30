@@ -18,7 +18,6 @@
 
 // @mui material components
 import Grid from "@mui/material/Grid";
-import { Card } from "@mui/material";
 
 // Vision UI Dashboard React components
 import VuiBox from "components/VuiBox";
@@ -59,7 +58,7 @@ function Dashboard() {
         <VuiBox mb={3}>
           <Grid container spacing="18px">
             <Grid item xs={12} md={6} lg={6} xl={5}>
-              <WelcomeMark />
+              <WelcomeMark user={user} />
             </Grid>
             <Grid item xs={12} md={6} lg={3} xl={4}>
               <VuiBox mb={0}>
@@ -96,31 +95,31 @@ function Dashboard() {
             </Grid>
           </Grid>
         </VuiBox>
-        <VuiBox mb={3}>
-          <Grid item xs={12} lg={6} xl={7}>
-            <Card>
-              <VuiBox sx={{ height: "100%" }}>
-                <VuiTypography variant="lg" color="white" fontWeight="bold" mb="5px">
-                  Sales Overview
-                </VuiTypography>
-                <VuiBox display="flex" alignItems="center" mb="40px">
-                  <VuiTypography variant="button" color="success" fontWeight="bold">
-                    +5% more{" "}
-                    <VuiTypography variant="button" color="text" fontWeight="regular">
-                      in 2021
-                    </VuiTypography>
-                  </VuiTypography>
-                </VuiBox>
-                <VuiBox sx={{ height: "310px" }}>
-                  <LineChart
-                    lineChartData={lineChartDataDashboard}
-                    lineChartOptions={lineChartOptionsDashboard}
-                  />
-                </VuiBox>
-              </VuiBox>
-            </Card>
-          </Grid>
-        </VuiBox>
+        {/*<VuiBox mb={3}>*/}
+        {/*  <Grid item xs={12} lg={6} xl={7}>*/}
+        {/*    <Card>*/}
+        {/*      <VuiBox sx={{ height: "100%" }}>*/}
+        {/*        <VuiTypography variant="lg" color="white" fontWeight="bold" mb="5px">*/}
+        {/*          Sales Overview*/}
+        {/*        </VuiTypography>*/}
+        {/*        <VuiBox display="flex" alignItems="center" mb="40px">*/}
+        {/*          <VuiTypography variant="button" color="success" fontWeight="bold">*/}
+        {/*            +5% more{" "}*/}
+        {/*            <VuiTypography variant="button" color="text" fontWeight="regular">*/}
+        {/*              in 2021*/}
+        {/*            </VuiTypography>*/}
+        {/*          </VuiTypography>*/}
+        {/*        </VuiBox>*/}
+        {/*        <VuiBox sx={{ height: "310px" }}>*/}
+        {/*          <LineChart*/}
+        {/*            lineChartData={lineChartDataDashboard}*/}
+        {/*            lineChartOptions={lineChartOptionsDashboard}*/}
+        {/*          />*/}
+        {/*        </VuiBox>*/}
+        {/*      </VuiBox>*/}
+        {/*    </Card>*/}
+        {/*  </Grid>*/}
+        {/*</VuiBox>*/}
         <Grid container spacing={3} direction="row" justifyContent="center" alignItems="stretch">
           <Grid item xs={12} md={6} lg={8}>
             <Projects />

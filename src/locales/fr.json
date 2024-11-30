@@ -1,38 +1,47 @@
 {
-  "signup": {
-    "welcome": "Bienvenue !",
-    "description": "Créez un nouveau compte à l'aide de ces formulaires.",
-    "premotto": "",
-    "motto": "PLATFORME POUR ENSEIGNANTS",
-    "forms": {
-      "firstName": "Prénom",
-      "lastName": "Nom de famille",
-      "email": "Email",
-      "password": "Password",
-      "subject": "Matière",
-      "school": "L'établissement",
-      "years": "Années d'expérience ",
-      "upload": "Charger un avatar"
-    },
-    "stepper": {
-      "personal": "Personal Details",
-      "personalPro": "Professional Details",
-      "upload": "Upload Photo"
-    },
-    "placeholder": {
-      "firstName": "Votre prénom",
-      "lastName": "Votre nom de famille",
-      "email": "Votre email",
-      "password": "Votre password",
-      "subject": "Votre matière",
-      "school": "Votre l'établissement",
-      "years": "Votre qnnées d'expérience"
-    },
-    "already": "Vous avez un compte ?",
-    "signin": "S'inscrire"
+  "banner": {
+    "button": "Vérifier Email",
+    "title": "Votre email n'est pas encore vérifié !"
+  },
+  "button": {
+    "back": "Retour",
+    "buttonCooldown": "Temps de recharge",
+    "cancel": "Annuler",
+    "confirm": "Confirmer",
+    "forgetButton01": "Réessayez dans",
+    "forgetButton02": "Envoyer le lien de réinitialisation",
+    "next": "Suivant",
+    "reset": "Réinitialiser le mot de passe",
+    "signin": "Se Connecter",
+    "submit": "Soumettre"
+  },
+  "dialog": {
+    "description": "Cette action modifiera votre photo de profil. Voulez-vous continuer ?",
+    "title": "Êtes-vous sûr de vouloir mettre à jour votre photo de profil ?"
+  },
+  "forgetPassword": {
+    "description": "Enter your email address and we’ll send you instructions to reset your password",
+    "forget": "Vous avez oublié votre mot de passe ?"
+  },
+  "forms": {
+    "confirmPassword": "Confirmer le mot de passe",
+    "email": "Email",
+    "firstName": "Prénom",
+    "fullName": "Nom complet",
+    "institution": "L'établissement",
+    "isEmailVerified": "Email vérifié",
+    "lastName": "Nom de famille",
+    "newPassword": "Nouveau mot de passe",
+    "password": "le mot de passe",
+    "phone": "mobile",
+    "school": "L'établissement",
+    "subject": "Matière",
+    "upload": "Charger un avatar",
+    "years": "Années d'expérience ",
+    "yearsOfExperience": "Années d'expérience"
   },
   "login": {
-    "welcome": "Ravi de vous voir !",
+    "already": "Vous n'avez pas de compte ?",
     "description": "Saisissez votre adresse électronique et votre mot de passe pour vous connecter",
     "forms": {
       "email": "Email",
@@ -43,73 +52,64 @@
       "password": "Votre password"
     },
     "remember": "Souvenez-vous de moi",
-    "already": "Vous n'avez pas de compte ?",
-    "signin": "Inscrivez-vous"
-  },
-  "forgetPassword": {
-    "forget": "Vous avez oublié votre mot de passe ?",
-    "description": "Enter your email address and we’ll send you instructions to reset your password"
-  },
-  "resetPassword": {
-    "reset": "Réinitialiser votre mot de passe",
-    "description": "Entrez et confirmez votre nouveau mot de passe"
-  },
-  "forms": {
-    "fullName": "Nom complet",
-    "firstName": "Prénom",
-    "lastName": "Nom de famille",
-    "email": "Email",
-    "password": "le mot de passe",
-    "confirmPassword": "Confirmer le mot de passe",
-    "newPassword": "Nouveau mot de passe",
-    "subject": "Matière",
-    "school": "L'établissement",
-    "institution": "L'établissement",
-    "years": "Années d'expérience ",
-    "upload": "Charger un avatar",
-    "yearsOfExperience": "Années d'expérience",
-    "phone": "mobile",
-    "isEmailVerified": "Email vérifié"
+    "signin": "Inscrivez-vous",
+    "welcome": "Ravi de vous voir !"
   },
   "placeholder": {
+    "email": "Votre email",
     "firstName": "Votre prénom",
     "lastName": "Votre nom de famille",
-    "email": "Votre email",
     "password": "Votre password",
-    "subject": "Votre matière",
+    "phone": "Votre mobile",
     "school": "Votre l'établissement",
-    "years": "Votre années d'expérience",
-    "phone": "Votre mobile"
-  },
-  "button": {
-    "next": "Suivant",
-    "back": "Retour",
-    "submit": "Soumettre",
-    "signin": "S'inscrire",
-    "forgetButton01": "Réessayez dans",
-    "forgetButton02": "Envoyer le lien de réinitialisation",
-    "reset": "Réinitialiser le mot de passe",
-    "cancel": "Annuler",
-    "confirm": "Confirmer",
-    "buttonCooldown":"Temps de recharge"
+    "subject": "Votre matière",
+    "years": "Votre années d'expérience"
   },
   "profile": {
-    "title": "Mettre à jour les informations",
-    "subtitle": "Vous pouvez mettre à jour en remplissant le formulaire",
-    "welcome": "Bienvenue !",
-    "description": "Mise à jour de l'image",
     "card": {
+      "Verified": "Vérifié",
       "title": "Informations sur le profil",
-      "unVerified": "Non vérifié",
-      "Verified": "Vérifié"
-    }
+      "unVerified": "Non vérifié"
+    },
+    "description": "Mise à jour de l'image",
+    "subtitle": "Vous pouvez mettre à jour en remplissant le formulaire",
+    "title": "Mettre à jour les informations",
+    "welcome": "Bienvenue !"
   },
-  "dialog": {
-    "title": "Êtes-vous sûr de vouloir mettre à jour votre photo de profil ?",
-    "description": "Cette action modifiera votre photo de profil. Voulez-vous continuer ?"
+  "resetPassword": {
+    "description": "Entrez et confirmez votre nouveau mot de passe",
+    "reset": "Réinitialiser votre mot de passe"
   },
-  "banner": {
-    "title": "Votre email n'est pas encore vérifié !",
-    "button": "Vérifier Email"
+  "signup": {
+    "already": "Vous avez un compte ?",
+    "description": "Créez un nouveau compte à l'aide de ces formulaires.",
+    "forms": {
+      "email": "Email",
+      "firstName": "Prénom",
+      "lastName": "Nom de famille",
+      "password": "Password",
+      "school": "L'établissement",
+      "subject": "Matière",
+      "upload": "Charger un avatar",
+      "years": "Années d'expérience "
+    },
+    "motto": "PLATFORME POUR ENSEIGNANTS",
+    "placeholder": {
+      "email": "Votre email",
+      "firstName": "Votre prénom",
+      "lastName": "Votre nom de famille",
+      "password": "Votre password",
+      "school": "Votre l'établissement",
+      "subject": "Votre matière",
+      "years": "Votre qnnées d'expérience"
+    },
+    "premotto": "",
+    "signin": "S'inscrire",
+    "stepper": {
+      "personal": "Personal Details",
+      "personalPro": "Professional Details",
+      "upload": "Upload Photo"
+    },
+    "welcome": "Bienvenue !"
   }
 }

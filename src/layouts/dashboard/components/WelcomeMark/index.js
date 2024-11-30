@@ -8,7 +8,7 @@ import gif from "assets/images/zinou-la-colombe.png";
 import colors from "../../../../assets/theme/base/colors";
 import Box from "@mui/material/Box";
 
-const WelcomeMark = () => {
+const WelcomeMark = ({user}) => {
   const { black, gradients } = colors;
   const { card } = gradients;
 
@@ -22,10 +22,10 @@ const WelcomeMark = () => {
       <VuiBox height="100%" display="flex" flexDirection="column" justifyContent="space-between">
         <VuiBox sx={{ zIndex: "1" }}>
           <VuiTypography color="text" variant="button" fontWeight="regular" mb="12px">
-            Bienvenue,
+            Bienvenue
           </VuiTypography>
           <VuiTypography color="white" variant="h3" fontWeight="bold" mb="18px">
-            Zinou La Colombe
+            {user ? `${user.firstName} ${user.lastName}` : "Zinou La Colombe"}
           </VuiTypography>
           <VuiTypography color="text" variant="h6" fontWeight="regular" mb="auto">
             Glad to see you again!
