@@ -31,13 +31,17 @@ import Table from "examples/Tables/Table";
 // Data
 import authorsTableData from "./data/authorsTableData";
 import projectsTableData from "./data/projectsTableData";
+import { useAuth } from "context/auth/authContext";
 
 function Courses() {
+
+  const { user } = useAuth()
+
   const { columns, rows } = authorsTableData;
   const { columns: prCols, rows: prRows } = projectsTableData;
 
   return (
-    <DashboardLayout>
+    <DashboardLayout user={user} >
       <DashboardNavbar pageName={"Mes Cours"} />
       <VuiBox py={3}>
         <VuiBox mb={3}>

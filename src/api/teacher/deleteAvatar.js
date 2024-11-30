@@ -18,8 +18,6 @@ export function useDeleteAvatar() {
     return useMutation({
         mutationFn: createDeleteAvatarFn,
         onSuccess: (data) => {
-            console.log(data);
-
             // Update successful
             showSnackBar(dispatch, "Avatar deleted successfully!", "success");
 
@@ -40,8 +38,6 @@ export function useDeleteAvatar() {
                 err.response?.data?.message || "An unexpected error occurred.";
             showSnackBar(dispatch, errorMessage, "error");
 
-            // Optionally log the error for debugging purposes
-            console.error("Delete Avatar Error:", err);
             return err.response?.data;
         },
     });

@@ -90,7 +90,8 @@
     "forgetButton02": "Envoyer le lien de réinitialisation",
     "reset": "Réinitialiser le mot de passe",
     "cancel": "Annuler",
-    "confirm": "Confirmer"
+    "confirm": "Confirmer",
+    "buttonCooldown":"Temps de recharge"
   },
   "profile": {
     "title": "Mettre à jour les informations",
@@ -106,5 +107,9 @@
   "dialog": {
     "title": "Êtes-vous sûr de vouloir mettre à jour votre photo de profil ?",
     "description": "Cette action modifiera votre photo de profil. Voulez-vous continuer ?"
+  },
+  "banner": {
+    "title": "Votre email n'est pas encore vérifié !",
+    "button": "Vérifier Email"
   }
 }

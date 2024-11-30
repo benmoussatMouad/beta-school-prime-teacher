@@ -5,4 +5,5 @@ export * from "./refreshToken";
 
 export const authQueryKeys = {
   all: ["auth"],
+  teacher: "teacher"
 };

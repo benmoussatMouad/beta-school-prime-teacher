@@ -21,8 +21,6 @@ export function useUpdateProfile() {
             // Update successful
             showSnackBar(dispatch, "Profile updated successfully!", "success");
 
-            console.log(data);
-
             // Invalidate queries to ensure the UI reflects the updated data
             queryClient.invalidateQueries(teacherQueryKeys.all);
 
@@ -41,7 +39,6 @@ export function useUpdateProfile() {
             showSnackBar(dispatch, errorMessage, "error");
 
             // Optionally log the error for debugging purposes
-            console.error("Update Profile Error:", err);
             return err.response?.data;
         },
     });

@@ -35,7 +35,6 @@ export const getToken = () => {
 
         return null;
     } catch (error) {
-        console.error("Error retrieving token:", error);
         return null; // Return null in case of an error
     }
 };

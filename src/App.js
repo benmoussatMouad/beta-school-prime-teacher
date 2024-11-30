@@ -47,11 +47,8 @@ import ProtectedRoute from "providers/protectedRoute";
 import GuestRoute from "providers/guestRoute";
 import { useTranslation } from "react-i18next";
 import { useAuth } from "context/auth/authContext";
-import { Box, CircularProgress } from "@mui/material";
-import colors from "assets/theme/base/colors";
 import { setDirection } from "context";
 
-const { dark } = colors
 
 export default function App() {
   const [controller, dispatch] = useVisionUIController();

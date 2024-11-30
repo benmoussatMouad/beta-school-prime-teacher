@@ -44,13 +44,15 @@ import { FaShoppingCart } from "react-icons/fa";
 import LineChart from "examples/Charts/LineCharts/LineChart";
 import { lineChartDataDashboard } from "layouts/dashboard/data/lineChartData";
 import { lineChartOptionsDashboard } from "layouts/dashboard/data/lineChartOptions";
+import { useAuth } from "context/auth/authContext";
 
 
 function Dashboard() {
 
+  const { user } = useAuth()
 
   return (
-    <DashboardLayout>
+    <DashboardLayout user={user} >
       <DashboardNavbar pageName={"Tableau de bord"} />
       <VuiBox py={3}>
 

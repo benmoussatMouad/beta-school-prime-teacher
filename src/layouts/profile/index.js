@@ -54,7 +54,7 @@ function Overview() {
 
 
   return (
-    <DashboardLayout>
+    <DashboardLayout user={context.user} >
       <Header pageName={"Profile"} />
       <VuiBox mt={5} mb={3}>
         <Grid

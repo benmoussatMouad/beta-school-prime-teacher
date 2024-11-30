@@ -28,9 +28,10 @@ const Welcome = () => {
   const [image, setImage] = useState(user?.user?.profilePic || null); // State to store the image
   const [selectedFile, setSelectedFile] = useState(null); // To keep track of the selected file
   const [openDialog, setOpenDialog] = useState(false); // Dialog state for confirmation
+  const [openDeleteDialog, setOpenDeleteDialog] = useState(false); // State for delete confirmation dialog
   const { t } = useTranslation();
   const { mutate } = useUpdateProfile();
-  const { mutate: deletAvatarMutate } = useDeleteAvatar()
+  const { mutate: deletAvatarMutate } = useDeleteAvatar();
   const [avatarUrl, setAvatarUrl] = useState(user?.user?.profilePic?.url || image);
 
   const handleOpenPopover = (event) => {
@@ -55,9 +56,10 @@ const Welcome = () => {
   };
 
   const handleDelete = () => {
-    deletAvatarMutate()
+    deletAvatarMutate();
     setImage(null); // Reset to default image
-    handleClosePopover();
+    setOpenDeleteDialog(false); // Close delete confirmation dialog
+    handleClosePopover(); // Close popover
   };
 
   const handleUpdateProfilePicture = () => {
@@ -75,17 +77,21 @@ const Welcome = () => {
     }
   };
 
-  const publicUrl = getEnvSafely('REACT_APP_API_URL')
+  const handleDeleteDialogClose = (confirmed) => {
+    if (confirmed) {
+      handleDelete(); // Proceed with deleting the image
+    } else {
+      setOpenDeleteDialog(false); // Close the delete confirmation dialog
+    }
+  };
+
+  const publicUrl = getEnvSafely("REACT_APP_API_URL");
 
   useEffect(() => {
     if (user?.user?.profilePic?.url) {
-      setAvatarUrl(`${publicUrl}/${user.user.profilePic.url}`);
+      setAvatarUrl(`${user.user.profilePic.url}`);
     }
-  }, [user?.user?.profilePic?.url, publicUrl]);
-
-
-  console.log(avatarUrl);
-
+  }, [user?.user?.profilePic?.url]);
 
   return (
     <Card
@@ -102,16 +108,16 @@ const Welcome = () => {
       <VuiBox display="flex" flexDirection="column">
         <VuiBox display="flex" flexDirection="column">
           <VuiTypography color="white" variant="h3" fontWeight="bold" mb="3px">
-            {t('profile.welcome')}
+            {t("profile.welcome")}
           </VuiTypography>
           <VuiTypography color="white" variant="button" fontWeight="regular">
-            {t('profile.description')}
+            {t("profile.description")}
           </VuiTypography>
         </VuiBox>
       </VuiBox>
       <Box sx={{ height: "100%", display: "flex", alignItems: "center", justifyContent: "center" }}>
         <Box sx={{ display: "flex", alignItems: "center", justifyContent: "center", position: "relative", width: "70%", height: "210px" }}>
-          <Avatar sx={{ width: "100%", height: "100%" }} src={avatarUrl} />
+          <Avatar sx={{ width: "100%", height: "100%", '& img': { height: "100%", objectFit: 'cover' } }} src={avatarUrl} />
           <VuiButton
             style={{
               position: "absolute",
@@ -141,7 +147,7 @@ const Welcome = () => {
           >
             <VuiBox bgColor={dark.body} style={{ borderRadius: "10px", padding: "5px" }} p={2}>
               <MenuItem onClick={() => document.getElementById("file-input").click()}>Update Picture</MenuItem>
-              <MenuItem onClick={handleDelete}>Delete Picture</MenuItem>
+              <MenuItem onClick={() => setOpenDeleteDialog(true)}>Delete Picture</MenuItem>
             </VuiBox>
           </Popover>
         </Box>
@@ -156,38 +162,72 @@ const Welcome = () => {
         onChange={handleFileChange}
       />
 
-      {/* Confirmation Dialog */}
-      <Dialog sx={({ breakpoints, theme }) => ({
-        "& .MuiDialog-paper": {
-          display: "flex",
-          flexDirection: "column",
-          background: linearGradient(card.main, card.state, card.deg),
-          backdropFilter: "blur(120px)",
-          position: "relative",
-          minWidth: 0,
-          padding: "22px",
-          wordWrap: "break-word",
-          backgroundClip: "border-box",
-          border: `${borderWidth[0]} solid ${rgba(black.main, 0.125)}`,
-          borderRadius: borderRadius.xl,
-          boxShadow: xxl,
-        }
-      })}
+      {/* Update Picture Confirmation Dialog */}
+      <Dialog
+        sx={({ breakpoints, theme }) => ({
+          "& .MuiDialog-paper": {
+            display: "flex",
+            flexDirection: "column",
+            background: linearGradient(card.main, card.state, card.deg),
+            backdropFilter: "blur(120px)",
+            position: "relative",
+            minWidth: 0,
+            padding: "22px",
+            wordWrap: "break-word",
+            backgroundClip: "border-box",
+            border: `${borderWidth[0]} solid ${rgba(black.main, 0.125)}`,
+            borderRadius: borderRadius.xl,
+            boxShadow: xxl,
+          },
+        })}
         open={openDialog}
         onClose={() => setOpenDialog(false)}
       >
-        <DialogTitle color={"#ffffff"}>{t('dialog.title')}</DialogTitle>
+        <DialogTitle color={"#ffffff"}>{t("dialog.title")}</DialogTitle>
         <DialogContent>
-          <Typography color={"#ffffff"}>
-            {t('dialog.description')}
-          </Typography>
+          <Typography color={"#ffffff"}>{t("dialog.description")}</Typography>
         </DialogContent>
         <DialogActions>
           <VuiButton onClick={() => handleConfirmDialogClose(false)} color="secondary">
-            {t('button.cancel')}
+            {t("button.cancel")}
           </VuiButton>
           <VuiButton onClick={() => handleConfirmDialogClose(true)} color="info">
-            {t('button.confirm')}
+            {t("button.confirm")}
+          </VuiButton>
+        </DialogActions>
+      </Dialog>
+
+      {/* Delete Picture Confirmation Dialog */}
+      <Dialog
+        sx={({ breakpoints, theme }) => ({
+          "& .MuiDialog-paper": {
+            display: "flex",
+            flexDirection: "column",
+            background: linearGradient(card.main, card.state, card.deg),
+            backdropFilter: "blur(120px)",
+            position: "relative",
+            minWidth: 0,
+            padding: "22px",
+            wordWrap: "break-word",
+            backgroundClip: "border-box",
+            border: `${borderWidth[0]} solid ${rgba(black.main, 0.125)}`,
+            borderRadius: borderRadius.xl,
+            boxShadow: xxl,
+          },
+        })}
+        open={openDeleteDialog}
+        onClose={() => setOpenDeleteDialog(false)}
+      >
+        <DialogTitle color={"#ffffff"}>{t("dialog.title")}</DialogTitle>
+        <DialogContent>
+          <Typography color={"#ffffff"}>{t("dialog.description")}</Typography>
+        </DialogContent>
+        <DialogActions>
+          <VuiButton onClick={() => handleDeleteDialogClose(false)} color="secondary">
+            {t("button.cancel")}
+          </VuiButton>
+          <VuiButton onClick={() => handleDeleteDialogClose(true)} color="info">
+            {t("button.confirm")}
           </VuiButton>
         </DialogActions>
       </Dialog>

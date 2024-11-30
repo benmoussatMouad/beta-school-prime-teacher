@@ -1,6 +1,5 @@
 import { useProfile } from "api/teacher/profile";
 import React, { createContext, useContext, useEffect, useState } from "react";
-import { useHistory } from "react-router-dom";
 import { getAccessToken } from "utils";
 
 

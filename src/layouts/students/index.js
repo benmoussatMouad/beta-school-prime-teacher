@@ -28,14 +28,16 @@ import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
 import DashboardNavbar from "examples/Navbars/DashboardNavbar";
 import Table from "examples/Tables/Table";
 import studentsTableData from "./data/studentsTableData";
+import { useAuth } from "context/auth/authContext";
 
 
 function Students() {
 
+  const { user } = useAuth()
   const { columns, rows } = studentsTableData;
 
   return (
-    <DashboardLayout>
+    <DashboardLayout user={user} >
       <DashboardNavbar pageName={"Les étudiants"} />
       <VuiBox py={3}>
         <VuiBox mb={3}>
