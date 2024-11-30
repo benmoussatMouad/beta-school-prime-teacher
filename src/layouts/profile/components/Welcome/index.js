@@ -1,36 +1,47 @@
-import React, { useState } from "react";
-import { Avatar, Box, Card, Popover, Typography, MenuItem } from "@mui/material";
+import React, { useEffect, useState } from "react";
+import { Avatar, Box, Card, Popover, Typography, MenuItem, Dialog, DialogActions, DialogContent, DialogTitle } from "@mui/material";
 import welcome from "assets/images/welcome-profile.png";
 import VuiTypography from "components/VuiTypography";
 import VuiBox from "components/VuiBox";
 import { FaRegEdit } from "react-icons/fa";
 import avatar1 from "assets/images/avatar1.png";
 import VuiButton from "components/VuiButton";
-import colors from "assets/theme/base/colors";
 import { useTranslation } from "react-i18next";
+import { useAuth } from "context/auth/authContext";
+import { useUpdateProfile } from "api";
+import colors from "assets/theme/base/colors";
+import linearGradient from "assets/theme/functions/linearGradient";
+import borders from "assets/theme/base/borders";
+import boxShadows from "assets/theme/base/boxShadows";
+import rgba from "assets/theme/functions/rgba";
+import { getEnvSafely } from "utils";
+import { useDeleteAvatar } from "api/teacher/deleteAvatar";
 
-const { dark } = colors;
+const { black, gradients, dark } = colors;
+const { card } = gradients;
+const { borderWidth, borderRadius } = borders;
+const { xxl } = boxShadows;
 
 const Welcome = () => {
+  const { user } = useAuth();
   const [anchorEl, setAnchorEl] = useState(null); // Popover state
-  const [image, setImage] = useState(avatar1); // State to store the image
+  const [image, setImage] = useState(user?.user?.profilePic || null); // State to store the image
   const [selectedFile, setSelectedFile] = useState(null); // To keep track of the selected file
-	const { t } = useTranslation();
+  const [openDialog, setOpenDialog] = useState(false); // Dialog state for confirmation
+  const { t } = useTranslation();
+  const { mutate } = useUpdateProfile();
+  const { mutate: deletAvatarMutate } = useDeleteAvatar()
+  const [avatarUrl, setAvatarUrl] = useState(user?.user?.profilePic?.url || image);
 
-  const handleOpen = (event) => {
+  const handleOpenPopover = (event) => {
     setAnchorEl(event.currentTarget); // Set the element that opens the popover
   };
 
-  const handleClose = () => {
+  const handleClosePopover = () => {
     setAnchorEl(null); // Close the popover
   };
 
-  const open = Boolean(anchorEl); // Check if the popover is open
-
-  const handleUpdate = () => {
-    // Trigger file input when "Update Picture" is clicked
-    document.getElementById("file-input").click();
-  };
+  const openPopover = Boolean(anchorEl); // Check if the popover is open
 
   const handleFileChange = (event) => {
     const file = event.target.files[0];
@@ -38,14 +49,43 @@ const Welcome = () => {
       // Create an object URL to display the image
       setImage(URL.createObjectURL(file));
       setSelectedFile(file);
-      handleClose(); // Close popover after selecting the image
+      setOpenDialog(true); // Open the confirmation dialog after selecting a file
+      handleClosePopover(); // Close popover after selecting the image
     }
   };
 
   const handleDelete = () => {
-    setImage(avatar1); // Reset to default image
-    handleClose();
+    deletAvatarMutate()
+    setImage(null); // Reset to default image
+    handleClosePopover();
   };
+
+  const handleUpdateProfilePicture = () => {
+    if (selectedFile && selectedFile instanceof File) {
+      const formData = new FormData();
+      formData.append("profilePic", selectedFile);
+      mutate(formData); // Upload the image only if confirmed
+    }
+  };
+
+  const handleConfirmDialogClose = (confirmed) => {
+    setOpenDialog(false);
+    if (confirmed) {
+      handleUpdateProfilePicture(); // Upload the image if confirmed
+    }
+  };
+
+  const publicUrl = getEnvSafely('REACT_APP_API_URL')
+
+  useEffect(() => {
+    if (user?.user?.profilePic?.url) {
+      setAvatarUrl(`${publicUrl}/${user.user.profilePic.url}`);
+    }
+  }, [user?.user?.profilePic?.url, publicUrl]);
+
+
+  console.log(avatarUrl);
+
 
   return (
     <Card
@@ -65,13 +105,13 @@ const Welcome = () => {
             {t('profile.welcome')}
           </VuiTypography>
           <VuiTypography color="white" variant="button" fontWeight="regular">
-          {t('profile.description')}
+            {t('profile.description')}
           </VuiTypography>
         </VuiBox>
       </VuiBox>
       <Box sx={{ height: "100%", display: "flex", alignItems: "center", justifyContent: "center" }}>
-        <Box sx={{ display: "flex", alignItems: "center", justifyContent: "center", position: "relative" }}>
-          <Avatar sx={{ width: "70%", height: "75%" }} src={image} />
+        <Box sx={{ display: "flex", alignItems: "center", justifyContent: "center", position: "relative", width: "70%", height: "210px" }}>
+          <Avatar sx={{ width: "100%", height: "100%" }} src={avatarUrl} />
           <VuiButton
             style={{
               position: "absolute",
@@ -80,16 +120,16 @@ const Welcome = () => {
               bottom: 0,
             }}
             color="info"
-            onClick={handleOpen}
+            onClick={handleOpenPopover}
           >
             <FaRegEdit />
           </VuiButton>
 
           {/* Popover for update/delete options */}
           <Popover
-            open={open}
+            open={openPopover}
             anchorEl={anchorEl}
-            onClose={handleClose}
+            onClose={handleClosePopover}
             anchorOrigin={{
               vertical: "top",
               horizontal: "center",
@@ -100,7 +140,7 @@ const Welcome = () => {
             }}
           >
             <VuiBox bgColor={dark.body} style={{ borderRadius: "10px", padding: "5px" }} p={2}>
-              <MenuItem onClick={handleUpdate}>Update Picture</MenuItem>
+              <MenuItem onClick={() => document.getElementById("file-input").click()}>Update Picture</MenuItem>
               <MenuItem onClick={handleDelete}>Delete Picture</MenuItem>
             </VuiBox>
           </Popover>
@@ -115,6 +155,42 @@ const Welcome = () => {
         accept="image/*"
         onChange={handleFileChange}
       />
+
+      {/* Confirmation Dialog */}
+      <Dialog sx={({ breakpoints, theme }) => ({
+        "& .MuiDialog-paper": {
+          display: "flex",
+          flexDirection: "column",
+          background: linearGradient(card.main, card.state, card.deg),
+          backdropFilter: "blur(120px)",
+          position: "relative",
+          minWidth: 0,
+          padding: "22px",
+          wordWrap: "break-word",
+          backgroundClip: "border-box",
+          border: `${borderWidth[0]} solid ${rgba(black.main, 0.125)}`,
+          borderRadius: borderRadius.xl,
+          boxShadow: xxl,
+        }
+      })}
+        open={openDialog}
+        onClose={() => setOpenDialog(false)}
+      >
+        <DialogTitle color={"#ffffff"}>{t('dialog.title')}</DialogTitle>
+        <DialogContent>
+          <Typography color={"#ffffff"}>
+            {t('dialog.description')}
+          </Typography>
+        </DialogContent>
+        <DialogActions>
+          <VuiButton onClick={() => handleConfirmDialogClose(false)} color="secondary">
+            {t('button.cancel')}
+          </VuiButton>
+          <VuiButton onClick={() => handleConfirmDialogClose(true)} color="info">
+            {t('button.confirm')}
+          </VuiButton>
+        </DialogActions>
+      </Dialog>
     </Card>
   );
 };

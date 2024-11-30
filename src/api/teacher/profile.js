@@ -1,5 +1,6 @@
 import { useQuery } from "react-query";
 import { apiClient } from "../apiClient";
+import { teacherQueryKeys } from ".";
 
 
 const createProfileFn = async (token) => {
@@ -12,7 +13,7 @@ const createProfileFn = async (token) => {
 export function useProfile(token) {
 
     return useQuery(
-        ["profile", token],
+        [teacherQueryKeys.all, token],
         () => createProfileFn(token),
         {
             enabled: !!token, // Only run if token exists

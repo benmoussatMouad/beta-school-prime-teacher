@@ -55,7 +55,7 @@
     "description": "Entrez et confirmez votre nouveau mot de passe"
   },
   "forms": {
-    "fullName":"Nom complet",
+    "fullName": "Nom complet",
     "firstName": "Prénom",
     "lastName": "Nom de famille",
     "email": "Email",
@@ -67,9 +67,9 @@
     "institution": "L'établissement",
     "years": "Années d'expérience ",
     "upload": "Charger un avatar",
-    "yearsOfExperience":"Années d'expérience",
+    "yearsOfExperience": "Années d'expérience",
     "phone": "mobile",
-    "isEmailVerified":"Email vérifié"
+    "isEmailVerified": "Email vérifié"
   },
   "placeholder": {
     "firstName": "Votre prénom",
@@ -88,7 +88,9 @@
     "signin": "S'inscrire",
     "forgetButton01": "Réessayez dans",
     "forgetButton02": "Envoyer le lien de réinitialisation",
-    "reset": "Réinitialiser le mot de passe"
+    "reset": "Réinitialiser le mot de passe",
+    "cancel": "Annuler",
+    "confirm": "Confirmer"
   },
   "profile": {
     "title": "Mettre à jour les informations",
@@ -100,5 +102,9 @@
       "unVerified": "Non vérifié",
       "Verified": "Vérifié"
     }
+  },
+  "dialog": {
+    "title": "Êtes-vous sûr de vouloir mettre à jour votre photo de profil ?",
+    "description": "Cette action modifiera votre photo de profil. Voulez-vous continuer ?"
   }
 }
