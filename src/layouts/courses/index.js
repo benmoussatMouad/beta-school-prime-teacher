@@ -29,22 +29,24 @@ import DashboardNavbar from "examples/Navbars/DashboardNavbar";
 import Table from "examples/Tables/Table";
 
 // Data
-import authorsTableData from "./data/authorsTableData";
-import projectsTableData from "./data/projectsTableData";
 import { useAuth } from "context/auth/authContext";
+import { useTranslation } from "react-i18next";
+import { projectsTableData } from "./data/projectsTableData";
+import VuiBadge from "../../components/VuiBadge";
 
 function Courses() {
 
-  const { user } = useAuth()
+  const { user } = useAuth();
 
-  const { columns, rows } = authorsTableData;
-  const { columns: prCols, rows: prRows } = projectsTableData;
+  const { t } = useTranslation();
+
+  const { columns, rows } = projectsTableData(t);
 
   return (
-    <DashboardLayout user={user} >
+    <DashboardLayout user={user}>
       <DashboardNavbar pageName={"Mes Cours"} />
       <VuiBox py={3}>
-        <VuiBox mb={3}>
+        { /*<VuiBox mb={3}>
           <Card>
             <VuiBox display="flex" justifyContent="space-between" alignItems="center" mb="22px">
               <VuiTypography variant="lg" color="white">
@@ -68,11 +70,12 @@ function Courses() {
               <Table columns={columns} rows={rows} />
             </VuiBox>
           </Card>
-        </VuiBox>
+        </VuiBox> */}
         <Card>
           <VuiBox display="flex" justifyContent="space-between" alignItems="center">
             <VuiTypography variant="lg" color="white">
-              Mes Cours
+              {t("cours.title")}
+              <VuiBadge color="warning" variant="gradient" badgeContent="En cours de development" size="lg"/>
             </VuiTypography>
           </VuiBox>
           <VuiBox
@@ -89,7 +92,7 @@ function Courses() {
               },
             }}
           >
-            <Table columns={prCols} rows={prRows} />
+            <Table columns={columns} rows={rows} />
           </VuiBox>
         </Card>
       </VuiBox>

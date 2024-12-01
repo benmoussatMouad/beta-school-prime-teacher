@@ -111,13 +111,6 @@
     "description": "Entrez et confirmez votre nouveau mot de passe",
     "reset": "Réinitialiser votre mot de passe"
   },
-  "routes": {
-    "account-pages": "Account Pages",
-    "courses": "Cours",
-    "dashboard": "Tableau de bord",
-    "profile": "Profil",
-    "students": "Les étudiants"
-  },
   "signup": {
     "already": "Vous avez un compte ?",
     "description": "Créez un nouveau compte à l'aide de ces formulaires.",
@@ -160,8 +153,36 @@
     "PHYSICS": "PHYSIQUE",
     "SCIENCE": "SCIENCE"
   },
+  "routes": {
+    "dashboard": "Tableau de bord",
+    "courses": "Cours",
+    "students": "Les étudiants",
+    "profile": "Profil",
+    "account-pages": "Pages du compte"
+  },
   "subscriptionCard": {
     "title": "Tarif d'abonnement",
     "toAllCourses": "De tous les cours"
+  },
+  "cours": {
+    "title": "Mes Cours",
+    "table": {
+      "project": "projet",
+      "budget": "le budget",
+      "status": "le statut",
+      "completion": "l'achèvement",
+      "action": "l'action"
+    }
+  },
+  "students": {
+    "title": "Les étudiants",
+    "table": {
+      "author": "auteur",
+      "function": "la fonction",
+      "status": "statut",
+      "employed": "employés",
+      "action": "l'action"
+    }
+  }
   }
 }
