@@ -42,9 +42,5 @@ export default {
       minHeight: "none",
       overflow: "unset",
     },
-
-    icon: {
-      display: "none",
-    },
   },
 };

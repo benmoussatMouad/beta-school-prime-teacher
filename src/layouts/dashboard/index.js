@@ -21,7 +21,6 @@ import Grid from "@mui/material/Grid";
 
 // Vision UI Dashboard React components
 import VuiBox from "components/VuiBox";
-import VuiTypography from "components/VuiTypography";
 
 // Vision UI Dashboard React example components
 import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
@@ -40,9 +39,6 @@ import { IoDocumentText, IoGlobe } from "react-icons/io5";
 import { FaShoppingCart } from "react-icons/fa";
 
 // Data
-import LineChart from "examples/Charts/LineCharts/LineChart";
-import { lineChartDataDashboard } from "layouts/dashboard/data/lineChartData";
-import { lineChartOptionsDashboard } from "layouts/dashboard/data/lineChartOptions";
 import { useAuth } from "context/auth/authContext";
 import { useTransition } from "react";
 import { useTranslation } from "react-i18next";
@@ -57,10 +53,9 @@ function Dashboard() {
   const { t } = useTranslation();
 
   return (
-    <DashboardLayout user={user} >
+    <DashboardLayout user={user}>
       <DashboardNavbar pageName={"Tableau de bord"} />
       <VuiBox py={3}>
-
         <VuiBox mb={3}>
           <Grid container spacing="18px">
             <Grid item xs={12} md={6} lg={6} xl={6}>

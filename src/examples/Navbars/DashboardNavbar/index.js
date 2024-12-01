@@ -47,13 +47,7 @@ import {
 } from "examples/Navbars/DashboardNavbar/styles";
 
 // Vision UI Dashboard React context
-import {
-  setDirection,
-  setMiniSidenav,
-  setOpenConfigurator,
-  setTransparentNavbar,
-  useVisionUIController,
-} from "context";
+import { setDirection, setMiniSidenav, setTransparentNavbar, useVisionUIController } from "context";
 
 // Images
 import team2 from "assets/images/team-2.jpg";
@@ -61,6 +55,7 @@ import logoSpotify from "assets/images/small-logos/logo-spotify.svg";
 import { useLogout } from "api";
 import { getRefreshToken } from "utils";
 import i18n from "i18n";
+import { useTranslation } from "react-i18next";
 
 function DashboardNavbar({ absolute, light, isMini, pageName }) {
   const [navbarType, setNavbarType] = useState();
@@ -69,7 +64,7 @@ function DashboardNavbar({ absolute, light, isMini, pageName }) {
   const [openMenu, setOpenMenu] = useState(false);
   const route = useLocation().pathname.split("/").slice(1);
 
-  const { mutate } = useLogout()
+  const { mutate } = useLogout();
 
   useEffect(() => {
     // Setting the navbar type
@@ -102,9 +97,11 @@ function DashboardNavbar({ absolute, light, isMini, pageName }) {
   const handleCloseMenu = () => setOpenMenu(false);
 
   const logout = async () => {
-    const refreshToken = getRefreshToken()
-    await mutate(refreshToken)
-  }
+    const refreshToken = getRefreshToken();
+    await mutate(refreshToken);
+  };
+
+  const { t } = useTranslation();
 
   // Render the notifications menu
   const renderMenu = () => (
@@ -149,11 +146,11 @@ function DashboardNavbar({ absolute, light, isMini, pageName }) {
     if (controller.direction === "rtl") {
       setDirection(dispatch, "ltr");
       i18n.changeLanguage("fr");
-      localStorage.setItem('language', "fr");
+      localStorage.setItem("language", "fr");
     } else {
       setDirection(dispatch, "rtl");
       i18n.changeLanguage("ar");
-      localStorage.setItem('language', "ar");
+      localStorage.setItem("language", "ar");
     }
   };
 
@@ -165,7 +162,7 @@ function DashboardNavbar({ absolute, light, isMini, pageName }) {
     >
       <Toolbar sx={(theme) => navbarContainer(theme)}>
         <VuiBox color="inherit" mb={{ xs: 1, md: 0 }} sx={(theme) => navbarRow(theme, { isMini })}>
-          <Breadcrumbs icon="home" title={pageName || ""} route={route} light={light} />
+          <Breadcrumbs icon="home" title={t(`routes.${route}`) || ""} route={route} light={light} />
         </VuiBox>
         {isMini ? null : (
           <VuiBox sx={(theme) => navbarRow(theme, { isMini })}>

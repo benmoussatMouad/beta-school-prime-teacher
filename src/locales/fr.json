@@ -18,12 +18,6 @@
     "signin": "Se Connecter",
     "submit": "Soumettre"
   },
-  "dashboard": {
-    "myCourses": "Mes Cours",
-    "newViewers": "Nouveaux spectateurs",
-    "numberOfCourses": "Nombre de cours",
-    "todayUsers": "Les spectateurs du jour"
-  },
   "dialog": {
     "description": "Cette action modifiera votre photo de profil. Voulez-vous continuer ?",
     "title": "Êtes-vous sûr de vouloir mettre à jour votre photo de profil ?"
@@ -121,8 +115,37 @@
     },
     "welcome": "Bienvenue !"
   },
+  "dashboard": {
+    "myCourses": "Mes Cours",
+    "newViewers": "Nouveaux spectateurs",
+    "numberOfCourses": "Nombre de cours",
+    "todayUsers": "Les spectateurs du jour",
+    "welcomeCard": {
+      "title": "Bienvenue !",
+      "description": "Heureux de vous revoir !",
+      "subject": "La matière que vous enseignez",
+      "link": "Voir mon profile"
+    }
+  },
   "subscriptionCard": {
     "title": "Tarif d'abonnement",
     "toAllCourses": "À tous les cours"
+  },
+  "subjects": {
+    "MATHEMATICS": "MATHEMATIQUES",
+    "SCIENCE": "SCIENCE",
+    "PHYSICS": "PHYSIQUE",
+    "HISTORY_GEOGRAPHY": "HISTOIRE GÉOGRAPHIE",
+    "ISLAMIC_STUDIES": "ÉTUDES ISLAMIQUES",
+    "ARABIC": "ARABE",
+    "FRENCH": "FRANÇAIS",
+    "ENGLISH": "ANGLAIS"
+  },
+  "routes": {
+    "dashboard": "Tableau de bord",
+    "courses": "Cours",
+    "students": "Les étudiants",
+    "profile": "Profil",
+    "account-pages": "Account Pages"
   }
 }

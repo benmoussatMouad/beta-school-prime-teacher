@@ -18,12 +18,6 @@
     "signin": "تسجيل الدخول",
     "submit": "إرسال"
   },
-  "dashboard": {
-    "myCourses": "دوراتي",
-    "newViewers": "المشاهدين الجدد",
-    "numberOfCourses": "عدد الدورات",
-    "todayUsers": "مشاهدي اليوم"
-  },
   "dialog": {
     "description": "ستقوم هذه العملية بتغيير صورة ملفك الشخصي. هل تريد المتابعة؟",
     "title": "هل أنت متأكد أنك تريد تحديث صورة الملف الشخصي؟"
@@ -124,5 +118,34 @@
   "subscriptionCard": {
     "title": "سعر الاشتراك",
     "toAllCourses": "الى جميع الدورات"
+  },
+  "dashboard": {
+    "myCourses": "دوراتي",
+    "newViewers": "المشاهدين الجدد",
+    "numberOfCourses": "عدد الدورات",
+    "todayUsers": "مشاهدي اليوم",
+    "welcomeCard": {
+      "title": "مرحباً بك!",
+      "description": "سعيدون برؤيتك مجدداً!",
+      "subject": "المادة التي تقوم بتدريسها",
+      "link": "عرض ملفي الشخصي"
+    }
+  },
+  "subjects": {
+    "MATHEMATICS": "الرياضيات",
+    "SCIENCE": "العلوم",
+    "PHYSICS": "الفيزياء",
+    "HISTORY_GEOGRAPHY": "التاريخ والجغرافيا",
+    "ISLAMIC_STUDIES": "الدراسات الإسلامية",
+    "ARABIC": "اللغة العربية",
+    "FRENCH": "اللغة الفرنسية",
+    "ENGLISH": "اللغة الإنجليزية"
+  },
+  "routes": {
+    "dashboard": "لوحة القيادة",
+    "courses": "الدورات",
+    "students": "الطلاب",
+    "profile": "الملف الشخصي",
+    "account-pages": "صفحات الحساب"
   }
 }

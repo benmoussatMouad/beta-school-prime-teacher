@@ -17,36 +17,40 @@
 */
 
 import { forwardRef } from "react";
-import { FormControl, InputLabel, MenuItem } from "@mui/material";
+import { FormControl, MenuItem } from "@mui/material";
 import StyledSelect from "./VuiSelectRoot";
+import { useTranslation } from "react-i18next";
 
 
-const VuiSelect = forwardRef(({ variant, color, value, label, onChange, options, ...rest }, ref) => (
+const VuiSelect = forwardRef(({ variant, color, value, label, onChange, options, ...rest }, ref) => {
+  const { t } = useTranslation();
+  return (
     <FormControl fullWidth>
-        {/* Use dynamic label */}
-        <StyledSelect
-            labelId="vui-select-label"
-            id="vui-select"
-            value={value}
-            label={label}
-            onChange={onChange}
-            {...rest}
-            ownerState={{
-                size: "medium",
-                error: false,
-                success: false,
-                direction: "ltr",
-                iconDirection: "right",
-            }}
-        >
-            {options.map((value, index) => (
-                <MenuItem key={index} value={value}>
-                    {value}
-                </MenuItem>
-            ))}
-        </StyledSelect>
+      {/* Use dynamic label */}
+      <StyledSelect
+        labelId="vui-select-label"
+        id="vui-select"
+        value={value}
+        label={label}
+        onChange={onChange}
+        {...rest}
+        ownerState={{
+          size: "medium",
+          error: false,
+          success: false,
+          direction: "ltr",
+          iconDirection: "left",
+        }}
+      >
+        {options.map((value, index) => (
+          <MenuItem key={index} value={value}>
+            {t(`subjects.${value}`)}
+          </MenuItem>
+        ))}
+      </StyledSelect>
     </FormControl>
-));
+  );
+});
 
 
 export default VuiSelect;

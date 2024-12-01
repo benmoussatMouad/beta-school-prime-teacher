@@ -1,16 +1,21 @@
 import React from "react";
 
-import { Card, Icon } from "@mui/material";
+import { Card, Chip, Icon } from "@mui/material";
 import VuiBox from "components/VuiBox";
 import VuiTypography from "components/VuiTypography";
-
-import gif from "assets/images/zinou-la-colombe.png";
 import colors from "../../../../assets/theme/base/colors";
 import Box from "@mui/material/Box";
+import { useTranslation } from "react-i18next";
+import { useVisionUIController } from "../../../../context";
 
-const WelcomeMark = ({user}) => {
+const WelcomeMark = ({ user: { user, teacher } }) => {
   const { black, gradients } = colors;
   const { card } = gradients;
+  const [{ direction }, dispatch] = useVisionUIController();
+
+  const subject = teacher?.subject;
+
+  const { t } = useTranslation();
 
   return (
     <Card sx={() => ({
@@ -22,19 +27,21 @@ const WelcomeMark = ({user}) => {
       <VuiBox height="100%" display="flex" flexDirection="column" justifyContent="space-between">
         <VuiBox sx={{ zIndex: "1" }}>
           <VuiTypography color="text" variant="button" fontWeight="regular" mb="12px">
-            Bienvenue
+            {t("dashboard.welcomeCard.title")}
           </VuiTypography>
           <VuiTypography color="white" variant="h3" fontWeight="bold" mb="18px">
-            {user ? `${user.firstName} ${user.lastName}` : "Zinou La Colombe"}
+            {user ? `${user.firstName} ${user.lastName}` : "User Name"}
           </VuiTypography>
           <VuiTypography color="text" variant="h6" fontWeight="regular" mb="auto">
-            Glad to see you again!
-            <br /> Ask me anything.
+            {t("dashboard.welcomeCard.description")}
+            <br /> {t("dashboard.welcomeCard.subject")} <br />
+            <Chip sx={{ marginTop: "5px" }} color={"info"} label={t(`subjects.${subject}`)} />
           </VuiTypography>
         </VuiBox>
+
         <VuiTypography
           component="a"
-          href="#"
+          href="/profile"
           variant="button"
           color="white"
           fontWeight="regular"
@@ -55,8 +62,10 @@ const WelcomeMark = ({user}) => {
             },
           }}
         >
-          Voir mon profile
-          <Icon sx={{ fontWeight: "bold", ml: "5px" }}>arrow_forward</Icon>
+          {t("dashboard.welcomeCard.link")}
+          <Icon sx={{ fontWeight: "bold", ml: "5px" }}>
+            {direction === "rtl" ? "arrow_back" : "arrow_forward"}
+          </Icon>
         </VuiTypography>
       </VuiBox>
       <VuiBox
@@ -70,18 +79,18 @@ const WelcomeMark = ({user}) => {
           overflow: "hidden",
         }}
       >
-        <img
-          src={gif}
-          alt="animated gif"
+        {user.profilePic ? <img
+          src={user.profilePic.url}
+          alt="profile pic"
           style={{
             backgroundSize: "cover",
             // width: "100%",
             height: "100%",
             position: "relative",
             backgroundPositionX: "center",
-            backgroundRepeat: "no-repeat"
+            backgroundRepeat: "no-repeat",
           }}
-        />
+        /> : ""}
         <Box
           style={{
             position: "absolute",
@@ -89,7 +98,7 @@ const WelcomeMark = ({user}) => {
             left: 0,
             width: "100%",
             height: "100%",
-            background: `linear-gradient(to right, rgba(6, 11, 40, 1.0) , rgba(14, 16, 55, 0) 100%)`,
+            background: `linear-gradient(to ${direction === "rtl" ? "left" : "right"} , rgba(6, 11, 40, 1.0) , rgba(14, 16, 55, 0) 100%)`,
             pointerEvents: "none",
           }}
         >

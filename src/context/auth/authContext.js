@@ -13,38 +13,38 @@ export const AuthProvider = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [isLoading, setLoading] = useState(true);
 
-  const token = getAccessToken()
-  const { data, isLoading: dataLoading } = useProfile(token)
+  const token = getAccessToken();
+  const { data, isLoading: dataLoading } = useProfile(token);
 
 
   const [user, setUser] = useState(null);
 
   const login = (userData) => {
     setUser(userData);
-    setIsAuthenticated(true)
+    setIsAuthenticated(true);
   };
 
   const logout = () => {
     setUser(null);
-    setIsAuthenticated(false)
+    setIsAuthenticated(false);
   };
 
   useEffect(() => {
     if (!dataLoading) {
-      setLoading(false)
+      setLoading(false);
     }
-  }, [dataLoading])
+  }, [dataLoading]);
 
   useEffect(() => {
     if (data?.user) {
       setUser(data);
-      setIsAuthenticated(true)
+      setIsAuthenticated(true);
     }
-  }, [data])
+  }, [data]);
 
 
   return (
-    <AuthContext.Provider value={{ user, login, logout, isLoading, isAuthenticated }}>
+    <AuthContext.Provider value={{ user, login, logout, setUser, isLoading, isAuthenticated }}>
       {children}
     </AuthContext.Provider>
   );

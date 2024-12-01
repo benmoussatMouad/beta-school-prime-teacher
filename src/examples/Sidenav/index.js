@@ -22,8 +22,6 @@ import { useEffect } from "react";
 import { NavLink, useLocation } from "react-router-dom";
 
 // prop-types is a library for typechecking of props.
-import PropTypes from "prop-types";
-
 // @mui material components
 import List from "@mui/material/List";
 import Divider from "@mui/material/Divider";
@@ -45,6 +43,7 @@ import sidenavLogoLabel from "examples/Sidenav/styles/sidenav";
 
 // Vision UI Dashboard React context
 import { setMiniSidenav, setTransparentSidenav, useVisionUIController } from "context";
+import { useTranslation } from "react-i18next";
 
 // Vision UI Dashboard React icons
 
@@ -56,6 +55,7 @@ function Sidenav({ color, brandName, routes, ...rest }) {
   const { pathname } = location;
   const collapseName = pathname.split("/").slice(1)[0];
 
+  const { t } = useTranslation();
   const closeSidenav = () => setMiniSidenav(dispatch, true);
 
   useEffect(() => {
@@ -97,7 +97,7 @@ function Sidenav({ color, brandName, routes, ...rest }) {
         >
           <SidenavCollapse
             color={color}
-            name={name}
+            name={t(`routes.${key}`)}
             icon={icon}
             active={key === collapseName}
             noCollapse={noCollapse}
@@ -108,7 +108,7 @@ function Sidenav({ color, brandName, routes, ...rest }) {
           <SidenavCollapse
             color={color}
             key={key}
-            name={name}
+            name={t(`routes.${key}`)}
             icon={icon}
             active={key === collapseName}
             noCollapse={noCollapse}
@@ -129,7 +129,7 @@ function Sidenav({ color, brandName, routes, ...rest }) {
           mb={1}
           ml={1}
         >
-          {title}
+          {t(`routes.${key}`)}
         </VuiTypography>
       );
     } else if (type === "divider") {
@@ -202,7 +202,6 @@ function Sidenav({ color, brandName, routes, ...rest }) {
     </SidenavRoot>
   );
 }
-
 
 
 export default Sidenav;
