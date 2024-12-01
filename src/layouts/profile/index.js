@@ -18,9 +18,6 @@
 
 // @mui material components
 // @mui icons
-import FacebookIcon from "@mui/icons-material/Facebook";
-import InstagramIcon from "@mui/icons-material/Instagram";
-import TwitterIcon from "@mui/icons-material/Twitter";
 import Card from "@mui/material/Card";
 import Grid from "@mui/material/Grid";
 import team1 from "assets/images/avatar1.png";
@@ -45,16 +42,15 @@ import Welcome from "../profile/components/Welcome/index";
 import UpdateInformations from "./components/UpdateProfile";
 import { useAuth } from "context/auth/authContext";
 import { useTranslation } from "react-i18next";
-import { Chip } from "@mui/material";
 
 function Overview() {
 
-  const { t } = useTranslation()
-  const context = useAuth()
+  const { t } = useTranslation();
+  const context = useAuth();
 
 
   return (
-    <DashboardLayout user={context.user} >
+    <DashboardLayout user={context.user}>
       <Header pageName={"Profile"} />
       <VuiBox mt={5} mb={3}>
         <Grid
@@ -92,15 +88,15 @@ function Overview() {
             })}
           >
             <ProfileInfoCard
-              title={t('profile.card.title')}
+              title={t("profile.card.title")}
               description="Hi, I’m Mark Johnson, Decisions: If you can’t decide, the answer is no. If two equally difficult paths, choose the one more painful in the short term (pain avoidance is creating an illusion of equality)."
               info={{
-                [t('forms.fullName')]: `${context.user.user.firstName}  ${context.user.user.lastName}`,
-                [t('forms.email')]: context.user.user.email,
-                [t('forms.institution')]: context.user.teacher.institution,
-                [t('forms.subject')]: context.user.teacher.subject,
-                [t('forms.yearsOfExperience')]: context.user.teacher.yearsOfExperience,
-                [t('forms.isEmailVerified')]: context.user.user.isEmailVerified ? t('profile.card.Verified') : t('profile.card.unVerified'),
+                [t("forms.fullName")]: `${context.user.user.firstName}  ${context.user.user.lastName}`,
+                [t("forms.email")]: context.user.user.email,
+                [t("forms.institution")]: context.user.teacher.institution,
+                [t("forms.subject")]: t(`subjects.${context.user.teacher.subject}`),
+                [t("forms.yearsOfExperience")]: context.user.teacher.yearsOfExperience,
+                [t("forms.isEmailVerified")]: context.user.user.isEmailVerified ? t("profile.card.Verified") : t("profile.card.unVerified"),
               }}
             />
           </Grid>

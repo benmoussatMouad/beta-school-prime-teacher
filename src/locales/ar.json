@@ -111,5 +111,30 @@
       "upload": "رفع الصورة"
     },
     "welcome": "أهلاً وسهلاً!"
+  },
+  "dashboard": {
+    "welcomeCard": {
+      "title": "مرحباً بك!",
+      "description": "سعيدون برؤيتك مجدداً!",
+      "subject": "المادة التي تقوم بتدريسها",
+      "link": "عرض ملفي الشخصي"
+    }
+  },
+  "subjects": {
+    "MATHEMATICS": "الرياضيات",
+    "SCIENCE": "العلوم",
+    "PHYSICS": "الفيزياء",
+    "HISTORY_GEOGRAPHY": "التاريخ والجغرافيا",
+    "ISLAMIC_STUDIES": "الدراسات الإسلامية",
+    "ARABIC": "اللغة العربية",
+    "FRENCH": "اللغة الفرنسية",
+    "ENGLISH": "اللغة الإنجليزية"
+  },
+  "routes": {
+    "dashboard": "لوحة القيادة",
+    "courses": "الدورات",
+    "students": "الطلاب",
+    "profile": "الملف الشخصي",
+    "account-pages": "صفحات الحساب"
   }
 }

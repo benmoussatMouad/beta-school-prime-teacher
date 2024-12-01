@@ -111,5 +111,30 @@
       "upload": "Upload Photo"
     },
     "welcome": "Bienvenue !"
+  },
+  "dashboard": {
+    "welcomeCard": {
+      "title": "Bienvenue !",
+      "description": "Heureux de vous revoir !",
+      "subject": "La matière que vous enseignez",
+      "link": "Voir mon profile"
+    }
+  },
+  "subjects": {
+    "MATHEMATICS": "MATHEMATIQUES",
+    "SCIENCE": "SCIENCE",
+    "PHYSICS": "PHYSIQUE",
+    "HISTORY_GEOGRAPHY": "HISTOIRE GÉOGRAPHIE",
+    "ISLAMIC_STUDIES": "ÉTUDES ISLAMIQUES",
+    "ARABIC": "ARABE",
+    "FRENCH": "FRANÇAIS",
+    "ENGLISH": "ANGLAIS"
+  },
+  "routes": {
+    "dashboard": "Tableau de bord",
+    "courses": "Cours",
+    "students": "Les étudiants",
+    "profile": "Profil",
+    "account-pages": "Account Pages"
   }
 }

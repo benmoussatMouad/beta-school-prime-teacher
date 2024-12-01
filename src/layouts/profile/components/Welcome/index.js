@@ -1,10 +1,20 @@
 import React, { useEffect, useState } from "react";
-import { Avatar, Box, Card, Popover, Typography, MenuItem, Dialog, DialogActions, DialogContent, DialogTitle } from "@mui/material";
+import {
+  Avatar,
+  Box,
+  Card,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
+  MenuItem,
+  Popover,
+  Typography,
+} from "@mui/material";
 import welcome from "assets/images/welcome-profile.png";
 import VuiTypography from "components/VuiTypography";
 import VuiBox from "components/VuiBox";
 import { FaRegEdit } from "react-icons/fa";
-import avatar1 from "assets/images/avatar1.png";
 import VuiButton from "components/VuiButton";
 import { useTranslation } from "react-i18next";
 import { useAuth } from "context/auth/authContext";
@@ -14,7 +24,6 @@ import linearGradient from "assets/theme/functions/linearGradient";
 import borders from "assets/theme/base/borders";
 import boxShadows from "assets/theme/base/boxShadows";
 import rgba from "assets/theme/functions/rgba";
-import { getEnvSafely } from "utils";
 import { useDeleteAvatar } from "api/teacher/deleteAvatar";
 
 const { black, gradients, dark } = colors;
@@ -23,16 +32,19 @@ const { borderWidth, borderRadius } = borders;
 const { xxl } = boxShadows;
 
 const Welcome = () => {
-  const { user } = useAuth();
+  const { user: { user } } = useAuth();
   const [anchorEl, setAnchorEl] = useState(null); // Popover state
-  const [image, setImage] = useState(user?.user?.profilePic || null); // State to store the image
+  const [image, setImage] = useState(user?.profilePic?.url || null); // State to store the image
   const [selectedFile, setSelectedFile] = useState(null); // To keep track of the selected file
   const [openDialog, setOpenDialog] = useState(false); // Dialog state for confirmation
   const [openDeleteDialog, setOpenDeleteDialog] = useState(false); // State for delete confirmation dialog
   const { t } = useTranslation();
   const { mutate } = useUpdateProfile();
-  const { mutate: deletAvatarMutate } = useDeleteAvatar();
-  const [avatarUrl, setAvatarUrl] = useState(user?.user?.profilePic?.url || image);
+  const { mutate: deleteAvatarMutate } = useDeleteAvatar("", {
+    onSuccess: () => {
+      setImage(null);
+    },
+  });
 
   const handleOpenPopover = (event) => {
     setAnchorEl(event.currentTarget); // Set the element that opens the popover
@@ -47,7 +59,6 @@ const Welcome = () => {
   const handleFileChange = (event) => {
     const file = event.target.files[0];
     if (file) {
-      // Create an object URL to display the image
       setImage(URL.createObjectURL(file));
       setSelectedFile(file);
       setOpenDialog(true); // Open the confirmation dialog after selecting a file
@@ -56,17 +67,20 @@ const Welcome = () => {
   };
 
   const handleDelete = () => {
-    deletAvatarMutate();
-    setImage(null); // Reset to default image
+    deleteAvatarMutate(); // Call mutation to delete avatar
     setOpenDeleteDialog(false); // Close delete confirmation dialog
     handleClosePopover(); // Close popover
   };
 
   const handleUpdateProfilePicture = () => {
-    if (selectedFile && selectedFile instanceof File) {
+    if (selectedFile) {
       const formData = new FormData();
       formData.append("profilePic", selectedFile);
-      mutate(formData); // Upload the image only if confirmed
+      mutate(formData, {
+        onSuccess: () => {
+          setImage(URL.createObjectURL(selectedFile)); // Update the avatar preview
+        },
+      });
     }
   };
 
@@ -85,13 +99,10 @@ const Welcome = () => {
     }
   };
 
-  const publicUrl = getEnvSafely("REACT_APP_API_URL");
-
   useEffect(() => {
-    if (user?.user?.profilePic?.url) {
-      setAvatarUrl(`${user.user.profilePic.url}`);
-    }
-  }, [user?.user?.profilePic?.url]);
+    // Sync image state with the user profile pic whenever the user data changes
+    setImage(user?.profilePic?.url || null);
+  }, [user]);
 
   return (
     <Card
@@ -116,8 +127,17 @@ const Welcome = () => {
         </VuiBox>
       </VuiBox>
       <Box sx={{ height: "100%", display: "flex", alignItems: "center", justifyContent: "center" }}>
-        <Box sx={{ display: "flex", alignItems: "center", justifyContent: "center", position: "relative", width: "70%", height: "210px" }}>
-          <Avatar sx={{ width: "100%", height: "100%", maxWidth: '210px', '& img': { height: "100%", objectFit: 'cover' } }} src={avatarUrl} />
+        <Box sx={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          position: "relative",
+          width: "70%",
+          height: "210px",
+        }}>
+          <Avatar
+            sx={{ width: "100%", height: "100%", maxWidth: "210px", "& img": { height: "100%", objectFit: "cover" } }}
+            src={image || null} />
           <VuiButton
             style={{
               position: "absolute",

@@ -54,7 +54,6 @@ import { PiStudentFill } from "react-icons/pi";
 import ResetPassword from "layouts/authentication/reset-password";
 import ForgetPassword from "layouts/authentication/forget-password";
 
-
 const routes = [
   {
     type: "collapse",
