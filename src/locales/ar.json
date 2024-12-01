@@ -18,6 +18,16 @@
     "signin": "تسجيل الدخول",
     "submit": "إرسال"
   },
+  "cours": {
+    "table": {
+      "action": "الإجراء",
+      "budget": "الميزانية",
+      "completion": "الإنجاز",
+      "project": "المشروع",
+      "status": "الحالة"
+    },
+    "title": "دوراتي"
+  },
   "dashboard": {
     "course": "دورة",
     "coursesCard": {
@@ -96,6 +106,10 @@
       "unVerified": "غير موثوق"
     },
     "description": "تحديث الصورة",
+    "myDescirption": "أنا أستاذ متحمس لمادة الرياضيات ولدي عدة سنوات من الخبرة. دائمًا ما كنت مفتونًا بالمنطق والدقة التي تتطلبها الرياضيات وأحب مشاركة هذا الشغف مع طلابي كل يوم",
+    "project": {
+      "title": "بياناتي"
+    },
     "setting": {
       "account": "حساب",
       "accountEmailMe": "أرسل لي بريدًا إلكترونيًا عندما يتابعني شخص ما",
@@ -110,6 +124,13 @@
   "resetPassword": {
     "description": "أدخل ووافق على كلمة المرور الجديدة",
     "reset": "إعادة تعيين كلمة المرور"
+  },
+  "routes": {
+    "account-pages": "صفحات الحساب",
+    "courses": "الدورات",
+    "dashboard": "لوحة القيادة",
+    "profile": "الملف الشخصي",
+    "students": "الطلاب"
   },
   "signup": {
     "already": "هل لديك حساب؟",
@@ -143,6 +164,16 @@
     },
     "welcome": "أهلاً وسهلاً!"
   },
+  "students": {
+    "table": {
+      "action": "الإجراء",
+      "author": "المؤلف",
+      "employed": "الموظفون",
+      "function": "الوظيفة",
+      "status": "الحالة"
+    },
+    "title": "الطلاب"
+  },
   "subjects": {
     "ARABIC": "اللغة العربية",
     "ENGLISH": "اللغة الإنجليزية",
@@ -153,36 +184,8 @@
     "PHYSICS": "الفيزياء",
     "SCIENCE": "العلوم"
   },
-"routes": {
-  "dashboard": "لوحة القيادة",
-  "courses": "الدورات",
-  "students": "الطلاب",
-  "profile": "الملف الشخصي",
-  "account-pages": "صفحات الحساب",
-},
-"cours": {
-  "title": "دوراتي",
-  "table": {
-    "project": "المشروع",
-    "budget": "الميزانية",
-    "status": "الحالة",
-    "completion": "الإنجاز",
-    "action": "الإجراء"
-  }
-},
-"students": {
-  "title": "الطلاب",
-  "table": {
-    "author": "المؤلف",
-    "function": "الوظيفة",
-    "status": "الحالة",
-    "employed": "الموظفون",
-    "action": "الإجراء"
-  }
-},
-"subscriptionCard": {
-  "title": "سعر الاشتراك",
-  "toAllCourses": "الى جميع الدورات"
-}
+  "subscriptionCard": {
+    "title": "سعر الاشتراك",
+    "toAllCourses": "الى جميع الدورات"
   }
 }

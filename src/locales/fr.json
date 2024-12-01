@@ -18,6 +18,16 @@
     "signin": "Se Connecter",
     "submit": "Soumettre"
   },
+  "cours": {
+    "table": {
+      "action": "l'action",
+      "budget": "le budget",
+      "completion": "l'achèvement",
+      "project": "projet",
+      "status": "le statut"
+    },
+    "title": "Mes Cours"
+  },
   "dashboard": {
     "course": "Cours",
     "coursesCard": {
@@ -96,6 +106,10 @@
       "unVerified": "Non vérifié"
     },
     "description": "Mise à jour de l'image",
+    "myDescirption": "Je suis un professeur passionné de mathématiques avec plusieurs années d'expérience. J'ai toujours été fasciné par la logique et la précision que les mathématiques exigent et j'aime partager cette passion avec mes étudiants chaque jour.",
+    "project": {
+      "title": "Mes Donnees"
+    },
     "setting": {
       "account": "Compte",
       "accountEmailMe": "Envoyez-moi un e-mail lorsque quelqu'un s'abonne",
@@ -110,6 +124,13 @@
   "resetPassword": {
     "description": "Entrez et confirmez votre nouveau mot de passe",
     "reset": "Réinitialiser votre mot de passe"
+  },
+  "routes": {
+    "account-pages": "Pages du compte",
+    "courses": "Cours",
+    "dashboard": "Tableau de bord",
+    "profile": "Profil",
+    "students": "Les étudiants"
   },
   "signup": {
     "already": "Vous avez un compte ?",
@@ -143,6 +164,16 @@
     },
     "welcome": "Bienvenue !"
   },
+  "students": {
+    "table": {
+      "action": "l'action",
+      "author": "auteur",
+      "employed": "employés",
+      "function": "la fonction",
+      "status": "statut"
+    },
+    "title": "Les étudiants"
+  },
   "subjects": {
     "ARABIC": "ARABE",
     "ENGLISH": "ANGLAIS",
@@ -153,36 +184,8 @@
     "PHYSICS": "PHYSIQUE",
     "SCIENCE": "SCIENCE"
   },
-  "routes": {
-    "dashboard": "Tableau de bord",
-    "courses": "Cours",
-    "students": "Les étudiants",
-    "profile": "Profil",
-    "account-pages": "Pages du compte"
-  },
   "subscriptionCard": {
     "title": "Tarif d'abonnement",
     "toAllCourses": "De tous les cours"
-  },
-  "cours": {
-    "title": "Mes Cours",
-    "table": {
-      "project": "projet",
-      "budget": "le budget",
-      "status": "le statut",
-      "completion": "l'achèvement",
-      "action": "l'action"
-    }
-  },
-  "students": {
-    "title": "Les étudiants",
-    "table": {
-      "author": "auteur",
-      "function": "la fonction",
-      "status": "statut",
-      "employed": "employés",
-      "action": "l'action"
-    }
-  }
   }
 }

@@ -43,6 +43,7 @@ import UpdateInformations from "./components/UpdateProfile";
 import { useAuth } from "context/auth/authContext";
 import { useTranslation } from "react-i18next";
 import VuiButton from "../../components/VuiButton";
+import VuiBadge from "../../components/VuiBadge";
 
 function Overview() {
 
@@ -90,7 +91,7 @@ function Overview() {
           >
             <ProfileInfoCard
               title={t("profile.card.title")}
-              description="Hi, I’m Mark Johnson, Decisions: If you can’t decide, the answer is no. If two equally difficult paths, choose the one more painful in the short term (pain avoidance is creating an illusion of equality)."
+              description={t('profile.myDescirption')}
               info={{
                 [t("forms.fullName")]: `${context.user.user.firstName}  ${context.user.user.lastName}`,
                 [t("forms.email")]: context.user.user.email,
@@ -124,20 +125,24 @@ function Overview() {
           <Card>
             <VuiBox display="flex" flexDirection="column" height="100%">
               <VuiBox display="flex" flexDirection="column" mb="24px">
-                <VuiTypography color="white" variant="lg" fontWeight="bold" mb="6px">
-                  Projects
+                <VuiBox>
+                  <VuiTypography color="white" variant="lg" fontWeight="bold" mb="6px">
+                    {t('profile.project.title')}
                 </VuiTypography>
+                  <VuiBadge badgeContent="A concevoir" color="warning" variant="gradient" size="lg"/>
+                </VuiBox>
                 <VuiTypography color="text" variant="button" fontWeight="regular">
-                  Architects design houses
+                  {t('profile.project.descirption')}
                 </VuiTypography>
               </VuiBox>
               <Grid container spacing={3}>
                 <Grid item xs={12} md={6} xl={4}>
                   <DefaultProjectCard
                     image={profile1}
-                    label="project #2"
-                    title="modern"
-                    description="As Uber works through a huge amount of internal management turmoil."
+                    label="Cours #2"
+                    title="Cours #2"
+                    description=""
+                    description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut enim ad minim veniam, quis nostrud exercitation."
                     action={{
                       type: "internal",
                       route: "/pages/profile/profile-overview",
