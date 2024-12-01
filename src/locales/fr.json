@@ -3,121 +3,134 @@
     "title": "Annonces"
   },
   "banner": {
-    "button": "Vérifier Email",
-    "title": "Votre email n'est pas encore vérifié ! Vos actions sont limitées"
+    "button": "Vérifiez votre e-mail",
+    "title": "Votre e-mail n'a pas encore été vérifié !"
   },
   "button": {
     "back": "Retour",
-    "buttonCooldown": "Temps de recharge",
+    "buttonCooldown": "Intervalle de repos",
     "cancel": "Annuler",
     "confirm": "Confirmer",
     "forgetButton01": "Réessayez dans",
     "forgetButton02": "Envoyer le lien de réinitialisation",
     "next": "Suivant",
     "reset": "Réinitialiser le mot de passe",
-    "signin": "Se Connecter",
+    "signin": "Se connecter",
     "submit": "Soumettre"
   },
   "cours": {
     "table": {
-      "action": "l'action",
-      "budget": "le budget",
-      "completion": "l'achèvement",
-      "project": "projet",
-      "status": "le statut"
+      "action": "Action",
+      "budget": "Budget",
+      "completion": "Achèvement",
+      "project": "Projet",
+      "status": "Statut"
     },
-    "title": "Mes Cours"
+    "title": "Mes cours"
   },
   "dashboard": {
     "course": "Cours",
     "coursesCard": {
-      "addCourse": "Ajoutez un cours"
+      "addCourse": "Ajouter un cours"
     },
-    "myCourses": "Mes Cours",
-    "newViewers": "Nouveaux spectateurs",
+    "myCourses": "Mes cours",
+    "newViewers": "Nouveaux visiteurs",
     "numberOfCourses": "Nombre de cours",
-    "todayUsers": "Les spectateurs du jour",
+    "todayUsers": "Visiteurs d'aujourd'hui",
     "welcomeCard": {
-      "description": "Heureux de vous revoir !",
-      "link": "Voir mon profile",
-      "subject": "La matière que vous enseignez",
+      "description": "Content de vous revoir !",
+      "link": "Voir mon profil",
+      "subject": "Sujet que vous enseignez",
       "title": "Bienvenue !"
     }
   },
   "dialog": {
-    "description": "Cette action modifiera votre photo de profil. Voulez-vous continuer ?",
+    "description": "Cette action changera votre photo de profil. Voulez-vous continuer ?",
     "title": "Êtes-vous sûr de vouloir mettre à jour votre photo de profil ?"
   },
   "forgetPassword": {
-    "description": "Enter your email address and we’ll send you instructions to reset your password",
-    "forget": "Vous avez oublié votre mot de passe ?"
+    "description": "Entrez votre adresse e-mail et nous vous enverrons des instructions pour réinitialiser votre mot de passe",
+    "forget": "Mot de passe oublié ?"
   },
   "forms": {
     "confirmPassword": "Confirmer le mot de passe",
-    "email": "Email",
+    "email": "E-mail",
     "firstName": "Prénom",
+    "forgetPassword": "Mot de passe oublié",
     "fullName": "Nom complet",
-    "institution": "L'établissement",
-    "isEmailVerified": "Email vérifié",
-    "lastName": "Nom de famille",
+    "institution": "Institution",
+    "isEmailVerified": "E-mail vérifié",
+    "lastName": "Nom",
     "newPassword": "Nouveau mot de passe",
-    "password": "le mot de passe",
-    "phone": "mobile",
-    "school": "L'établissement",
-    "subject": "Matière",
-    "upload": "Charger un avatar",
-    "years": "Années d'expérience ",
+    "password": "Mot de passe",
+    "passwordLength": "Le mot de passe doit comporter au moins 6 caractères",
+    "phone": "Téléphone",
+    "school": "École",
+    "subject": "Sujet",
+    "required": {
+      "subject": "Le sujet est requis.",
+      "school": "L'école est requise.",
+      "password": "Le mot de passe est requis.",
+      "lastName": "Le nom est requis.",
+      "firstName": "Le prénom est requis.",
+      "experince": "Les années d'expérience sont requises.",
+      "email": "L'adresse e-mail est requise.",
+      "confimPassword": "La confirmation du mot de passe est requise."
+    },
+    "upload": "Télécharger un avatar",
+    "years": "Années d'expérience",
     "yearsOfExperience": "Années d'expérience"
   },
   "login": {
     "already": "Vous n'avez pas de compte ?",
-    "description": "Saisissez votre adresse électronique et votre mot de passe pour vous connecter",
+    "description": "Veuillez entrer votre adresse e-mail et votre mot de passe pour vous connecter",
     "forms": {
-      "email": "Email",
+      "email": "E-mail",
       "password": "Mot de passe"
     },
     "placeholder": {
-      "email": "Votre email",
+      "email": "Votre e-mail",
       "password": "Votre mot de passe"
     },
-    "remember": "Souvenez-vous de moi",
-    "signin": "Inscrivez-vous",
-    "welcome": "Ravi de vous voir !"
+    "remember": "Se souvenir de moi",
+    "signin": "Créer un nouveau compte",
+    "welcome": "Ravi de vous revoir !"
   },
   "placeholder": {
-    "email": "Votre email",
+    "email": "Votre e-mail",
     "firstName": "Votre prénom",
-    "lastName": "Votre nom de famille",
-    "password": "Votre password",
-    "phone": "Votre mobile",
-    "school": "Votre l'établissement",
-    "subject": "Votre matière",
-    "years": "Votre années d'expérience"
+    "lastName": "Votre nom",
+    "password": "Votre mot de passe",
+    "phone": "Votre téléphone",
+    "school": "Votre école",
+    "subject": "Votre sujet",
+    "years": "Vos années d'expérience"
   },
   "profile": {
     "accountDeletion": {
       "deleteButton": "Supprimer",
-      "description": "Après avoir supprimé votre compte, vous ne pourrez plus le récupérer.",
-      "title": "Supprimer le compte"
+      "description": "Après la suppression de votre compte, vous ne pourrez pas le récupérer.",
+      "title": "Suppression de compte"
     },
     "card": {
       "Verified": "Vérifié",
-      "title": "Informations sur le profil",
+      "title": "Informations du profil",
       "unVerified": "Non vérifié"
     },
-    "description": "Mise à jour de l'image",
-    "myDescirption": "Je suis un professeur passionné de mathématiques avec plusieurs années d'expérience. J'ai toujours été fasciné par la logique et la précision que les mathématiques exigent et j'aime partager cette passion avec mes étudiants chaque jour.",
+    "description": "Mise à jour de la photo",
+    "myDescirption": "Je suis un professeur de mathématiques passionné avec plusieurs années d'expérience. J'ai toujours été fasciné par la logique et la précision exigées par les mathématiques, et j'aime partager cette passion avec mes élèves chaque jour",
     "project": {
-      "title": "Mes Donnees"
+      "title": "Mes données",
+      "descirption": ""
     },
     "setting": {
       "account": "Compte",
-      "accountEmailMe": "Envoyez-moi un e-mail lorsque quelqu'un s'abonne",
+      "accountEmailMe": "Envoyez-moi un e-mail lorsque quelqu'un me suit",
       "accountEmailMeComment": "Envoyez-moi un e-mail lorsque quelqu'un commente mes vidéos",
-      "accountEmailMeMention": "Envoyez-moi un e-mail lorsque quelqu'un me mentionne",
+      "accountEmailMeMention": "Envoyez-moi un e-mail lorsqu'on me mentionne",
       "title": "Paramètres de la plateforme"
     },
-    "subtitle": "Vous pouvez mettre à jour en remplissant le formulaire",
+    "subtitle": "Vous pouvez vous mettre à jour en remplissant le formulaire",
     "title": "Mettre à jour les informations",
     "welcome": "Bienvenue !"
   },
@@ -126,66 +139,79 @@
     "reset": "Réinitialiser votre mot de passe"
   },
   "routes": {
-    "account-pages": "Pages du compte",
+    "account-pages": "Pages de compte",
     "courses": "Cours",
     "dashboard": "Tableau de bord",
     "profile": "Profil",
-    "students": "Les étudiants"
+    "students": "Étudiants"
   },
   "signup": {
-    "already": "Vous avez un compte ?",
-    "description": "Créez un nouveau compte à l'aide de ces formulaires.",
+    "already": "Vous avez déjà un compte ?",
+    "description": "Créez un nouveau compte avec ces formulaires.",
     "forms": {
-      "email": "Email",
+      "email": "E-mail",
       "firstName": "Prénom",
-      "lastName": "Nom de famille",
-      "password": "Password",
-      "school": "L'établissement",
-      "subject": "Matière",
-      "upload": "Charger un avatar",
-      "years": "Années d'expérience "
+      "lastName": "Nom",
+      "password": "Mot de passe",
+      "school": "École",
+      "subject": "Sujet",
+      "upload": "Télécharger un avatar",
+      "years": "Années d'expérience"
     },
-    "motto": "PLATFORME POUR ENSEIGNANTS",
+    "motto": "Une plateforme pour les enseignants",
     "placeholder": {
-      "email": "Votre email",
+      "email": "Votre e-mail",
       "firstName": "Votre prénom",
-      "lastName": "Votre nom de famille",
-      "password": "Votre password",
-      "school": "Votre l'établissement",
-      "subject": "Votre matière",
-      "years": "Votre qnnées d'expérience"
+      "lastName": "Votre nom",
+      "password": "Votre mot de passe",
+      "school": "Votre école",
+      "subject": "Votre sujet",
+      "years": "Vos années d'expérience"
     },
     "premotto": "",
-    "signin": "S'inscrire",
+    "signin": "Créer un compte",
     "stepper": {
-      "personal": "Personal Details",
-      "personalPro": "Professional Details",
-      "upload": "Upload Photo"
+      "personal": "Détails personnels",
+      "personalPro": "Détails professionnels",
+      "upload": "Télécharger la photo"
     },
     "welcome": "Bienvenue !"
   },
+  "snackbar": {
+    "deleteAvatar": "L'avatar a été supprimé avec succès !",
+    "error": "Une erreur s'est produite !",
+    "forgetPassword": "Vérifiez votre e-mail pour les instructions de réinitialisation.",
+    "logged": "Connexion réussie !",
+    "logout": "Déconnexion réussie !",
+    "passwordMatch": "Le mot de passe ne correspond pas",
+    "resetPassword": "Le mot de passe a été mis à jour avec succès !",
+    "sendVerifyEmail": "Vérifiez votre e-mail pour les instructions de vérification.",
+    "signup": "Utilisateur enregistré avec succès !",
+    "updateProfile": "Profil mis à jour avec succès !",
+    "verifyEmail": "Votre e-mail a été vérifié avec succès !"
+  },
   "students": {
     "table": {
-      "action": "l'action",
-      "author": "auteur",
-      "employed": "employés",
-      "function": "la fonction",
-      "status": "statut"
+      "action": "Action",
+      "author": "Auteur",
+      "employed": "Employés",
+      "function": "Fonction",
+      "status": "Statut"
     },
-    "title": "Les étudiants"
+    "title": "Étudiants"
   },
   "subjects": {
-    "ARABIC": "ARABE",
-    "ENGLISH": "ANGLAIS",
-    "FRENCH": "FRANÇAIS",
-    "HISTORY_GEOGRAPHY": "HISTOIRE GÉOGRAPHIE",
-    "ISLAMIC_STUDIES": "ÉTUDES ISLAMIQUES",
-    "MATHEMATICS": "MATHEMATIQUES",
-    "PHYSICS": "PHYSIQUE",
-    "SCIENCE": "SCIENCE"
+    "ARABIC": "Arabe",
+    "ENGLISH": "Anglais",
+    "FRENCH": "Français",
+    "HISTORY_GEOGRAPHY": "Histoire et géographie",
+    "ISLAMIC_STUDIES": "Études islamiques",
+    "MATHEMATICS": "Mathématiques",
+    "PHYSICS": "Physique",
+    "SCIENCE": "Science"
   },
   "subscriptionCard": {
-    "title": "Tarif d'abonnement",
-    "toAllCourses": "De tous les cours"
+    "title": "Prix de l'abonnement",
+    "toAllCourses": "à tous les cours"
   }
 }

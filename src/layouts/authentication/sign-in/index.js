@@ -8,7 +8,6 @@ import VuiButton from "components/VuiButton";
 import VuiSwitch from "components/VuiSwitch";
 import CoverLayout from "layouts/authentication/components/CoverLayout";
 import bgSignIn from "assets/images/signInImage.png";
-import logo from "assets/images/logos/logo-white.png";
 import IconButton from "@mui/material/IconButton";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import Visibility from "@mui/icons-material/Visibility";
@@ -25,7 +24,7 @@ function SignIn() {
   const { mutate, isLoading } = useLogin();
 
   // react-hook-form setup
-  const { register, handleSubmit, formState: { errors }, setValue, trigger } = useForm({
+  const { register, handleSubmit, formState: { errors } } = useForm({
     defaultValues: {
       email: "",
       password: "",
@@ -46,11 +45,11 @@ function SignIn() {
 
   return (
     <CoverLayout
-      title={t('login.welcome')}
+      title={t("login.welcome")}
       color="white"
-      description={t('login.description')}
+      description={t("login.description")}
       premotto="PRIME BETA SCHOOL"
-      motto={t('signup.motto')}
+      motto={t("signup.motto")}
       image={bgSignIn}
     >
       {isLoading ?
@@ -63,12 +62,12 @@ function SignIn() {
           <VuiBox mb={2}>
             <VuiBox>
               <VuiTypography component="label" variant="button" color="white" fontWeight="medium">
-                {t('login.forms.email')}
+                {t("login.forms.email")}
               </VuiTypography>
             </VuiBox>
             <VuiInput
               {...register("email", {
-                required: "L'adresse électronique est requise",
+                required: t("forms.required.email"),
                 pattern: { value: /^\S+@\S+$/, message: "Invalid email format" },
               })}
               type="email"
@@ -89,7 +88,7 @@ function SignIn() {
             </VuiBox>
             <VuiInput
               {...register("password", {
-                required: "Le mot de passe est requis.",
+                required: t("forms.required.password"),
                 minLength: { value: 6, message: "Password must be at least 6 characters." },
               })}
               placeholder={t("signup.placeholder.email")}
@@ -115,7 +114,7 @@ function SignIn() {
               fontWeight="medium"
               sx={{ textDecoration: "underline", cursor: "pointer" }}
             >
-              Forgot password?
+              {t("forms.forgetPassword")}
             </VuiTypography>
           </VuiBox>
 
@@ -129,7 +128,7 @@ function SignIn() {
               onClick={handleSetRememberMe}
               sx={{ cursor: "pointer", userSelect: "none" }}
             >
-              &nbsp;&nbsp;&nbsp;&nbsp;{t('login.remember')}
+              &nbsp;&nbsp;&nbsp;&nbsp;{t("login.remember")}
             </VuiTypography>
           </VuiBox>
 
@@ -137,14 +136,14 @@ function SignIn() {
           {/* Submit Button */}
           <VuiBox mt={4} mb={1}>
             <VuiButton type="submit" color="info" fullWidth>
-              {t('button.signin')}
+              {t("button.signin")}
             </VuiButton>
           </VuiBox>
 
           {/* Sign Up Link */}
           <VuiBox mt={3} textAlign="center">
             <VuiTypography variant="button" color="text" fontWeight="regular">
-              {t('login.already')}
+              {t("login.already")}
               <VuiTypography
                 component={Link}
                 to="/authentication/sign-up"
@@ -152,7 +151,7 @@ function SignIn() {
                 color="white"
                 fontWeight="medium"
               >
-                {t('login.signin')}
+                {t("login.signin")}
               </VuiTypography>
             </VuiTypography>
           </VuiBox>

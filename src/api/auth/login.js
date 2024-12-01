@@ -1,9 +1,8 @@
 import { useMutation } from "react-query";
-import { queryClient } from "../../providers/queryProvider";
 import { showSnackBar, useVisionUIController } from "../../context";
-import { authQueryKeys } from "./index";
 import { apiClient } from "../apiClient";
 import { useAuth } from "../../context/auth/authContext";
+import { useTranslation } from "react-i18next";
 
 const createLoginFn = async (credentials) => {
   const response = await apiClient.post("/auth/login", credentials);
@@ -14,6 +13,8 @@ export function useLogin() {
   const [, dispatch] = useVisionUIController(); // Get dispatch from context
   const { login } = useAuth();
 
+  const { t } = useTranslation();
+
   return useMutation({
     mutationFn: createLoginFn,
     onSuccess: (data) => {
@@ -23,11 +24,11 @@ export function useLogin() {
 
       login(data);
       // Trigger success Snackbar
-      showSnackBar(dispatch, "User successfully logged!", "success");
+      showSnackBar(dispatch, t("snackbar.logged"), "success");
     },
-    onError: (err, credentials, context) => {
+    onError: (err) => {
       // Trigger error Snackbar
-      showSnackBar(dispatch, err.response?.data?.message || "An error occurred!", "error");
+      showSnackBar(dispatch, err.response?.data?.message || t("snackbar.error"), "error");
       return err.response.data;
     },
   });

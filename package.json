@@ -40,7 +40,7 @@
     "react-query": "^3.39.3",
     "react-router-dom": "5.2.0",
     "stylis": "4.0.10",
-    "stylis-plugin-rtl": "^2.0.2",
+    "stylis-plugin-rtl": "^2.1.1",
     "uuid": "8.3.2",
     "web-vitals": "1.0.1"
   },

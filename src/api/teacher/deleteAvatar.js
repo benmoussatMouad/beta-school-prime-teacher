@@ -4,6 +4,7 @@ import { showSnackBar, useVisionUIController } from "../../context";
 import { useAuth } from "../../context/auth/authContext";
 import { queryClient } from "providers/queryProvider";
 import { teacherQueryKeys } from ".";
+import { useTranslation } from "react-i18next";
 
 // Function to handle the API call for updating the teacher profile
 const createDeleteAvatarFn = async () => {
@@ -15,11 +16,13 @@ export function useDeleteAvatar() {
   const [, dispatch] = useVisionUIController(); // Get dispatch for Snackbar
   const { user, setUser } = useAuth(); // Access the authenticated user's context
 
+  const { t } = useTranslation();
+
   return useMutation({
     mutationFn: createDeleteAvatarFn,
-    onSuccess: (data) => {
+    onSuccess: () => {
       // Update successful
-      showSnackBar(dispatch, "Avatar deleted successfully!", "success");
+      showSnackBar(dispatch, t("snackbar.deleteAvatar"), "success");
 
       // Invalidate queries to ensure the UI reflects the updated data
       queryClient.invalidateQueries(teacherQueryKeys.all);

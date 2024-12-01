@@ -22,7 +22,7 @@ import { Subjects } from "utils";
 function SignUp() {
 
   const { t } = useTranslation();
-  const steps = [t('signup.stepper.personal'), t('signup.stepper.personalPro'), t('signup.stepper.upload')];
+  const steps = [t("signup.stepper.personal"), t("signup.stepper.personalPro"), t("signup.stepper.upload")];
 
   const [activeStep, setActiveStep] = useState(0);
   const [avatarPreview, setAvatarPreview] = useState(null); // State to store the avatar preview
@@ -117,35 +117,35 @@ function SignUp() {
         return (
           <VuiBox sx={{ display: "flex", flexDirection: "column", justifyContent: "center" }}>
             <VuiTypography sx={{ margin: "10px 0" }} component="label" variant="button" color="white"
-              fontWeight="medium">
+                           fontWeight="medium">
               {t("signup.forms.firstName")}
             </VuiTypography>
             <VuiInput
-              {...register("firstName", { required: "Le prénom est obligatoire." })}
+              {...register("firstName", { required: t("forms.required.firstName") })}
               placeholder={t("signup.placeholder.firstName")}
               error={!!errors.firstName}
             />
             {errors.firstName &&
               <VuiTypography sx={{ color: "red", fontSize: "0.7rem" }}>{errors.firstName.message}</VuiTypography>}
             <VuiTypography sx={{ margin: "10px 0" }} component="label" variant="button" color="white"
-              fontWeight="medium">
+                           fontWeight="medium">
               {t("signup.forms.lastName")}
             </VuiTypography>
             <VuiInput
-              {...register("lastName", { required: "Le nom de famille est obligatoire." })}
+              {...register("lastName", { required: t("forms.required.lastName") })}
               placeholder={t("signup.placeholder.lastName")}
               error={!!errors.lastName}
             />
             {errors.lastName &&
               <VuiTypography sx={{ color: "red", fontSize: "0.7rem" }}>{errors.lastName.message}</VuiTypography>}
             <VuiTypography sx={{ margin: "10px 0" }} component="label" variant="button" color="white"
-              fontWeight="medium">
+                           fontWeight="medium">
               {t("signup.forms.email")}
             </VuiTypography>
             <VuiInput
               {...register("email", {
-                required: "L'adresse électronique est obligatoire.",
-                pattern: { value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/, message: "Enter a valid email address." },
+                required: t("forms.required.email"),
+                pattern: { value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/, message: t("forms.required.email") },
               })}
               placeholder={t("signup.placeholder.email")}
               type="email"
@@ -155,13 +155,13 @@ function SignUp() {
               <VuiTypography sx={{ color: "red", fontSize: "0.7rem" }}>{errors.email.message}</VuiTypography>
             }
             <VuiTypography sx={{ margin: "10px 0" }} component="label" variant="button" color="white"
-              fontWeight="medium">
+                           fontWeight="medium">
               {t("signup.forms.password")}
             </VuiTypography>
             <VuiInput
               {...register("password", {
-                required: "Le mot de passe est requis.",
-                minLength: { value: 6, message: "Le mot de passe doit comporter au moins 6 caractères" },
+                required: t("forms.required.password"),
+                minLength: { value: 6, message: t("") },
               })}
               placeholder={t("signup.placeholder.password")}
               type={showPassword ? "text" : "password"}
@@ -181,11 +181,11 @@ function SignUp() {
         return (
           <VuiBox sx={{ display: "flex", flexDirection: "column", justifyContent: "center" }}>
             <VuiTypography sx={{ margin: "10px 0" }} component="label" variant="button" color="white"
-              fontWeight="medium">
+                           fontWeight="medium">
               {t("signup.forms.subject")}
             </VuiTypography>
             <VuiSelect
-              {...register("subject", { required: "Subject is required." })}
+              {...register("subject", { required: t("forms.required.subject") })}
               value={getValues("subject")} // Dynamically bind the current form state
               onChange={(event) => {
                 setValue("subject", event.target.value, { shouldValidate: true }); // Update the state
@@ -197,25 +197,34 @@ function SignUp() {
               <VuiTypography sx={{ color: "red", fontSize: "0.7rem" }}>{errors.subject.message}</VuiTypography>}
 
             <VuiTypography sx={{ margin: "10px 0" }} component="label" variant="button" color="white"
-              fontWeight="medium">
+                           fontWeight="medium">
               {t("signup.forms.school")}
             </VuiTypography>
             <VuiInput
-              {...register("institution", { required: "School is required." })}
+              {...register("institution", { required: t("forms.required.school") })}
               placeholder={t("signup.placeholder.school")}
               error={!!errors.institution}
             />
             {errors.institution &&
               <VuiTypography sx={{ color: "red", fontSize: "0.7rem" }}>{errors.institution.message}</VuiTypography>}
             <VuiTypography sx={{ margin: "10px 0" }} component="label" variant="button" color="white"
-              fontWeight="medium">
+                           fontWeight="medium">
               {t("signup.forms.years")}
             </VuiTypography>
             <VuiInput
               type={"number"}
-              {...register("yearsOfExperience", { required: "Years Of Experience is required." })}
+              {...register("yearsOfExperience", {
+                required: t("forms.required.experince"), min: {
+                  value: 0,
+                  message: "Years of experience cannot be less than 0.",
+                },
+              })}
               placeholder={t("signup.placeholder.years")}
               error={!!errors.yearsOfExperience}
+              onInput={(e) => {
+                if (e.target.value < 0) e.target.value = 0; // Prevent negative numbers
+                if (e.target.value > 50) e.target.value = 50; // Prevent numbers greater than 50
+              }}
             />
             {errors.yearsOfExperience &&
               <VuiTypography
@@ -226,7 +235,7 @@ function SignUp() {
         return (
           <VuiBox sx={{ display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center" }}>
             <VuiTypography sx={{ margin: "10px 0" }} component="label" variant="button" color="white"
-              fontWeight="medium">
+                           fontWeight="medium">
               {t("signup.forms.upload")}
             </VuiTypography>
 
@@ -253,7 +262,7 @@ function SignUp() {
       color="white"
       description={t("signup.description")}
       premotto="PRIME BETA SCHOOL"
-      motto={t('signup.motto')}
+      motto={t("signup.motto")}
       image={bgSignIn}
     >
       {isLoading ?

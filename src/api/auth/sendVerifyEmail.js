@@ -1,26 +1,27 @@
 import { useMutation } from "react-query";
 import { showSnackBar, useVisionUIController } from "../../context";
 import { apiClient } from "../apiClient";
-import { useHistory } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 const createSendVerifyEmailFn = async () => {
-    const response = await apiClient.post("/auth/send-verification-email");
-    return response.data;
+  const response = await apiClient.post("/auth/send-verification-email");
+  return response.data;
 };
 
 export function useSendVerifyEmail() {
-    const [, dispatch] = useVisionUIController(); // Get dispatch from context
-    const history = useHistory();
+  const [, dispatch] = useVisionUIController(); // Get dispatch from context
 
-    return useMutation({
-        mutationFn: createSendVerifyEmailFn,
-        onSuccess: (data) => {
-            showSnackBar(dispatch, data.message || "Check your email for verification instructions.", "success");
-        },
-        onError: (err, credentials, context) => {
-            // Trigger error Snackbar
-            showSnackBar(dispatch, err.response?.data?.message || "An error occurred!", "error");
-        },
-    });
+  const { t } = useTranslation();
+
+  return useMutation({
+    mutationFn: createSendVerifyEmailFn,
+    onSuccess: (data) => {
+      showSnackBar(dispatch, data.message || t("snackbar.sendVerifyEmail"), "success");
+    },
+    onError: (err) => {
+      // Trigger error Snackbar
+      showSnackBar(dispatch, err.response?.data?.message || t("snackbar.error"), "error");
+    },
+  });
 }
 

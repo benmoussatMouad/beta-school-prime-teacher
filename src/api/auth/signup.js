@@ -1,8 +1,7 @@
 import { useMutation } from "react-query";
-import { apiClient, authQueryKeys } from "../index";
-import { queryClient } from "../../providers/queryProvider";
+import { apiClient } from "../index";
 import { showSnackBar, useVisionUIController } from "../../context";
-import { useAuth } from "../../context/auth/authContext";
+import { useTranslation } from "react-i18next";
 
 const createSignUpFn = async (newUser) => {
   const response = await apiClient.post("/auth/teacher/register", newUser);
@@ -11,7 +10,8 @@ const createSignUpFn = async (newUser) => {
 
 export function useSignUp() {
   const [, dispatch] = useVisionUIController(); // Get dispatch from context
-  const { login } = useAuth();
+
+  const { t } = useTranslation();
 
   return useMutation({
     mutationFn: createSignUpFn,
@@ -20,13 +20,12 @@ export function useSignUp() {
       localStorage.setItem("access_token", data.tokens.access.token);
       localStorage.setItem("refresh_token", data.tokens.refresh.token);
 
-      login(data);
       // Trigger success Snackbar
-      showSnackBar(dispatch, "User successfully registered!", "success");
+      showSnackBar(dispatch, t("snackbar.signup"), "success");
     },
     onError: (err) => {
       // Trigger error Snackbar
-      showSnackBar(dispatch, err.response?.data?.message || "An error occurred!", "error");
+      showSnackBar(dispatch, err.response?.data?.message || t("snackbar.error"), "error");
       return err.response.data;
     },
   });
