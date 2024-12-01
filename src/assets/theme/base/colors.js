@@ -37,7 +37,7 @@ export default {
   },
 
   transparent: {
-    main: "transparent",
+    main: "#ffffff00",
   },
 
   white: {

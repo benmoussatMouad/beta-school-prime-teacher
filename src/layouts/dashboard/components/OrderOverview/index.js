@@ -36,52 +36,62 @@ import TimelineItem from "examples/Timeline/TimelineItem";
 
 // Vision UI Dashboard theme imports
 import palette from "assets/theme/base/colors";
+import VuiInput from "../../../../components/VuiInput";
+import { useTranslation } from "react-i18next";
+import VuiBadge from "../../../../components/VuiBadge";
 
 function OrdersOverview() {
+  const {t} = useTranslation();
   return (
     <Card className="h-100">
+      <VuiBox
+        xs={{width: "100%", height: "100%", position: "absolute", top: 0, left: 0}}
+      >
+
+      </VuiBox>
       <VuiBox mb="16px">
         <VuiTypography variant="lg" fontWeight="bold" mb="5px" color="white">
-          Orders overview
+          {t("announcement.title")}
         </VuiTypography>
-        <VuiBox mb={2}>
-          <VuiBox display="flex" alignItems="center">
-            <BsCheckCircleFill color="green" size="15px" mr="5px" />
-            <VuiTypography variant="button" color="text" fontWeight="medium" ml="5px" mr="2px">
-              +30%
-            </VuiTypography>{" "}
-            <VuiTypography variant="button" color="text" fontWeight="regular">
-              {" "}
-              this month
-            </VuiTypography>
-          </VuiBox>
-        </VuiBox>
+        <VuiBadge color="warning" variant="gradient" badgeContent="En cours de development" size="lg" />
+        {/*<VuiBox mb={2}>*/}
+        {/*  <VuiBox display="flex" alignItems="center">*/}
+        {/*    <BsCheckCircleFill color="green" size="15px" mr="5px" />*/}
+        {/*    <VuiTypography variant="button" color="text" fontWeight="medium" ml="5px" mr="2px">*/}
+        {/*      +30%*/}
+        {/*    </VuiTypography>{" "}*/}
+        {/*    <VuiTypography variant="button" color="text" fontWeight="regular">*/}
+        {/*      {" "}*/}
+        {/*      this month*/}
+        {/*    </VuiTypography>*/}
+        {/*  </VuiBox>*/}
+        {/*</VuiBox>*/}
       </VuiBox>
-      <VuiBox>
+      <VuiBox
+        p={2}
+      >
         <TimelineItem
           icon={<FaBell size="16px" color={palette.info.main} />}
-          title="$2400, Design changes"
+          title="Session directe, 24 Nov. Lien meet: https://meet.google.com/wax-kivn-kni"
+          dateTime="22 DEC 7:20 PM"
+        /> <TimelineItem
+          icon={<FaBell size="16px" color={palette.info.main} />}
+          title="Session directe, 24 Nov. Lien meet: https://meet.google.com/wax-kivn-kni"
+          dateTime="22 DEC 7:20 PM"
+        /> <TimelineItem
+          icon={<FaBell size="16px" color={palette.info.main} />}
+          title="Session directe, 24 Nov. Lien meet: https://meet.google.com/wax-kivn-kni"
           dateTime="22 DEC 7:20 PM"
         />
-        <TimelineItem
-          icon={<IoLogoCss3 size="16px" color={palette.error.main} />}
-          title="New order #1832412"
-          dateTime="21 DEC 11 PM"
-        />
-        <TimelineItem
-          icon={<FaShoppingCart size="16px" color={palette.lightblue.main} />}
-          title="Server payments for April"
-          dateTime="21 DEC 9:34 PM"
-        />
-        <TimelineItem
-          icon={<BsCreditCardFill size="16px" color={palette.warning.main} />}
-          title="New card added for order #4395133"
-          dateTime="20 DEC 2:20 AM"
-        />
-        <TimelineItem
-          icon={<SiDropbox size="16px" color={palette.primary.focus} />}
-          title="New card added for order #4395133"
-          dateTime="18 DEC 4:54 AM"
+      </VuiBox>
+      <VuiBox
+      >
+        <VuiInput
+          placeholder="Type here..."
+          icon={{
+            component: "send",
+            direction: "right",
+          }}
         />
       </VuiBox>
     </Card>

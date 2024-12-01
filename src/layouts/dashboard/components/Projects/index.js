@@ -34,6 +34,8 @@ import Table from "examples/Tables/Table";
 
 // Data
 import data from "layouts/dashboard/components/Projects/data";
+import { useTranslation } from "react-i18next";
+import VuiBadge from "../../../../components/VuiBadge";
 
 function Projects() {
   const { columns, rows } = data();
@@ -41,6 +43,7 @@ function Projects() {
 
   const openMenu = ({ currentTarget }) => setMenu(currentTarget);
   const closeMenu = () => setMenu(null);
+  const {t} = useTranslation();
 
   const renderMenu = (
     <Menu
@@ -71,15 +74,11 @@ function Projects() {
     >
       <VuiBox display="flex" justifyContent="space-between" alignItems="center" mb="32px">
         <VuiBox mb="auto">
-          <VuiTypography color="white" variant="lg" mb="6px" gutterBottom>
-            Projects
+          <VuiTypography color="white" variant="lg" mb="6px" gutterBottom fontWeight="bold">
+            {t('dashboard.myCourses')}
           </VuiTypography>
-          <VuiBox display="flex" alignItems="center" lineHeight={0}>
-            <BsCheckCircleFill color="green" size="15px" />
-            <VuiTypography variant="button" fontWeight="regular" color="text" ml="5px">
-              &nbsp;<strong>30 done</strong> this month
-            </VuiTypography>
-          </VuiBox>
+          <VuiBadge color="warning" variant="gradient" badgeContent="En cours de development" size="lg"/>
+
         </VuiBox>
         <VuiBox color="text" px={2}>
           <Icon sx={{ cursor: "pointer", fontWeight: "bold" }} fontSize="small" onClick={openMenu}>

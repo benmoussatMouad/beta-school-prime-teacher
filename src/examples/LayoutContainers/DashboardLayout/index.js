@@ -24,7 +24,7 @@ function DashboardLayout({ children, user }) {
   const [isVerifyToken, setIsVerifyToken] = useState('');
 
   const { isLoading: isVerifyLoading, data } = useVerifyEmail({ token: isVerifyToken })
-  
+
 
   const isEmailVerified = user.user.isEmailVerified;
 
@@ -118,13 +118,23 @@ function DashboardLayout({ children, user }) {
             margin: "auto",
             boxShadow: "0 4px 8px rgba(0,0,0,0.1)",
             width: "50%",
+            [breakpoints.down("xl")]: {
+              width: "50%", // suitable for very large screens
+            },
+            [breakpoints.down("lg")]: {
+              width: "80%", // suitable for desktop
+            },
+            [breakpoints.down("md")]: {
+              width: "85%", // suitable for tablets
+            },
             [breakpoints.down("sm")]: {
-              width: "90%",
+              width: "90%", // suitable for mobile devices
+              padding: "8px 16px",
               bottom: 20,
             },
           })}
         >
-          <Typography variant="caption" sx={{ maxWidth: "80%" }}>
+          <Typography fontSize="1rem" color="white" variant="caption" sx={{ maxWidth: "80%" }}>
             {t('banner.title')}
           </Typography>
           <Box style={{ display: "flex", alignItems: "center" }}>

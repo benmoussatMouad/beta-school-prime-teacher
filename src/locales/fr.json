@@ -1,7 +1,10 @@
 {
+  "announcement": {
+    "title": "Annonces"
+  },
   "banner": {
     "button": "Vérifier Email",
-    "title": "Votre email n'est pas encore vérifié !"
+    "title": "Votre email n'est pas encore vérifié ! Vos actions sont limitées"
   },
   "button": {
     "back": "Retour",
@@ -14,6 +17,12 @@
     "reset": "Réinitialiser le mot de passe",
     "signin": "Se Connecter",
     "submit": "Soumettre"
+  },
+  "dashboard": {
+    "myCourses": "Mes Cours",
+    "newViewers": "Nouveaux spectateurs",
+    "numberOfCourses": "Nombre de cours",
+    "todayUsers": "Les spectateurs du jour"
   },
   "dialog": {
     "description": "Cette action modifiera votre photo de profil. Voulez-vous continuer ?",
@@ -111,5 +120,9 @@
       "upload": "Upload Photo"
     },
     "welcome": "Bienvenue !"
+  },
+  "subscriptionCard": {
+    "title": "Tarif d'abonnement",
+    "toAllCourses": "À tous les cours"
   }
 }
