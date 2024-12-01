@@ -45,118 +45,101 @@ const action = (
   </Icon>
 );
 
-export default {
-  columns: [
-    { name: "project", align: "left" },
-    { name: "budget", align: "left" },
-    { name: "status", align: "left" },
-    { name: "completion", align: "center" },
-    { name: "action", align: "center" },
-  ],
+export const projectsTableData = (t) => {
+  return {
+    columns: [
+      { name: t("cours.table.project"), align: "left" },
+      { name: t("cours.table.budget"), align: "left" },
+      { name: t("cours.table.status"), align: "left" },
+      { name: t("cours.table.completion"), align: "center" },
+      { name: t("cours.table.action"), align: "center" },
+    ],
 
-  rows: [
-    {
-      project: (
-        <VuiBox display="flex" alignItems="center">
-          <VuiTypography pl="16px" color="white" variant="button" fontWeight="medium">
-            Chakra Vision UI Version
+    rows: [
+      {
+        [t("cours.table.project")]: (
+          <VuiBox display="flex" alignItems="center">
+            <VuiTypography pl="16px" color="white" variant="button" fontWeight="medium">
+              Chakra Vision UI Version
+            </VuiTypography>
+          </VuiBox>
+        ),
+        [t("cours.table.budget")]: (
+          <VuiTypography variant="button" color="white" fontWeight="medium">
+            $14,000
           </VuiTypography>
-        </VuiBox>
-      ),
-      budget: (
-        <VuiTypography variant="button" color="white" fontWeight="medium">
-          $14,000
-        </VuiTypography>
-      ),
-      status: (
-        <VuiTypography variant="button" color="white" fontWeight="medium">
-          Working
-        </VuiTypography>
-      ),
-      completion: <Completion value={60} color="info" />,
-      action,
-    },
-    {
-      project: (
-        <VuiBox display="flex" alignItems="center">
-          <VuiTypography pl="16px" color="white" variant="button" fontWeight="medium">
-            Add Progress Track
+        ),
+        [t("cours.table.status")]: (
+          <VuiTypography variant="button" color="white" fontWeight="medium">
+            Working
           </VuiTypography>
-        </VuiBox>
-      ),
-      budget: (
-        <VuiTypography variant="button" color="white" fontWeight="medium">
-          $3,000
-        </VuiTypography>
-      ),
-      status: (
-        <VuiTypography variant="button" color="white" fontWeight="medium">
-          Done
-        </VuiTypography>
-      ),
-      completion: <Completion value={100} color="info" />,
-      action,
-    },
-    {
-      project: (
-        <VuiBox display="flex" alignItems="center">
-          <VuiTypography pl="16px" color="white" variant="button" fontWeight="medium">
-            Fix Platform Errors
+        ),
+        [t("cours.table.completion")]: <Completion value={60} color="info" />,
+        action,
+      },
+      {
+        [t("cours.table.project")]: (
+          <VuiBox display="flex" alignItems="center">
+            <VuiTypography pl="16px" color="white" variant="button" fontWeight="medium">
+              Add Progress Track
+            </VuiTypography>
+          </VuiBox>
+        ),
+        [t("cours.table.budget")]: (
+          <VuiTypography variant="button" color="white" fontWeight="medium">
+            $3,000
           </VuiTypography>
-        </VuiBox>
-      ),
-      budget: (
-        <VuiTypography variant="button" color="white" fontWeight="medium">
-          Not set
-        </VuiTypography>
-      ),
-      status: (
-        <VuiTypography variant="button" color="white" fontWeight="medium">
-          Canceled
-        </VuiTypography>
-      ),
-      completion: <Completion value={30} color="info" />,
-      action,
-    },
-    {
-      project: (
-        <VuiBox display="flex" alignItems="center">
-          test
-        </VuiBox>
-      ),
-      budget: (
-        <VuiTypography variant="button" color="white" fontWeight="medium">
-          $32,000
-        </VuiTypography>
-      ),
-      status: (
-        <VuiTypography variant="button" color="white" fontWeight="medium">
-          Canceled
-        </VuiTypography>
-      ),
-      completion: <Completion value={0} color="info" />,
-      action,
-    },
-    {
-      project: (
-        <VuiBox display="flex" alignItems="center">
-          <VuiTypography pl="16px" color="white" variant="button" fontWeight="medium">
-            Add the New Pricing Page
+        ),
+        [t("cours.table.status")]: (
+          <VuiTypography variant="button" color="white" fontWeight="medium">
+            Done
           </VuiTypography>
-        </VuiBox>
-      ),
-      budget: (
-        <VuiTypography variant="button" color="white" fontWeight="medium">
-          $2,300
-        </VuiTypography>
-      ),
-      status: (
-        <VuiTypography variant="button" color="white" fontWeight="medium">
-          Done
-        </VuiTypography>
-      ),
-      completion: <Completion value={100} color="info" />,
-      action,
-    },
-  ],
+        ),
+        [t("cours.table.completion")]: <Completion value={100} color="info" />,
+        action,
+      },
+      {
+        [t("cours.table.project")]: (
+          <VuiBox display="flex" alignItems="center">
+            <VuiTypography pl="16px" color="white" variant="button" fontWeight="medium">
+              Fix Platform Errors
+            </VuiTypography>
+          </VuiBox>
+        ),
+        [t("cours.table.budget")]: (
+          <VuiTypography variant="button" color="white" fontWeight="medium">
+            Not set
+          </VuiTypography>
+        ),
+        [t("cours.table.status")]: (
+          <VuiTypography variant="button" color="white" fontWeight="medium">
+            Canceled
+          </VuiTypography>
+        ),
+        [t("cours.table.completion")]: <Completion value={30} color="info" />,
+        action,
+      },
+      {
+        [t("cours.table.project")]: (
+          <VuiBox display="flex" alignItems="center">
+            <VuiTypography pl="16px" color="white" variant="button" fontWeight="medium">
+              Add the New Pricing Page
+            </VuiTypography>
+          </VuiBox>
+        ),
+        [t("cours.table.budget")]: (
+          <VuiTypography variant="button" color="white" fontWeight="medium">
+            $2,300
+          </VuiTypography>
+        ),
+        [t("cours.table.status")]: (
+          <VuiTypography variant="button" color="white" fontWeight="medium">
+            Done
+          </VuiTypography>
+        ),
+        [t("cours.table.completion")]: <Completion value={100} color="info" />,
+        action,
+      },
+    ],
+  };
 };

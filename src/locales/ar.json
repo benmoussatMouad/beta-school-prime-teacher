@@ -136,5 +136,25 @@
     "students": "الطلاب",
     "profile": "الملف الشخصي",
     "account-pages": "صفحات الحساب"
+  },
+  "cours": {
+    "title": "دوراتي",
+    "table": {
+      "project": "المشروع",
+      "budget": "الميزانية",
+      "status": "الحالة",
+      "completion": "الإنجاز",
+      "action": "الإجراء"
+    }
+  },
+  "students": {
+    "title": "الطلاب",
+    "table": {
+      "author": "المؤلف",
+      "function": "الوظيفة",
+      "status": "الحالة",
+      "employed": "الموظفون",
+      "action": "الإجراء"
+    }
   }
 }

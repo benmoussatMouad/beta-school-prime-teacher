@@ -135,6 +135,26 @@
     "courses": "Cours",
     "students": "Les étudiants",
     "profile": "Profil",
-    "account-pages": "Account Pages"
+    "account-pages": "Pages du compte"
+  },
+  "cours": {
+    "title": "Mes Cours",
+    "table": {
+      "project": "projet",
+      "budget": "le budget",
+      "status": "le statut",
+      "completion": "l'achèvement",
+      "action": "l'action"
+    }
+  },
+  "students": {
+    "title": "Les étudiants",
+    "table": {
+      "author": "auteur",
+      "function": "la fonction",
+      "status": "statut",
+      "employed": "employés",
+      "action": "l'action"
+    }
   }
 }
