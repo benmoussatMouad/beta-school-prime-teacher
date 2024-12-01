@@ -36,6 +36,7 @@ import Table from "examples/Tables/Table";
 import data from "layouts/dashboard/components/Projects/data";
 import { useTranslation } from "react-i18next";
 import VuiBadge from "../../../../components/VuiBadge";
+import VuiButton from "../../../../components/VuiButton";
 
 function Projects() {
   const { columns, rows } = data();
@@ -78,14 +79,16 @@ function Projects() {
             {t('dashboard.myCourses')}
           </VuiTypography>
           <VuiBadge color="warning" variant="gradient" badgeContent="En cours de development" size="lg"/>
-
         </VuiBox>
-        <VuiBox color="text" px={2}>
-          <Icon sx={{ cursor: "pointer", fontWeight: "bold" }} fontSize="small" onClick={openMenu}>
-            more_vert
-          </Icon>
-        </VuiBox>
-        {renderMenu}
+        <VuiButton color="info" value="+" variant="gradient" size="sm">
+          + {t('dashboard.coursesCard.addCourse')}
+        </VuiButton>
+        {/*<VuiBox color="text" px={2}>*/}
+        {/*  <Icon sx={{ cursor: "pointer", fontWeight: "bold" }} fontSize="small" onClick={openMenu}>*/}
+        {/*    more_vert*/}
+        {/*  </Icon>*/}
+        {/*</VuiBox>*/}
+        {/*{renderMenu}*/}
       </VuiBox>
       <VuiBox
         sx={{

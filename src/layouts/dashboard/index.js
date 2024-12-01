@@ -83,7 +83,7 @@ function Dashboard() {
                   <Grid item xs={12} md={6} xl={3}>
                     <VuiBox my={2}><MiniStatisticsCard
                       title={{ text: t('dashboard.numberOfCourses') }}
-                      count="5"
+                      count="7"
                       // percentage={{ color: "success", text: "+5%" }}
                       icon={{ color: "info", component: <MdOutlineOndemandVideo size="20px" color="white" /> }}
                     /></VuiBox>

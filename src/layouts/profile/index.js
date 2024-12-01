@@ -42,6 +42,7 @@ import Welcome from "../profile/components/Welcome/index";
 import UpdateInformations from "./components/UpdateProfile";
 import { useAuth } from "context/auth/authContext";
 import { useTranslation } from "react-i18next";
+import VuiButton from "../../components/VuiButton";
 
 function Overview() {
 
@@ -194,8 +195,27 @@ function Overview() {
               </Grid>
             </VuiBox>
           </Card>
+
         </Grid>
       </Grid>
+      <Card>
+        <VuiBox display="flex" sx={{width: '100%', justifyContent: 'space-between', alignItems: 'center'}} flexDirection="row" height="100%" >
+          <VuiBox display="flex" flexDirection="column" mb="24px">
+            <VuiTypography color="white" variant="lg" fontWeight="bold" mb="6px">
+              {t('profile.accountDeletion.title')}
+            </VuiTypography>
+            <VuiTypography color="text" variant="button" fontWeight="regular">
+              {t('profile.accountDeletion.description')}
+            </VuiTypography>
+          </VuiBox>
+          <VuiBox xs={{justifyContent: 'center', alignSelf: 'end'}}>
+            <VuiButton color={"error"}
+                       size={"large"}
+                       variant={"gradient"}>{t('profile.accountDeletion.deleteButton')}</VuiButton>
+          </VuiBox>
+        </VuiBox>
+
+      </Card>
     </DashboardLayout>
   );
 }

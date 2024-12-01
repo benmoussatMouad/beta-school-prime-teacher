@@ -12,8 +12,10 @@ import avatar1 from "assets/images/avatar1.png";
 import avatar2 from "assets/images/avatar2.png";
 import avatar3 from "assets/images/avatar3.png";
 import avatar4 from "assets/images/avatar4.png";
+import { useTranslation } from "react-i18next";
 
 export default function data() {
+  const {t} = useTranslation();
   const avatars = (members) =>
     members.map(([image, name]) => (
       <Tooltip key={name} title={name} placeholder="bottom">
@@ -41,37 +43,37 @@ export default function data() {
 
   return {
     columns: [
-      { name: "companies", align: "left" },
+      { name: "cours",  align: "left" },
       { name: "members", align: "left" },
-      { name: "budget", align: "center" },
-      { name: "completion", align: "center" },
+      { name: "etudiants", align: "center" },
+      { name: "Revues", align: "center" },
     ],
 
     rows: [
       {
-        companies: (
+        cours: (
           <VuiBox display="flex" alignItems="center">
             <VuiTypography pl="16px" color="white" variant="button" fontWeight="medium">
-              Chakra Vision UI Version
+التفاضل والتكامل
             </VuiTypography>
           </VuiBox>
         ),
         members: (
           <VuiBox display="flex" py={1}>
             {avatars([
-              [avatar1, "Ryan Tompson"],
-              [avatar2, "Romina Hadid"],
-              [avatar3, "Alexander Smith"],
-              [avatar4, "Jessica Doe"],
+              [avatar1, "Rayane Arbi"],
+              [avatar2, "Amina Hadid"],
+              [avatar3, "Rayane Arbi"],
+              [avatar4, "Amina Hadid"],
             ])}
           </VuiBox>
         ),
-        budget: (
+        etudiants: (
           <VuiTypography variant="button" color="white" fontWeight="bold">
-            $14,000
+            322
           </VuiTypography>
         ),
-        completion: (
+        Revues: (
           <VuiBox width="8rem" textAlign="left">
             <VuiTypography color="white" variant="button" fontWeight="bold">
               60%
@@ -81,10 +83,10 @@ export default function data() {
         ),
       },
       {
-        companies: (
+        cours: (
           <VuiBox display="flex" alignItems="center">
             <VuiTypography pl="16px" color="white" variant="button" fontWeight="medium">
-              Add Progress Track
+الجبر الخطي
             </VuiTypography>
           </VuiBox>
         ),
@@ -96,12 +98,12 @@ export default function data() {
             ])}
           </VuiBox>
         ),
-        budget: (
+        etudiants: (
           <VuiTypography variant="button" color="white" fontWeight="bold">
-            $3,000
+            80
           </VuiTypography>
         ),
-        completion: (
+        Revues: (
           <VuiBox width="8rem" textAlign="left">
             <VuiTypography color="white" variant="button" fontWeight="bold">
               10%
@@ -111,10 +113,10 @@ export default function data() {
         ),
       },
       {
-        companies: (
+        cours: (
           <VuiBox display="flex" alignItems="center">
             <VuiTypography pl="16px" color="white" variant="button" fontWeight="medium">
-              Fix Platform Errors
+الهندسة التحليلية
             </VuiTypography>
           </VuiBox>
         ),
@@ -126,12 +128,12 @@ export default function data() {
             ])}
           </VuiBox>
         ),
-        budget: (
+        etudiants: (
           <VuiTypography variant="button" color="white" fontWeight="bold">
-            Not set
+            54
           </VuiTypography>
         ),
-        completion: (
+        Revues: (
           <VuiBox width="8rem" textAlign="left">
             <VuiTypography color="white" variant="button" fontWeight="bold">
               100%
@@ -141,10 +143,10 @@ export default function data() {
         ),
       },
       {
-        companies: (
+        cours: (
           <VuiBox display="flex" alignItems="center">
             <VuiTypography pl="16px" color="white" variant="button" fontWeight="medium">
-              Launch our Mobile App
+الإحصاء والاحتمالات
             </VuiTypography>
           </VuiBox>
         ),
@@ -158,12 +160,12 @@ export default function data() {
             ])}
           </VuiBox>
         ),
-        budget: (
+        etudiants: (
           <VuiTypography variant="button" color="white" fontWeight="bold">
-            $20,500
+            124
           </VuiTypography>
         ),
-        completion: (
+        Revues: (
           <VuiBox width="8rem" textAlign="left">
             <VuiTypography color="white" variant="button" fontWeight="bold">
               100%
@@ -173,10 +175,10 @@ export default function data() {
         ),
       },
       {
-        companies: (
+        cours: (
           <VuiBox display="flex" alignItems="center">
             <VuiTypography pl="16px" color="white" variant="button" fontWeight="medium">
-              Add the New Pricing Page
+المعادلات التفاضلية
             </VuiTypography>
           </VuiBox>
         ),
@@ -185,12 +187,12 @@ export default function data() {
             {avatars([[avatar4, "Jessica Doe"]])}
           </VuiBox>
         ),
-        budget: (
+        etudiants: (
           <VuiTypography variant="button" color="white" fontWeight="bold">
-            $500
+            78
           </VuiTypography>
         ),
-        completion: (
+        Revues: (
           <VuiBox width="8rem" textAlign="left">
             <VuiTypography color="white" variant="button" fontWeight="bold">
               25%
@@ -200,10 +202,10 @@ export default function data() {
         ),
       },
       {
-        companies: (
+        cours: (
           <VuiBox display="flex" alignItems="center">
             <VuiTypography pl="16px" color="white" variant="button" fontWeight="medium">
-              Redesign New Online Shop
+الجبر
             </VuiTypography>
           </VuiBox>
         ),
@@ -215,12 +217,12 @@ export default function data() {
             ])}
           </VuiBox>
         ),
-        budget: (
+        etudiants: (
           <VuiTypography variant="button" color="white" fontWeight="bold">
-            $2,000
+            43
           </VuiTypography>
         ),
-        completion: (
+        Revues: (
           <VuiBox width="8rem" textAlign="left">
             <VuiTypography color="white" variant="button" fontWeight="bold">
               40%

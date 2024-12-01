@@ -18,6 +18,22 @@
     "signin": "تسجيل الدخول",
     "submit": "إرسال"
   },
+  "dashboard": {
+    "course": "دورة",
+    "coursesCard": {
+      "addCourse": "أضف دورة"
+    },
+    "myCourses": "دوراتي",
+    "newViewers": "المشاهدين الجدد",
+    "numberOfCourses": "عدد الدورات",
+    "todayUsers": "مشاهدي اليوم",
+    "welcomeCard": {
+      "description": "سعيدون برؤيتك مجدداً!",
+      "link": "عرض ملفي الشخصي",
+      "subject": "المادة التي تقوم بتدريسها",
+      "title": "مرحباً بك!"
+    }
+  },
   "dialog": {
     "description": "ستقوم هذه العملية بتغيير صورة ملفك الشخصي. هل تريد المتابعة؟",
     "title": "هل أنت متأكد أنك تريد تحديث صورة الملف الشخصي؟"
@@ -69,12 +85,24 @@
     "years": "سنوات خبرتك"
   },
   "profile": {
+    "accountDeletion": {
+      "deleteButton": "حذف",
+      "description": "بعد حذف حسابك، لن تتمكن من استعادته.",
+      "title": "حذف الحساب"
+    },
     "card": {
       "Verified": "موثوق",
       "title": "معلومات الملف الشخصي",
       "unVerified": "غير موثوق"
     },
     "description": "تحديث الصورة",
+    "setting": {
+      "account": "حساب",
+      "accountEmailMe": "أرسل لي بريدًا إلكترونيًا عندما يتابعني شخص ما",
+      "accountEmailMeComment": "أرسل لي بريدًا إلكترونيًا عندما يعلق شخص ما على مقاطع الفيديو الخاصة بي",
+      "accountEmailMeMention": "أرسل لي بريدًا إلكترونيًا عندما يذكرني شخص ما",
+      "title": "إعدادات المنصة"
+    },
     "subtitle": "يمكنك التحديث بملء النموذج",
     "title": "تحديث المعلومات",
     "welcome": "أهلاً وسهلاً!"
@@ -82,6 +110,13 @@
   "resetPassword": {
     "description": "أدخل ووافق على كلمة المرور الجديدة",
     "reset": "إعادة تعيين كلمة المرور"
+  },
+  "routes": {
+    "account-pages": "صفحات الحساب",
+    "courses": "الدورات",
+    "dashboard": "لوحة القيادة",
+    "profile": "الملف الشخصي",
+    "students": "الطلاب"
   },
   "signup": {
     "already": "هل لديك حساب؟",
@@ -115,37 +150,18 @@
     },
     "welcome": "أهلاً وسهلاً!"
   },
+  "subjects": {
+    "ARABIC": "اللغة العربية",
+    "ENGLISH": "اللغة الإنجليزية",
+    "FRENCH": "اللغة الفرنسية",
+    "HISTORY_GEOGRAPHY": "التاريخ والجغرافيا",
+    "ISLAMIC_STUDIES": "الدراسات الإسلامية",
+    "MATHEMATICS": "الرياضيات",
+    "PHYSICS": "الفيزياء",
+    "SCIENCE": "العلوم"
+  },
   "subscriptionCard": {
     "title": "سعر الاشتراك",
     "toAllCourses": "الى جميع الدورات"
-  },
-  "dashboard": {
-    "myCourses": "دوراتي",
-    "newViewers": "المشاهدين الجدد",
-    "numberOfCourses": "عدد الدورات",
-    "todayUsers": "مشاهدي اليوم",
-    "welcomeCard": {
-      "title": "مرحباً بك!",
-      "description": "سعيدون برؤيتك مجدداً!",
-      "subject": "المادة التي تقوم بتدريسها",
-      "link": "عرض ملفي الشخصي"
-    }
-  },
-  "subjects": {
-    "MATHEMATICS": "الرياضيات",
-    "SCIENCE": "العلوم",
-    "PHYSICS": "الفيزياء",
-    "HISTORY_GEOGRAPHY": "التاريخ والجغرافيا",
-    "ISLAMIC_STUDIES": "الدراسات الإسلامية",
-    "ARABIC": "اللغة العربية",
-    "FRENCH": "اللغة الفرنسية",
-    "ENGLISH": "اللغة الإنجليزية"
-  },
-  "routes": {
-    "dashboard": "لوحة القيادة",
-    "courses": "الدورات",
-    "students": "الطلاب",
-    "profile": "الملف الشخصي",
-    "account-pages": "صفحات الحساب"
   }
 }

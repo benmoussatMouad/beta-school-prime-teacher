@@ -18,6 +18,22 @@
     "signin": "Se Connecter",
     "submit": "Soumettre"
   },
+  "dashboard": {
+    "course": "Cours",
+    "coursesCard": {
+      "addCourse": "Ajoutez un cours"
+    },
+    "myCourses": "Mes Cours",
+    "newViewers": "Nouveaux spectateurs",
+    "numberOfCourses": "Nombre de cours",
+    "todayUsers": "Les spectateurs du jour",
+    "welcomeCard": {
+      "description": "Heureux de vous revoir !",
+      "link": "Voir mon profile",
+      "subject": "La matière que vous enseignez",
+      "title": "Bienvenue !"
+    }
+  },
   "dialog": {
     "description": "Cette action modifiera votre photo de profil. Voulez-vous continuer ?",
     "title": "Êtes-vous sûr de vouloir mettre à jour votre photo de profil ?"
@@ -48,11 +64,11 @@
     "description": "Saisissez votre adresse électronique et votre mot de passe pour vous connecter",
     "forms": {
       "email": "Email",
-      "password": "Password"
+      "password": "Mot de passe"
     },
     "placeholder": {
       "email": "Votre email",
-      "password": "Votre password"
+      "password": "Votre mot de passe"
     },
     "remember": "Souvenez-vous de moi",
     "signin": "Inscrivez-vous",
@@ -69,12 +85,24 @@
     "years": "Votre années d'expérience"
   },
   "profile": {
+    "accountDeletion": {
+      "deleteButton": "Supprimer",
+      "description": "Après avoir supprimé votre compte, vous ne pourrez plus le récupérer.",
+      "title": "Supprimer le compte"
+    },
     "card": {
       "Verified": "Vérifié",
       "title": "Informations sur le profil",
       "unVerified": "Non vérifié"
     },
     "description": "Mise à jour de l'image",
+    "setting": {
+      "account": "Compte",
+      "accountEmailMe": "Envoyez-moi un e-mail lorsque quelqu'un s'abonne",
+      "accountEmailMeComment": "Envoyez-moi un e-mail lorsque quelqu'un commente mes vidéos",
+      "accountEmailMeMention": "Envoyez-moi un e-mail lorsque quelqu'un me mentionne",
+      "title": "Paramètres de la plateforme"
+    },
     "subtitle": "Vous pouvez mettre à jour en remplissant le formulaire",
     "title": "Mettre à jour les informations",
     "welcome": "Bienvenue !"
@@ -82,6 +110,13 @@
   "resetPassword": {
     "description": "Entrez et confirmez votre nouveau mot de passe",
     "reset": "Réinitialiser votre mot de passe"
+  },
+  "routes": {
+    "account-pages": "Account Pages",
+    "courses": "Cours",
+    "dashboard": "Tableau de bord",
+    "profile": "Profil",
+    "students": "Les étudiants"
   },
   "signup": {
     "already": "Vous avez un compte ?",
@@ -115,37 +150,18 @@
     },
     "welcome": "Bienvenue !"
   },
-  "dashboard": {
-    "myCourses": "Mes Cours",
-    "newViewers": "Nouveaux spectateurs",
-    "numberOfCourses": "Nombre de cours",
-    "todayUsers": "Les spectateurs du jour",
-    "welcomeCard": {
-      "title": "Bienvenue !",
-      "description": "Heureux de vous revoir !",
-      "subject": "La matière que vous enseignez",
-      "link": "Voir mon profile"
-    }
+  "subjects": {
+    "ARABIC": "ARABE",
+    "ENGLISH": "ANGLAIS",
+    "FRENCH": "FRANÇAIS",
+    "HISTORY_GEOGRAPHY": "HISTOIRE GÉOGRAPHIE",
+    "ISLAMIC_STUDIES": "ÉTUDES ISLAMIQUES",
+    "MATHEMATICS": "MATHEMATIQUES",
+    "PHYSICS": "PHYSIQUE",
+    "SCIENCE": "SCIENCE"
   },
   "subscriptionCard": {
     "title": "Tarif d'abonnement",
-    "toAllCourses": "À tous les cours"
-  },
-  "subjects": {
-    "MATHEMATICS": "MATHEMATIQUES",
-    "SCIENCE": "SCIENCE",
-    "PHYSICS": "PHYSIQUE",
-    "HISTORY_GEOGRAPHY": "HISTOIRE GÉOGRAPHIE",
-    "ISLAMIC_STUDIES": "ÉTUDES ISLAMIQUES",
-    "ARABIC": "ARABE",
-    "FRENCH": "FRANÇAIS",
-    "ENGLISH": "ANGLAIS"
-  },
-  "routes": {
-    "dashboard": "Tableau de bord",
-    "courses": "Cours",
-    "students": "Les étudiants",
-    "profile": "Profil",
-    "account-pages": "Account Pages"
+    "toAllCourses": "De tous les cours"
   }
 }
