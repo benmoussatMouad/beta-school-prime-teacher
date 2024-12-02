@@ -27,7 +27,7 @@ function SignUp() {
   const [activeStep, setActiveStep] = useState(0);
   const [avatarPreview, setAvatarPreview] = useState(null); // State to store the avatar preview
   const [showPassword, setShowPassword] = useState(false); // Toggle for password visibility
-  const [formData, setFormData] = useState({
+  const [formDataState, setFormData] = useState({
     firstName: "",
     lastName: "",
     email: "",
@@ -72,21 +72,21 @@ function SignUp() {
     if (activeStep > 0) setActiveStep((prev) => prev - 1);
   };
 
-  const onSubmit = async (data) => {
+  const onSubmit = async () => {
     const formData = new FormData();
 
     // Append text fields
-    formData.append("email", data.email);
-    formData.append("firstName", data.firstName);
-    formData.append("institution", data.institution);
-    formData.append("lastName", data.lastName);
-    formData.append("password", data.password);
-    formData.append("subject", data.subject);
-    formData.append("yearsOfExperience", data.yearsOfExperience);
+    formData.append("email", formDataState.email);
+    formData.append("firstName", formDataState.firstName);
+    formData.append("institution", formDataState.institution);
+    formData.append("lastName", formDataState.lastName);
+    formData.append("password", formDataState.password);
+    formData.append("subject", formDataState.subject);
+    formData.append("yearsOfExperience", formDataState.yearsOfExperience);
 
     // Append file (if any)
-    if (data.profilePic && data.profilePic instanceof File) {
-      formData.append("profilePic", data.profilePic); // Make sure `profilePic` is a File
+    if (formDataState.profilePic && formDataState.profilePic instanceof File) {
+      formData.append("profilePic", formDataState.profilePic); // Make sure `profilePic` is a File
     }
 
     await mutate(formData);
@@ -117,8 +117,8 @@ function SignUp() {
             <VuiInput
               {...register("firstName", { required: t("forms.required.firstName") })}
               placeholder={t("signup.placeholder.firstName")}
-              onChange={(e) => setFormData({ ...formData, firstName: e.target.value })}
-              value={formData.firstName} // Bind to state value
+              onChange={(e) => setFormData({ ...formDataState, firstName: e.target.value })}
+              value={formDataState.firstName} // Bind to state value
               error={!!errors.firstName}
             />
             {errors.firstName &&
@@ -130,8 +130,8 @@ function SignUp() {
             <VuiInput
               {...register("lastName", { required: t("forms.required.lastName") })}
               placeholder={t("signup.placeholder.lastName")}
-              value={formData.lastName}
-              onChange={(e) => setFormData({ ...formData, lastName: e.target.value })}
+              value={formDataState.lastName}
+              onChange={(e) => setFormData({ ...formDataState, lastName: e.target.value })}
               error={!!errors.lastName}
             />
             {errors.lastName &&
@@ -148,8 +148,8 @@ function SignUp() {
               placeholder={t("signup.placeholder.email")}
               type="email"
               error={!!errors.email}
-              value={formData.email}
-              onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+              value={formDataState.email}
+              onChange={(e) => setFormData({ ...formDataState, email: e.target.value })}
             />
             {errors.email &&
               <VuiTypography sx={{ color: "red", fontSize: "0.7rem" }}>{errors.email.message}</VuiTypography>
@@ -166,8 +166,8 @@ function SignUp() {
               placeholder={t("signup.placeholder.password")}
               type={showPassword ? "text" : "password"}
               error={!!errors.password}
-              value={formData.password}
-              onChange={(e) => setFormData({ ...formData, password: e.target.value })}
+              value={formDataState.password}
+              onChange={(e) => setFormData({ ...formDataState, password: e.target.value })}
               endAdornment={
                 <IconButton sx={{ position: "absolute", right: 25 }} onClick={() => setShowPassword(!showPassword)}>
                   {showPassword ? <VisibilityOff color="white" /> : <Visibility color="white" />}
@@ -188,8 +188,8 @@ function SignUp() {
             </VuiTypography>
             <VuiSelect
               {...register("subject", { required: t("forms.required.subject") })}
-              value={formData.subject} // Bind to state value
-              onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
+              value={formDataState.subject} // Bind to state value
+              onChange={(e) => setFormData({ ...formDataState, subject: e.target.value })}
               label={t("signup.forms.subject")}
               options={Subjects}
             />
@@ -204,8 +204,8 @@ function SignUp() {
               {...register("institution", { required: t("forms.required.school") })}
               placeholder={t("signup.placeholder.school")}
               error={!!errors.institution}
-              value={formData.institution}
-              onChange={(e) => setFormData({ ...formData, institution: e.target.value })}
+              value={formDataState.institution}
+              onChange={(e) => setFormData({ ...formDataState, institution: e.target.value })}
             />
             {errors.institution &&
               <VuiTypography sx={{ color: "red", fontSize: "0.7rem" }}>{errors.institution.message}</VuiTypography>}
@@ -221,8 +221,8 @@ function SignUp() {
                   message: "Years of experience cannot be less than 0.",
                 },
               })}
-              value={formData.yearsOfExperience}
-              onChange={(e) => setFormData({ ...formData, yearsOfExperience: e.target.value })}
+              value={formDataState.yearsOfExperience}
+              onChange={(e) => setFormData({ ...formDataState, yearsOfExperience: e.target.value })}
               placeholder={t("signup.placeholder.years")}
               error={!!errors.yearsOfExperience}
               onInput={(e) => {
@@ -248,7 +248,6 @@ function SignUp() {
               {t("signup.forms.upload")}
             </VuiTypography>
             <input
-              {...register("profilePic")}
               type="file"
               onChange={handleAvatarChange}
               style={{ display: "none" }}
