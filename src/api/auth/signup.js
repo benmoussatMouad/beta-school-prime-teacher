@@ -2,6 +2,8 @@ import { useMutation } from "react-query";
 import { apiClient } from "../index";
 import { showSnackBar, useVisionUIController } from "../../context";
 import { useTranslation } from "react-i18next";
+import { useHistory } from "react-router-dom";
+import { useAuth } from "../../context/auth/authContext";
 
 const createSignUpFn = async (newUser) => {
   const response = await apiClient.post("/auth/teacher/register", newUser);
@@ -10,6 +12,7 @@ const createSignUpFn = async (newUser) => {
 
 export function useSignUp() {
   const [, dispatch] = useVisionUIController(); // Get dispatch from context
+  const { login } = useAuth();
 
   const { t } = useTranslation();
 
@@ -20,6 +23,7 @@ export function useSignUp() {
       localStorage.setItem("access_token", data.tokens.access.token);
       localStorage.setItem("refresh_token", data.tokens.refresh.token);
 
+      login(data);
       // Trigger success Snackbar
       showSnackBar(dispatch, t("snackbar.signup"), "success");
     },

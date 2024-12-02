@@ -1,10 +1,5 @@
 import axios from "axios";
-import { setTokens } from "utils";
-import { clearTokens } from "utils";
-import { getRefreshToken } from "utils";
-import { getAccessToken } from "utils";
-import { getEnvSafely } from "utils";
-
+import { clearTokens, getAccessToken, getEnvSafely, getRefreshToken, setTokens } from "utils";
 
 // Create Axios instance
 export const apiClient = axios.create({
@@ -14,12 +9,17 @@ export const apiClient = axios.create({
   },
 });
 
-// Request Interceptor: Attach Access Token
+// Request Interceptor: Attach Access Token and Language
 apiClient.interceptors.request.use((config) => {
   const token = getAccessToken();
+  const language = localStorage.getItem("language") || "fr"; // Default to 'fr' if no language is set
+
   if (token) {
     config.headers["Authorization"] = `Bearer ${token}`;
   }
+
+  config.headers["Accept-Language"] = language;
+
   return config;
 });
 
@@ -58,7 +58,7 @@ apiClient.interceptors.response.use(
     }
 
     return Promise.reject(error);
-  }
+  },
 );
 
 // API Methods for Convenience

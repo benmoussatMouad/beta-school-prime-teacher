@@ -27,22 +27,21 @@ function SignUp() {
   const [activeStep, setActiveStep] = useState(0);
   const [avatarPreview, setAvatarPreview] = useState(null); // State to store the avatar preview
   const [showPassword, setShowPassword] = useState(false); // Toggle for password visibility
+  const [formData, setFormData] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    phone: "",
+    subject: Subjects[0],
+    institution: "",
+    yearsOfExperience: 0,
+    profilePic: null,
+    password: "",
+  });
 
   const { mutate, isLoading } = useSignUp();
 
-  const { register, handleSubmit, getValues, formState: { errors }, setValue, trigger } = useForm({
-    defaultValues: {
-      firstName: "",
-      lastName: "",
-      email: "",
-      phone: "",
-      subject: "MATHEMATICS",
-      institution: "",
-      yearsOfExperience: 0,
-      profilePic: null,
-      password: "",
-    },
-  });
+  const { register, handleSubmit, getValues, formState: { errors }, setValue, trigger } = useForm();
 
   const validateStep = async () => {
     let fieldsToValidate = [];
@@ -97,15 +96,10 @@ function SignUp() {
   const handleAvatarChange = (e) => {
     const file = e.target.files[0];
     if (file) {
-      if (file.size > 5 * 1024 * 1024) {
-        alert("File size exceeds 5MB!");
-        return;
-      }
-      if (!file.type.startsWith("image/")) {
-        alert("Only image files are allowed!");
-        return;
-      }
-      setValue("profilePic", file);
+      setFormData((prevData) => ({
+        ...prevData,
+        profilePic: file,
+      }));
       setAvatarPreview(URL.createObjectURL(file));
     }
   };
@@ -123,6 +117,8 @@ function SignUp() {
             <VuiInput
               {...register("firstName", { required: t("forms.required.firstName") })}
               placeholder={t("signup.placeholder.firstName")}
+              onChange={(e) => setFormData({ ...formData, firstName: e.target.value })}
+              value={formData.firstName} // Bind to state value
               error={!!errors.firstName}
             />
             {errors.firstName &&
@@ -134,6 +130,8 @@ function SignUp() {
             <VuiInput
               {...register("lastName", { required: t("forms.required.lastName") })}
               placeholder={t("signup.placeholder.lastName")}
+              value={formData.lastName}
+              onChange={(e) => setFormData({ ...formData, lastName: e.target.value })}
               error={!!errors.lastName}
             />
             {errors.lastName &&
@@ -150,6 +148,8 @@ function SignUp() {
               placeholder={t("signup.placeholder.email")}
               type="email"
               error={!!errors.email}
+              value={formData.email}
+              onChange={(e) => setFormData({ ...formData, email: e.target.value })}
             />
             {errors.email &&
               <VuiTypography sx={{ color: "red", fontSize: "0.7rem" }}>{errors.email.message}</VuiTypography>
@@ -166,6 +166,8 @@ function SignUp() {
               placeholder={t("signup.placeholder.password")}
               type={showPassword ? "text" : "password"}
               error={!!errors.password}
+              value={formData.password}
+              onChange={(e) => setFormData({ ...formData, password: e.target.value })}
               endAdornment={
                 <IconButton sx={{ position: "absolute", right: 25 }} onClick={() => setShowPassword(!showPassword)}>
                   {showPassword ? <VisibilityOff color="white" /> : <Visibility color="white" />}
@@ -186,10 +188,8 @@ function SignUp() {
             </VuiTypography>
             <VuiSelect
               {...register("subject", { required: t("forms.required.subject") })}
-              value={getValues("subject")} // Dynamically bind the current form state
-              onChange={(event) => {
-                setValue("subject", event.target.value, { shouldValidate: true }); // Update the state
-              }}
+              value={formData.subject} // Bind to state value
+              onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
               label={t("signup.forms.subject")}
               options={Subjects}
             />
@@ -204,6 +204,8 @@ function SignUp() {
               {...register("institution", { required: t("forms.required.school") })}
               placeholder={t("signup.placeholder.school")}
               error={!!errors.institution}
+              value={formData.institution}
+              onChange={(e) => setFormData({ ...formData, institution: e.target.value })}
             />
             {errors.institution &&
               <VuiTypography sx={{ color: "red", fontSize: "0.7rem" }}>{errors.institution.message}</VuiTypography>}
@@ -219,6 +221,8 @@ function SignUp() {
                   message: "Years of experience cannot be less than 0.",
                 },
               })}
+              value={formData.yearsOfExperience}
+              onChange={(e) => setFormData({ ...formData, yearsOfExperience: e.target.value })}
               placeholder={t("signup.placeholder.years")}
               error={!!errors.yearsOfExperience}
               onInput={(e) => {
@@ -233,19 +237,24 @@ function SignUp() {
         );
       case 2:
         return (
-          <VuiBox sx={{ display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center" }}>
+          <VuiBox sx={{
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            alignItems: "center",
+          }}>
             <VuiTypography sx={{ margin: "10px 0" }} component="label" variant="button" color="white"
                            fontWeight="medium">
               {t("signup.forms.upload")}
             </VuiTypography>
-
-            {avatarPreview ? (
-              <Avatar sx={{ width: 100, height: 100, marginBottom: "1em" }} src={avatarPreview} />
-            ) : (
-              <Avatar sx={{ width: 100, height: 100, marginBottom: "1em" }} />
-            )}
-
-            <input type="file" accept="image/*" onChange={handleAvatarChange} style={{ marginBottom: "1em" }} />
+            <input
+              {...register("profilePic", { required: t("forms.required.profilePic") })}
+              type="file"
+              onChange={handleAvatarChange}
+              style={{ display: "none" }}
+            />
+            <Avatar src={avatarPreview} sx={{ width: 100, height: 100, cursor: "pointer" }}
+                    onClick={() => document.querySelector("input[type=\"file\"]").click()} />
             {errors.profilePic &&
               <VuiTypography sx={{ color: "red", fontSize: "0.7rem" }}>{errors.profilePic.message}</VuiTypography>}
           </VuiBox>
