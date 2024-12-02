@@ -41,7 +41,7 @@ function SignUp() {
 
   const { mutate, isLoading } = useSignUp();
 
-  const { register, handleSubmit, getValues, formState: { errors }, setValue, trigger } = useForm();
+  const { register, handleSubmit, formState: { errors }, trigger } = useForm();
 
   const validateStep = async () => {
     let fieldsToValidate = [];
