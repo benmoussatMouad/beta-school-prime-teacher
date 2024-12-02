@@ -44,11 +44,36 @@ import { useAuth } from "context/auth/authContext";
 import { useTranslation } from "react-i18next";
 import VuiButton from "../../components/VuiButton";
 import VuiBadge from "../../components/VuiBadge";
+import { Dialog, DialogActions, DialogContent, DialogTitle, Typography } from "@mui/material";
+import linearGradient from "../../assets/theme/functions/linearGradient";
+import rgba from "../../assets/theme/functions/rgba";
+import React, { useState } from "react";
+import colors from "../../assets/theme/base/colors";
+import borders from "../../assets/theme/base/borders";
+import boxShadows from "../../assets/theme/base/boxShadows";
+import { useDeleteTeacher } from "../../api/teacher/deleteTeacher";
+
+
+const { black, gradients, dark } = colors;
+const { card } = gradients;
+const { borderWidth, borderRadius } = borders;
+const { xxl } = boxShadows;
+
 
 function Overview() {
 
   const { t } = useTranslation();
   const context = useAuth();
+  const [openDialog, setOpenDialog] = useState(false); // Dialog state for confirmation
+  const { mutate } = useDeleteTeacher();
+
+  const handleConfirmDialogClose = (confirmed) => {
+
+    if (confirmed) {
+      mutate();
+    }
+    setOpenDialog(false);
+  };
 
 
   return (
@@ -91,14 +116,14 @@ function Overview() {
           >
             <ProfileInfoCard
               title={t("profile.card.title")}
-              description={t('profile.myDescirption')}
+              description={t("profile.myDescirption")}
               info={{
-                [t("forms.fullName")]: `${context.user.user.firstName}  ${context.user.user.lastName}`,
-                [t("forms.email")]: context.user.user.email,
-                [t("forms.institution")]: context.user.teacher.institution,
-                [t("forms.subject")]: t(`subjects.${context.user.teacher.subject}`),
-                [t("forms.yearsOfExperience")]: context.user.teacher.yearsOfExperience,
-                [t("forms.isEmailVerified")]: context.user.user.isEmailVerified ? t("profile.card.Verified") : t("profile.card.unVerified"),
+                [t("forms.fullName")]: `${context.user.user?.firstName}  ${context.user.user?.lastName}`,
+                [t("forms.email")]: context.user.user?.email,
+                [t("forms.institution")]: context.user.teacher?.institution,
+                [t("forms.subject")]: t(`subjects.${context.user.teacher?.subject}`),
+                [t("forms.yearsOfExperience")]: context.user.teacher?.yearsOfExperience,
+                [t("forms.isEmailVerified")]: context.user.user?.isEmailVerified ? t("profile.card.Verified") : t("profile.card.unVerified"),
               }}
             />
           </Grid>
@@ -127,12 +152,12 @@ function Overview() {
               <VuiBox display="flex" flexDirection="column" mb="24px">
                 <VuiBox>
                   <VuiTypography color="white" variant="lg" fontWeight="bold" mb="6px">
-                    {t('profile.project.title')}
-                </VuiTypography>
-                  <VuiBadge badgeContent="A concevoir" color="warning" variant="gradient" size="lg"/>
+                    {t("profile.project.title")}
+                  </VuiTypography>
+                  <VuiBadge badgeContent="A concevoir" color="warning" variant="gradient" size="lg" />
                 </VuiBox>
                 <VuiTypography color="text" variant="button" fontWeight="regular">
-                  {t('profile.project.descirption')}
+                  {t("profile.project.descirption")}
                 </VuiTypography>
               </VuiBox>
               <Grid container spacing={3}>
@@ -203,20 +228,57 @@ function Overview() {
 
         </Grid>
       </Grid>
+
+      {/* Update Picture Confirmation Dialog */}
+      <Dialog
+        sx={({ breakpoints, theme }) => ({
+          "& .MuiDialog-paper": {
+            display: "flex",
+            flexDirection: "column",
+            background: linearGradient(card.main, card.state, card.deg),
+            backdropFilter: "blur(120px)",
+            position: "relative",
+            minWidth: 0,
+            padding: "22px",
+            wordWrap: "break-word",
+            backgroundClip: "border-box",
+            border: `${borderWidth[0]} solid ${rgba(black.main, 0.125)}`,
+            borderRadius: borderRadius.xl,
+            boxShadow: xxl,
+          },
+        })}
+        open={openDialog}
+        onClose={() => setOpenDialog(false)}
+      >
+        <DialogTitle color={"#ffffff"}>{t("dialog.deleteAccount.title")}</DialogTitle>
+        <DialogContent>
+          <Typography color={"#ffffff"}>{t("dialog.deleteAccount.description")}</Typography>
+        </DialogContent>
+        <DialogActions>
+          <VuiButton onClick={() => handleConfirmDialogClose(false)} color="secondary">
+            {t("button.cancel")}
+          </VuiButton>
+          <VuiButton onClick={() => handleConfirmDialogClose(true)} color="info">
+            {t("button.confirm")}
+          </VuiButton>
+        </DialogActions>
+      </Dialog>
+
       <Card>
-        <VuiBox display="flex" sx={{width: '100%', justifyContent: 'space-between', alignItems: 'center'}} flexDirection="row" height="100%" >
+        <VuiBox display="flex" sx={{ width: "100%", justifyContent: "space-between", alignItems: "center" }}
+                flexDirection="row" height="100%">
           <VuiBox display="flex" flexDirection="column" mb="24px">
             <VuiTypography color="white" variant="lg" fontWeight="bold" mb="6px">
-              {t('profile.accountDeletion.title')}
+              {t("profile.accountDeletion.title")}
             </VuiTypography>
             <VuiTypography color="text" variant="button" fontWeight="regular">
-              {t('profile.accountDeletion.description')}
+              {t("profile.accountDeletion.description")}
             </VuiTypography>
           </VuiBox>
-          <VuiBox xs={{justifyContent: 'center', alignSelf: 'end'}}>
-            <VuiButton color={"error"}
-                       size={"large"}
-                       variant={"gradient"}>{t('profile.accountDeletion.deleteButton')}</VuiButton>
+          <VuiBox xs={{ justifyContent: "center", alignSelf: "end" }}>
+            <VuiButton onClick={() => setOpenDialog(true)} color={"error"} size={"large"}
+                       variant={"gradient"}>{t("profile.accountDeletion.deleteButton")}
+            </VuiButton>
           </VuiBox>
         </VuiBox>
 

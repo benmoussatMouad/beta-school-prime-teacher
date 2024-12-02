@@ -46,7 +46,11 @@
   },
   "dialog": {
     "description": "Cette action changera votre photo de profil. Voulez-vous continuer ?",
-    "title": "Êtes-vous sûr de vouloir mettre à jour votre photo de profil ?"
+    "title": "Êtes-vous sûr de vouloir mettre à jour votre photo de profil ?",
+    "deleteAccount": {
+      "title": "Cette action supprime votre compte. Voulez-vous continuer ?",
+      "description": "Êtes-vous sûr  supprime votre compte"
+    }
   },
   "forgetPassword": {
     "description": "Entrez votre adresse e-mail et nous vous enverrons des instructions pour réinitialiser votre mot de passe",
