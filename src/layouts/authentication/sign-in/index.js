@@ -89,7 +89,7 @@ function SignIn() {
             <VuiInput
               {...register("password", {
                 required: t("forms.required.password"),
-                minLength: { value: 6, message: "Password must be at least 6 characters." },
+                minLength: { value: 6, message: t("forms.passwordLength") },
               })}
               placeholder={t("signup.placeholder.email")}
               type={showPassword ? "text" : "password"}

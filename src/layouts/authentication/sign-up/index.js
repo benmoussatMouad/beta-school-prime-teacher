@@ -248,7 +248,7 @@ function SignUp() {
               {t("signup.forms.upload")}
             </VuiTypography>
             <input
-              {...register("profilePic", { required: t("forms.required.profilePic") })}
+              {...register("profilePic")}
               type="file"
               onChange={handleAvatarChange}
               style={{ display: "none" }}
