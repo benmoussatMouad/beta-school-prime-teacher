@@ -48,7 +48,7 @@ import { useTranslation } from "react-i18next";
 // Vision UI Dashboard React icons
 
 // function Sidenav({ color, brand, brandName, routes, ...rest }) {
-function Sidenav({ color, brandName, routes, ...rest }) {
+function Sidenav({ color, brandName, routes, user, ...rest }) {
   const [controller, dispatch] = useVisionUIController();
   const { miniSidenav, transparentSidenav } = controller;
   const location = useLocation();
@@ -57,6 +57,9 @@ function Sidenav({ color, brandName, routes, ...rest }) {
 
   const { t } = useTranslation();
   const closeSidenav = () => setMiniSidenav(dispatch, true);
+
+
+  const role = user?.user?.role || null;
 
   useEffect(() => {
     // A function that sets the mini state of the sidenav.
@@ -83,10 +86,13 @@ function Sidenav({ color, brandName, routes, ...rest }) {
   }, []);
 
   // Render all the routes from the routes.js (All the visible items on the Sidenav)
-  const renderRoutes = routes.map(({ type, name, icon, title, noCollapse, key, route, href }) => {
+  const renderRoutes = routes.map(({ type, name, icon, title, noCollapse, key, route, href, isAdmin }) => {
     let returnValue;
 
     if (type === "collapse") {
+      if (role !== "ADMIN" && isAdmin) {
+        return null; // Don't render this route if it's an admin-only route and the user is not an admin
+      }
       returnValue = href ? (
         <Link
           href={href}
