@@ -86,12 +86,12 @@ function Sidenav({ color, brandName, routes, user, ...rest }) {
   }, []);
 
   // Render all the routes from the routes.js (All the visible items on the Sidenav)
-  const renderRoutes = routes.map(({ type, name, icon, title, noCollapse, key, route, href, isAdmin }) => {
+  const renderRoutes = routes.map(({ type, icon, noCollapse, key, route, href, isAdmin }) => {
     let returnValue;
 
     if (type === "collapse") {
-      if (role !== "ADMIN" && isAdmin) {
-        return null; // Don't render this route if it's an admin-only route and the user is not an admin
+      if (isAdmin && role !== "ADMIN" && role !== "ROOT") {
+        return null; // Don't render this route if it's an admin-only route and the user doesn't have 'ADMIN' or 'ROOT' role
       }
       returnValue = href ? (
         <Link

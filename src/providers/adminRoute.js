@@ -10,7 +10,6 @@ const AdminRoute = ({ component: Component, ...rest }) => {
 
   const { isAuthenticated, user, isLoading } = useAuth();
 
-
   if (isLoading) {
     return (
       <Box
@@ -38,7 +37,7 @@ const AdminRoute = ({ component: Component, ...rest }) => {
     <Route
       {...rest}
       render={(props) =>
-        isAuthenticated && role === "ADMIN" ? (
+        isAuthenticated && (role === "ADMIN" || role === "ROOT") ? (
           <Component {...props} />
         ) : (
           <Redirect to="/authentication/sign-in" />
