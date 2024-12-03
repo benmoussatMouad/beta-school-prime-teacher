@@ -48,11 +48,14 @@ import SignUp from "layouts/authentication/sign-up";
 
 // Vision UI Dashboard React icons
 import { IoHome } from "react-icons/io5";
-import { BsFillPersonFill } from "react-icons/bs";
+import { BsFillEnvelopePaperFill, BsFillPersonFill } from "react-icons/bs";
 import { GiMaterialsScience } from "react-icons/gi";
 import { PiStudentFill } from "react-icons/pi";
+import { LiaChalkboardTeacherSolid } from "react-icons/lia";
 import ResetPassword from "layouts/authentication/reset-password";
 import ForgetPassword from "layouts/authentication/forget-password";
+import Demands from "./layouts/demands";
+import Teachers from "./layouts/teachers";
 
 const routes = [
   {
@@ -64,6 +67,28 @@ const routes = [
     component: Dashboard,
     noCollapse: true,
     isProtected: true,
+  },
+  {
+    type: "collapse",
+    name: "Les demands",
+    key: "demands",
+    route: "/demands",
+    icon: <BsFillEnvelopePaperFill size="15px" color="inherit" />,
+    component: Demands,
+    noCollapse: true,
+    isProtected: true,
+    isAdmin: true,
+  },
+  {
+    type: "collapse",
+    name: "Les enseignants",
+    key: "teachers",
+    route: "/teachers",
+    icon: <LiaChalkboardTeacherSolid size="15px" color="inherit" />,
+    component: Teachers,
+    noCollapse: true,
+    isProtected: true,
+    isAdmin: true,
   },
   {
     type: "collapse",

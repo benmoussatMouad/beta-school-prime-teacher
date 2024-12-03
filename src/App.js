@@ -42,12 +42,12 @@ import createCache from "@emotion/cache";
 import routes from "routes";
 
 // Vision UI Dashboard React contexts
-import { setMiniSidenav, useVisionUIController } from "context";
+import { setDirection, setMiniSidenav, useVisionUIController } from "context";
 import ProtectedRoute from "providers/protectedRoute";
 import GuestRoute from "providers/guestRoute";
 import { useTranslation } from "react-i18next";
 import { useAuth } from "context/auth/authContext";
-import { setDirection } from "context";
+import AdminRoute from "./providers/adminRoute";
 
 
 export default function App() {
@@ -101,7 +101,7 @@ export default function App() {
   useEffect(() => {
 
     if (!language) {
-      localStorage.setItem("language", "fr")
+      localStorage.setItem("language", "fr");
     }
 
     if (language === "ar" || language === "fr") {
@@ -113,7 +113,7 @@ export default function App() {
     } else {
       setDirection(dispatch, "rtl");
     }
-  }, [language])
+  }, [language]);
 
   const getRoutes = (allRoutes) =>
     allRoutes.map((route) => {
@@ -122,6 +122,19 @@ export default function App() {
       }
 
       if (route.route) {
+
+        if (route.isAdmin) {
+          // Use AdminRoute for admin-protected routes
+          return (
+            <AdminRoute
+              exact
+              path={route.route}
+              component={route.component}
+              key={route.key}
+            />
+          );
+        }
+
         if (route.isProtected) {
           // Use ProtectedRoute for protected routes
           return (
@@ -160,7 +173,7 @@ export default function App() {
       return null;
     });
 
-  
+
   return direction === "rtl" ? (
     <CacheProvider value={rtlCache}>
       <ThemeProvider theme={themeRTL}>
@@ -174,6 +187,7 @@ export default function App() {
               routes={routes}
               onMouseEnter={handleOnMouseEnter}
               onMouseLeave={handleOnMouseLeave}
+              user={user}
             />
           </>
         )}
@@ -195,6 +209,7 @@ export default function App() {
             routes={routes}
             onMouseEnter={handleOnMouseEnter}
             onMouseLeave={handleOnMouseLeave}
+            user={user}
           />
         </>
       )}
