@@ -40,6 +40,7 @@
     "numberOfCourses": "Nombre de cours",
     "todayUsers": "Visiteurs d'aujourd'hui",
     "welcomeCard": {
+      "admin": "Admin",
       "description": "Content de vous revoir !",
       "link": "Voir mon profil",
       "subject": "Sujet que vous enseignez",
