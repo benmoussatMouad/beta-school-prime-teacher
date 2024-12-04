@@ -26,7 +26,7 @@ import VuiTypography from "components/VuiTypography";
 // Vision UI Dashboard React example components
 import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
 import DashboardNavbar from "examples/Navbars/DashboardNavbar";
-import Table from "examples/Tables/Table";
+import Table from "examples/Tables/Example";
 import { useAuth } from "context/auth/authContext";
 import { useTranslation } from "react-i18next";
 import { studentsTableData } from "./data/studentsTableData";

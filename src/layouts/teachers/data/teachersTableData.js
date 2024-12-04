@@ -65,7 +65,9 @@ const getStatusColor = (status, palette) => {
   }
 };
 
-export const teacherTableData = (t, data, handleOpen) => {
+export const teacherTableData = (t, data, handleOpen, user) => {
+
+  const role = user?.user?.role;
 
   const rowsObject = data?.map((item) => ({
     [t("demands.table.fullName")]: (
@@ -144,7 +146,7 @@ export const teacherTableData = (t, data, handleOpen) => {
         />
       </VuiTypography>
     ),
-    [t("demands.table.action")]: (
+    [t("demands.table.action")]: role === "ROOT" ? (
       <VuiButton
         variant="contained"
         sx={{ padding: "0px", height: "30px" }}
@@ -153,20 +155,20 @@ export const teacherTableData = (t, data, handleOpen) => {
       >
         {t("demands.table.view")}
       </VuiButton>
-    ),
+    ) : null,
   }));
 
   return {
     columns: [
-      { name: t("demands.table.fullName"), align: "left" },
-      { name: t("demands.table.email"), align: "left" },
-      { name: t("demands.table.institution"), align: "center" },
-      { name: t("demands.table.yearsOfExperience"), align: "center" },
-      { name: t("demands.table.status"), align: "center" },
-      { name: t("demands.table.subject"), align: "center" },
-      { name: t("demands.table.role"), align: "center" },
-      { name: t("demands.table.isEmailVerified"), align: "center" },
-      { name: t("demands.table.action"), align: "center" },
+      { name: t("demands.table.fullName"), key: "fullName", align: "left", sortable: true },
+      { name: t("demands.table.email"), key: "email", align: "left", sortable: true },
+      { name: t("demands.table.institution"), key: "institution", align: "center", sortable: true }, // Not sortable
+      { name: t("demands.table.yearsOfExperience"), key: "yearsOfExperience", align: "center", sortable: true },
+      { name: t("demands.table.status"), key: "status", align: "center", sortable: false }, // Not sortable
+      { name: t("demands.table.subject"), key: "subject", align: "center", sortable: true }, // Not sortable
+      { name: t("demands.table.role"), key: "role", align: "center", sortable: false },
+      { name: t("demands.table.isEmailVerified"), key: "isEmailVerified", align: "center", sortable: false }, // Not sortable
+      { name: t("demands.table.action"), key: "action", align: "center", sortable: false }, // Not sortable
     ],
 
     rows: rowsObject || [],

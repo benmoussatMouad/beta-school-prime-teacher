@@ -49,6 +49,7 @@
   "demands": {
     "table": {
       "action": "Action",
+      "createdAt": "Créé le",
       "email": "Email",
       "fullName": "Nom complet",
       "institution": "institution",
@@ -247,6 +248,7 @@
     "HISTORY_GEOGRAPHY": "Histoire et géographie",
     "ISLAMIC_STUDIES": "Études islamiques",
     "MATHEMATICS": "Mathématiques",
+    "NONE": "Aucun",
     "PHYSICS": "Physique",
     "SCIENCE": "Science"
   },

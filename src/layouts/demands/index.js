@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import CircularProgress from "@mui/material/CircularProgress";
 import Card from "@mui/material/Card";
 import VuiBox from "components/VuiBox";
 import VuiTypography from "components/VuiTypography";
@@ -31,7 +30,16 @@ function Demands() {
   const { user } = useAuth();
   const token = getAccessToken();
   const { t } = useTranslation();
-  const { data, isLoading } = useGetDemands(token);
+
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [email, setEmail] = useState("");
+  const [subject, setSubjects] = useState("");
+  const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(5);
+
+
+  const { data, isLoading } = useGetDemands(token, firstName, lastName, email, subject, page, rowsPerPage);
 
   const [open, setOpen] = useState(false);
   const [selectedTeacher, setSelectedTeacher] = useState(null);
@@ -63,6 +71,39 @@ function Demands() {
     }
   };
 
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+
+    switch (name) {
+      case "firstName":
+        setFirstName(value);
+        break;
+      case "lastName":
+        setLastName(value);
+        break;
+      case "email":
+        setEmail(value);
+        break;
+      case "subject":
+        if (value === "NONE") {
+          setSubjects("");
+        } else {
+          setSubjects(value);
+        }
+        break;
+      default:
+        break;
+    }
+  };
+
+  const handlePageChange = (e) => {
+    setPage(e.target.value);  // Update the page state
+  };
+
+  const handleRowsPerPage = (e) => {
+    setRowsPerPage(e.target.value);  // Update the rows state
+  };
+
 
   return (
     <DashboardLayout user={user}>
@@ -88,22 +129,24 @@ function Demands() {
               },
             }}
           >
-            {isLoading ? (
-              <VuiBox display="flex" justifyContent="center" alignItems="center" py={3}>
-                <CircularProgress color="inherit" />
-              </VuiBox>
-            ) : !rows.length ? (
-              <VuiBox display="flex" justifyContent="center" alignItems="center" py={3}>
-                {t("demands.table.nodata")}
-              </VuiBox>
-            ) : (
-              <Table columns={columns} rows={rows.length ? rows : []} />
-            )}
+
+            <Table
+              columns={columns}
+              rows={rows}
+              onSearchChange={handleChange}
+              page={page}
+              rowsPerPage={rowsPerPage}
+              onPageChange={handlePageChange}
+              onRowsPerPageChange={handleRowsPerPage}
+              isLoading={isLoading}
+              subject={subject}
+            />
+
           </VuiBox>
         </Card>
       </VuiBox>
       {selectedTeacher && <Dialog
-        sx={({ breakpoints, theme }) => ({
+        sx={() => ({
           "& .MuiDialog-paper": {
             display: "flex",
             flexDirection: "column",

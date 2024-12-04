@@ -49,6 +49,7 @@
   "demands": {
     "table": {
       "action": "الإجراءات",
+      "createdAt": "تم الإنشاء في",
       "email": "البريد الإلكتروني",
       "fullName": "الاسم الكامل",
       "institution": "الأكاديمية",
@@ -247,6 +248,7 @@
     "HISTORY_GEOGRAPHY": "التاريخ والجغرافيا",
     "ISLAMIC_STUDIES": "الدراسات الإسلامية",
     "MATHEMATICS": "الرياضيات",
+    "NONE": "لا يوجد",
     "PHYSICS": "الفيزياء",
     "SCIENCE": "العلوم"
   },
