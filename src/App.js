@@ -101,7 +101,7 @@ export default function App() {
   useEffect(() => {
 
     if (!language) {
-      localStorage.setItem("language", "fr");
+      localStorage.setItem("language", "ar");
     }
 
     if (language === "ar" || language === "fr") {
