@@ -38,6 +38,7 @@
     "numberOfCourses": "عدد الدورات",
     "todayUsers": "مشاهدي اليوم",
     "welcomeCard": {
+      "admin": "مسؤول",
       "description": "سعيدون برؤيتك مجدداً!",
       "link": "عرض ملفي الشخصي",
       "subject": "المادة التي تقوم بتدريسها",
