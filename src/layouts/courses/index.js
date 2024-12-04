@@ -26,13 +26,13 @@ import VuiTypography from "components/VuiTypography";
 // Vision UI Dashboard React example components
 import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
 import DashboardNavbar from "examples/Navbars/DashboardNavbar";
-import Table from "examples/Tables/Table";
 
 // Data
 import { useAuth } from "context/auth/authContext";
 import { useTranslation } from "react-i18next";
 import { projectsTableData } from "./data/projectsTableData";
 import VuiBadge from "../../components/VuiBadge";
+import Table from "examples/Tables/Example";
 
 function Courses() {
 
@@ -75,7 +75,7 @@ function Courses() {
           <VuiBox display="flex" justifyContent="space-between" alignItems="center">
             <VuiTypography variant="lg" color="white">
               {t("cours.title")}
-              <VuiBadge color="warning" variant="gradient" badgeContent="En cours de development" size="lg"/>
+              <VuiBadge color="warning" variant="gradient" badgeContent="En cours de development" size="lg" />
             </VuiTypography>
           </VuiBox>
           <VuiBox

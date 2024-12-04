@@ -34,13 +34,9 @@ import Projects from "layouts/dashboard/components/Projects";
 import OrderOverview from "layouts/dashboard/components/OrderOverview";
 import SatisfactionRate from "layouts/dashboard/components/SatisfactionRate";
 
-// React icons
-import { IoDocumentText, IoGlobe } from "react-icons/io5";
-import { FaShoppingCart } from "react-icons/fa";
 
 // Data
 import { useAuth } from "context/auth/authContext";
-import { useTransition } from "react";
 import { useTranslation } from "react-i18next";
 import { PiStudent } from "react-icons/pi";
 import { MdOutlineOndemandVideo } from "react-icons/md";
@@ -96,31 +92,6 @@ function Dashboard() {
             </Grid>
           </Grid>
         </VuiBox>
-        {/*<VuiBox mb={3}>*/}
-        {/*  <Grid item xs={12} lg={6} xl={7}>*/}
-        {/*    <Card>*/}
-        {/*      <VuiBox sx={{ height: "100%" }}>*/}
-        {/*        <VuiTypography variant="lg" color="white" fontWeight="bold" mb="5px">*/}
-        {/*          Sales Overview*/}
-        {/*        </VuiTypography>*/}
-        {/*        <VuiBox display="flex" alignItems="center" mb="40px">*/}
-        {/*          <VuiTypography variant="button" color="success" fontWeight="bold">*/}
-        {/*            +5% more{" "}*/}
-        {/*            <VuiTypography variant="button" color="text" fontWeight="regular">*/}
-        {/*              in 2021*/}
-        {/*            </VuiTypography>*/}
-        {/*          </VuiTypography>*/}
-        {/*        </VuiBox>*/}
-        {/*        <VuiBox sx={{ height: "310px" }}>*/}
-        {/*          <LineChart*/}
-        {/*            lineChartData={lineChartDataDashboard}*/}
-        {/*            lineChartOptions={lineChartOptionsDashboard}*/}
-        {/*          />*/}
-        {/*        </VuiBox>*/}
-        {/*      </VuiBox>*/}
-        {/*    </Card>*/}
-        {/*  </Grid>*/}
-        {/*</VuiBox>*/}
         <Grid container spacing={3} direction="row" justifyContent="center" alignItems="stretch">
           <Grid item xs={12} md={6} lg={8}>
             <Projects />

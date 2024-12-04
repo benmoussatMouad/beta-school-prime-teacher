@@ -7,6 +7,7 @@
     "title": "Votre e-mail n'a pas encore été vérifié !"
   },
   "button": {
+    "approve": "Approuver",
     "back": "Retour",
     "buttonCooldown": "Intervalle de repos",
     "cancel": "Annuler",
@@ -14,6 +15,7 @@
     "forgetButton01": "Réessayez dans",
     "forgetButton02": "Envoyer le lien de réinitialisation",
     "next": "Suivant",
+    "reject": "Rejeter",
     "reset": "Réinitialiser le mot de passe",
     "signin": "Se connecter",
     "submit": "Soumettre"
@@ -44,13 +46,31 @@
       "title": "Bienvenue !"
     }
   },
-  "dialog": {
-    "description": "Cette action changera votre photo de profil. Voulez-vous continuer ?",
-    "title": "Êtes-vous sûr de vouloir mettre à jour votre photo de profil ?",
-    "deleteAccount": {
-      "title": "Cette action supprime votre compte. Voulez-vous continuer ?",
-      "description": "Êtes-vous sûr  supprime votre compte"
+  "demands": {
+    "table": {
+      "action": "Action",
+      "createdAt": "Créé le",
+      "email": "Email",
+      "fullName": "Nom complet",
+      "institution": "institution",
+      "isEmailVerified": "Statut Email",
+      "nodata": "Il n'y a pas de données",
+      "progress": "EN PROGRESSION",
+      "role": "Rôle",
+      "status": "statut",
+      "subject": "Sujet ",
+      "title": "Demande",
+      "view": "voir",
+      "yearsOfExperience": "Années d'expérience"
     }
+  },
+  "dialog": {
+    "deleteAccount": {
+      "description": "Êtes-vous sûr  supprime votre compte",
+      "title": "Cette action supprime votre compte. Voulez-vous continuer ?"
+    },
+    "description": "Cette action changera votre photo de profil. Voulez-vous continuer ?",
+    "title": "Êtes-vous sûr de vouloir mettre à jour votre photo de profil ?"
   },
   "forgetPassword": {
     "description": "Entrez votre adresse e-mail et nous vous enverrons des instructions pour réinitialiser votre mot de passe",
@@ -69,18 +89,18 @@
     "password": "Mot de passe",
     "passwordLength": "Le mot de passe doit comporter au moins 6 caractères",
     "phone": "Téléphone",
+    "required": {
+      "confimPassword": "La confirmation du mot de passe est requise.",
+      "email": "L'adresse e-mail est requise.",
+      "experince": "Les années d'expérience sont requises.",
+      "firstName": "Le prénom est requis.",
+      "lastName": "Le nom est requis.",
+      "password": "Le mot de passe est requis.",
+      "school": "L'école est requise.",
+      "subject": "Le sujet est requis."
+    },
     "school": "École",
     "subject": "Sujet",
-    "required": {
-      "subject": "Le sujet est requis.",
-      "school": "L'école est requise.",
-      "password": "Le mot de passe est requis.",
-      "lastName": "Le nom est requis.",
-      "firstName": "Le prénom est requis.",
-      "experince": "Les années d'expérience sont requises.",
-      "email": "L'adresse e-mail est requise.",
-      "confimPassword": "La confirmation du mot de passe est requise."
-    },
     "upload": "Télécharger un avatar",
     "years": "Années d'expérience",
     "yearsOfExperience": "Années d'expérience"
@@ -110,6 +130,21 @@
     "subject": "Votre sujet",
     "years": "Vos années d'expérience"
   },
+  "popup": {
+    "defaultName": "Utilisateur",
+    "demand": {
+      "description": "Si vous cliquez sur ces deux boutons, vous pouvez approuver ou rejeter le profil de l'enseignant.Votre action approuvera ou rejettera l'enseignant"
+    },
+    "description": "Vous êtes sur le point de prendre une mesure pour {{name}}, qui est un(e) Professor {{role}}.",
+    "email": "Email",
+    "fullName": "Nom complet",
+    "noEmail": "Email non fourni",
+    "role": "Rôle",
+    "teachers": {
+      "description": "Le clic de confirmation fera de l'enseignant un administrateur"
+    },
+    "title": "Action pour {{name}}"
+  },
   "profile": {
     "accountDeletion": {
       "deleteButton": "Supprimer",
@@ -124,8 +159,8 @@
     "description": "Mise à jour de la photo",
     "myDescirption": "Je suis un professeur de mathématiques passionné avec plusieurs années d'expérience. J'ai toujours été fasciné par la logique et la précision exigées par les mathématiques, et j'aime partager cette passion avec mes élèves chaque jour",
     "project": {
-      "title": "Mes données",
-      "descirption": ""
+      "descirption": "",
+      "title": "Mes données"
     },
     "setting": {
       "account": "Compte",
@@ -146,8 +181,10 @@
     "account-pages": "Pages de compte",
     "courses": "Cours",
     "dashboard": "Tableau de bord",
+    "demands": "Demands",
     "profile": "Profil",
-    "students": "Étudiants"
+    "students": "Étudiants",
+    "teachers": "Les enseignants"
   },
   "signup": {
     "already": "Vous avez déjà un compte ?",
@@ -211,11 +248,26 @@
     "HISTORY_GEOGRAPHY": "Histoire et géographie",
     "ISLAMIC_STUDIES": "Études islamiques",
     "MATHEMATICS": "Mathématiques",
+    "NONE": "Aucun",
     "PHYSICS": "Physique",
     "SCIENCE": "Science"
   },
   "subscriptionCard": {
     "title": "Prix de l'abonnement",
     "toAllCourses": "à tous les cours"
+  },
+  "teachers": {
+    "page": {
+      "title": "Les enseignants"
+    },
+    "status": {
+      "ACCEPTED": "ACCEPTÉ",
+      "IN_PROGRESS": "IN_PROGRESS",
+      "REGISTERED": "ENREGISTRÉ",
+      "REJECTED": "REJETÉ"
+    },
+    "table": {
+      "title": "Les enseignants"
+    }
   }
 }

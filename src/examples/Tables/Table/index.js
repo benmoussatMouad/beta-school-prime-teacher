@@ -1,156 +1,240 @@
-/*!
-
-=========================================================
-* Vision UI Free React - v1.0.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/vision-ui-free-react
-* Copyright 2021 Creative Tim (https://www.creative-tim.com/)
-* Licensed under MIT (https://github.com/creativetimofficial/vision-ui-free-react/blob/master LICENSE.md)
-
-* Design and Coded by Simmmple & Creative Tim
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-*/
-
-import { useMemo } from "react";
-
-// prop-types is a library for typechecking of props
-import PropTypes from "prop-types";
-
-// uuid is a library for generating unique id
-import { v4 as uuidv4 } from "uuid";
-
-// @mui material components
-import { Table as MuiTable } from "@mui/material";
-import TableBody from "@mui/material/TableBody";
-import TableContainer from "@mui/material/TableContainer";
-import TableRow from "@mui/material/TableRow";
-
-// Vision UI Dashboard React components
+import React, { useState } from "react";
+import { Table as MuiTable, TableBody, TableContainer, TablePagination, TableRow } from "@mui/material";
 import VuiBox from "components/VuiBox";
-import VuiAvatar from "components/VuiAvatar";
-import VuiTypography from "components/VuiTypography";
-
-// Vision UI Dashboard React base styles
+import VuiInput from "components/VuiInput";
 import colors from "assets/theme/base/colors";
 import typography from "assets/theme/base/typography";
 import borders from "assets/theme/base/borders";
+import { useTranslation } from "react-i18next";
+import CircularProgress from "@mui/material/CircularProgress";
+import Grid from "@mui/material/Grid";
+import { FiltersSubjects } from "../../../utils";
+import VuiSelect from "../../../components/VuiSelect";
 
-function Table({ columns, rows }) {
+function Table({
+columns,
+rows,
+onSearchChange,
+page,
+rowsPerPage,
+onPageChange,
+onRowsPerPageChange,
+isLoading,
+subject,
+}) {
   const { grey } = colors;
   const { size, fontWeightBold } = typography;
   const { borderWidth } = borders;
+  const { t } = useTranslation();
 
-  const renderColumns = columns.map(({ name, align, width }, key) => {
-    let pl;
-    let pr;
+  const [sortConfig, setSortConfig] = useState({ key: "", translatedKey: "", direction: "asc" });
 
-    if (key === 0) {
-      pl = 3;
-      pr = 3;
-    } else if (key === columns.length - 1) {
-      pl = 3;
-      pr = 3;
-    } else {
-      pl = 1;
-      pr = 1;
+  const handleSort = (columnKey, translatedKey, sortable) => {
+    if (!sortable) return; // Skip sorting if the column is not sortable
+
+    let direction = "asc";
+    if (sortConfig.key === columnKey && sortConfig.direction === "asc") {
+      direction = "desc";
     }
+    setSortConfig({ key: columnKey, translatedKey, direction });
+  };
 
-    return (
-      <VuiBox
-        key={name}
-        component="th"
-        width={width || "auto"}
-        pt={1.5}
-        pb={1.25}
-        pl={align === "left" ? pl : 3}
-        pr={align === "right" ? pr : 3}
-        textAlign={align}
-        fontSize={size.xxs}
-        fontWeight={fontWeightBold}
-        color="text"
-        opacity={0.7}
-        borderBottom={`${borderWidth[1]} solid ${grey[700]}`}
-      >
-        {name.toUpperCase()}
-      </VuiBox>
-    );
-  });
+  const sortRows = (rows) => {
+    const { key, translatedKey, direction } = sortConfig;
 
-  const renderRows = rows.map((row, key) => {
-    const rowKey = `row-${key}`;
+    if (!key) return rows;
 
-    const tableRow = columns.map(({ name, align }) => {
-      let template;
+    return [...rows].sort((a, b) => {
+      const aValue = extractSortableValue(a, key, translatedKey);
+      const bValue = extractSortableValue(b, key, translatedKey);
 
-      if (Array.isArray(row[name])) {
-        template = (
-          <VuiBox
-            key={uuidv4()}
-            component="td"
-            p={1}
-            borderBottom={row.hasBorder ? `${borderWidth[1]} solid ${light.main}` : null}
-          >
-            <VuiBox display="flex" alignItems="center" py={0.5} px={1}>
-              <VuiBox mr={2}>
-                <VuiAvatar src={row[name][0]} name={row[name][1]} variant="rounded" size="sm" />
-              </VuiBox>
-              <VuiTypography
-                color="white"
-                variant="button"
-                fontWeight="medium"
-                sx={{ width: "max-content" }}
-              >
-                {row[name][1]}
-              </VuiTypography>
-            </VuiBox>
-          </VuiBox>
-        );
-      } else {
-        template = (
-          <VuiBox
-            key={uuidv4()}
-            component="td"
-            p={1}
-            textAlign={align}
-            borderBottom={row.hasBorder ? `${borderWidth[1]} solid ${grey[700]}` : null}
-          >
-            <VuiTypography
-              variant="button"
-              fontWeight="regular"
-              color="text"
-              sx={{ display: "inline-block", width: "max-content" }}
-            >
-              {row[name]}
-            </VuiTypography>
-          </VuiBox>
-        );
+      if (aValue < bValue) {
+        return direction === "asc" ? -1 : 1;
       }
-
-      return template;
+      if (aValue > bValue) {
+        return direction === "asc" ? 1 : -1;
+      }
+      return 0;
     });
+  };
 
-    return <TableRow key={rowKey}>{tableRow}</TableRow>;
-  });
+  const extractSortableValue = (row, key, translatedKey) => {
+    // This function extracts the correct value from the row object for each column key
+    switch (key) {
+      case "fullName":
+        return `${row[translatedKey].props?.name}`;
+      case "institution":
+        return row[translatedKey].props.content;
+      case "email":
+        return row[translatedKey].props.content;
+      case "yearsOfExperience":
+        return row[translatedKey].props.children;
+      case "subject":
+        return row[translatedKey].props.content;
+      case "createdAt":
+        return new Date(row[translatedKey].props.children);
+      default:
+        return "";  // or a default value to ensure sort can always proceed
+    }
+  };
 
-  return useMemo(
-    () => (
-      <TableContainer>
-        <MuiTable>
-          <VuiBox component="thead">
-            <TableRow>{renderColumns}</TableRow>
-          </VuiBox>
-          <TableBody>{renderRows}</TableBody>
-        </MuiTable>
-      </TableContainer>
-    ),
-    [columns, rows]
+  const sortedRows = sortRows(rows);
+  const paginatedRows = sortedRows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage);
+
+  return (
+    <>
+      {/* Search Input */}
+      <Grid container spacing={2}>
+        <Grid item xs={12} sm={6} md={3}>
+          <VuiInput
+            placeholder={t("signup.forms.firstName")}
+            fullWidth
+            onChange={onSearchChange}
+            sx={{ my: 1 }}
+            name="firstName"
+          />
+        </Grid>
+        <Grid item xs={12} sm={6} md={3}>
+          <VuiInput
+            placeholder={t("signup.forms.lastName")}
+            fullWidth
+            onChange={onSearchChange}
+            sx={{ my: 1 }}
+            name="lastName"
+          />
+        </Grid>
+        <Grid item xs={12} sm={6} md={3}>
+          <VuiInput
+            placeholder={t("signup.forms.email")}
+            fullWidth
+            onChange={onSearchChange}
+            sx={{ my: 1 }}
+            name="email"
+          />
+        </Grid>
+        <Grid item sx={{ display: "flex", alignItems: "center" }} xs={12} sm={6} md={3}>
+          <VuiSelect
+            onChange={onSearchChange}
+            label={t("signup.forms.subject")}
+            options={FiltersSubjects}
+            value={subject || FiltersSubjects[0]}
+            name={"subject"}
+          />
+        </Grid>
+      </Grid>
+
+      {isLoading ? (
+        <VuiBox display="flex" justifyContent="center" alignItems="center" py={3}>
+          <CircularProgress color="inherit" />
+        </VuiBox>
+      ) : !rows.length ? (
+        <VuiBox display="flex" justifyContent="center" alignItems="center" py={3}>
+          {t("demands.table.nodata")}
+        </VuiBox>
+      ) : (
+        <>
+          <TableContainer>
+            <MuiTable>
+              <VuiBox component="thead">
+                <TableRow>
+                  {columns.map(({ name, key, sortable, align }) => (
+                    <VuiBox
+                      key={name}
+                      component="th"
+                      pt={1.5}
+                      pb={1.25}
+                      textAlign={align}
+                      fontSize={size.xxs}
+                      fontWeight={fontWeightBold}
+                      color="text"
+                      opacity={0.7}
+                      borderBottom={`${borderWidth[1]} solid ${grey[700]}`}
+                      sx={{ cursor: "pointer" }}
+                      onClick={() => handleSort(key, name, sortable)}
+                    >
+                      {name.toUpperCase()}{" "}
+                      {sortable && sortConfig.key === key ? (sortConfig.direction === "asc" ? "▲" : "▼") : ""}
+                    </VuiBox>
+                  ))}
+                </TableRow>
+              </VuiBox>
+              <TableBody>
+                {paginatedRows.map((row, index) => (
+                  <TableRow key={`row-${index}`}>
+                    {columns.map(({ name, align }) => (
+                      <VuiBox
+                        key={name}
+                        component="td"
+                        textAlign={align}
+                        borderBottom={`${borderWidth[1]} solid ${grey[700]}`}
+                      >
+                        {row[name] || "-"}
+                      </VuiBox>
+                    ))}
+                  </TableRow>
+                ))}
+              </TableBody>
+              <TablePagination
+                rowsPerPageOptions={[5, 10, 15]}
+                count={rows.length}
+                rowsPerPage={rowsPerPage}
+                page={page}
+                onPageChange={onPageChange}
+                onRowsPerPageChange={onRowsPerPageChange}
+                sx={{
+                  padding: "20px 0px !important",
+                  width: "100%",
+                  background: "transparent !important",
+                  borderBottom: "none !important",
+                  color: "white !important",
+                  "& .MuiTablePagination-input": {
+                    fontSize: "1.2rem",
+                    color: "white !important",
+                    maxWidth: "300px",
+                    backgroundColor: "transparent !important",
+                    margin: "0px !important",
+                  },
+                  "& .MuiTablePagination-select": {
+                    fontSize: "1.2rem",
+                    color: "white",
+                    border: "none",
+                    padding: "0px !important",
+                  },
+                  ".MuiTablePagination-actions": {
+                    display: "flex",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                    button: {
+                      color: "white !important",
+                    },
+                  },
+                  ".MuiTablePagination-spacer": {
+                    display: "none",
+                  },
+                  ".MuiTablePagination-selectIcon": {
+                    color: "white",
+                  },
+                  ".MuiTablePagination-toolbar": {
+                    display: "flex",
+                    justifyContent: "space-between",
+                    backgroundColor: "transparent",
+                    padding: "0px !important",
+                  },
+                  ".MuiTypography-root": {
+                    fontSize: "1.1rem",
+                  },
+                  ".MuiTablePagination-selectLabel": {
+                    display: "none !important",
+                  },
+                }}
+                variant={"footer"}
+              />
+            </MuiTable>
+          </TableContainer>
+        </>
+      )}
+    </>
   );
 }
-
 
 export default Table;

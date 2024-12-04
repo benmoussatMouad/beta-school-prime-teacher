@@ -16,21 +16,16 @@
 
 */
 
-import { useState } from "react";
-
 // @mui material components
 import Card from "@mui/material/Card";
-import Icon from "@mui/material/Icon";
-import Menu from "@mui/material/Menu";
-import MenuItem from "@mui/material/MenuItem";
-import { BsCheckCircleFill } from "react-icons/bs";
+
 
 // Vision UI Dashboard React components
 import VuiBox from "components/VuiBox";
 import VuiTypography from "components/VuiTypography";
 
 // Vision UI Dashboard Materail-UI example components
-import Table from "examples/Tables/Table";
+import Table from "examples/Tables/Example";
 
 // Data
 import data from "layouts/dashboard/components/Projects/data";
@@ -40,12 +35,10 @@ import VuiButton from "../../../../components/VuiButton";
 
 function Projects() {
   const { columns, rows } = data();
-  const [menu, setMenu] = useState(null);
 
-  const openMenu = ({ currentTarget }) => setMenu(currentTarget);
-  const closeMenu = () => setMenu(null);
   const {t} = useTranslation();
 
+  /*
   const renderMenu = (
     <Menu
       id="simple-menu"
@@ -66,6 +59,7 @@ function Projects() {
       <MenuItem onClick={closeMenu}>Something else</MenuItem>
     </Menu>
   );
+  */
 
   return (
     <Card
