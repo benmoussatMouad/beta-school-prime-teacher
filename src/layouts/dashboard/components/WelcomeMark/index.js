@@ -15,8 +15,9 @@ const WelcomeMark = ({ user: { user, teacher } }) => {
   const [{ direction }, dispatch] = useVisionUIController();
 
   const subject = teacher?.subject;
+  console.log(user);
 
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
 
   return (
     <Card sx={() => ({
@@ -31,9 +32,10 @@ const WelcomeMark = ({ user: { user, teacher } }) => {
             {t("dashboard.welcomeCard.title")}
           </VuiTypography>
           <VuiTypography color="white" variant="h3" fontWeight="bold" mb="18px">
-            {user ? `${user.firstName} ${user.lastName}` : "User Name"}
+            {user ? (i18n.language === "fr" ? `${user.firstName} ${user.lastName}` : `${user.firstNameAr || user.firstName} ${user.lastNameAr || user.lastName}`) : "User Name"}
             {user && user.role === "ADMIN" && (
-              <VuiBadge badgeContent={t("dashboard.welcomeCard.admin")} container color="primary" variant="contained" size="md" sx={{ position: "relative", top: "-1rem", color: "black", ml: "10px" }}/>
+              <VuiBadge badgeContent={t("dashboard.welcomeCard.admin")} container color="primary" variant="contained"
+                        size="md" sx={{ position: "relative", top: "-1rem", color: "black", ml: "10px" }} />
             )}
           </VuiTypography>
           <VuiTypography color="text" variant="h6" fontWeight="regular" mb="auto">

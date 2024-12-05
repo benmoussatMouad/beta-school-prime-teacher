@@ -75,52 +75,52 @@
   },
   "faq": {
     "1": {
-      "question": "Comment puis-je m'inscrire en tant qu'enseignant ?",
-      "answer": "Vous pouvez vous inscrire en cliquant sur le bouton « S'inscrire » sur la page d'accueil. Remplissez vos coordonnées, vérifiez votre adresse électronique et commencez à télécharger vos cours."
-    },
-    "2": {
-      "question": "Quels types de cours puis-je télécharger ?",
-      "answer": "Vous pouvez télécharger n'importe quel cours de formation ou de développement professionnel qui respecte les lignes directrices de notre plateforme."
-    },
-    "3": {
-      "question": "Quels sont les formats de fichiers pris en charge pour les cours ?",
-      "answer": "Notre plateforme prend en charge les formats tels que PDF, MP4, PPT et autres fichiers standard pour les documents et vidéos éducatifs."
-    },
-    "4": {
-      "question": "Puis-je modifier un cours après l'avoir téléchargé ?",
-      "answer": "Oui, vous pouvez modifier vos cours en accédant à la section « Mes cours » sur votre tableau de bord."
-    },
-    "5": {
-      "question": "Comment les étudiants peuvent-ils accéder à mes cours ?",
-      "answer": "Une fois publiés, vos cours seront visibles pour les étudiants dans les catégories correspondantes. Ils peuvent s'inscrire et commencer à apprendre immédiatement."
-    },
-    "6": {
-      "question": "Comment puis-je recevoir des paiements pour mes cours ?",
-      "answer": "Les paiements sont effectués directement sur votre compte bancaire enregistré ou via une méthode de paiement que vous avez configurée dans votre profil."
-    },
-    "7": {
-      "question": "Puis-je fixer mes propres prix pour mes cours ?",
-      "answer": "Oui, en tant qu'enseignant, vous avez la possibilité de fixer les prix de vos cours selon vos préférences."
-    },
-    "8": {
-      "question": "Existe-t-il une limite au nombre de cours que je peux télécharger ?",
-      "answer": "Non, il n'y a pas de limite au nombre de cours que vous pouvez télécharger, tant qu'ils respectent nos directives."
-    },
-    "9": {
-      "question": "Comment puis-je obtenir de l'aide si j'ai des questions techniques ?",
-      "answer": "Vous pouvez contacter notre équipe de support via le formulaire de contact ou par email à support@example.com."
+      "answer": "Vous pouvez vous inscrire en cliquant sur le bouton « S'inscrire » sur la page d'accueil. Remplissez vos coordonnées, vérifiez votre adresse électronique et commencez à télécharger vos cours.",
+      "question": "Comment puis-je m'inscrire en tant qu'enseignant ?"
     },
     "10": {
-      "question": "Puis-je retirer un cours publié ?",
-      "answer": "Oui, vous pouvez retirer un cours publié depuis votre tableau de bord. Les étudiants inscrits auront toujours accès à la version téléchargée."
+      "answer": "Oui, vous pouvez retirer un cours publié depuis votre tableau de bord. Les étudiants inscrits auront toujours accès à la version téléchargée.",
+      "question": "Puis-je retirer un cours publié ?"
     },
     "11": {
-      "question": "Puis-je collaborer avec d'autres enseignants sur une seule plateforme ?",
-      "answer": "Oui, vous pouvez inviter d'autres enseignants à collaborer et partager la gestion des cours."
+      "answer": "Oui, vous pouvez inviter d'autres enseignants à collaborer et partager la gestion des cours.",
+      "question": "Puis-je collaborer avec d'autres enseignants sur une seule plateforme ?"
     },
     "12": {
-      "question": "Comment puis-je suivre la progression des étudiants ?",
-      "answer": "Depuis votre tableau de bord, vous pouvez voir les statistiques sur l'inscription, les progrès et les retours des étudiants."
+      "answer": "Depuis votre tableau de bord, vous pouvez voir les statistiques sur l'inscription, les progrès et les retours des étudiants.",
+      "question": "Comment puis-je suivre la progression des étudiants ?"
+    },
+    "2": {
+      "answer": "Vous pouvez télécharger n'importe quel cours de formation ou de développement professionnel qui respecte les lignes directrices de notre plateforme.",
+      "question": "Quels types de cours puis-je télécharger ?"
+    },
+    "3": {
+      "answer": "Notre plateforme prend en charge les formats tels que PDF, MP4, PPT et autres fichiers standard pour les documents et vidéos éducatifs.",
+      "question": "Quels sont les formats de fichiers pris en charge pour les cours ?"
+    },
+    "4": {
+      "answer": "Oui, vous pouvez modifier vos cours en accédant à la section « Mes cours » sur votre tableau de bord.",
+      "question": "Puis-je modifier un cours après l'avoir téléchargé ?"
+    },
+    "5": {
+      "answer": "Une fois publiés, vos cours seront visibles pour les étudiants dans les catégories correspondantes. Ils peuvent s'inscrire et commencer à apprendre immédiatement.",
+      "question": "Comment les étudiants peuvent-ils accéder à mes cours ?"
+    },
+    "6": {
+      "answer": "Les paiements sont effectués directement sur votre compte bancaire enregistré ou via une méthode de paiement que vous avez configurée dans votre profil.",
+      "question": "Comment puis-je recevoir des paiements pour mes cours ?"
+    },
+    "7": {
+      "answer": "Oui, en tant qu'enseignant, vous avez la possibilité de fixer les prix de vos cours selon vos préférences.",
+      "question": "Puis-je fixer mes propres prix pour mes cours ?"
+    },
+    "8": {
+      "answer": "Non, il n'y a pas de limite au nombre de cours que vous pouvez télécharger, tant qu'ils respectent nos directives.",
+      "question": "Existe-t-il une limite au nombre de cours que je peux télécharger ?"
+    },
+    "9": {
+      "answer": "Vous pouvez contacter notre équipe de support via le formulaire de contact ou par email à support@example.com.",
+      "question": "Comment puis-je obtenir de l'aide si j'ai des questions techniques ?"
     }
   },
   "forgetPassword": {
@@ -245,7 +245,9 @@
     "forms": {
       "email": "E-mail",
       "firstName": "Prénom",
+      "firstNameAr": "Prénom en arabe",
       "lastName": "Nom",
+      "lastNameAr": "Nom en arabe",
       "password": "Mot de passe",
       "school": "École",
       "subject": "Sujet",
@@ -255,8 +257,10 @@
     "motto": "Une plateforme pour les enseignants",
     "placeholder": {
       "email": "Votre e-mail",
-      "firstName": "Votre prénom",
-      "lastName": "Votre nom",
+      "firstName": "Samir",
+      "firstNameAr": "سمير",
+      "lastName": "Belmiloud",
+      "lastNameAr": "بل ميلود",
       "password": "Votre mot de passe",
       "school": "Votre école",
       "subject": "Votre sujet",
@@ -321,8 +325,8 @@
       "title": "FAQ"
     },
     "inquiryForm": {
-      "title": "Nous Contacter",
-      "description": "Pour vous offrir une meilleure qualité de service, nous siége et localisé en Oran"
+      "description": "Pour vous offrir une meilleure qualité de service, nous siége et localisé en Oran",
+      "title": "Nous Contacter"
     }
   },
   "table": {

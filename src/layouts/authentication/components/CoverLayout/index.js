@@ -139,9 +139,9 @@ function CoverLayout({
             },
           })}
         >
-          <VuiBox mb={2} textAlign="center" style={{width: "100%"}}>
-            <img src={logo} alt="Logo" style={{ maxWidth: "100%", height: "auto" }} />
-          </VuiBox>
+          {/*<VuiBox mb={2} textAlign="center" style={{width: "100%"}}>*/}
+          {/*  <img src={logo} alt="Logo" style={{ maxWidth: "100%", height: "auto" }} />*/}
+          {/*</VuiBox>*/}
           <VuiBox pt={3} px={3} mx="auto !important" maxWidth={cardContent ? "400px" : "350px"}>
             {!header ? (
               <>
