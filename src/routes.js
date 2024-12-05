@@ -52,10 +52,13 @@ import { BsFillEnvelopePaperFill, BsFillPersonFill } from "react-icons/bs";
 import { GiMaterialsScience } from "react-icons/gi";
 import { PiStudentFill } from "react-icons/pi";
 import { LiaChalkboardTeacherSolid } from "react-icons/lia";
+import { BiSupport } from "react-icons/bi";
 import ResetPassword from "layouts/authentication/reset-password";
 import ForgetPassword from "layouts/authentication/forget-password";
 import Demands from "./layouts/demands";
 import Teachers from "./layouts/teachers";
+import Support from "./layouts/support";
+
 
 const routes = [
   {
@@ -118,6 +121,16 @@ const routes = [
     route: "/profile",
     icon: <BsFillPersonFill size="15px" color="inherit" />,
     component: Profile,
+    noCollapse: true,
+    isProtected: true,
+  },
+  {
+    type: "collapse",
+    name: "Support",
+    key: "support",
+    route: "/support",
+    icon: <BiSupport size="15px" color="inherit" />,
+    component: Support,
     noCollapse: true,
     isProtected: true,
   },

@@ -73,6 +73,56 @@
     "description": "Cette action changera votre photo de profil. Voulez-vous continuer ?",
     "title": "Êtes-vous sûr de vouloir mettre à jour votre photo de profil ?"
   },
+  "faq": {
+    "1": {
+      "question": "Comment puis-je m'inscrire en tant qu'enseignant ?",
+      "answer": "Vous pouvez vous inscrire en cliquant sur le bouton « S'inscrire » sur la page d'accueil. Remplissez vos coordonnées, vérifiez votre adresse électronique et commencez à télécharger vos cours."
+    },
+    "2": {
+      "question": "Quels types de cours puis-je télécharger ?",
+      "answer": "Vous pouvez télécharger n'importe quel cours de formation ou de développement professionnel qui respecte les lignes directrices de notre plateforme."
+    },
+    "3": {
+      "question": "Quels sont les formats de fichiers pris en charge pour les cours ?",
+      "answer": "Notre plateforme prend en charge les formats tels que PDF, MP4, PPT et autres fichiers standard pour les documents et vidéos éducatifs."
+    },
+    "4": {
+      "question": "Puis-je modifier un cours après l'avoir téléchargé ?",
+      "answer": "Oui, vous pouvez modifier vos cours en accédant à la section « Mes cours » sur votre tableau de bord."
+    },
+    "5": {
+      "question": "Comment les étudiants peuvent-ils accéder à mes cours ?",
+      "answer": "Une fois publiés, vos cours seront visibles pour les étudiants dans les catégories correspondantes. Ils peuvent s'inscrire et commencer à apprendre immédiatement."
+    },
+    "6": {
+      "question": "Comment puis-je recevoir des paiements pour mes cours ?",
+      "answer": "Les paiements sont effectués directement sur votre compte bancaire enregistré ou via une méthode de paiement que vous avez configurée dans votre profil."
+    },
+    "7": {
+      "question": "Puis-je fixer mes propres prix pour mes cours ?",
+      "answer": "Oui, en tant qu'enseignant, vous avez la possibilité de fixer les prix de vos cours selon vos préférences."
+    },
+    "8": {
+      "question": "Existe-t-il une limite au nombre de cours que je peux télécharger ?",
+      "answer": "Non, il n'y a pas de limite au nombre de cours que vous pouvez télécharger, tant qu'ils respectent nos directives."
+    },
+    "9": {
+      "question": "Comment puis-je obtenir de l'aide si j'ai des questions techniques ?",
+      "answer": "Vous pouvez contacter notre équipe de support via le formulaire de contact ou par email à support@example.com."
+    },
+    "10": {
+      "question": "Puis-je retirer un cours publié ?",
+      "answer": "Oui, vous pouvez retirer un cours publié depuis votre tableau de bord. Les étudiants inscrits auront toujours accès à la version téléchargée."
+    },
+    "11": {
+      "question": "Puis-je collaborer avec d'autres enseignants sur une seule plateforme ?",
+      "answer": "Oui, vous pouvez inviter d'autres enseignants à collaborer et partager la gestion des cours."
+    },
+    "12": {
+      "question": "Comment puis-je suivre la progression des étudiants ?",
+      "answer": "Depuis votre tableau de bord, vous pouvez voir les statistiques sur l'inscription, les progrès et les retours des étudiants."
+    }
+  },
   "forgetPassword": {
     "description": "Entrez votre adresse e-mail et nous vous enverrons des instructions pour réinitialiser votre mot de passe",
     "forget": "Mot de passe oublié ?"
@@ -86,6 +136,7 @@
     "institution": "Institution",
     "isEmailVerified": "E-mail vérifié",
     "lastName": "Nom",
+    "message": "Message",
     "newPassword": "Nouveau mot de passe",
     "password": "Mot de passe",
     "passwordLength": "Le mot de passe doit comporter au moins 6 caractères",
@@ -185,6 +236,7 @@
     "demands": "Demands",
     "profile": "Profil",
     "students": "Étudiants",
+    "support": "Support",
     "teachers": "Les enseignants"
   },
   "signup": {
@@ -256,6 +308,22 @@
   "subscriptionCard": {
     "title": "Prix de l'abonnement",
     "toAllCourses": "à tous les cours"
+  },
+  "support": {
+    "contactNumbers": {
+      "address": "Adresse",
+      "email": "E-mail",
+      "phone": "Téléphone",
+      "socialMedia": "Médias sociaux",
+      "title": "Information Contact"
+    },
+    "faq": {
+      "title": "FAQ"
+    },
+    "inquiryForm": {
+      "title": "Nous Contacter",
+      "description": "Pour vous offrir une meilleure qualité de service, nous siége et localisé en Oran"
+    }
   },
   "table": {
     "pagination": {
