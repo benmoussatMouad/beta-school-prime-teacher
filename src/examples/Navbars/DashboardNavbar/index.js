@@ -168,20 +168,21 @@ function DashboardNavbar({ absolute, light, isMini, pageName }) {
           <VuiBox sx={(theme) => navbarRow(theme, { isMini })}>
             <VuiBox color={light ? "white" : "inherit"}>
               <IconButton onClick={translate} sx={navbarIconButton} size="small">
-                <Icon
-                  sx={({ palette: { dark, white } }) => ({
-                    color: light ? white.main : dark.main,
-                  })}
-                >
-                  translate
-                </Icon>
                 <VuiTypography
                   variant="button"
                   fontWeight="medium"
                   color={light ? "white" : "dark"}
                 >
-                  {controller.direction === "ltr" ? "العربية" : "français"}
+                  {controller.direction === "ltr" ? "العربية" : "Français"}
                 </VuiTypography>
+                <Icon
+                  sx={({ palette: { dark, white } }) => ({
+                    color: light ? white.main : dark.main,
+                    marginLeft: "10px",
+                  })}
+                >
+                  language
+                </Icon>
               </IconButton>
               <IconButton
                 size="small"

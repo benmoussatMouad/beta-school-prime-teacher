@@ -13,19 +13,22 @@ function Translator() {
         i18n.changeLanguage(newLang);
     };
 
-    return (
-        <IconButton style={{ position: "absolute", top: 10, right: 0 }} onClick={toggleLanguage} sx={navbarIconButton} size="small">
-            <Icon>
-                translate
-            </Icon>
-            <VuiTypography
-                variant="button"
-                fontWeight="medium"
-            >
-                {i18n.language === "fr" ? "العربية" : "français"}
-            </VuiTypography>
-        </IconButton>
-    )
+  return (
+    <IconButton style={{ position: "absolute", top: 10, [i18n.language === "ar" ? "left" : "right"]: 0 }}
+                onClick={toggleLanguage} sx={navbarIconButton} size="small">
+      <VuiTypography
+        variant="button"
+        fontWeight="medium"
+      >
+        {i18n.language === "fr" ? "العربية" : "Français"}
+      </VuiTypography>
+      <Icon
+        style={{ [i18n.language === "ar" ? "marginRight" : "marginLeft"]: "10px" }}
+      >
+        language
+      </Icon>
+    </IconButton>
+  );
 }
 
 export default Translator
