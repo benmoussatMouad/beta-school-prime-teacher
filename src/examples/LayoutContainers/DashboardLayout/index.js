@@ -8,6 +8,7 @@ import { Box, CircularProgress, Typography } from "@mui/material";
 import { useTranslation } from "react-i18next";
 import { useSendVerifyEmail } from "api/auth/sendVerifyEmail";
 import { useVerifyEmail } from "api/auth/VerifyEmail";
+import VuiAlert from "../../../components/VuiAlert";
 
 function DashboardLayout({ children, user }) {
   const [controller, dispatch] = useVisionUIController();
@@ -101,37 +102,27 @@ function DashboardLayout({ children, user }) {
     >
       {/* Banner for unverified email */}
       {showBanner && !isVerifyLoading && (
-        <VuiBox
+        <VuiAlert
+          color="primary"
+          variant="contained"
           sx={({ breakpoints }) => ({
-            background: "#0A0E32",
-            color: "#fff",
-            padding: "10px 20px",
+            // background: "#0A0E32",
+            color: "#39003f",
+            padding: "2px 20px ",
+            minHeight: "0px",
             position: "fixed",
-            bottom: 10,
+            bottom: 0,
             left: 0,
             right: 0,
             zIndex: 10000,
             display: "flex",
-            justifyContent: "space-between",
+            justifyContent: "center",
             alignItems: "center",
-            borderRadius: "30px",
+            borderRadius: "0px",
+            border: "none",
             margin: "auto",
             boxShadow: "0 4px 8px rgba(0,0,0,0.1)",
-            width: "50%",
-            [breakpoints.down("xl")]: {
-              width: "50%", // suitable for very large screens
-            },
-            [breakpoints.down("lg")]: {
-              width: "80%", // suitable for desktop
-            },
-            [breakpoints.down("md")]: {
-              width: "85%", // suitable for tablets
-            },
-            [breakpoints.down("sm")]: {
-              width: "90%", // suitable for mobile devices
-              padding: "8px 16px",
-              bottom: 20,
-            },
+            width: "100%"
           })}
         >
           <Typography fontSize="1rem" color="white" variant="caption" sx={{ maxWidth: "80%" }}>
@@ -140,9 +131,9 @@ function DashboardLayout({ children, user }) {
           <Box style={{ display: "flex", alignItems: "center" }}>
             <VuiButton
               onClick={handleVerifyClick}
-              color="info"
-              variant="gradient"
-              sx={{ marginRight: "10px", fontSize: "12px" }}
+              color="warning"
+              variant="text"
+              sx={{ marginRight: "10px", fontSize: "12px", marginLeft: "10px" }}
               disabled={isCooldown || isLoading} // Disable button during cooldown or while loading
             >
               {isLoading ? (
@@ -158,7 +149,7 @@ function DashboardLayout({ children, user }) {
               sx={{ cursor: "pointer", color: "#fff", fontSize: "20px" }}
             />
           </Box>
-        </VuiBox>
+        </VuiAlert>
       )}
 
       {/* The rest of the dashboard content */}
