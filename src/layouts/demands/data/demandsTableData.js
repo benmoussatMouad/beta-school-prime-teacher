@@ -52,7 +52,10 @@ function Function({ content }) {
 }
 
 export const demandsTableData = (t, data, handleOpen) => {
-  const rowsObject = data?.map((item) => ({
+
+  const safeData = Array.isArray(data) ? data : [];
+
+  const rowsObject = safeData.map((item) => ({
       [t("demands.table.fullName")]: (
         <Teacher image={item?.profilePic?.url} name={`${item.firstName} ${item.lastName}`} />
       ),

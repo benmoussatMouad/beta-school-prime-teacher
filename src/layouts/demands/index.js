@@ -58,7 +58,7 @@ function Demands() {
     setSelectedTeacher(null);
   };
 
-  const { columns, rows } = demandsTableData(t, data, handleOpen);
+  const { columns, rows } = demandsTableData(t, data?.users, handleOpen);
 
   const submitApproval = (approve) => {
     if (approve) {
