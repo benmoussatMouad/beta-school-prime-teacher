@@ -30,6 +30,8 @@ function SignUp() {
   const [formDataState, setFormData] = useState({
     firstName: "",
     lastName: "",
+    firstNameAr: "",
+    lastNameAr: "",
     email: "",
     phone: "",
     subject: Subjects[0],
@@ -47,7 +49,7 @@ function SignUp() {
     let fieldsToValidate = [];
     switch (activeStep) {
       case 0:
-        fieldsToValidate = ["firstName", "lastName", "email", "password"];
+        fieldsToValidate = ["firstName", "firstNameAr", "lastName", "email", "password"];
         break;
       case 1:
         fieldsToValidate = ["subject", "institution", "yearsOfExperience"];
@@ -78,8 +80,10 @@ function SignUp() {
     // Append text fields
     formData.append("email", formDataState.email);
     formData.append("firstName", formDataState.firstName);
+    formData.append("firstNameAr", formDataState.firstNameAr);
     formData.append("institution", formDataState.institution);
     formData.append("lastName", formDataState.lastName);
+    formData.append("lastNameAr", formDataState.lastNameAr);
     formData.append("password", formDataState.password);
     formData.append("subject", formDataState.subject);
     formData.append("yearsOfExperience", formDataState.yearsOfExperience);
@@ -110,37 +114,76 @@ function SignUp() {
       case 0:
         return (
           <VuiBox sx={{ display: "flex", flexDirection: "column", justifyContent: "center" }}>
-            <VuiTypography sx={{ margin: "10px 0" }} component="label" variant="button" color="white"
-                           fontWeight="medium">
-              {t("signup.forms.firstName")}
-            </VuiTypography>
-            <VuiInput
-              {...register("firstName", { required: t("forms.required.firstName") })}
-              placeholder={t("signup.placeholder.firstName")}
-              onChange={(e) => setFormData({ ...formDataState, firstName: e.target.value })}
-              value={formDataState.firstName} // Bind to state value
-              error={!!errors.firstName}
-            />
-            {errors.firstName &&
-              <VuiTypography sx={{ color: "red", fontSize: "0.7rem" }}>{errors.firstName.message}</VuiTypography>}
-            <VuiTypography sx={{ margin: "10px 0" }} component="label" variant="button" color="white"
-                           fontWeight="medium">
-              {t("signup.forms.lastName")}
-            </VuiTypography>
-            <VuiInput
-              {...register("lastName", { required: t("forms.required.lastName") })}
-              placeholder={t("signup.placeholder.lastName")}
-              value={formDataState.lastName}
-              onChange={(e) => setFormData({ ...formDataState, lastName: e.target.value })}
-              error={!!errors.lastName}
-            />
-            {errors.lastName &&
-              <VuiTypography sx={{ color: "red", fontSize: "0.7rem" }}>{errors.lastName.message}</VuiTypography>}
-            <VuiTypography sx={{ margin: "10px 0" }} component="label" variant="button" color="white"
+            <VuiBox sx={{ display: "flex", flexDirection: "row", justifyContent: "space-between", width: "100%" }}>
+              <VuiBox px={1}>
+                <VuiTypography sx={{ margin: "10px 0" }} component="label" variant="button" color="white"
+                               fontWeight="medium">
+                  {t("signup.forms.firstName")}
+                </VuiTypography>
+                <VuiInput
+                  {...register("firstName", { required: t("forms.required.firstName") })}
+                  placeholder={t("signup.placeholder.firstName")}
+                  onChange={(e) => setFormData({ ...formDataState, firstName: e.target.value })}
+                  value={formDataState.firstName} // Bind to state value
+                  error={!!errors.firstName}
+                />
+                {errors.firstName &&
+                  <VuiTypography sx={{ color: "red", fontSize: "0.7rem" }}>{errors.firstName.message}</VuiTypography>}
+              </VuiBox>
+              <VuiBox px={1}>
+                <VuiTypography sx={{ margin: "10px 0" }} component="label" variant="button" color="white"
+                               fontWeight="medium">
+                  {t("signup.forms.firstNameAr")}
+                </VuiTypography>
+                <VuiInput
+                  {...register("firstNameAr")}
+                  placeholder={t("signup.placeholder.firstNameAr")}
+                  onChange={(e) => setFormData({ ...formDataState, firstNameAr: e.target.value })}
+                  value={formDataState.firstNameAr}
+                />
+              </VuiBox></VuiBox>
+            <VuiBox sx={{
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "space-between",
+              width: "100%",
+              margin: "10px 0",
+            }}>
+              <VuiBox px={1}>
+                <VuiTypography sx={{ margin: "10px 0" }} component="label" variant="button" color="white"
+                               fontWeight="medium">
+                  {t("signup.forms.lastName")}
+                </VuiTypography>
+                <VuiInput
+                  {...register("lastName", { required: t("forms.required.lastName") })}
+                  placeholder={t("signup.placeholder.lastName")}
+                  value={formDataState.lastName}
+                  onChange={(e) => setFormData({ ...formDataState, lastName: e.target.value })}
+                  error={!!errors.lastName}
+                />
+                {errors.lastName &&
+                  <VuiTypography sx={{ color: "red", fontSize: "0.7rem" }}>{errors.lastName.message}
+                  </VuiTypography>}
+              </VuiBox>
+              <VuiBox px={1}>
+                <VuiTypography sx={{ margin: "10px 0" }} component="label" variant="button" color="white"
+                               fontWeight="medium">
+                  {t("signup.forms.lastNameAr")}
+                </VuiTypography>
+                <VuiInput
+                  {...register("lastNameAr")}
+                  placeholder={t("signup.placeholder.lastNameAr")}
+                  value={formDataState.lastNameAr}
+                  onChange={(e) => setFormData({ ...formDataState, lastNameAr: e.target.value })}
+                />
+              </VuiBox>
+            </VuiBox>
+            <VuiTypography px={1} sx={{ margin: "10px 0" }} component="label" variant="button" color="white"
                            fontWeight="medium">
               {t("signup.forms.email")}
             </VuiTypography>
             <VuiInput
+              mx={1}
               {...register("email", {
                 required: t("forms.required.email"),
                 pattern: { value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/, message: t("forms.required.email") },
@@ -272,6 +315,7 @@ function SignUp() {
       premotto="PRIME BETA SCHOOL"
       motto={t("signup.motto")}
       image={bgSignIn}
+      cardContent
     >
       {isLoading ?
         <VuiBox sx={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
