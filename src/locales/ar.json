@@ -257,6 +257,11 @@
     "title": "سعر الاشتراك",
     "toAllCourses": "الى جميع الدورات"
   },
+  "table": {
+    "pagination": {
+      "of": "من"
+    }
+  },
   "teachers": {
     "page": {
       "title": "المدرسين"

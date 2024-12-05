@@ -66,10 +66,11 @@ const getStatusColor = (status, palette) => {
 };
 
 export const teacherTableData = (t, data, handleOpen, user) => {
-
   const role = user?.user?.role;
+  // Use a default empty array if data is undefined or not an array
+  const safeData = Array.isArray(data) ? data : [];
 
-  const rowsObject = data?.map((item) => ({
+  const rowsObject = safeData.map((item) => ({
     [t("demands.table.fullName")]: (
       <Teacher image={item?.profilePic?.url} name={`${item.firstName} ${item.lastName}`} />
     ),
@@ -114,12 +115,8 @@ export const teacherTableData = (t, data, handleOpen, user) => {
         />
       </VuiTypography>
     ),
-    [t("demands.table.subject")]: (
-      <Function content={t(`subjects.${item.Teacher.subject}`)} />
-    ),
-    [t("demands.table.role")]: (
-      <Function content={item.role} />
-    ),
+    [t("demands.table.subject")]: <Function content={t(`subjects.${item.Teacher.subject}`)} />,
+    [t("demands.table.role")]: <Function content={item.role} />,
     [t("demands.table.isEmailVerified")]: (
       <VuiTypography
         variant="caption"
@@ -170,7 +167,6 @@ export const teacherTableData = (t, data, handleOpen, user) => {
       { name: t("demands.table.isEmailVerified"), key: "isEmailVerified", align: "center", sortable: false }, // Not sortable
       { name: t("demands.table.action"), key: "action", align: "center", sortable: false }, // Not sortable
     ],
-
     rows: rowsObject || [],
   };
 };

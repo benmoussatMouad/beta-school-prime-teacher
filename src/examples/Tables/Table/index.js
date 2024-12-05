@@ -12,16 +12,16 @@ import { FiltersSubjects } from "../../../utils";
 import VuiSelect from "../../../components/VuiSelect";
 
 function Table({
-columns,
-rows,
-onSearchChange,
-page,
-rowsPerPage,
-onPageChange,
-onRowsPerPageChange,
-isLoading,
-subject,
-}) {
+                 columns,
+                 rows,
+                 onSearchChange,
+                 page,
+                 rowsPerPage,
+                 onPageChange,
+                 onRowsPerPageChange,
+                 isLoading,
+                 subject,
+               }) {
   const { grey } = colors;
   const { size, fontWeightBold } = typography;
   const { borderWidth } = borders;
@@ -181,6 +181,8 @@ subject,
                 page={page}
                 onPageChange={onPageChange}
                 onRowsPerPageChange={onRowsPerPageChange}
+                labelDisplayedRows={({ from, to, count }) =>
+                  <span> {from}-{to} {t("table.pagination.of")} {count} </span>}
                 sx={{
                   padding: "20px 0px !important",
                   width: "100%",
@@ -190,16 +192,18 @@ subject,
                   "& .MuiTablePagination-input": {
                     fontSize: "1.2rem",
                     color: "white !important",
-                    maxWidth: "300px",
+                    maxWidth: "50px",
                     backgroundColor: "transparent !important",
                     margin: "0px !important",
+                    minWidth: "0px !important",
+                    "& .MuiTablePagination-select": {
+                      fontSize: "1.2rem",
+                      color: "white",
+                      border: "none",
+                      padding: "0px 0px !important",
+                    },
                   },
-                  "& .MuiTablePagination-select": {
-                    fontSize: "1.2rem",
-                    color: "white",
-                    border: "none",
-                    padding: "0px !important",
-                  },
+
                   ".MuiTablePagination-actions": {
                     display: "flex",
                     justifyContent: "space-between",

@@ -257,6 +257,11 @@
     "title": "Prix de l'abonnement",
     "toAllCourses": "à tous les cours"
   },
+  "table": {
+    "pagination": {
+      "of": "de"
+    }
+  },
   "teachers": {
     "page": {
       "title": "Les enseignants"

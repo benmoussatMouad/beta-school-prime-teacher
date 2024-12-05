@@ -55,7 +55,7 @@ function Teachers() {
     setSelectedTeacher(null);
   };
 
-  const { columns, rows } = teacherTableData(t, data, handleOpen, user);
+  const { columns, rows } = teacherTableData(t, data?.users || [], handleOpen, user);
 
   const MakeTeacherAdmin = (approve) => {
     if (approve) {
