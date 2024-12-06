@@ -38,7 +38,6 @@ function Teachers() {
   const [rowsPerPage, setRowsPerPage] = useState(5);
 
   const { data, isLoading } = useGetTeachers(token, firstName, lastName, email, subject, page, rowsPerPage);
-  console.log(data);
   const [open, setOpen] = useState(false);
   const [selectedTeacher, setSelectedTeacher] = useState(null);
 

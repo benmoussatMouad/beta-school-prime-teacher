@@ -11,7 +11,7 @@ import { useTranslation } from "react-i18next";
 import VuiInput from "../../../../components/VuiInput";
 import VuiBadge from "../../../../components/VuiBadge";
 
-const SatisfactionRate = () => {
+const SubscribersRate = () => {
 	const { info, gradients } = colors;
 	const { cardContent } = gradients;
 	const {t} = useTranslation();
@@ -77,4 +77,4 @@ const SatisfactionRate = () => {
 	);
 };
 
-export default SatisfactionRate;
+export default SubscribersRate;

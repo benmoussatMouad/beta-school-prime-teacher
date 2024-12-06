@@ -25,13 +25,11 @@ import { useLocation } from "react-router-dom";
 // @material-ui core components
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
-import IconButton from "@mui/material/IconButton";
 import Menu from "@mui/material/Menu";
 import Icon from "@mui/material/Icon";
 
 // Vision UI Dashboard React components
 import VuiBox from "components/VuiBox";
-import VuiTypography from "components/VuiTypography";
 
 // Vision UI Dashboard React example components
 import Breadcrumbs from "examples/Breadcrumbs";
@@ -56,6 +54,8 @@ import { useLogout } from "api";
 import { getRefreshToken } from "utils";
 import i18n from "i18n";
 import { useTranslation } from "react-i18next";
+import { IconButton } from "@mui/material";
+import VuiTypography from "../../../components/VuiTypography";
 
 function DashboardNavbar({ absolute, light, isMini, pageName }) {
   const [navbarType, setNavbarType] = useState();
@@ -162,7 +162,9 @@ function DashboardNavbar({ absolute, light, isMini, pageName }) {
     >
       <Toolbar sx={(theme) => navbarContainer(theme)}>
         <VuiBox color="inherit" mb={{ xs: 1, md: 0 }} sx={(theme) => navbarRow(theme, { isMini })}>
-          <Breadcrumbs icon="home" title={t(`routes.${route}`) || ""} route={route} light={light} />
+          <Breadcrumbs icon="home"
+                       title={route.length > 1 ? t(`routes.${route[0]}`) + ` ${route[1]}` : t(`routes.${route}`) || ""}
+                       route={route} light={light} />
         </VuiBox>
         {isMini ? null : (
           <VuiBox sx={(theme) => navbarRow(theme, { isMini })}>

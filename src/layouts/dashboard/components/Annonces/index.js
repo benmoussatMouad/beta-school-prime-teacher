@@ -24,12 +24,7 @@ import VuiBox from "components/VuiBox";
 import VuiTypography from "components/VuiTypography";
 
 // React icons
-import { BsCheckCircleFill } from "react-icons/bs";
 import { FaBell } from "react-icons/fa";
-import { IoLogoCss3 } from "react-icons/io";
-import { FaShoppingCart } from "react-icons/fa";
-import { BsCreditCardFill } from "react-icons/bs";
-import { SiDropbox } from "react-icons/si";
 
 // Vision UI Dashboard React example components
 import TimelineItem from "examples/Timeline/TimelineItem";
@@ -40,12 +35,12 @@ import VuiInput from "../../../../components/VuiInput";
 import { useTranslation } from "react-i18next";
 import VuiBadge from "../../../../components/VuiBadge";
 
-function OrdersOverview() {
-  const {t} = useTranslation();
+function Annonces() {
+  const { t } = useTranslation();
   return (
     <Card className="h-100">
       <VuiBox
-        xs={{width: "100%", height: "100%", position: "absolute", top: 0, left: 0}}
+        xs={{ width: "100%", height: "100%", position: "absolute", top: 0, left: 0 }}
       >
 
       </VuiBox>
@@ -75,14 +70,14 @@ function OrdersOverview() {
           title="Session directe, 24 Nov. Lien meet: https://meet.google.com/wax-kivn-kni"
           dateTime="22 DEC 7:20 PM"
         /> <TimelineItem
-          icon={<FaBell size="16px" color={palette.info.main} />}
-          title="Session directe, 24 Nov. Lien meet: https://meet.google.com/wax-kivn-kni"
-          dateTime="22 DEC 7:20 PM"
-        /> <TimelineItem
-          icon={<FaBell size="16px" color={palette.info.main} />}
-          title="Session directe, 24 Nov. Lien meet: https://meet.google.com/wax-kivn-kni"
-          dateTime="22 DEC 7:20 PM"
-        />
+        icon={<FaBell size="16px" color={palette.info.main} />}
+        title="Session directe, 24 Nov. Lien meet: https://meet.google.com/wax-kivn-kni"
+        dateTime="22 DEC 7:20 PM"
+      /> <TimelineItem
+        icon={<FaBell size="16px" color={palette.info.main} />}
+        title="Session directe, 24 Nov. Lien meet: https://meet.google.com/wax-kivn-kni"
+        dateTime="22 DEC 7:20 PM"
+      />
       </VuiBox>
       <VuiBox
       >
@@ -98,4 +93,4 @@ function OrdersOverview() {
   );
 }
 
-export default OrdersOverview;
+export default Annonces;

@@ -21,7 +21,7 @@ function Table({
                  onRowsPerPageChange,
                  isLoading,
                  subject,
-                 totalCount
+                 totalCount,
                }) {
   const { grey } = colors;
   const { size, fontWeightBold } = typography;

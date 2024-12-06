@@ -35,7 +35,6 @@ function Support() {
 
   const handleSubmit = () => {
     // TODO: Add your form submission logic here
-    console.log("Form Data:", formData);
     alert("Your inquiry has been submitted!");
   };
 
@@ -238,7 +237,6 @@ function Support() {
           </VuiTypography>
           {faqs.map((faq, index) => (
             <Accordion key={index} sx={({ palette, borders }) => {
-              console.log(palette, borders);
               return {
                 backgroundColor: palette.inputColors, // Adjust background
                 borderRadius: `${borders.borderRadius.lg} !important`,

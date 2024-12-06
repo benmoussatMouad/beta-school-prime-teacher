@@ -40,7 +40,6 @@ function Demands() {
 
 
   const { data, isLoading } = useGetDemands(token, firstName, lastName, email, subject, page, rowsPerPage);
-  console.log(data);
   const [open, setOpen] = useState(false);
   const [selectedTeacher, setSelectedTeacher] = useState(null);
 

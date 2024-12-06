@@ -58,6 +58,7 @@ import ForgetPassword from "layouts/authentication/forget-password";
 import Demands from "./layouts/demands";
 import Teachers from "./layouts/teachers";
 import Support from "./layouts/support";
+import CoursDetails from "./layouts/cours";
 
 
 const routes = [
@@ -100,6 +101,15 @@ const routes = [
     route: "/courses",
     icon: <GiMaterialsScience size="15px" color="inherit" />,
     component: Courses,
+    noCollapse: true,
+    isProtected: true,
+  },
+  {
+    type: "route",
+    name: "Course Detail",
+    key: "cours",
+    route: "/cours/:id",
+    component: CoursDetails,
     noCollapse: true,
     isProtected: true,
   },

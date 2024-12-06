@@ -22,7 +22,16 @@ import StyledSelect from "./VuiSelectRoot";
 import { useTranslation } from "react-i18next";
 
 
-const VuiSelect = forwardRef(({ variant, color, value, label, onChange, options, ...rest }, ref) => {
+const VuiSelect = forwardRef(({
+                                t: translated = true,
+                                variant,
+                                color,
+                                value,
+                                label,
+                                onChange,
+                                options,
+                                ...rest
+                              }, ref) => {
   const { t } = useTranslation();
   return (
     <FormControl fullWidth>
@@ -44,7 +53,7 @@ const VuiSelect = forwardRef(({ variant, color, value, label, onChange, options,
       >
         {options.map((value, index) => (
           <MenuItem key={index} value={value}>
-            {t(`subjects.${value}`)}
+            {translated ? t(`subjects.${value}`) : value}
           </MenuItem>
         ))}
       </StyledSelect>

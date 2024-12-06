@@ -15,7 +15,6 @@ const WelcomeMark = ({ user: { user, teacher } }) => {
   const [{ direction }, dispatch] = useVisionUIController();
 
   const subject = teacher?.subject;
-  console.log(user);
 
   const { t, i18n } = useTranslation();
 
