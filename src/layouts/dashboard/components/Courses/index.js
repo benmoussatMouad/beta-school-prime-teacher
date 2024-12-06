@@ -42,7 +42,6 @@ function Courses() {
     reset,
     setValue,
     watch,
-    getValues,
   } = useForm({
     defaultValues: {
       title: "",
@@ -83,7 +82,7 @@ function Courses() {
   return (
     <Card sx={{ height: "100% !important" }}>
       <Dialog
-        sx={({ breakpoints }) => ({
+        sx={({  }) => ({
           "& .MuiDialog-paper": {
             display: "flex",
             flexDirection: "column",

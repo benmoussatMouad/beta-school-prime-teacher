@@ -15,7 +15,6 @@ import avatar4 from "assets/images/avatar4.png";
 import { useTranslation } from "react-i18next";
 
 export default function data() {
-  const {t} = useTranslation();
   const avatars = (members) =>
     members.map(([image, name]) => (
       <Tooltip key={name} title={name} placeholder="bottom">

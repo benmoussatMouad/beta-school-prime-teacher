@@ -57,10 +57,10 @@ import { useTranslation } from "react-i18next";
 import { IconButton } from "@mui/material";
 import VuiTypography from "../../../components/VuiTypography";
 
-function DashboardNavbar({ absolute, light, isMini, pageName }) {
+function DashboardNavbar({ absolute, light, isMini }) {
   const [navbarType, setNavbarType] = useState();
   const [controller, dispatch] = useVisionUIController();
-  const { miniSidenav, transparentNavbar, fixedNavbar, openConfigurator } = controller;
+  const { miniSidenav, transparentNavbar, fixedNavbar } = controller;
   const [openMenu, setOpenMenu] = useState(false);
   const route = useLocation().pathname.split("/").slice(1);
 

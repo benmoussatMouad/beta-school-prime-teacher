@@ -22,16 +22,17 @@ import StyledSelect from "./VuiSelectRoot";
 import { useTranslation } from "react-i18next";
 
 
-const VuiSelect = forwardRef(({
-                                t: translated = true,
-                                variant,
-                                color,
-                                value,
-                                label,
-                                onChange,
-                                options,
-                                ...rest
-                              }, ref) => {
+const VuiSelect = forwardRef((
+  {
+    t: translated = true,
+    variant,
+    color,
+    value,
+    label,
+    onChange,
+    options,
+    ...rest
+  }) => {
   const { t } = useTranslation();
   return (
     <FormControl fullWidth>

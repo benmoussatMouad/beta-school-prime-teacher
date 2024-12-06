@@ -21,10 +21,8 @@ function UpdateCourse() {
     register,
     handleSubmit,
     formState: { errors },
-    reset,
     setValue,
     watch,
-    getValues,
   } = useForm({
     defaultValues: {
       title: "",

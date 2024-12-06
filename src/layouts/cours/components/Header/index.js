@@ -32,10 +32,8 @@ import { useState } from "react";
 import VuiTypography from "../../../../components/VuiTypography";
 
 function Header({ pageName }) {
-  const [tabValue, setTabValue] = useState(0);
+  const [_, setTabValue] = useState(0);
 
-
-  const handleSetTabValue = (event, newValue) => setTabValue(newValue);
 
   return (
     <VuiBox position="relative">
@@ -50,7 +48,7 @@ function Header({ pageName }) {
           container
           alignItems="center"
           justifyContent="space-between" // Use space-between for better distribution
-          sx={({ breakpoints }) => ({
+          sx={({  }) => ({
             padding: { xs: 2, sm: 3 }, // Adding padding for a better look
             gap: {
               xs: "16px",
