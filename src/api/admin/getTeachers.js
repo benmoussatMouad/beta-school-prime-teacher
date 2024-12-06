@@ -1,5 +1,6 @@
 import { useQuery } from "react-query";
 import { apiClient } from "../apiClient";
+import { queryClient } from "../../providers/queryProvider";
 
 
 const createGetTeachersFn = async (
@@ -18,7 +19,7 @@ const createGetTeachersFn = async (
   if (lastName) params.lastName = lastName;
   if (email) params.email = email;
   if (subject) params.subject = subject;
-  if (page) params.page = page;
+  if (page) params.page = page + 1;
   if (limit) params.limit = limit;
 
 

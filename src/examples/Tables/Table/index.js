@@ -21,6 +21,7 @@ function Table({
                  onRowsPerPageChange,
                  isLoading,
                  subject,
+                 totalCount
                }) {
   const { grey } = colors;
   const { size, fontWeightBold } = typography;
@@ -79,7 +80,6 @@ function Table({
   };
 
   const sortedRows = sortRows(rows);
-  const paginatedRows = sortedRows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage);
 
   return (
     <>
@@ -159,7 +159,7 @@ function Table({
                 </TableRow>
               </VuiBox>
               <TableBody>
-                {paginatedRows.map((row, index) => (
+                {sortedRows.map((row, index) => (
                   <TableRow key={`row-${index}`}>
                     {columns.map(({ name, align }) => (
                       <VuiBox
@@ -176,7 +176,7 @@ function Table({
               </TableBody>
               <TablePagination
                 rowsPerPageOptions={[5, 10, 15]}
-                count={rows.length}
+                count={totalCount}
                 rowsPerPage={rowsPerPage}
                 page={page}
                 onPageChange={onPageChange}

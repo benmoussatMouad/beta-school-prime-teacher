@@ -40,7 +40,7 @@ function Demands() {
 
 
   const { data, isLoading } = useGetDemands(token, firstName, lastName, email, subject, page, rowsPerPage);
-
+  console.log(data);
   const [open, setOpen] = useState(false);
   const [selectedTeacher, setSelectedTeacher] = useState(null);
 
@@ -135,6 +135,7 @@ function Demands() {
               rows={rows}
               onSearchChange={handleChange}
               page={page}
+              totalCount={data?.totalCount || 0}
               rowsPerPage={rowsPerPage}
               onPageChange={handlePageChange}
               onRowsPerPageChange={handleRowsPerPage}
