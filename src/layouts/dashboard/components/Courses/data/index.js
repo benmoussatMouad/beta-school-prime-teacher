@@ -12,7 +12,6 @@ import avatar1 from "assets/images/avatar1.png";
 import avatar2 from "assets/images/avatar2.png";
 import avatar3 from "assets/images/avatar3.png";
 import avatar4 from "assets/images/avatar4.png";
-import { useTranslation } from "react-i18next";
 
 export default function data() {
   const avatars = (members) =>

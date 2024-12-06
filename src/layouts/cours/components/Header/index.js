@@ -28,12 +28,9 @@ import VuiBox from "components/VuiBox";
 // Vision UI Dashboard React icons
 // Vision UI Dashboard React example components
 import DashboardNavbar from "examples/Navbars/DashboardNavbar";
-import { useState } from "react";
 import VuiTypography from "../../../../components/VuiTypography";
 
 function Header({ pageName }) {
-  const [_, setTabValue] = useState(0);
-
 
   return (
     <VuiBox position="relative">
