@@ -1,7 +1,6 @@
 import { useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useAuth } from "context/auth/authContext";
-import { useDeleteTeacher } from "../../api/teacher/deleteTeacher";
 
 // @mui material components
 import Card from "@mui/material/Card";
@@ -44,19 +43,12 @@ function CoursDetails() {
   const { t } = useTranslation();
   const context = useAuth();
   const [openDialog, setOpenDialog] = useState(false); // Dialog state for confirmation
-  const { mutate } = useDeleteTeacher();
 
   const [controller] = useVisionUIController();
   const { direction } = controller;
 
   const swiperRef = useRef(null); // Create a ref for Swiper
 
-  const handleConfirmDialogClose = (confirmed) => {
-    if (confirmed) {
-      mutate();
-    }
-    setOpenDialog(false);
-  };
 
   const {
     register,
@@ -64,7 +56,7 @@ function CoursDetails() {
     formState: { errors },
     reset,
     setValue,
-    watch,
+    //watch,
   } = useForm({
     defaultValues: {
       title: "",
@@ -77,8 +69,8 @@ function CoursDetails() {
     },
   });
 
-  const watchVideo = watch("video");
-  const watchAttachments = watch("attachments");
+  //const watchVideo = watch("video");
+  //const watchAttachments = watch("attachments");
 
   const handleFileChange = (e, fieldName) => {
     const files = fieldName === "attachments" ? Array.from(e.target.files) : e.target.files[0];
@@ -110,7 +102,7 @@ function CoursDetails() {
       <Header pageName={"Course Details"} />
 
       <Dialog
-        sx={({ breakpoints }) => ({
+        sx={({  }) => ({
           "& .MuiDialog-paper": {
             display: "flex",
             flexDirection: "column",

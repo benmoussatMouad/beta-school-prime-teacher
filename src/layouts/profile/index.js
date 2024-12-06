@@ -51,7 +51,7 @@ import { courseData } from "../../utils";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 
 
-const { black, gradients, dark } = colors;
+const { black, gradients } = colors;
 const { card } = gradients;
 const { borderWidth, borderRadius } = borders;
 const { xxl } = boxShadows;
@@ -231,7 +231,7 @@ function Overview() {
 
       {/* Update Picture Confirmation Dialog */}
       <Dialog
-        sx={({ breakpoints, theme }) => ({
+        sx={({}) => ({
           "& .MuiDialog-paper": {
             display: "flex",
             flexDirection: "column",

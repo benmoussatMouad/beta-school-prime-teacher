@@ -122,7 +122,7 @@ function ChapterCard({ image, label, title, description, action, duration, id, r
               vertical: "bottom",
               horizontal: "left",
             }}
-            sx={(theme) => {
+            sx={() => {
               return {
                 "& .MuiPopover-paper": {
                   display: "flex",
