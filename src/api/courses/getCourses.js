@@ -19,6 +19,7 @@ export function useGetCourses() {
     createGetCoursesFn,
     {
       enabled: !!token, // Only run if token exists
+      refetchOnWindowFocus: true,
     },
   );
 }

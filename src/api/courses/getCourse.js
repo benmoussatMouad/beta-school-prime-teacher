@@ -18,6 +18,7 @@ export function useGetCourse(courseId) {
     () => createGetCourseFn(courseId),
     {
       enabled: !!token || !!courseId, // Only run if token exists
+      refetchOnWindowFocus: true,
     },
   );
 }
