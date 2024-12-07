@@ -20,19 +20,11 @@
 // @mui icons
 import Card from "@mui/material/Card";
 import Grid from "@mui/material/Grid";
-import team1 from "assets/images/avatar1.png";
-import team2 from "assets/images/avatar2.png";
-import team3 from "assets/images/avatar3.png";
-import team4 from "assets/images/avatar4.png";
 // Images
-import profile1 from "assets/images/profile-1.png";
-import profile2 from "assets/images/profile-2.png";
-import profile3 from "assets/images/profile-3.png";
 // Vision UI Dashboard React components
 import VuiBox from "components/VuiBox";
 import VuiTypography from "components/VuiTypography";
 import ProfileInfoCard from "examples/Cards/InfoCards/ProfileInfoCard";
-import DefaultProjectCard from "examples/Cards/ProjectCards/DefaultProjectCard";
 // Vision UI Dashboard React example components
 import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
 // Overview page components
@@ -44,17 +36,22 @@ import { useAuth } from "context/auth/authContext";
 import { useTranslation } from "react-i18next";
 import VuiButton from "../../components/VuiButton";
 import VuiBadge from "../../components/VuiBadge";
-import { Dialog, DialogActions, DialogContent, DialogTitle, Typography } from "@mui/material";
+import { Box, Dialog, DialogActions, DialogContent, DialogTitle, Typography } from "@mui/material";
 import linearGradient from "../../assets/theme/functions/linearGradient";
 import rgba from "../../assets/theme/functions/rgba";
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import colors from "../../assets/theme/base/colors";
 import borders from "../../assets/theme/base/borders";
 import boxShadows from "../../assets/theme/base/boxShadows";
 import { useDeleteTeacher } from "../../api/teacher/deleteTeacher";
+import ChapterCard from "../../examples/Cards/ChapterCards/DefaultChapterCard";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation, Pagination } from "swiper/modules";
+import { courseData } from "../../utils";
+import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 
 
-const { black, gradients, dark } = colors;
+const { black, gradients } = colors;
 const { card } = gradients;
 const { borderWidth, borderRadius } = borders;
 const { xxl } = boxShadows;
@@ -62,6 +59,7 @@ const { xxl } = boxShadows;
 
 function Overview() {
 
+  const swiperRef = useRef(null); // Create a ref for Swiper
   const { t } = useTranslation();
   const context = useAuth();
   const [openDialog, setOpenDialog] = useState(false); // Dialog state for confirmation
@@ -160,69 +158,71 @@ function Overview() {
                   {t("profile.project.descirption")}
                 </VuiTypography>
               </VuiBox>
-              <Grid container spacing={3}>
-                <Grid item xs={12} md={6} xl={4}>
-                  <DefaultProjectCard
-                    image={profile1}
-                    label="Cours #2"
-                    title="Cours #2"
-                    description=""
-                    description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut enim ad minim veniam, quis nostrud exercitation."
-                    action={{
-                      type: "internal",
-                      route: "/pages/profile/profile-overview",
-                      color: "white",
-                      label: "VIEW ALL",
-                    }}
-                    authors={[
-                      { image: team1, name: "Elena Morison" },
-                      { image: team2, name: "Ryan Milly" },
-                      { image: team3, name: "Nick Daniel" },
-                      { image: team4, name: "Peterson" },
-                    ]}
-                  />
-                </Grid>
-                <Grid item xs={12} md={6} xl={4}>
-                  <DefaultProjectCard
-                    image={profile2}
-                    label="project #1"
-                    title="scandinavian"
-                    description="Music is something that every person has his or her own specific opinion about."
-                    action={{
-                      type: "internal",
-                      route: "/pages/profile/profile-overview",
-                      color: "white",
-                      label: "VIEW ALL",
-                    }}
-                    authors={[
-                      { image: team3, name: "Nick Daniel" },
-                      { image: team4, name: "Peterson" },
-                      { image: team1, name: "Elena Morison" },
-                      { image: team2, name: "Ryan Milly" },
-                    ]}
-                  />
-                </Grid>
-                <Grid item xs={12} md={6} xl={4}>
-                  <DefaultProjectCard
-                    image={profile3}
-                    label="project #3"
-                    title="minimalist"
-                    description="Different people have different taste, and various types of music."
-                    action={{
-                      type: "internal",
-                      route: "/pages/profile/profile-overview",
-                      color: "white",
-                      label: "VIEW ALL",
-                    }}
-                    authors={[
-                      { image: team4, name: "Peterson" },
-                      { image: team3, name: "Nick Daniel" },
-                      { image: team2, name: "Ryan Milly" },
-                      { image: team1, name: "Elena Morison" },
-                    ]}
-                  />
-                </Grid>
-              </Grid>
+              <Box sx={{ width: "100%", position: "relative" }}>
+                <Swiper
+                  ref={swiperRef} // Pass the ref to Swiper
+                  modules={[Navigation, Pagination]}
+                  spaceBetween={20}
+                  slidesPerView={1}
+                  navigation={false} // Disable default navigation buttons
+                  loop={true} // Enable looping
+                  breakpoints={{
+                    600: {
+                      slidesPerView: 1, // One slide per view on small screens
+                    },
+                    1024: {
+                      slidesPerView: 2, // Two slides per view on medium screens
+                    },
+                    1440: {
+                      slidesPerView: 3, // Three slides per view on larger screens
+                    },
+                  }}
+                >
+                  {courseData.map((course) => (
+                    <SwiperSlide style={{ maxWidth: "350px" }} key={course.id}>
+                      <ChapterCard
+                        id={course.id}
+                        image={course.image}
+                        label={course.label}
+                        title={course.title}
+                        description={course.description}
+                        action={{
+                          color: "white",
+                          label: t("chapters.ressources"),
+                        }}
+                        duration={course.duration}
+                        ressources={course.ressources}
+                      />
+                    </SwiperSlide>
+                  ))}
+                </Swiper>
+
+                {/* Custom Navigation Buttons */}
+                <VuiButton
+                  variant={"outlined"}
+                  onClick={() => swiperRef.current.swiper.slidePrev()}
+                  sx={{
+                    position: "absolute",
+                    left: "20px",
+                    top: "45%",
+                    zIndex: 10,
+                  }}
+                >
+                  <FaChevronLeft />
+                </VuiButton>
+                <VuiButton
+                  variant={"outlined"}
+                  onClick={() => swiperRef.current.swiper.slideNext()}
+                  sx={{
+                    position: "absolute",
+                    right: "20px",
+                    top: "45%",
+                    zIndex: 10,
+                  }}
+                >
+                  <FaChevronRight />
+                </VuiButton>
+              </Box>
             </VuiBox>
           </Card>
 
@@ -231,7 +231,7 @@ function Overview() {
 
       {/* Update Picture Confirmation Dialog */}
       <Dialog
-        sx={({ breakpoints, theme }) => ({
+        sx={({}) => ({
           "& .MuiDialog-paper": {
             display: "flex",
             flexDirection: "column",

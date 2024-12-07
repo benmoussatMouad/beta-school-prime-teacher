@@ -3,17 +3,10 @@ import React from 'react';
 import { Card, Slider } from "@mui/material";
 import VuiBox from 'components/VuiBox';
 import VuiTypography from 'components/VuiTypography';
-import { IoHappy } from 'react-icons/io5';
-import colors from 'assets/theme/base/colors';
-import linearGradient from 'assets/theme/functions/linearGradient';
-import CircularProgress from '@mui/material/CircularProgress';
 import { useTranslation } from "react-i18next";
-import VuiInput from "../../../../components/VuiInput";
-import VuiBadge from "../../../../components/VuiBadge";
 
-const SatisfactionRate = () => {
-	const { info, gradients } = colors;
-	const { cardContent } = gradients;
+
+const SubscribersRate = () => {
 	const {t} = useTranslation();
 	const [value, setValue] = React.useState(30);
 
@@ -21,17 +14,6 @@ const SatisfactionRate = () => {
 		setValue(newValue);
 	};
 
-	const handleInputChange = (event) => {
-		setValue(event.target.value === '' ? 0 : Number(event.target.value));
-	};
-
-	const handleBlur = () => {
-		if (value < 0) {
-			setValue(0);
-		} else if (value > 100) {
-			setValue(100);
-		}
-	};
 
 	return (
 		<Card sx={{ height: "340px" }}>
@@ -77,4 +59,4 @@ const SatisfactionRate = () => {
 	);
 };
 
-export default SatisfactionRate;
+export default SubscribersRate;

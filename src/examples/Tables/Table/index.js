@@ -1,28 +1,28 @@
 import React, { useState } from "react";
 import { Table as MuiTable, TableBody, TableContainer, TablePagination, TableRow } from "@mui/material";
 import VuiBox from "components/VuiBox";
-import VuiInput from "components/VuiInput";
 import colors from "assets/theme/base/colors";
 import typography from "assets/theme/base/typography";
 import borders from "assets/theme/base/borders";
 import { useTranslation } from "react-i18next";
 import CircularProgress from "@mui/material/CircularProgress";
-import Grid from "@mui/material/Grid";
-import { FiltersSubjects } from "../../../utils";
-import VuiSelect from "../../../components/VuiSelect";
+import { getFiltersInputs } from "../../../utils";
 
-function Table({
-                 columns,
-                 rows,
-                 onSearchChange,
-                 page,
-                 rowsPerPage,
-                 onPageChange,
-                 onRowsPerPageChange,
-                 isLoading,
-                 subject,
-                 totalCount
-               }) {
+function Table(
+  {
+    columns,
+    rows,
+    onSearchChange,
+    page,
+    rowsPerPage,
+    onPageChange,
+    onRowsPerPageChange,
+    isLoading,
+    subject,
+    teacherClass,
+    totalCount,
+    tableId,
+  }) {
   const { grey } = colors;
   const { size, fontWeightBold } = typography;
   const { borderWidth } = borders;
@@ -65,6 +65,8 @@ function Table({
       case "fullName":
         return `${row[translatedKey].props?.name}`;
       case "institution":
+      case "title":
+      case "level":
         return row[translatedKey].props.content;
       case "email":
         return row[translatedKey].props.content;
@@ -84,48 +86,10 @@ function Table({
   return (
     <>
       {/* Search Input */}
-      <Grid container spacing={2}>
-        <Grid item xs={12} sm={6} md={3}>
-          <VuiInput
-            placeholder={t("signup.forms.firstName")}
-            fullWidth
-            onChange={onSearchChange}
-            sx={{ my: 1 }}
-            name="firstName"
-          />
-        </Grid>
-        <Grid item xs={12} sm={6} md={3}>
-          <VuiInput
-            placeholder={t("signup.forms.lastName")}
-            fullWidth
-            onChange={onSearchChange}
-            sx={{ my: 1 }}
-            name="lastName"
-          />
-        </Grid>
-        <Grid item xs={12} sm={6} md={3}>
-          <VuiInput
-            placeholder={t("signup.forms.email")}
-            fullWidth
-            onChange={onSearchChange}
-            sx={{ my: 1 }}
-            name="email"
-          />
-        </Grid>
-        <Grid item sx={{ display: "flex", alignItems: "center" }} xs={12} sm={6} md={3}>
-          <VuiSelect
-            onChange={onSearchChange}
-            label={t("signup.forms.subject")}
-            options={FiltersSubjects}
-            value={subject || FiltersSubjects[0]}
-            name={"subject"}
-          />
-        </Grid>
-      </Grid>
-
+      {getFiltersInputs({ tableId, onSearchChange, subject, teacherClass, t })}
       {isLoading ? (
         <VuiBox display="flex" justifyContent="center" alignItems="center" py={3}>
-          <CircularProgress color="inherit" />
+          <CircularProgress color="info" />
         </VuiBox>
       ) : !rows.length ? (
         <VuiBox display="flex" justifyContent="center" alignItems="center" py={3}>

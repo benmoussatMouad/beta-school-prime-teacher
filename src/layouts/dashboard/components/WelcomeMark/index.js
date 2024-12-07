@@ -3,19 +3,15 @@ import React from "react";
 import { Card, Chip, Icon } from "@mui/material";
 import VuiBox from "components/VuiBox";
 import VuiTypography from "components/VuiTypography";
-import colors from "../../../../assets/theme/base/colors";
 import Box from "@mui/material/Box";
 import { useTranslation } from "react-i18next";
 import { useVisionUIController } from "../../../../context";
 import VuiBadge from "../../../../components/VuiBadge";
 
 const WelcomeMark = ({ user: { user, teacher } }) => {
-  const { black, gradients } = colors;
-  const { card } = gradients;
-  const [{ direction }, dispatch] = useVisionUIController();
+  const [{ direction }] = useVisionUIController();
 
   const subject = teacher?.subject;
-  console.log(user);
 
   const { t, i18n } = useTranslation();
 

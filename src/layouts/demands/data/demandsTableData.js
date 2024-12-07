@@ -30,7 +30,7 @@ import moment from "moment/moment";
 
 function Teacher({ image, name }) {
   return (
-    <VuiBox display="flex" alignItems="center" px={1} mt={2}>
+    <VuiBox display="flex" alignItems="center" px={1} m={2}>
       <VuiBox mr={2}>
         <VuiAvatar src={image} alt={name} size="sm" variant="rounded" />
       </VuiBox>

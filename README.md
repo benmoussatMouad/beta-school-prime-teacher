@@ -352,7 +352,7 @@ vision-dashboard-react-free/
     │   ├── tables
     │   │   ├── data
     │   │   │   ├── authorsTableData.js
-    │   │   │   └── projectsTableData.js
+    │   │   │   └── coursesTableData.js
     │   │   └── index.js
     ├── variables
     │   └── charts.js

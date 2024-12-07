@@ -17,8 +17,8 @@ import VuiButton from "../../components/VuiButton";
 import VuiBadge from "../../components/VuiBadge";
 import { useAuth } from "../../context/auth/authContext";
 import { teacherTableData } from "./data/teachersTableData";
-import { useGetTeachers } from "../../api/admin/getTeachers";
-import { useMakeTeacherAdmin } from "../../api/admin/makeTeacherAdmin";
+import { useGetTeachers } from "../../api/admin";
+import { useMakeTeacherAdmin } from "../../api/admin";
 
 const { black, gradients } = colors;
 const { card } = gradients;
@@ -38,7 +38,6 @@ function Teachers() {
   const [rowsPerPage, setRowsPerPage] = useState(5);
 
   const { data, isLoading } = useGetTeachers(token, firstName, lastName, email, subject, page, rowsPerPage);
-  console.log(data);
   const [open, setOpen] = useState(false);
   const [selectedTeacher, setSelectedTeacher] = useState(null);
 
@@ -137,6 +136,7 @@ function Teachers() {
               onRowsPerPageChange={handleRowsPerPage}
               isLoading={isLoading}
               subject={subject}
+              tableId={"teachers"}
             />
 
           </VuiBox>

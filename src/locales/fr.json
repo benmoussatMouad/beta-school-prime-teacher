@@ -20,6 +20,13 @@
     "signin": "Se connecter",
     "submit": "Soumettre"
   },
+  "chapter": {
+    "create": "Créer un chapitre"
+  },
+  "chapters": {
+    "ressources": "Les ressources",
+    "title": "Les chapitres"
+  },
   "cours": {
     "table": {
       "action": "Action",
@@ -29,6 +36,42 @@
       "status": "Statut"
     },
     "title": "Mes cours"
+  },
+  "course": {
+    "accountDeletion": {
+      "description": "Êtes-vous sûr de supprimer le cours ?",
+      "title": "Supprimer le cours"
+    },
+    "create": {
+      "success": "Créer un cours avec succès !"
+    },
+    "filter": {
+      "level": "Niveau",
+      "subject": "Sujet",
+      "title": "Titre"
+    },
+    "notfound": {
+      "button": "Accéder au tableau de bord",
+      "title": "Aucun cours n'a été trouvé. Veuillez en créer un !"
+    },
+    "update": {
+      "success": "Vous mettez à jour le cours avec succès",
+      "title": "Mettre à jour votre cours "
+    }
+  },
+  "courses": {
+    "table": {
+      "attachments": "Les pièces jointes",
+      "createdAt": "Créé le",
+      "description": "Description ",
+      "icon": "Icône",
+      "level": "Niveau",
+      "rating": "Note",
+      "subject": "Sujet",
+      "title": "Titre",
+      "updatedAt": "Mis à jour le",
+      "views": "Vues"
+    }
   },
   "dashboard": {
     "course": "Cours",
@@ -53,25 +96,50 @@
       "createdAt": "Créé le",
       "email": "Email",
       "fullName": "Nom complet",
-      "institution": "institution",
+      "institution": "Institution",
       "isEmailVerified": "Statut Email",
       "nodata": "Il n'y a pas de données",
       "progress": "EN PROGRESSION",
       "role": "Rôle",
-      "status": "statut",
+      "status": "Statut",
       "subject": "Sujet ",
       "title": "Demande",
-      "view": "voir",
+      "view": "Voir",
       "yearsOfExperience": "Années d'expérience"
     }
   },
   "dialog": {
+    "chapter": {
+      "title": "Créer un nouveau chapitre pour le cours"
+    },
+    "course": {
+      "description": "Remplir les champs afin de créer un cours",
+      "icon": "Téléchargez l'icône de votre cours",
+      "title": "Créer un cours "
+    },
     "deleteAccount": {
       "description": "Êtes-vous sûr  supprime votre compte",
       "title": "Cette action supprime votre compte. Voulez-vous continuer ?"
     },
     "description": "Cette action changera votre photo de profil. Voulez-vous continuer ?",
-    "title": "Êtes-vous sûr de vouloir mettre à jour votre photo de profil ?"
+    "forms": {
+      "attachments": "Les pièces jointes",
+      "description": "Description du cours",
+      "level": "Niveaux des étudiants",
+      "subjects": "Sujet du cours",
+      "title": "Titre du cours",
+      "video": "Vidéo"
+    },
+    "required": {
+      "description": "La description est obligatoire",
+      "title": "Un titre est requis",
+      "video": "Vidéo requise "
+    },
+    "title": "Êtes-vous sûr de vouloir mettre à jour votre photo de profil ?",
+    "upload": {
+      "attachments": "Télécharger des pièces jointes",
+      "video": "Télécharger la vidéo"
+    }
   },
   "faq": {
     "1": {
@@ -143,13 +211,15 @@
     "phone": "Téléphone",
     "required": {
       "confimPassword": "La confirmation du mot de passe est requise.",
+      "description": "La description est requise",
       "email": "L'adresse e-mail est requise.",
       "experince": "Les années d'expérience sont requises.",
       "firstName": "Le prénom est requis.",
       "lastName": "Le nom est requis.",
+      "level": "Le niveau de l'étudiant est requis",
       "password": "Le mot de passe est requis.",
       "school": "L'école est requise.",
-      "subject": "Le sujet est requis."
+      "subject": "Le sujet est requis"
     },
     "school": "École",
     "subject": "Sujet",
@@ -211,7 +281,6 @@
     "description": "Mise à jour de la photo",
     "myDescirption": "Je suis un professeur de mathématiques passionné avec plusieurs années d'expérience. J'ai toujours été fasciné par la logique et la précision exigées par les mathématiques, et j'aime partager cette passion avec mes élèves chaque jour",
     "project": {
-      "descirption": "",
       "title": "Mes données"
     },
     "setting": {
@@ -231,6 +300,7 @@
   },
   "routes": {
     "account-pages": "Pages de compte",
+    "cours": "Cours",
     "courses": "Cours",
     "dashboard": "Tableau de bord",
     "demands": "Demands",
@@ -266,7 +336,6 @@
       "subject": "Votre sujet",
       "years": "Vos années d'expérience"
     },
-    "premotto": "",
     "signin": "Se Connecter",
     "stepper": {
       "personal": "Détails personnels",
@@ -333,6 +402,17 @@
     "pagination": {
       "of": "de"
     }
+  },
+  "teacherClass": {
+    "AM2": "AM2",
+    "AM3": "AM3",
+    "AS1": "AS1",
+    "AS2": "AS2",
+    "AS3": "AS3",
+    "NONE": "Aucun",
+    "OTHER": "Autre",
+    "TM2": "TM2",
+    "TM3": "TM3"
   },
   "teachers": {
     "page": {

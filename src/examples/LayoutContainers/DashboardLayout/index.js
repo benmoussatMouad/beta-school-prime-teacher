@@ -105,7 +105,7 @@ function DashboardLayout({ children, user }) {
         <VuiAlert
           color="primary"
           variant="contained"
-          sx={({ breakpoints }) => ({
+          sx={({  }) => ({
             // background: "#0A0E32",
             color: "#39003f",
             padding: "2px 20px ",
@@ -137,7 +137,7 @@ function DashboardLayout({ children, user }) {
               disabled={isCooldown || isLoading} // Disable button during cooldown or while loading
             >
               {isLoading ? (
-                <CircularProgress size={20} color="inherit" /> // Show loading spinner while loading
+                <CircularProgress size={20} color="info" /> // Show loading spinner while loading
               ) : isCooldown ? (
                 `${t('button.buttonCooldown')} (${cooldownTime}s)`
               ) : (

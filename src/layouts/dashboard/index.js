@@ -30,9 +30,9 @@ import MiniStatisticsCard from "examples/Cards/StatisticsCards/MiniStatisticsCar
 
 // Dashboard layout components
 import WelcomeMark from "layouts/dashboard/components/WelcomeMark";
-import Projects from "layouts/dashboard/components/Projects";
-import OrderOverview from "layouts/dashboard/components/OrderOverview";
-import SatisfactionRate from "layouts/dashboard/components/SatisfactionRate";
+import Courses from "layouts/dashboard/components/Courses";
+import Annonces from "layouts/dashboard/components/Annonces";
+import SubscribersRate from "layouts/dashboard/components/SubscribersRate";
 
 
 // Data
@@ -45,7 +45,7 @@ import { IoMdEye } from "react-icons/io";
 
 function Dashboard() {
 
-  const { user } = useAuth()
+  const { user } = useAuth();
   const { t } = useTranslation();
 
   return (
@@ -62,7 +62,7 @@ function Dashboard() {
                 <Grid direction={"column"}>
                   <Grid item xs={12} md={6} xl={3}>
                     <VuiBox my={2}><MiniStatisticsCard
-                      title={{ text: t("dashboard.todayUsers")} }
+                      title={{ text: t("dashboard.todayUsers") }}
                       count="15"
                       // percentage={{ color: "success", text: "+3%" }}
                       icon={{ color: "info", component: <PiStudent size="22px" color="white" /> }}
@@ -70,7 +70,7 @@ function Dashboard() {
                   </Grid>
                   <Grid item xs={12} md={6} xl={3}>
                     <VuiBox my={2}><MiniStatisticsCard
-                      title={{ text: t('dashboard.newViewers') }}
+                      title={{ text: t("dashboard.newViewers") }}
                       count="+5"
                       // percentage={{ color: "error", text: "-2%" }}
                       icon={{ color: "info", component: <IoMdEye size="22px" color="white" /> }}
@@ -78,7 +78,7 @@ function Dashboard() {
                   </Grid>
                   <Grid item xs={12} md={6} xl={3}>
                     <VuiBox my={2}><MiniStatisticsCard
-                      title={{ text: t('dashboard.numberOfCourses') }}
+                      title={{ text: t("dashboard.numberOfCourses") }}
                       count="7"
                       // percentage={{ color: "success", text: "+5%" }}
                       icon={{ color: "info", component: <MdOutlineOndemandVideo size="20px" color="white" /> }}
@@ -88,16 +88,16 @@ function Dashboard() {
               </VuiBox>
             </Grid>
             <Grid item xs={12} lg={3} xl={3}>
-              <SatisfactionRate />
+              <SubscribersRate />
             </Grid>
           </Grid>
         </VuiBox>
         <Grid container spacing={3} direction="row" justifyContent="center" alignItems="stretch">
           <Grid item xs={12} md={6} lg={8}>
-            <Projects />
+            <Courses />
           </Grid>
           <Grid item xs={12} md={6} lg={4}>
-            <OrderOverview />
+            <Annonces />
           </Grid>
         </Grid>
       </VuiBox>

@@ -12,13 +12,11 @@ import avatar1 from "assets/images/avatar1.png";
 import avatar2 from "assets/images/avatar2.png";
 import avatar3 from "assets/images/avatar3.png";
 import avatar4 from "assets/images/avatar4.png";
-import { useTranslation } from "react-i18next";
 
 export default function data() {
-  const {t} = useTranslation();
   const avatars = (members) =>
-    members.map(([image, name]) => (
-      <Tooltip key={name} title={name} placeholder="bottom">
+    members.map(([image, name], index) => (
+      <Tooltip key={index} title={name} placeholder="bottom">
         <VuiAvatar
           src={image}
           alt="name"
