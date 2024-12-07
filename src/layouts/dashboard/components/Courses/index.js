@@ -38,7 +38,7 @@ function Courses() {
   const { data: courses, isLoading: isLoadingCourses } = useGetCourses(token);
 
   const { t } = useTranslation();
-  const { columns, rows } = data(courses);
+  const { columns, rows } = data(courses?.courses);
 
   const {
     register,

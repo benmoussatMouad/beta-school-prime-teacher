@@ -40,7 +40,7 @@ import { getAccessToken } from "../../utils";
 function Courses() {
 
   const [subject, setSubjects] = useState("");
-  //const [title, setTitle] = useState("");
+  const [title, setTitle] = useState("");
   const [teacherClass, setTeacherClass] = useState("");
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
@@ -48,18 +48,18 @@ function Courses() {
   const token = getAccessToken();
 
   const { user } = useAuth();
-  const { data, isLoading } = useGetCourses(token);
+  const { data, isLoading } = useGetCourses(token, title, teacherClass, subject, page, rowsPerPage);
 
   const { t } = useTranslation();
 
-  const { columns, rows } = coursesTableData(t, data);
+  const { columns, rows } = coursesTableData(t, data?.courses);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
 
     switch (name) {
       case "title":
-        setTeacherClass(value);
+        setTitle(value);
         break;
       case "subject":
         if (value === "NONE") {
@@ -70,9 +70,9 @@ function Courses() {
         break;
       case "teacherClass":
         if (value === "NONE") {
-          setSubjects("");
+          setTeacherClass("");
         } else {
-          setSubjects(value);
+          setTeacherClass(value);
         }
         break;
       default:

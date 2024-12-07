@@ -16,8 +16,7 @@ export function useUpdateCourse() {
 
   return useMutation({
     mutationFn: updateCourseFn,
-    onSuccess: (data) => {
-      console.log(data);
+    onSuccess: () => {
       // Trigger success Snackbar
       showSnackBar(dispatch, t("course.update.success"), "success");
       queryClient.invalidateQueries("course");
