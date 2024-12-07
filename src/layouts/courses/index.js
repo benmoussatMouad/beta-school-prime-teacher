@@ -39,7 +39,7 @@ import { useState } from "react";
 function Courses() {
 
   const [subject, setSubjects] = useState("");
-  const [title, setTitle] = useState("");
+  //const [title, setTitle] = useState("");
   const [teacherClass, setTeacherClass] = useState("");
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
