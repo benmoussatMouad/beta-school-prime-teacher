@@ -136,6 +136,7 @@ function Teachers() {
               onRowsPerPageChange={handleRowsPerPage}
               isLoading={isLoading}
               subject={subject}
+              tableId={"teachers"}
             />
 
           </VuiBox>

@@ -38,7 +38,24 @@
     "title": "دوراتي"
   },
   "course": {
+    "accountDeletion": {
+      "description": "هل أنت متأكد من حذف الدورة",
+      "title": "حذف الدورة"
+    },
+    "create": {
+      "success": "إنشاء الدورة بنجاح!"
+    },
+    "filter": {
+      "level": "المستوى",
+      "subject": "الموضوع",
+      "title": "العنوان"
+    },
+    "notfound": {
+      "button": "الانتقال إلى لوحة التحكم",
+      "title": "لم يتم العثور على أي مقررات دراسية. يرجى إنشاء واحدة!"
+    },
     "update": {
+      "success": "قمت بتحديث الدورات بنجاح",
       "title": "تحديث دورتك الدراسية"
     }
   },
@@ -47,7 +64,10 @@
       "attachments": "الملحقات",
       "createdAt": "تم الإنشاء في",
       "description": "الوصف",
+      "icon": "الأيقونة",
+      "level": "المستوى",
       "rating": "التقييم",
+      "subject": "الموضوع",
       "title": "العنوان",
       "updatedAt": "تم التحديث في",
       "views": "المشاهدات"
@@ -382,6 +402,17 @@
     "pagination": {
       "of": "من"
     }
+  },
+  "teacherClass": {
+    "AM2": "AM2",
+    "AM3": "AM3",
+    "AS1": "AS1",
+    "AS2": "AS2",
+    "AS3": "AS3",
+    "NONE": "لا يوجد",
+    "OTHER": "آخر",
+    "TM2": "TM2",
+    "TM3": "TM3"
   },
   "teachers": {
     "page": {

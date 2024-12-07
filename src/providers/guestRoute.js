@@ -1,47 +1,30 @@
-import { Box, CircularProgress } from '@mui/material';
-import colors from 'assets/theme/base/colors';
-import { useAuth } from 'context/auth/authContext';
-import React from 'react';
-import { Route, Redirect } from 'react-router-dom';
+import { useAuth } from "context/auth/authContext";
+import React from "react";
+import { Redirect, Route } from "react-router-dom";
+import VuiLoading from "../components/VuiLoading";
 
-const { dark } = colors
 
 const GuestRoute = ({ component: Component, ...rest }) => {
-    const { isAuthenticated, isLoading } = useAuth();
+  const { isAuthenticated, isLoading } = useAuth();
 
-    if (isLoading) {
-        return (
-            <Box
-                sx={{
-                    display: "flex",
-                    background: dark.body,
-                    alignItems: "center",
-                    justifyContent: "center",
-                    position: "fixed",
-                    zIndex: 30,
-                    top: 0,
-                    left: 0,
-                    width: "100%",
-                    height: "100%",
-                }}
-            >
-                <CircularProgress color="info" />
-            </Box>
-        );
-    }
-
+  if (isLoading) {
     return (
-        <Route
-            {...rest}
-            render={(props) =>
-                isAuthenticated ? (
-                    <Redirect to="/dashboard" />
-                ) : (
-                    <Component {...props} />
-                )
-            }
-        />
+      <VuiLoading />
     );
+  }
+
+  return (
+    <Route
+      {...rest}
+      render={(props) =>
+        isAuthenticated ? (
+          <Redirect to="/dashboard" />
+        ) : (
+          <Component {...props} />
+        )
+      }
+    />
+  );
 };
 
 export default GuestRoute;

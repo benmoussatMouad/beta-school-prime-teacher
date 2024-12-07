@@ -1,6 +1,10 @@
 import profile1 from "../assets/images/profile-1.png";
 import profile2 from "../assets/images/profile-2.png";
 import profile3 from "../assets/images/profile-3.png";
+import Grid from "@mui/material/Grid";
+import VuiInput from "../components/VuiInput";
+import VuiSelect from "../components/VuiSelect";
+import React from "react";
 
 export function getEnvSafely(envKey, defaultValue) {
   const value = process.env[envKey];
@@ -48,6 +52,18 @@ export const FiltersSubjects = [
   "ARABIC",
   "FRENCH",
   "ENGLISH",
+];
+
+export const FiltersStudentsLevel = [
+  "NONE",
+  "AS1",
+  "AS2",
+  "AS3",
+  "AM2",
+  "AM3",
+  "TM2",
+  "TM3",
+  "OTHER",
 ];
 
 export const getToken = () => {
@@ -159,6 +175,82 @@ export const courseData = [
     ressources: [1, 3, 6],
   },
 ];
+
+export const getFiltersInputs = ({ tableId, onSearchChange, subject, teacherClass, t }) => {
+  switch (tableId) {
+    case "teachers":
+      return <Grid container spacing={2}>
+        <Grid item xs={12} sm={6} md={3}>
+          <VuiInput
+            placeholder={t("signup.forms.firstName")}
+            fullWidth
+            onChange={onSearchChange}
+            sx={{ my: 1 }}
+            name="firstName"
+          />
+        </Grid>
+        <Grid item xs={12} sm={6} md={3}>
+          <VuiInput
+            placeholder={t("signup.forms.lastName")}
+            fullWidth
+            onChange={onSearchChange}
+            sx={{ my: 1 }}
+            name="lastName"
+          />
+        </Grid>
+        <Grid item xs={12} sm={6} md={3}>
+          <VuiInput
+            placeholder={t("signup.forms.email")}
+            fullWidth
+            onChange={onSearchChange}
+            sx={{ my: 1 }}
+            name="email"
+          />
+        </Grid>
+        <Grid item sx={{ display: "flex", alignItems: "center" }} xs={12} sm={6} md={3}>
+          <VuiSelect
+            onChange={onSearchChange}
+            label={t("signup.forms.subject")}
+            options={FiltersSubjects}
+            value={subject || FiltersSubjects[0]}
+            name={"subject"}
+          />
+        </Grid>
+      </Grid>;
+    case "courses":
+      return <Grid container spacing={2}>
+        <Grid item xs={12} md={4}>
+          <VuiInput
+            placeholder={t("course.filter.title")}
+            fullWidth
+            onChange={onSearchChange}
+            sx={{ my: 1 }}
+            name="title"
+          />
+        </Grid>
+        <Grid item sx={{ display: "flex", alignItems: "center" }} xs={12} md={4}>
+          <VuiSelect
+            onChange={onSearchChange}
+            label={t("course.filter.subject")}
+            options={FiltersSubjects}
+            value={subject || FiltersSubjects[0]}
+            name={"subject"}
+          />
+        </Grid>
+        <Grid item sx={{ display: "flex", alignItems: "center" }} xs={12} md={4}>
+          <VuiSelect
+            t={false}
+            onChange={onSearchChange}
+            label={t("course.filter.level")}
+            options={FiltersStudentsLevel}
+            value={teacherClass || FiltersStudentsLevel[0]}
+            name={"teacherClass"}
+          />
+        </Grid>
+
+      </Grid>;
+  }
+};
 
 // Utility functions for token management
 export const getAccessToken = () => localStorage.getItem("access_token");

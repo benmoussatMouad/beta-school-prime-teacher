@@ -24,7 +24,7 @@ import { useTranslation } from "react-i18next";
 
 const VuiSelect = forwardRef((
   {
-    t: translated = true,
+    t: subject = true,
     variant,
     color,
     value,
@@ -32,7 +32,7 @@ const VuiSelect = forwardRef((
     onChange,
     options,
     ...rest
-  }) => {
+  }, ref) => {
   const { t } = useTranslation();
   return (
     <FormControl fullWidth>
@@ -43,6 +43,7 @@ const VuiSelect = forwardRef((
         value={value}
         label={label}
         onChange={onChange}
+        ref={ref}
         {...rest}
         ownerState={{
           size: "medium",
@@ -54,7 +55,7 @@ const VuiSelect = forwardRef((
       >
         {options.map((value, index) => (
           <MenuItem key={index} value={value}>
-            {translated ? t(`subjects.${value}`) : value}
+            {subject ? t(`subjects.${value}`) : t(`teacherClass.${value}`)}
           </MenuItem>
         ))}
       </StyledSelect>

@@ -137,7 +137,7 @@ function DashboardLayout({ children, user }) {
               disabled={isCooldown || isLoading} // Disable button during cooldown or while loading
             >
               {isLoading ? (
-                <CircularProgress size={20} color="inherit" /> // Show loading spinner while loading
+                <CircularProgress size={20} color="info" /> // Show loading spinner while loading
               ) : isCooldown ? (
                 `${t('button.buttonCooldown')} (${cooldownTime}s)`
               ) : (

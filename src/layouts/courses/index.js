@@ -32,15 +32,59 @@ import { useAuth } from "context/auth/authContext";
 import { useTranslation } from "react-i18next";
 import { coursesTableData } from "./data/coursesTableData";
 import VuiBadge from "../../components/VuiBadge";
-import Table from "examples/Tables/Example";
+import Table from "examples/Tables/Table";
+import { useGetCourses } from "../../api/courses";
+import { useState } from "react";
 
 function Courses() {
 
+  const [subject, setSubjects] = useState("");
+  const [title, setTitle] = useState("");
+  const [teacherClass, setTeacherClass] = useState("");
+  const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(5);
+
   const { user } = useAuth();
+  const { data, isLoading } = useGetCourses();
 
   const { t } = useTranslation();
 
-  const { columns, rows } = coursesTableData(t);
+  const { columns, rows } = coursesTableData(t, data);
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+
+    switch (name) {
+      case "title":
+        setTeacherClass(value);
+        break;
+      case "subject":
+        if (value === "NONE") {
+          setSubjects("");
+        } else {
+          setSubjects(value);
+        }
+        break;
+      case "teacherClass":
+        if (value === "NONE") {
+          setSubjects("");
+        } else {
+          setSubjects(value);
+        }
+        break;
+      default:
+        break;
+    }
+  };
+
+  const handlePageChange = (event, newPage) => {
+    setPage(newPage);
+  };
+
+  const handleRowsPerPage = (e) => {
+    setRowsPerPage(parseInt(e.target.value, 10));
+    setPage(0); // Reset page to 0 whenever rows per page is changed
+  };
 
   return (
     <DashboardLayout user={user}>
@@ -67,7 +111,20 @@ function Courses() {
               },
             }}
           >
-            <Table columns={columns} rows={rows} />
+            <Table
+              columns={columns}
+              rows={rows}
+              onSearchChange={handleChange}
+              page={page}
+              totalCount={data?.totalCount || 0}
+              rowsPerPage={rowsPerPage}
+              onPageChange={handlePageChange}
+              onRowsPerPageChange={handleRowsPerPage}
+              isLoading={isLoading}
+              subject={subject}
+              teacherClass={teacherClass}
+              tableId={"courses"}
+            />
           </VuiBox>
         </Card>
       </VuiBox>

@@ -3,171 +3,65 @@ import VuiBox from "components/VuiBox";
 import VuiTypography from "components/VuiTypography";
 import VuiButton from "../../../components/VuiButton";
 import React from "react";
+import VuiAvatar from "../../../components/VuiAvatar";
+import { GiOpenBook } from "react-icons/gi";
 
+function Icon({ image, name }) {
+  return (
+    <VuiBox display="flex" alignItems="center" justifyContent={"center"} m={2}>
+      <VuiBox>
+        {image ? <VuiAvatar src={image} alt={name} size="sm" variant="rounded" /> :
+          <GiOpenBook size={28} color={"white"} />}
+      </VuiBox>
+    </VuiBox>
+  );
+}
 
-export const coursesTableData = (t) => {
+function Function({ content }) {
+  return (
+    <VuiTypography variant="caption" fontWeight="medium" color="white">
+      {content}
+    </VuiTypography>
+  );
+}
+
+export const coursesTableData = (t, data) => {
   return {
     columns: [
-      { name: t("courses.table.title"), align: "left" },
-      { name: t("courses.table.description"), align: "left" },
-      { name: t("courses.table.views"), align: "center" },
-      { name: t("courses.table.rating"), align: "center" },
-      { name: t("courses.table.createdAt"), align: "center" },
-      { name: t("courses.table.updatedAt"), align: "center" },
-      { name: t("cours.table.action"), align: "center" },
+      { name: t("courses.table.icon"), align: "center", key: "icon" },
+      { name: t("courses.table.title"), align: "left", sortable: true, key: "title" },
+      { name: t("courses.table.subject"), align: "left", sortable: true, key: "subject" },
+      { name: t("courses.table.level"), align: "center", sortable: true, key: "level" },
+      { name: t("courses.table.createdAt"), align: "center", sortable: true, key: "createdAt" },
+      { name: t("demands.table.view"), align: "center", key: "view" },
     ],
 
-    rows: [
-      {
-        [t("courses.table.title")]: (
-          <VuiBox display="flex" alignItems="center">
-            <VuiTypography
-              variant="caption"
-              color="white"
-              fontWeight="medium"
-              display="flex"
-              justifyContent="center"
-            >
-              Introduction to React
-            </VuiTypography>
-          </VuiBox>
-        ),
-        [t("courses.table.description")]: (
-          <VuiTypography
-            variant="caption"
-            color="white"
-            fontWeight="medium"
-            display="flex"
-            justifyContent="center">
-            Learn the basics of React including components and state management.
-          </VuiTypography>
-        ),
-        [t("courses.table.views")]: (
-          <VuiTypography
-            variant="caption"
-            color="white"
-            fontWeight="medium"
-            display="flex"
-            justifyContent="center">
-            1,500
-          </VuiTypography>
-        ),
-        [t("courses.table.rating")]: (
-          <VuiTypography
-            variant="caption"
-            color="white"
-            fontWeight="medium"
-            display="flex"
-            justifyContent="center">
-            4.5/5
-          </VuiTypography>
-        ),
-        [t("courses.table.createdAt")]: (
-          <VuiTypography
-            variant="caption"
-            color="white"
-            fontWeight="medium"
-            display="flex"
-            justifyContent="center">
-            2024-01-05
-          </VuiTypography>
-        ),
-        [t("courses.table.updatedAt")]: (
-          <VuiTypography
-            variant="caption"
-            color="white"
-            fontWeight="medium"
-            display="flex"
-            justifyContent="center">
-            2024-02-15
-          </VuiTypography>
-        ),
-        [t("cours.table.action")]: (
-          <VuiButton
-            variant="contained"
-            sx={{ padding: "0px", height: "30px" }}
-            color="info"
-            href={"/cours/1"}
-          >
-            {t("cours.table.action")}
-          </VuiButton>
-        ),
-      },
-      {
-        [t("courses.table.title")]: (
-          <VuiBox display="flex" alignItems="center">
-            <VuiTypography
-              variant="caption"
-              color="white"
-              fontWeight="medium"
-              display="flex"
-              justifyContent="center"
-            >
-              Advanced JavaScript
-            </VuiTypography>
-          </VuiBox>
-        ),
-        [t("courses.table.description")]: (
-          <VuiTypography
-            variant="caption"
-            color="white"
-            fontWeight="medium"
-            display="flex"
-            justifyContent="center">
-            Dive deeper into JavaScript with advanced concepts and patterns.
-          </VuiTypography>
-        ),
-        [t("courses.table.views")]: (
-          <VuiTypography
-            variant="caption"
-            color="white"
-            fontWeight="medium"
-            display="flex"
-            justifyContent="center">
-            3,200
-          </VuiTypography>
-        ),
-        [t("courses.table.rating")]: (
-          <VuiTypography
-            variant="caption"
-            color="white"
-            fontWeight="medium"
-            display="flex"
-            justifyContent="center">
-            4.8/5
-          </VuiTypography>
-        ),
-        [t("courses.table.createdAt")]: (
-          <VuiTypography
-            variant="caption"
-            color="white"
-            fontWeight="medium"
-            display="flex"
-            justifyContent="center">
-            2024-03-10
-          </VuiTypography>
-        ),
-        [t("courses.table.updatedAt")]: (
-          <VuiTypography
-            variant="caption"
-            color="white"
-            fontWeight="medium"
-            display="flex"
-            justifyContent="center">
-            2024-04-20
-          </VuiTypography>
-        ),
-        [t("cours.table.action")]: (
-          <VuiButton
-            variant="contained"
-            sx={{ padding: "0px", height: "30px" }}
-            color="info"
-            href={"/cours/1"}
-          >
-            {t("cours.table.action")}
-          </VuiButton>
-        ),
-      },
-    ],
+    rows: !data ? [] : data?.map((course) => ({
+      [t("courses.table.icon")]: (
+        <Icon image={course?.icon?.url} name={`${course.title} }`} />
+      ),
+      [t("courses.table.title")]: (
+        <Function content={course.title} />
+      ),
+      [t("courses.table.subject")]: (
+        <Function content={t(`subjects.${course.subject}`)} />
+      ),
+      [t("courses.table.level")]: (
+        <Function content={course.class} />
+      ),
+      [t("courses.table.createdAt")]: (
+        <Function content={" 2024-01-05"} />
+      ),
+      [t("demands.table.view")]: (
+        <VuiButton
+          variant="contained"
+          sx={{ padding: "0px", height: "30px" }}
+          color="info"
+          href={"/cours/" + course.id}
+        >
+          {t("demands.table.view")}
+        </VuiButton>
+      ),
+    })),
   };
 };

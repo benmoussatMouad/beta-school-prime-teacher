@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useAuth } from "context/auth/authContext";
 
@@ -21,7 +21,7 @@ import Header from "./components/Header";
 import UpdateCourse from "./components/CourseDetails";
 
 
-import { Box, Dialog, DialogActions, DialogContent, DialogTitle } from "@mui/material";
+import { Box, Dialog, DialogActions, DialogContent, DialogTitle, Skeleton } from "@mui/material";
 import VuiButton from "../../components/VuiButton";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import { courseData, StudentsLevel, Subjects } from "../../utils";
@@ -33,6 +33,9 @@ import { useForm } from "react-hook-form";
 import colors from "../../assets/theme/base/colors";
 import borders from "../../assets/theme/base/borders";
 import boxShadows from "../../assets/theme/base/boxShadows";
+import { useLocation } from "react-router-dom";
+import { useGetCourse } from "../../api/courses/getCourse";
+import VuiLoading from "../../components/VuiLoading";
 
 const { black, gradients } = colors;
 const { card } = gradients;
@@ -40,6 +43,11 @@ const { borderWidth, borderRadius } = borders;
 const { xxl } = boxShadows;
 
 function CoursDetails() {
+
+  const pathname = useLocation().pathname;
+  const coursId = pathname.split("/")[2];
+
+  const [ui, dispatch] = useVisionUIController();
   const { t } = useTranslation();
   const context = useAuth();
   const [openDialog, setOpenDialog] = useState(false); // Dialog state for confirmation
@@ -49,6 +57,7 @@ function CoursDetails() {
 
   const swiperRef = useRef(null); // Create a ref for Swiper
 
+  const { data, isLoading } = useGetCourse(coursId);
 
   const {
     register,
@@ -82,7 +91,7 @@ function CoursDetails() {
     formData.append("title", data.title);
     formData.append("description", data.description);
     formData.append("subject", data.subject);
-    formData.append("level", data.level);
+    formData.append("teacherClass", data.level);
 
     if (data.icon) formData.append("icon", data.icon);
     if (data.video) formData.append("video", data.video);
@@ -97,12 +106,48 @@ function CoursDetails() {
     reset();
   };
 
+  if (isLoading) {
+    return <VuiLoading />;
+  }
+
+  if (!data) {
+    return (
+      <DashboardLayout user={context.user}>
+        <VuiBox
+          display="flex"
+          flexDirection="column"
+          alignItems="center"
+          justifyContent="center"
+          height="80vh" // Center the content vertically
+          p={3} // Add some padding
+        >
+          <VuiTypography
+            variant="h5"
+            color="white"
+            fontWeight="bold"
+            mb={2}
+            sx={{ textAlign: "center" }}
+          >
+            {t("course.notfound.title")}
+          </VuiTypography>
+          <VuiButton
+            variant="gradient"
+            color="info"
+            sx={{ mt: 3 }}
+            href={"/dashboard"}
+          >
+            {t("course.notfound.button")}
+          </VuiButton>
+        </VuiBox>
+      </DashboardLayout>
+    );
+  }
+
   return (
     <DashboardLayout user={context.user}>
-      <Header pageName={"Course Details"} />
-
+      <Header data={data} isLoading={isLoading} pageName={"Course Details"} />
       <Dialog
-        sx={({  }) => ({
+        sx={({}) => ({
           "& .MuiDialog-paper": {
             display: "flex",
             flexDirection: "column",
@@ -127,7 +172,7 @@ function CoursDetails() {
             <Grid container spacing={2}>
               {/* Title Input */}
               <Grid item xs={12}>
-                <VuiBox display="flex" flexDirection="column" alignItems="flex-start" gap={"10px"} >
+                <VuiBox display="flex" flexDirection="column" alignItems="flex-start" gap={"10px"}>
                   <VuiTypography component="label" variant="button" color="white" fontWeight="medium">
                     {t("dialog.forms.title")}
                   </VuiTypography>
@@ -145,7 +190,7 @@ function CoursDetails() {
                 <Grid container spacing={2}>
                   <Grid item xs={12}>
                     {/* Description Input */}
-                    <VuiBox display="flex" flexDirection="column" alignItems="flex-start" gap={"10px"} >
+                    <VuiBox display="flex" flexDirection="column" alignItems="flex-start" gap={"10px"}>
                       <VuiTypography component="label" variant="button" color="white" fontWeight="medium">
                         {t("dialog.forms.description")}
                       </VuiTypography>
@@ -163,7 +208,7 @@ function CoursDetails() {
 
                   <Grid item xs={12}>
                     {/* Chapter Video Upload */}
-                    <VuiBox display="flex" flexDirection="column" alignItems="center" gap={"10px"} >
+                    <VuiBox display="flex" flexDirection="column" alignItems="center" gap={"10px"}>
                       <VuiTypography component="label" variant="button" color="white" fontWeight="medium">
                         {t("dialog.forms.video")}
                       </VuiTypography>
@@ -188,9 +233,9 @@ function CoursDetails() {
                     </VuiBox>
                   </Grid>
 
-                  <Grid item xs={12} >
+                  <Grid item xs={12}>
                     {/* Attachments Upload */}
-                    <VuiBox display="flex" flexDirection="column" alignItems="center" gap={"10px"} >
+                    <VuiBox display="flex" flexDirection="column" alignItems="center" gap={"10px"}>
                       <VuiTypography component="label" variant="button" color="white" fontWeight="medium">
                         {t("dialog.forms.attachments")}
                       </VuiTypography>
@@ -233,12 +278,15 @@ function CoursDetails() {
           <Card>
             <VuiBox display="flex" flexDirection="column" height="100%">
               <VuiBox sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", mb: 2 }}>
-                <VuiTypography variant="lg" sx={{ mb: 2 }} fontWeight="bold" color="white" textTransform="capitalize">
-                  {t("chapters.title")}
-                </VuiTypography>
-                <VuiButton onClick={() => setOpenDialog(true)} color="info" variant="gradient" size="sm">
-                  + {t("chapter.create")}
-                </VuiButton>
+                {isLoading ? <Skeleton variant="text" color={"white"} width={100} height={30} /> :
+                  <VuiTypography variant="lg" sx={{ mb: 2 }} fontWeight="bold" color="white" textTransform="capitalize">
+                    {t("chapters.title")}
+                  </VuiTypography>
+                }
+                {isLoading ? <Skeleton variant="text" color={"white"} width={100} height={30} /> :
+                  <VuiButton onClick={() => setOpenDialog(true)} color="info" variant="gradient" size="small">
+                    + {t("chapter.create")}
+                  </VuiButton>}
               </VuiBox>
               {/* Overflow controlled Box container */}
               <Box
@@ -267,23 +315,50 @@ function CoursDetails() {
                     },
                   }}
                 >
-                  {courseData.map((course) => (
-                    <SwiperSlide style={{ maxWidth: "350px" }} key={course.id}>
-                      <ChapterCard
-                        id={course.id}
-                        image={course.image}
-                        label={course.label}
-                        title={course.title}
-                        description={course.description}
-                        action={{
-                          color: "white",
-                          label: t("chapters.ressources"),
-                        }}
-                        duration={course.duration}
-                        ressources={course.ressources}
-                      />
-                    </SwiperSlide>
-                  ))}
+                  {isLoading ? (
+                    Array.from(new Array(3)).map((_, index) => (
+                      <SwiperSlide style={{ maxWidth: "350px" }} key={index}>
+                        <Skeleton
+                          variant="rounded"
+                          width={200}
+                          height={120}
+                        />
+                        <Skeleton
+                          variant="text"
+                          width={100}
+                          height={30}
+                        />
+                        <Skeleton
+                          variant="rounded"
+                          width={180}
+                          height={80}
+                        />
+                        <Skeleton
+                          variant="text"
+                          width={90}
+                          height={40}
+                        />
+                      </SwiperSlide>
+                    ))
+                  ) : (
+                    courseData.map((course) => (
+                      <SwiperSlide style={{ maxWidth: "350px" }} key={course.id}>
+                        <ChapterCard
+                          id={course.id}
+                          image={course.image}
+                          label={course.label}
+                          title={course.title}
+                          description={course.description}
+                          action={{
+                            color: "white",
+                            label: t("chapters.ressources"),
+                          }}
+                          duration={course.duration}
+                          ressources={course.ressources}
+                        />
+                      </SwiperSlide>
+                    ))
+                  )}
                 </Swiper>
 
                 {/* Custom Navigation Buttons */}
@@ -322,9 +397,27 @@ function CoursDetails() {
           </Card>
         </Grid>
         <Grid item xs={12} xl={4}>
-          <UpdateCourse />
+          <UpdateCourse data={data} isLoading={isLoading} />
         </Grid>
       </Grid>
+      <Card>
+        <VuiBox display="flex" sx={{ width: "100%", justifyContent: "space-between", alignItems: "center" }}
+                flexDirection="row" height="100%">
+          <VuiBox display="flex" flexDirection="column" mb="24px">
+            <VuiTypography color="white" variant="lg" fontWeight="bold" mb="6px">
+              {t("course.accountDeletion.title")}
+            </VuiTypography>
+            <VuiTypography color="text" variant="button" fontWeight="regular">
+              {t("course.accountDeletion.description")}
+            </VuiTypography>
+          </VuiBox>
+          <VuiBox xs={{ justifyContent: "center", alignSelf: "end" }}>
+            <VuiButton onClick={() => setOpenDialog(true)} color={"error"} size={"large"}
+                       variant={"gradient"}>{t("profile.accountDeletion.deleteButton")}
+            </VuiButton>
+          </VuiBox>
+        </VuiBox>
+      </Card>
     </DashboardLayout>
   );
 }

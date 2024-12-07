@@ -38,7 +38,24 @@
     "title": "Mes cours"
   },
   "course": {
+    "accountDeletion": {
+      "description": "Êtes-vous sûr de supprimer le cours ?",
+      "title": "Supprimer le cours"
+    },
+    "create": {
+      "success": "Créer un cours avec succès !"
+    },
+    "filter": {
+      "level": "Niveau",
+      "subject": "Sujet",
+      "title": "Titre"
+    },
+    "notfound": {
+      "button": "Accéder au tableau de bord",
+      "title": "Aucun cours n'a été trouvé. Veuillez en créer un !"
+    },
     "update": {
+      "success": "Vous mettez à jour le cours avec succès",
       "title": "Mettre à jour votre cours "
     }
   },
@@ -47,7 +64,10 @@
       "attachments": "Les pièces jointes",
       "createdAt": "Créé le",
       "description": "Description ",
+      "icon": "Icône",
+      "level": "Niveau",
       "rating": "Note",
+      "subject": "Sujet",
       "title": "Titre",
       "updatedAt": "Mis à jour le",
       "views": "Vues"
@@ -382,6 +402,17 @@
     "pagination": {
       "of": "de"
     }
+  },
+  "teacherClass": {
+    "AM2": "AM2",
+    "AM3": "AM3",
+    "AS1": "AS1",
+    "AS2": "AS2",
+    "AS3": "AS3",
+    "NONE": "Aucun",
+    "OTHER": "Autre",
+    "TM2": "TM2",
+    "TM3": "TM3"
   },
   "teachers": {
     "page": {

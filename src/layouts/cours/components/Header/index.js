@@ -20,7 +20,6 @@
 import Card from "@mui/material/Card";
 import Grid from "@mui/material/Grid";
 // Images
-import burceMars from "assets/images/avatar-simmmple.png";
 // Vision UI Dashboard React base styles
 import VuiAvatar from "components/VuiAvatar";
 // Vision UI Dashboard React components
@@ -29,8 +28,12 @@ import VuiBox from "components/VuiBox";
 // Vision UI Dashboard React example components
 import DashboardNavbar from "examples/Navbars/DashboardNavbar";
 import VuiTypography from "../../../../components/VuiTypography";
+import { GiOpenBook } from "react-icons/gi";
+import { useTranslation } from "react-i18next";
 
-function Header({ pageName }) {
+function Header({ pageName, data, isLoading }) {
+
+  const { t } = useTranslation();
 
   return (
     <VuiBox position="relative">
@@ -45,7 +48,7 @@ function Header({ pageName }) {
           container
           alignItems="center"
           justifyContent="space-between" // Use space-between for better distribution
-          sx={({  }) => ({
+          sx={({}) => ({
             padding: { xs: 2, sm: 3 }, // Adding padding for a better look
             gap: {
               xs: "16px",
@@ -55,26 +58,26 @@ function Header({ pageName }) {
           })}
         >
           {/* Avatar and Name Section */}
-          <Grid
+          {<Grid
             item
             xs={12}
-            md={3}
-            lg={2}
-            xl={1.5}
+            md={8}
             sx={{
               display: "flex",
               alignItems: "center",
               justifyContent: { xs: "center", md: "flex-start" },
             }}
           >
-            <VuiAvatar
-              src={burceMars}
+            {data.icon ? <VuiAvatar
+              src={data?.icon?.url || GiOpenBook}
               alt="profile-image"
               variant="rounded"
               size="xl"
               shadow="sm"
               sx={{ mr: { xs: 0, md: 2 } }} // Margin to adjust spacing from text
-            />
+            /> : <VuiBox>
+              <GiOpenBook size={50} color={"white"} />
+            </VuiBox>}
             <VuiBox
               sx={{
                 textAlign: { xs: "center", md: "left" },
@@ -82,10 +85,10 @@ function Header({ pageName }) {
               }}
             >
               <VuiTypography variant="h6" color="white" fontWeight="bold">
-                Cours de Mathematics
+                {data.title}
               </VuiTypography>
             </VuiBox>
-          </Grid>
+          </Grid>}
 
           {/* Tabs Section */}
           <Grid
@@ -101,10 +104,10 @@ function Header({ pageName }) {
             <VuiBox sx={{ display: "flex", alignItems: "flex-end", justifyContent: "flex-end" }}>
               <VuiBox sx={{ display: "flex", alignItems: "center", gap: "1em" }}>
                 <VuiTypography color={"white"} sx={{ ml: 2 }} variant="caption">
-                  موضوع الدورة
+                  {t(`subjects.${data.subject}`)}
                 </VuiTypography>
                 <VuiTypography color={"white"} sx={{ cursor: "auto" }} variant="caption">
-                  مستوى الطلاب
+                  {data.class}
                 </VuiTypography>
               </VuiBox>
             </VuiBox>

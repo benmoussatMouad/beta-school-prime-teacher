@@ -15,8 +15,8 @@ import avatar4 from "assets/images/avatar4.png";
 
 export default function data() {
   const avatars = (members) =>
-    members.map(([image, name]) => (
-      <Tooltip key={name} title={name} placeholder="bottom">
+    members.map(([image, name], index) => (
+      <Tooltip key={index} title={name} placeholder="bottom">
         <VuiAvatar
           src={image}
           alt="name"

@@ -140,6 +140,7 @@ function Demands() {
               onRowsPerPageChange={handleRowsPerPage}
               isLoading={isLoading}
               subject={subject}
+              tableId={"teachers"}
             />
 
           </VuiBox>

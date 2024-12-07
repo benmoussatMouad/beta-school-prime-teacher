@@ -7,6 +7,9 @@ export const apiClient = axios.create({
   headers: {
     Accept: "application/json",
   },
+  validateStatus: (status) => {
+    return status >= 200 && status < 400; // Treat 3xx and 2xx as successful
+  },
 });
 
 // Request Interceptor: Attach Access Token and Language

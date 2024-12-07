@@ -1,9 +1,8 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 
 // @mui material components
 import Card from "@mui/material/Card";
-import Avatar from "@mui/material/Avatar";
 
 // Vision UI Dashboard React components
 import VuiBox from "components/VuiBox";
@@ -13,9 +12,14 @@ import { useTranslation } from "react-i18next";
 import VuiSelect from "../../../../components/VuiSelect";
 import { StudentsLevel, Subjects } from "../../../../utils";
 import VuiButton from "../../../../components/VuiButton";
-import icon from "../../../../assets/images/avatar-simmmple.png";
+import VuiAvatar from "../../../../components/VuiAvatar";
+import { GiOpenBook } from "react-icons/gi";
+import { useUpdateCourse } from "../../../../api/courses/updateCourse";
 
-function UpdateCourse() {
+function UpdateCourse({ isLoading, data: courseData }) {
+
+  const { mutate, isLoading: updateLoading } = useUpdateCourse();
+
   const { t } = useTranslation();
   const {
     register,
@@ -32,9 +36,24 @@ function UpdateCourse() {
       icon: null,
     },
   });
+
   const [loading, setLoading] = useState(false);
   const [iconPreview, setIconPreview] = useState(null);
   const [watchIcon, setWatchIcon] = useState(null);
+
+  // Set form data when `data` is available
+  useEffect(() => {
+    if (!isLoading && courseData) {
+      setValue("title", courseData.title);
+      setValue("description", courseData.description);
+      setValue("subject", courseData.subject || Subjects[0]);
+      setValue("level", courseData.level || StudentsLevel[0]);
+
+      if (courseData.icon) {
+        setIconPreview(courseData.icon.url);
+      }
+    }
+  }, [isLoading, courseData, setValue]);
 
   const handleAvatarChange = (event) => {
     const file = event.target.files[0];
@@ -45,24 +64,19 @@ function UpdateCourse() {
   };
 
   const onSubmit = async (data) => {
-    setLoading(true);
-    try {
-      const formData = new FormData();
-      formData.append("title", data.title);
-      formData.append("description", data.description);
-      formData.append("subject", data.subject);
-      formData.append("level", data.level);
-      formData.append("duration", data.duration);
-      if (watchIcon) {
-        formData.append("icon", watchIcon);
-      }
-
-      alert(t("profile.setting.updateSuccess"));
-    } catch (error) {
-      alert(t("profile.setting.updateError"));
-    } finally {
-      setLoading(false);
+    const formData = new FormData();
+    formData.append("title", data.title);
+    formData.append("description", data.description);
+    formData.append("subject", data.subject);
+    formData.append("teacherClass", data.level);
+    if (watchIcon) {
+      formData.append("icon", watchIcon);
     }
+
+    mutate({
+      formData: formData,
+      coursId: courseData.id,
+    });
   };
 
   return (
@@ -78,17 +92,22 @@ function UpdateCourse() {
           <VuiTypography component="label" variant="button" color="white" fontWeight="medium" sx={{ mb: 2 }}>
             {t("dialog.course.icon")}
           </VuiTypography>
+          {iconPreview ? <VuiAvatar
+            src={iconPreview}
+            sx={{ width: 100, height: 100, cursor: "pointer" }}
+            onClick={() => document.getElementById("avatar-file-input").click()} // Trigger file input click
+          /> : <GiOpenBook
+            color={"white"}
+            size={60}
+            style={{ cursor: "pointer" }}
+            onClick={() => document.getElementById("avatar-file-input").click()} />
+          }
           <input
             type="file"
+            id="avatar-file-input"
             style={{ display: "none" }}
             accept="image/*"
-            {...register("icon", { required: false })}
             onChange={handleAvatarChange}
-          />
-          <Avatar
-            src={iconPreview || icon}
-            sx={{ width: 100, height: 100, cursor: "pointer" }}
-            onClick={() => document.querySelector("input[type='file']").click()}
           />
           {errors.icon && (
             <VuiTypography sx={{ color: "red", fontSize: "0.7rem" }}>{errors.icon.message}</VuiTypography>
@@ -97,8 +116,7 @@ function UpdateCourse() {
 
         {/* Title Field */}
         <VuiBox mb="14px">
-          <VuiTypography component="label" variant="button" color="white" fontWeight="medium"
-                         sx={{ mb: 0 }}>
+          <VuiTypography component="label" variant="button" color="white" fontWeight="medium" sx={{ mb: 0 }}>
             {t("dialog.forms.title")}
           </VuiTypography>
           <VuiInput
@@ -112,8 +130,7 @@ function UpdateCourse() {
 
         {/* Description Field */}
         <VuiBox mb="14px">
-          <VuiTypography component="label" variant="button" color="white" fontWeight="medium"
-                         sx={{ mb: 1 }}>
+          <VuiTypography component="label" variant="button" color="white" fontWeight="medium" sx={{ mb: 1 }}>
             {t("dialog.forms.description")}
           </VuiTypography>
           <VuiInput
@@ -131,8 +148,7 @@ function UpdateCourse() {
 
         {/* Subject Field */}
         <VuiBox mb="14px">
-          <VuiTypography component="label" variant="button" color="white" fontWeight="medium"
-                         sx={{ mb: 1 }}>
+          <VuiTypography component="label" variant="button" color="white" fontWeight="medium" sx={{ mb: 1 }}>
             {t("dialog.forms.subjects")}
           </VuiTypography>
           <VuiSelect
@@ -143,15 +159,13 @@ function UpdateCourse() {
             options={Subjects}
           />
           {errors.subject && (
-            <VuiTypography
-              sx={{ color: "red", fontSize: "0.7rem" }}>{errors.subject.message}</VuiTypography>
+            <VuiTypography sx={{ color: "red", fontSize: "0.7rem" }}>{errors.subject.message}</VuiTypography>
           )}
         </VuiBox>
 
         {/* Student Level Field */}
         <VuiBox mb="14px">
-          <VuiTypography component="label" variant="button" color="white" fontWeight="medium"
-                         sx={{ mb: 1 }}>
+          <VuiTypography component="label" variant="button" color="white" fontWeight="medium" sx={{ mb: 1 }}>
             {t("dialog.forms.level")}
           </VuiTypography>
           <VuiSelect
@@ -167,14 +181,13 @@ function UpdateCourse() {
           )}
         </VuiBox>
 
-
         {/* Submit Button */}
         <VuiBox mt="20px" display="flex" justifyContent="flex-end">
           <VuiButton
             color={"info"}
             type="submit"
             variant="contained"
-            disabled={loading}
+            disabled={loading || isLoading || updateLoading}
           >
             {t("button.confirm")}
           </VuiButton>
