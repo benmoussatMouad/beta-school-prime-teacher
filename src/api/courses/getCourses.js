@@ -1,22 +1,19 @@
 import { useQuery } from "react-query";
 import { apiClient } from "../apiClient";
-import { getAccessToken } from "../../utils";
 
 
-const token = getAccessToken();
-
-const createGetCoursesFn = async () => {
+const createGetCoursesFn = async (token) => {
   const response = await apiClient.get("/course/me", {
     headers: { Authorization: `Bearer ${token}` },
   });
   return response.data;  // Ensure response has the expected structure
 };
 
-export function useGetCourses() {
+export function useGetCourses(token) {
 
   return useQuery(
     ["courses"],
-    createGetCoursesFn,
+    () => createGetCoursesFn(token),
     {
       enabled: !!token, // Only run if token exists
       refetchOnWindowFocus: true,

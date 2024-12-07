@@ -17,12 +17,12 @@ import rgba from "../../../../assets/theme/functions/rgba";
 import colors from "../../../../assets/theme/base/colors";
 import borders from "../../../../assets/theme/base/borders";
 import boxShadows from "../../../../assets/theme/base/boxShadows";
-import Icon from "../../../../assets/images/avatar-simmmple.png";
 
 import Table from "examples/Tables/Example";
 import data from "./data";
-import { StudentsLevel, Subjects } from "../../../../utils";
-import { useCreateCourse } from "../../../../api/courses";
+import { getAccessToken, StudentsLevel, Subjects } from "../../../../utils";
+import { useCreateCourse, useGetCourses } from "../../../../api/courses";
+import { GiOpenBook } from "react-icons/gi";
 
 const { black, gradients } = colors;
 const { card } = gradients;
@@ -31,11 +31,14 @@ const { xxl } = boxShadows;
 
 function Courses() {
   const [openDialog, setOpenDialog] = useState(false);
-  const [iconPreview, setIconPreview] = useState(Icon);
+  const [iconPreview, setIconPreview] = useState(null);
 
+  const token = getAccessToken();
+
+  const { data: courses, isLoading: isLoadingCourses } = useGetCourses(token);
 
   const { t } = useTranslation();
-  const { columns, rows } = data();
+  const { columns, rows } = data(courses);
 
   const {
     register,
@@ -56,8 +59,6 @@ function Courses() {
 
   const { mutate, isLoading } = useCreateCourse();
 
-
-  const watchIcon = watch("icon");
 
   const handleAvatarChange = (e) => {
     const file = e.target.files[0];
@@ -134,11 +135,15 @@ function Courses() {
                       accept="image/*"
                       onChange={handleAvatarChange}
                     />
-                    <Avatar
-                      src={watchIcon ? URL.createObjectURL(watchIcon) : iconPreview} // Dynamically show preview
+                    {iconPreview ? <Avatar
+                      src={iconPreview} // Dynamically show preview
                       sx={{ width: 100, height: 100, cursor: "pointer" }}
                       onClick={() => document.querySelector("input[type='file']").click()}
-                    />
+                    /> : <GiOpenBook
+                      color={"white"}
+                      size={60}
+                      style={{ cursor: "pointer" }}
+                      onClick={() => document.querySelector("input[type='file']").click()} />}
                     {errors.icon && (
                       <VuiTypography sx={{ color: "red", fontSize: "0.7rem" }}>{errors.icon.message}</VuiTypography>
                     )}
@@ -256,7 +261,7 @@ function Courses() {
         </VuiButton>
       </VuiBox>
       <VuiBox>
-        <Table columns={columns} rows={rows} />
+        <Table columns={columns} rows={rows?.reverse()} isLoading={isLoadingCourses} />
       </VuiBox>
     </Card>
   );

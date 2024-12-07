@@ -16,10 +16,9 @@
 
 */
 
-import { useMemo } from "react";
+import React, { useMemo } from "react";
 
 // prop-types is a library for typechecking of props
-
 // uuid is a library for generating unique id
 import { v4 as uuidv4 } from "uuid";
 
@@ -38,11 +37,38 @@ import VuiTypography from "components/VuiTypography";
 import colors from "assets/theme/base/colors";
 import typography from "assets/theme/base/typography";
 import borders from "assets/theme/base/borders";
+import { useTranslation } from "react-i18next";
+import CircularProgress from "@mui/material/CircularProgress";
+import { styled } from "@mui/material/styles";
 
-function Table({ columns, rows }) {
+
+const StyledTableContainer = styled(TableContainer)({
+  maxHeight: "350px",
+
+  // Custom scrollbar styles
+  "&::-webkit-scrollbar": {
+    width: "8px",
+  },
+  "&::-webkit-scrollbar-track": {
+    background: "#f0f0f0", // Track color
+    borderRadius: "4px",
+  },
+  "&::-webkit-scrollbar-thumb": {
+    backgroundColor: "#0e143d", // Thumb color
+    borderRadius: "4px",
+    border: "2px solid #0F1643",
+  },
+  "&::-webkit-scrollbar-thumb:hover": {
+    backgroundColor: "rgba(15,22,67,0.95)",
+  },
+});
+
+function Table({ columns, rows, isLoading }) {
   const { grey } = colors;
   const { size, fontWeightBold } = typography;
   const { borderWidth } = borders;
+
+  const { t } = useTranslation();
 
   const renderColumns = columns.map(({ name, align, width }, key) => {
     let pl;
@@ -138,14 +164,25 @@ function Table({ columns, rows }) {
 
   return useMemo(
     () => (
-      <TableContainer>
-        <MuiTable>
-          <VuiBox component="thead">
-            <TableRow>{renderColumns}</TableRow>
+      <>
+        {isLoading ? (
+          <VuiBox display="flex" justifyContent="center" alignItems="center" py={3}>
+            <CircularProgress color="info" />
           </VuiBox>
-          <TableBody>{renderRows}</TableBody>
-        </MuiTable>
-      </TableContainer>
+        ) : !rows.length ? (
+          <VuiBox display="flex" justifyContent="center" alignItems="center" py={3}>
+            {t("demands.table.nodata")}
+          </VuiBox>
+        ) : <StyledTableContainer>
+          <MuiTable>
+            <VuiBox component="thead">
+              <TableRow>{renderColumns}</TableRow>
+            </VuiBox>
+            <TableBody>{renderRows}</TableBody>
+          </MuiTable>
+        </StyledTableContainer>
+        }
+      </>
     ),
     [columns, rows],
   );

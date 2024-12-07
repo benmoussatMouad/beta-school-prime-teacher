@@ -35,6 +35,7 @@ import VuiBadge from "../../components/VuiBadge";
 import Table from "examples/Tables/Table";
 import { useGetCourses } from "../../api/courses";
 import { useState } from "react";
+import { getAccessToken } from "../../utils";
 
 function Courses() {
 
@@ -44,8 +45,10 @@ function Courses() {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
 
+  const token = getAccessToken();
+
   const { user } = useAuth();
-  const { data, isLoading } = useGetCourses();
+  const { data, isLoading } = useGetCourses(token);
 
   const { t } = useTranslation();
 

@@ -2,6 +2,7 @@ import { useMutation } from "react-query";
 import { apiClient } from "../index";
 import { showSnackBar, useVisionUIController } from "../../context";
 import { useTranslation } from "react-i18next";
+import { queryClient } from "../../providers/queryProvider";
 
 const createCourseFn = async (newCourse) => {
   const response = await apiClient.post("/course", newCourse);
@@ -18,6 +19,7 @@ export function useCreateCourse() {
     onSuccess: () => {
       // Trigger success Snackbar
       showSnackBar(dispatch, t("course.create.success"), "success");
+      queryClient.invalidateQueries("courses");
     },
     onError: (err) => {
       // Trigger error Snackbar

@@ -21,6 +21,7 @@ export function useUpdateCourse() {
       // Trigger success Snackbar
       showSnackBar(dispatch, t("course.update.success"), "success");
       queryClient.invalidateQueries("course");
+      queryClient.invalidateQueries("courses");
     },
     onError: (err) => {
       // Trigger error Snackbar
