@@ -18,8 +18,8 @@ import boxShadows from "../../assets/theme/base/boxShadows";
 import { Avatar, Box, Dialog, DialogActions, DialogContent, DialogTitle } from "@mui/material";
 import VuiButton from "../../components/VuiButton";
 import VuiBadge from "../../components/VuiBadge";
-import { useRejectTeacher } from "../../api/admin/rejectTeacher";
-import { useApproveTeacher } from "../../api/admin/approveTeacher";
+import { useRejectTeacher } from "../../api/admin";
+import { useApproveTeacher } from "../../api/admin";
 
 const { black, gradients } = colors;
 const { card } = gradients;

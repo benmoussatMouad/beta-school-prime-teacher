@@ -31,7 +31,7 @@ import VuiTypography from "../../../../components/VuiTypography";
 import { GiOpenBook } from "react-icons/gi";
 import { useTranslation } from "react-i18next";
 
-function Header({ pageName, data, isLoading }) {
+function Header({ pageName, data }) {
 
   const { t } = useTranslation();
 

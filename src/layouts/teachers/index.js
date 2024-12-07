@@ -17,8 +17,8 @@ import VuiButton from "../../components/VuiButton";
 import VuiBadge from "../../components/VuiBadge";
 import { useAuth } from "../../context/auth/authContext";
 import { teacherTableData } from "./data/teachersTableData";
-import { useGetTeachers } from "../../api/admin/getTeachers";
-import { useMakeTeacherAdmin } from "../../api/admin/makeTeacherAdmin";
+import { useGetTeachers } from "../../api/admin";
+import { useMakeTeacherAdmin } from "../../api/admin";
 
 const { black, gradients } = colors;
 const { card } = gradients;

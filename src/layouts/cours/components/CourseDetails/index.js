@@ -37,7 +37,7 @@ function UpdateCourse({ isLoading, data: courseData }) {
     },
   });
 
-  const [loading, setLoading] = useState(false);
+  const [loading] = useState(false);
   const [iconPreview, setIconPreview] = useState(null);
   const [watchIcon, setWatchIcon] = useState(null);
 

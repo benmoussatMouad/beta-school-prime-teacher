@@ -79,7 +79,7 @@ function Courses() {
       formData.append("icon", data.icon);
     }
     mutate(formData, {
-      onSuccess: (data) => {
+      onSuccess: () => {
         setOpenDialog(false);
         reset();
       },

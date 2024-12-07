@@ -15,7 +15,7 @@ export function useCreateCourse() {
 
   return useMutation({
     mutationFn: createCourseFn,
-    onSuccess: (data) => {
+    onSuccess: () => {
       // Trigger success Snackbar
       showSnackBar(dispatch, t("course.create.success"), "success");
     },

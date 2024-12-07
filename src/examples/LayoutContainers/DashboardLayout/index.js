@@ -105,7 +105,7 @@ function DashboardLayout({ children, user }) {
         <VuiAlert
           color="primary"
           variant="contained"
-          sx={({ breakpoints }) => ({
+          sx={({  }) => ({
             // background: "#0A0E32",
             color: "#39003f",
             padding: "2px 20px ",

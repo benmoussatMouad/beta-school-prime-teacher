@@ -47,7 +47,6 @@ function CoursDetails() {
   const pathname = useLocation().pathname;
   const coursId = pathname.split("/")[2];
 
-  const [ui, dispatch] = useVisionUIController();
   const { t } = useTranslation();
   const context = useAuth();
   const [openDialog, setOpenDialog] = useState(false); // Dialog state for confirmation
