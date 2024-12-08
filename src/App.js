@@ -42,12 +42,14 @@ import createCache from "@emotion/cache";
 import routes from "routes";
 
 // Vision UI Dashboard React contexts
-import { setDirection, setMiniSidenav, useVisionUIController } from "context";
+import { hideBanner, setDirection, setMiniSidenav, useVisionUIController } from "context";
 import ProtectedRoute from "providers/protectedRoute";
 import GuestRoute from "providers/guestRoute";
 import { useTranslation } from "react-i18next";
 import { useAuth } from "context/auth/authContext";
 import AdminRoute from "./providers/adminRoute";
+import { useVerifyEmail } from "./api/auth/VerifyEmail";
+import VuiLoading from "./components/VuiLoading";
 
 
 export default function App() {
@@ -58,6 +60,20 @@ export default function App() {
   const { pathname } = useLocation();
   const { i18n } = useTranslation();
   const { user, isLoading } = useAuth();  // Get the current authenticated user
+  const [isVerifyToken, setIsVerifyToken] = useState("");
+
+  const search = useLocation();
+
+  const { isLoading: isVerifyLoading, data: emailVerified } = useVerifyEmail({ token: isVerifyToken });
+
+  useEffect(() => {
+    const queryParams = new URLSearchParams(search.search);
+    const tokenFromUrl = queryParams.get("verificationToken");
+
+    if (tokenFromUrl) {
+      setIsVerifyToken(tokenFromUrl);
+    }
+  }, [search]);
 
   // Cache for the rtl
   useMemo(() => {
@@ -114,6 +130,16 @@ export default function App() {
       setDirection(dispatch, "rtl");
     }
   }, [language]);
+
+  useEffect(() => {
+    if (emailVerified) {
+      hideBanner(dispatch);
+    }
+  }, [emailVerified]);
+
+  if (isVerifyLoading) {
+    return <VuiLoading />;
+  }
 
   const getRoutes = (allRoutes) =>
     allRoutes.map((route) => {
