@@ -1,0 +1,26 @@
+import { useQuery } from "react-query";
+import { apiClient } from "../apiClient";
+import { getAccessToken } from "../../utils";
+
+
+const token = getAccessToken();
+
+const createDeleteCourseFn = async (courseId) => {
+  const response = await apiClient.get(`/course/${courseId}`, {
+    headers: { Authorization: `Bearer ${courseId}` },
+  });
+  return response.data;  // Ensure response has the expected structure
+};
+
+export function useDeleteCourse(courseId) {
+  return useQuery(
+    ["course", courseId],
+    () => createDeleteCourseFn(courseId),
+    {
+      enabled: !!token || !!courseId, // Only run if token exists
+      refetchOnWindowFocus: true,
+    },
+  );
+}
+
+

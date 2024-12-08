@@ -36,6 +36,7 @@ import boxShadows from "../../assets/theme/base/boxShadows";
 import { useLocation } from "react-router-dom";
 import { useGetCourse } from "../../api/courses/getCourse";
 import VuiLoading from "../../components/VuiLoading";
+import DeleteCourse from "./components/DeleteCourse";
 
 const { black, gradients } = colors;
 const { card } = gradients;
@@ -399,24 +400,7 @@ function CoursDetails() {
           <UpdateCourse data={data} isLoading={isLoading} />
         </Grid>
       </Grid>
-      <Card>
-        <VuiBox display="flex" sx={{ width: "100%", justifyContent: "space-between", alignItems: "center" }}
-                flexDirection="row" height="100%">
-          <VuiBox display="flex" flexDirection="column" mb="24px">
-            <VuiTypography color="white" variant="lg" fontWeight="bold" mb="6px">
-              {t("course.accountDeletion.title")}
-            </VuiTypography>
-            <VuiTypography color="text" variant="button" fontWeight="regular">
-              {t("course.accountDeletion.description")}
-            </VuiTypography>
-          </VuiBox>
-          <VuiBox xs={{ justifyContent: "center", alignSelf: "end" }}>
-            <VuiButton onClick={() => setOpenDialog(true)} color={"error"} size={"large"}
-                       variant={"gradient"}>{t("profile.accountDeletion.deleteButton")}
-            </VuiButton>
-          </VuiBox>
-        </VuiBox>
-      </Card>
+      <DeleteCourse coursId={coursId} />
     </DashboardLayout>
   );
 }

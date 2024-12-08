@@ -229,7 +229,6 @@ function Overview() {
         </Grid>
       </Grid>
 
-      {/* Update Picture Confirmation Dialog */}
       <Dialog
         sx={({}) => ({
           "& .MuiDialog-paper": {

@@ -121,6 +121,10 @@
       "description": "Êtes-vous sûr  supprime votre compte",
       "title": "Cette action supprime votre compte. Voulez-vous continuer ?"
     },
+    "deleteCourse": {
+      "description": "Êtes-vous sûr de vouloir supprimer ce cours ?",
+      "title": "Supprimer le cours"
+    },
     "description": "Cette action changera votre photo de profil. Voulez-vous continuer ?",
     "forms": {
       "attachments": "Les pièces jointes",
