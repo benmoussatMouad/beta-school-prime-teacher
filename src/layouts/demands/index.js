@@ -8,8 +8,8 @@ import Table from "examples/Tables/Table";
 import { useAuth } from "context/auth/authContext";
 import { useTranslation } from "react-i18next";
 import { demandsTableData } from "./data/demandsTableData";
-import { useGetDemands } from "../../api/admin";
-import { getAccessToken } from "../../utils";
+import { useApproveTeacher, useGetDemands, useRejectTeacher } from "../../api/admin";
+import { FiltersRoles, getAccessToken } from "../../utils";
 import linearGradient from "../../assets/theme/functions/linearGradient";
 import rgba from "../../assets/theme/functions/rgba";
 import colors from "../../assets/theme/base/colors";
@@ -18,8 +18,6 @@ import boxShadows from "../../assets/theme/base/boxShadows";
 import { Avatar, Box, Dialog, DialogActions, DialogContent, DialogTitle } from "@mui/material";
 import VuiButton from "../../components/VuiButton";
 import VuiBadge from "../../components/VuiBadge";
-import { useRejectTeacher } from "../../api/admin";
-import { useApproveTeacher } from "../../api/admin";
 
 const { black, gradients } = colors;
 const { card } = gradients;
@@ -35,11 +33,12 @@ function Demands() {
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [subject, setSubjects] = useState("");
+  const [role, setRoles] = useState(FiltersRoles[0]);
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
 
 
-  const { data, isLoading } = useGetDemands(token, firstName, lastName, email, subject, page, rowsPerPage);
+  const { data, isLoading } = useGetDemands(token, firstName, lastName, email, subject, role, page, rowsPerPage);
   const [open, setOpen] = useState(false);
   const [selectedTeacher, setSelectedTeacher] = useState(null);
 
@@ -89,6 +88,9 @@ function Demands() {
         } else {
           setSubjects(value);
         }
+        break;
+      case "roles":
+        setRoles(value);
         break;
       default:
         break;
@@ -141,6 +143,7 @@ function Demands() {
               isLoading={isLoading}
               subject={subject}
               tableId={"teachers"}
+              selectedRole={role}
             />
 
           </VuiBox>

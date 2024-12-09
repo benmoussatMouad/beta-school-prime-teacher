@@ -8,6 +8,7 @@ const createGetDemandsFn = async (
   lastName = "",
   email = "",
   subject = "",
+  role = "",
   page = 0,
   limit = 10,
 ) => {
@@ -15,11 +16,13 @@ const createGetDemandsFn = async (
     status: "IN_PROGRESS", // Example filter, adjust based on your need
   };
 
+
   // Conditionally add query params if they have values
   if (firstName) params.firstName = firstName;
   if (lastName) params.lastName = lastName;
   if (email) params.email = email;
   if (subject) params.subject = subject;
+  if (role) params.role = role;
   if (page) params.page = page + 1;
   if (limit) params.limit = limit;
 
@@ -33,10 +36,10 @@ const createGetDemandsFn = async (
 };
 
 
-export function useGetDemands(token, firstName, lastName, email, subject, page = 1, limit = 10) {
+export function useGetDemands(token, firstName, lastName, email, subject, role, page = 1, limit = 10) {
   return useQuery(
-    ["demands", token, firstName, lastName, email, subject, page, limit], // Include sortConfig in the query key
-    () => createGetDemandsFn(token, firstName, lastName, email, subject, page, limit), // Pass sortConfig to the function
+    ["demands", token, firstName, lastName, email, subject, role, page, limit], // Include sortConfig in the query key
+    () => createGetDemandsFn(token, firstName, lastName, email, subject, role, page, limit), // Pass sortConfig to the function
     {
       enabled: !!token, // Only run if token exists
       refetchOnWindowFocus: true,

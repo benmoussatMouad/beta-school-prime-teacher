@@ -33,6 +33,10 @@ const WelcomeMark = ({ user: { user, teacher } }) => {
               <VuiBadge badgeContent={t("dashboard.welcomeCard.admin")} container color="primary" variant="contained"
                         size="md" sx={{ position: "relative", top: "-1rem", color: "black", ml: "10px" }} />
             )}
+            {user && user.role === "ROOT" && (
+              <VuiBadge badgeContent={t("dashboard.welcomeCard.superadmin")} container color="success" variant="contained"
+                        size="md" sx={{ position: "relative", top: "-1rem", color: "black", ml: "10px" }} />
+            )}
           </VuiTypography>
           <VuiTypography color="text" variant="h6" fontWeight="regular" mb="auto">
             {t("dashboard.welcomeCard.description")}
