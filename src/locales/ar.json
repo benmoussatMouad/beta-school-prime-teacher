@@ -1,4 +1,5 @@
 {
+  "Instructor": "مدرس",
   "announcement": {
     "title": "اعلانات"
   },
@@ -28,6 +29,7 @@
     "title": "الفصول"
   },
   "cours": {
+    "description": "الوصف",
     "table": {
       "action": "الإجراء",
       "budget": "الميزانية",

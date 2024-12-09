@@ -143,6 +143,8 @@ function CoursDetails() {
     );
   }
 
+  const user = context.user.user;
+
   return (
     <DashboardLayout user={context.user}>
       <Header data={data} isLoading={isLoading} pageName={data?.title} />
@@ -276,17 +278,33 @@ function CoursDetails() {
       <Grid container spacing={3} my="20px">
         <Grid item xs={12} xl={8}>
           <Card>
+            <VuiBox sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", mb: 2 }}>
+              <VuiTypography variant="lg" sx={{ mb: 2 }} fontWeight="bold" color="white" textTransform="capitalize">
+                {t("cours.description")}
+              </VuiTypography>
+            </VuiBox>
+            <VuiTypography color={"white"} variant="h4" component="h2" gutterBottom
+                           fontWeight="bold">
+              {data.title} {/* Assuming data has a title property */}
+            </VuiTypography>
+            <VuiTypography color={"white"} variant="subtitle1" gutterBottom>
+              {`${t("Instructor")}: ${user.lastName} ${user.firstName}`} {/* Assuming data has an instructor property */}
+            </VuiTypography>
+            <VuiTypography color={"white"} variant="body1" sx={{ textAlign: "justify", mt: 1 }}>
+              {data.description}
+            </VuiTypography>
+          </Card>
+          <Card sx={{
+            marginTop: 1,
+          }}>
             <VuiBox display="flex" flexDirection="column" height="100%">
               <VuiBox sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", mb: 2 }}>
-                {isLoading ? <Skeleton variant="text" color={"white"} width={100} height={30} /> :
-                  <VuiTypography variant="lg" sx={{ mb: 2 }} fontWeight="bold" color="white" textTransform="capitalize">
-                    {t("chapters.title")}
-                  </VuiTypography>
-                }
-                {isLoading ? <Skeleton variant="text" color={"white"} width={100} height={30} /> :
-                  <VuiButton onClick={() => setOpenDialog(true)} color="info" variant="gradient" size="small">
-                    + {t("chapter.create")}
-                  </VuiButton>}
+                <VuiTypography variant="lg" sx={{ mb: 2 }} fontWeight="bold" color="white" textTransform="capitalize">
+                  {t("chapters.title")}
+                </VuiTypography>
+                <VuiButton onClick={() => setOpenDialog(true)} color="info" variant="gradient" size="small">
+                  + {t("chapter.create")}
+                </VuiButton>
               </VuiBox>
               {/* Overflow controlled Box container */}
               <Box
@@ -419,7 +437,7 @@ function CoursDetails() {
               color="info"
               sx={{ width: { xs: "100%", sm: "auto" } }}  // Full width on small screens
             >
-              {t('course.pending.button')}
+              {t("course.pending.button")}
             </VuiButton>
           </Card>
         </Grid>

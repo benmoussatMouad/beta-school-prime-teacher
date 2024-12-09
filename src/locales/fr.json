@@ -1,4 +1,5 @@
 {
+  "Instructor": "Instructeur",
   "announcement": {
     "title": "Annonces"
   },
@@ -28,6 +29,7 @@
     "title": "Les chapitres"
   },
   "cours": {
+    "description": "Description",
     "table": {
       "action": "Action",
       "budget": "Budget",

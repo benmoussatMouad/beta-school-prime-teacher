@@ -81,7 +81,7 @@ function UpdateCourse({ isLoading, data: courseData }) {
   };
 
   return (
-    <Card sx={{ minHeight: "490px", height: "100%" }}>
+    <Card sx={{ minHeight: "490px", maxHeight: "800px" }}>
       <VuiBox mb="26px">
         <VuiTypography variant="lg" fontWeight="bold" color="white" textTransform="capitalize">
           {t("course.update.title")}
