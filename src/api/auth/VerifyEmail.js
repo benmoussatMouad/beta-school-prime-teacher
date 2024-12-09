@@ -28,10 +28,6 @@ export function useVerifyEmail({ token }) {
         hideBanner(dispatch);
         queryClient.invalidateQueries([teacherQueryKeys.all, accessToken]);
       },
-      onError: (error) => {
-        const message = error?.response?.data?.message;
-        showSnackBar(dispatch, message || t("snackbar.error"), "error");
-      },
     },
   )
     ;

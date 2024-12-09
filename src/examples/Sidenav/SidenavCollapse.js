@@ -17,7 +17,6 @@
 */
 
 // prop-types is a library for typechecking of props.
-import PropTypes from "prop-types";
 
 // @mui material components
 import Collapse from "@mui/material/Collapse";
@@ -30,17 +29,12 @@ import Icon from "@mui/material/Icon";
 import VuiBox from "components/VuiBox";
 
 // Custom styles for the SidenavCollapse
-import {
-  collapseItem,
-  collapseIconBox,
-  collapseIcon,
-  collapseText,
-} from "examples/Sidenav/styles/sidenavCollapse";
+import { collapseIcon, collapseIconBox, collapseItem, collapseText } from "examples/Sidenav/styles/sidenavCollapse";
 
 // Vision UI Dashboard React context
 import { useVisionUIController } from "context";
 
-function SidenavCollapse({ color, icon, name, children, active, noCollapse, open, ...rest }) {
+function SidenavCollapse({ color, icon, name, children, active, noCollapse, isAdmin, open, role, ...rest }) {
   const [controller] = useVisionUIController();
   const { miniSidenav, transparentSidenav } = controller;
 
@@ -49,10 +43,20 @@ function SidenavCollapse({ color, icon, name, children, active, noCollapse, open
       <ListItem component="li">
         <VuiBox {...rest} sx={(theme) => collapseItem(theme, { active, transparentSidenav })}>
           <ListItemIcon
-            sx={(theme) => collapseIconBox(theme, { active, transparentSidenav, color })}
+            sx={(theme) => collapseIconBox(theme, { active, transparentSidenav, color }, role, isAdmin)}
           >
             {typeof icon === "string" ? (
-              <Icon sx={(theme) => collapseIcon(theme, { active })}>{icon}</Icon>
+              <Icon
+                sx={(theme) =>
+                  collapseIcon(theme, {
+                    active,
+                    role,
+                    isAdmin,
+                  })
+                }
+              >
+                {icon}
+              </Icon>
             ) : (
               icon
             )}
@@ -72,7 +76,6 @@ function SidenavCollapse({ color, icon, name, children, active, noCollapse, open
     </>
   );
 }
-
 
 
 export default SidenavCollapse;

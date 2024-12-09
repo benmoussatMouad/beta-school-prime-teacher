@@ -94,6 +94,7 @@
       "description": "Content de vous revoir !",
       "link": "Voir mon profil",
       "subject": "Sujet que vous enseignez",
+      "superadmin": "Super Admin",
       "title": "Bienvenue !"
     }
   },
@@ -316,14 +317,16 @@
   },
   "routes": {
     "account-pages": "Pages de compte",
+    "allCourses": "Les Cours",
     "cours": "Cours",
-    "courses": "Cours",
+    "courses": "Mes Cours",
     "dashboard": "Tableau de bord",
     "demands": "Demands",
     "profile": "Profil",
     "students": "Étudiants",
     "support": "Support",
-    "teachers": "Les enseignants"
+    "teachers": "Les Enseignants",
+    "administrateurs": "Administrateurs"
   },
   "signup": {
     "already": "Vous avez déjà un compte ?",
@@ -443,5 +446,11 @@
     "table": {
       "title": "Les enseignants"
     }
+  },
+  "roles": {
+    "NONE": "Aucun",
+    "ADMIN": "ADMIN",
+    "TEACHER": "ENSEIGNANT",
+    "STUDENT": "STUDENT"
   }
 }

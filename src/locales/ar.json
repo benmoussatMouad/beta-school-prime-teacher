@@ -94,6 +94,7 @@
       "description": "سعيدون برؤيتك مجدداً!",
       "link": "عرض ملفي الشخصي",
       "subject": "المادة التي تقوم بتدريسها",
+      "superadmin": "المشرف الأعلى",
       "title": "مرحباً بك!"
     }
   },
@@ -316,6 +317,7 @@
   },
   "routes": {
     "account-pages": "صفحات الحساب",
+    "allCourses": "دورات المعلمين",
     "cours": "الدورة",
     "courses": "الدورات",
     "dashboard": "لوحة التحكم",
@@ -323,7 +325,8 @@
     "profile": "الملف الشخصي",
     "students": "الطلاب",
     "support": "الدعم",
-    "teachers": "المعلمون"
+    "teachers": "المعلمون",
+    "administrateurs": "المشرفون"
   },
   "signup": {
     "already": "هل لديك حساب؟",
@@ -443,5 +446,11 @@
     "table": {
       "title": "المدرسين"
     }
+  },
+  "roles": {
+    "NONE": "لا يوجد",
+    "ADMIN": "المشرف",
+    "STUDENT": "طالب",
+    "TEACHER": "مدرس"
   }
 }
