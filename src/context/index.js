@@ -69,11 +69,18 @@ function reducer(state, action) {
     case "HIDE_SNACKBAR": {
       return { ...state, snackBarOpen: false, snackBarMessage: "", snackBarSeverity: "info" };
     }
+    case "SHOW_BANNER": {
+      return { ...state, bannerVisible: true }; // Only toggle visibility
+    }
+    case "HIDE_BANNER": {
+      return { ...state, bannerVisible: false }; // Only toggle visibility
+    }
     default: {
       throw new Error(`Unhandled action type: ${action.type}`);
     }
   }
 }
+
 
 // Vision UI Dashboard React context provider
 function VisionUIControllerProvider({ children }) {
@@ -89,6 +96,7 @@ function VisionUIControllerProvider({ children }) {
     snackBarOpen: false,
     snackBarMessage: "",
     snackBarSeverity: "info",
+    bannerVisible: false, // Banner visibility flag
   };
 
   const [controller, dispatch] = useReducer(reducer, initialState);
@@ -124,6 +132,11 @@ const showSnackBar = (dispatch, message, severity = "info") =>
   });
 
 const hideSnackBar = (dispatch) => dispatch({ type: "HIDE_SNACKBAR" });
+// Context module functions for banners
+const showBanner = (dispatch) => dispatch({ type: "SHOW_BANNER" });
+
+const hideBanner = (dispatch) => dispatch({ type: "HIDE_BANNER" });
+
 
 export {
   VisionUIControllerProvider,
@@ -138,4 +151,6 @@ export {
   setLayout,
   showSnackBar,
   hideSnackBar,
+  showBanner,
+  hideBanner,
 };

@@ -2,12 +2,11 @@ import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import VuiBox from "components/VuiBox";
 import VuiButton from "components/VuiButton";
-import { setLayout, useVisionUIController } from "context";
-import CloseIcon from '@mui/icons-material/Close';
+import { hideBanner, setLayout, showBanner, useVisionUIController } from "context";
+import CloseIcon from "@mui/icons-material/Close";
 import { Box, CircularProgress, Typography } from "@mui/material";
 import { useTranslation } from "react-i18next";
 import { useSendVerifyEmail } from "api/auth/sendVerifyEmail";
-import { useVerifyEmail } from "api/auth/VerifyEmail";
 import VuiAlert from "../../../components/VuiAlert";
 
 function DashboardLayout({ children, user }) {
@@ -17,26 +16,20 @@ function DashboardLayout({ children, user }) {
   const { t } = useTranslation();
   const { mutate, isLoading } = useSendVerifyEmail(); // Accessing isLoading state from mutation hook
 
-  const search = useLocation()
-
-  const [showBanner, setShowBanner] = useState(false);
   const [isCooldown, setIsCooldown] = useState(false); // Track cooldown state
   const [cooldownTime, setCooldownTime] = useState(0); // Track remaining cooldown time
-  const [isVerifyToken, setIsVerifyToken] = useState('');
-
-  const { isLoading: isVerifyLoading, data } = useVerifyEmail({ token: isVerifyToken })
 
 
   const isEmailVerified = user.user.isEmailVerified;
 
   useEffect(() => {
     setLayout(dispatch, "dashboard");
-    if (!isEmailVerified && !data) {
-      setShowBanner(true);
+    if (!isEmailVerified) {
+      showBanner(dispatch);
     } else {
-      setShowBanner(false);
+      hideBanner(dispatch);
     }
-  }, [pathname, isEmailVerified, data]);
+  }, [pathname, isEmailVerified]);
 
   useEffect(() => {
     if (isCooldown) {
@@ -60,7 +53,7 @@ function DashboardLayout({ children, user }) {
       return; // Don't allow email to be sent during cooldown or if already loading
     }
 
-    mutate('', {
+    mutate("", {
       onSuccess: () => {
         setIsCooldown(true); // Start cooldown after sending the email
         setCooldownTime(60); // Set cooldown to 60 seconds (adjust as needed)
@@ -69,20 +62,8 @@ function DashboardLayout({ children, user }) {
   };
 
   const handleCloseBanner = () => {
-    setShowBanner(false);
+    hideBanner(dispatch);
   };
-
-
-
-  useEffect(() => {
-    const queryParams = new URLSearchParams(search.search);
-    const tokenFromUrl = queryParams.get("verificationToken");
-
-    if (tokenFromUrl) {
-      setIsVerifyToken(tokenFromUrl);
-    }
-  }, [search]);
-
 
 
   return (
@@ -101,11 +82,11 @@ function DashboardLayout({ children, user }) {
       })}
     >
       {/* Banner for unverified email */}
-      {showBanner && !isVerifyLoading && (
+      {controller.bannerVisible && (
         <VuiAlert
           color="primary"
           variant="contained"
-          sx={({  }) => ({
+          sx={({}) => ({
             // background: "#0A0E32",
             color: "#39003f",
             padding: "2px 20px ",
@@ -122,11 +103,11 @@ function DashboardLayout({ children, user }) {
             border: "none",
             margin: "auto",
             boxShadow: "0 4px 8px rgba(0,0,0,0.1)",
-            width: "100%"
+            width: "100%",
           })}
         >
           <Typography fontSize="1rem" color="white" variant="caption" sx={{ maxWidth: "80%" }}>
-            {t('banner.title')}
+            {t("banner.title")}
           </Typography>
           <Box style={{ display: "flex", alignItems: "center" }}>
             <VuiButton
@@ -139,9 +120,9 @@ function DashboardLayout({ children, user }) {
               {isLoading ? (
                 <CircularProgress size={20} color="info" /> // Show loading spinner while loading
               ) : isCooldown ? (
-                `${t('button.buttonCooldown')} (${cooldownTime}s)`
+                `${t("button.buttonCooldown")} (${cooldownTime}s)`
               ) : (
-                t('banner.button')
+                t("banner.button")
               )}
             </VuiButton>
             <CloseIcon
