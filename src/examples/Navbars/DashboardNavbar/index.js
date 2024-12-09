@@ -57,7 +57,7 @@ import { useTranslation } from "react-i18next";
 import { IconButton } from "@mui/material";
 import VuiTypography from "../../../components/VuiTypography";
 
-function DashboardNavbar({ absolute, light, isMini }) {
+function DashboardNavbar({ absolute, light, isMini, pageName }) {
   const [navbarType, setNavbarType] = useState();
   const [controller, dispatch] = useVisionUIController();
   const { miniSidenav, transparentNavbar, fixedNavbar } = controller;
@@ -163,7 +163,7 @@ function DashboardNavbar({ absolute, light, isMini }) {
       <Toolbar sx={(theme) => navbarContainer(theme)}>
         <VuiBox color="inherit" mb={{ xs: 1, md: 0 }} sx={(theme) => navbarRow(theme, { isMini })}>
           <Breadcrumbs icon="home"
-                       title={route.length > 1 ? t(`routes.${route[0]}`) + ` ${route[1]}` : t(`routes.${route}`) || ""}
+                       title={route.length > 1 ? pageName : t(`routes.${route}`) || ""}
                        route={route} light={light} />
         </VuiBox>
         {isMini ? null : (

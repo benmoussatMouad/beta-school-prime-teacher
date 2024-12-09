@@ -191,6 +191,29 @@ function Courses() {
                       </VuiBox>
                     </Grid>
 
+                    <Grid item xs={12}>
+                      {/* Price */}
+                      <VuiBox>
+                        <VuiTypography component="label" variant="button" color="white" fontWeight="medium" sx={{ mb: 1 }}>
+                          {t("dialog.forms.price")}
+                        </VuiTypography>
+                        <VuiInput
+                          type="number" // Ensures that only numbers can be entered
+                          placeholder={t("dialog.forms.price")}
+                          {...register("price", {
+                            required: t("dialog.required.price"),
+                            valueAsNumber: true, // Converts input to number
+                            min: { value: 0, message: t("dialog.errors.price_min") }, // Min value validation
+                          })}
+                        />
+                        {errors.price && (
+                          <VuiTypography sx={{ color: "red", fontSize: "0.7rem" }}>
+                            {errors.price.message}
+                          </VuiTypography>
+                        )}
+                      </VuiBox>
+                    </Grid>
+
                     <Grid item xs={12} sm={6}>
                       {/* Subject */}
                       <VuiBox>

@@ -30,14 +30,45 @@ import DashboardNavbar from "examples/Navbars/DashboardNavbar";
 import VuiTypography from "../../../../components/VuiTypography";
 import { GiOpenBook } from "react-icons/gi";
 import { useTranslation } from "react-i18next";
+import VuiBadge from "../../../../components/VuiBadge";
+import { useAuth } from "../../../../context/auth/authContext";
 
 function Header({ pageName, data }) {
 
+  const { user } = useAuth();
   const { t } = useTranslation();
 
   return (
     <VuiBox position="relative">
       <DashboardNavbar pageName={pageName} light />
+      <Card
+        sx={{
+          px: 1,
+          mt: 1,
+        }}
+      >
+        <Grid
+          container
+          alignItems="center"
+          justifyContent="space-between"
+          sx={{
+            gap: { xs: "16px", sm: "12px", md: "8px" },
+            color: "white", // Text color
+            textAlign: "center", // Center text alignment
+          }}
+        >
+          <VuiTypography
+            variant="h6"
+            sx={{
+              fontWeight: "bold", // Bold text for emphasis
+              width: "100%", // Ensures text spans the banner
+            }}
+            color="white"
+          >
+            {t("course.pending.title")}
+          </VuiTypography>
+        </Grid>
+      </Card>
       <Card
         sx={{
           px: 3,
@@ -61,7 +92,7 @@ function Header({ pageName, data }) {
           {<Grid
             item
             xs={12}
-            md={8}
+            md={4}
             sx={{
               display: "flex",
               alignItems: "center",
@@ -94,22 +125,60 @@ function Header({ pageName, data }) {
           <Grid
             item
             xs={12}
-            md={2}
+            md={6}
             sx={{
               mt: { xs: 2, md: 0 },
               display: "flex",
               justifyContent: { xs: "center", md: "flex-end" },
+              alignItems: "center", // Ensures vertical centering
             }}
           >
-            <VuiBox sx={{ display: "flex", alignItems: "flex-end", justifyContent: "flex-end" }}>
-              <VuiBox sx={{ display: "flex", alignItems: "center", gap: "1em" }}>
-                <VuiTypography color={"white"} sx={{ ml: 2 }} variant="caption">
-                  {t(`subjects.${data.subject}`)}
-                </VuiTypography>
-                <VuiTypography color={"white"} sx={{ cursor: "auto" }} variant="caption">
-                  {data.class}
-                </VuiTypography>
-              </VuiBox>
+            <VuiBox
+              sx={{
+                display: "flex",
+                alignItems: "center",
+                gap: { xs: "0.5em", md: "1em" }, // Adjust gap for smaller screens
+                justifyContent: { xs: "center", md: "flex-end" },
+                flexDirection: { xs: "column", md: "row" }, // Stack elements on smaller screens
+              }}
+            >
+              <VuiBadge
+                color="secondry"
+                variant="gradient"
+                container
+                badgeContent={"15000DA"}
+                size="lg"
+                sx={{ fontSize: { xs: "1rem", md: "1.2rem" } }} // Responsive font size
+              />
+              <VuiTypography
+                color={"white"}
+                sx={{
+                  ml: { xs: 0, md: 2 },
+                  fontSize: { xs: "0.8rem", md: "1rem" },
+                  textAlign: { xs: "center", md: "left" },
+                }}
+                variant="caption"
+              >
+                {`${user.user.lastName} ${user.user.firstName}`}
+              </VuiTypography>
+              <VuiTypography
+                color={"white"}
+                sx={{
+                  ml: { xs: 0, md: 2 },
+                  fontSize: { xs: "0.8rem", md: "1rem" },
+                  textAlign: { xs: "center", md: "left" },
+                }}
+                variant="caption"
+              >
+                {t(`subjects.${data.subject}`)}
+              </VuiTypography>
+              <VuiTypography
+                color={"white"}
+                sx={{ cursor: "auto", fontSize: { xs: "0.8rem", md: "1rem" }, textAlign: { xs: "center", md: "left" } }}
+                variant="caption"
+              >
+                {data.class}
+              </VuiTypography>
             </VuiBox>
           </Grid>
         </Grid>

@@ -54,11 +54,6 @@
       "button": "Accéder au tableau de bord",
       "title": "Aucun cours n'a été trouvé. Veuillez en créer un !"
     },
-    "pending": {
-      "button": "Demande d'approbation",
-      "send": "Ce cours est actuellement en phase de création. Cliquez sur le bouton ci-dessous pour demander l'approbation de l'administrateur.",
-      "title": "Ce cours est encore en attente, veuillez attendre que l'administrateur l'approuve."
-    },
     "update": {
       "success": "Vous mettez à jour le cours avec succès",
       "title": "Mettre à jour votre cours "
@@ -92,6 +87,7 @@
       "description": "Content de vous revoir !",
       "link": "Voir mon profil",
       "subject": "Sujet que vous enseignez",
+      "superadmin": "Super Admin",
       "title": "Bienvenue !"
     }
   },
@@ -131,21 +127,16 @@
       "title": "Supprimer le cours"
     },
     "description": "Cette action changera votre photo de profil. Voulez-vous continuer ?",
-    "errors": {
-      "price_min": "Prix min"
-    },
     "forms": {
       "attachments": "Les pièces jointes",
       "description": "Description du cours",
       "level": "Niveaux des étudiants",
-      "price": "Prix",
       "subjects": "Sujet du cours",
       "title": "Titre du cours",
       "video": "Vidéo"
     },
     "required": {
       "description": "La description est obligatoire",
-      "price": "Prix requis",
       "title": "Un titre est requis",
       "video": "Vidéo requise "
     },
@@ -314,14 +305,16 @@
   },
   "routes": {
     "account-pages": "Pages de compte",
+    "allCourses": "Les Cours",
     "cours": "Cours",
-    "courses": "Cours",
+    "courses": "Mes Cours",
     "dashboard": "Tableau de bord",
     "demands": "Demands",
     "profile": "Profil",
     "students": "Étudiants",
     "support": "Support",
-    "teachers": "Les enseignants"
+    "teachers": "Les Enseignants",
+    "administrateurs": "Administrateurs"
   },
   "signup": {
     "already": "Vous avez déjà un compte ?",
@@ -441,5 +434,10 @@
     "table": {
       "title": "Les enseignants"
     }
+  },
+  "roles": {
+    "ADMIN": "ADMIN",
+    "TEACHER": "ENSEIGNANT",
+    "STUDENT": "STUDENT"
   }
 }

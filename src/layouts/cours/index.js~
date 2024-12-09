@@ -145,7 +145,7 @@ function CoursDetails() {
 
   return (
     <DashboardLayout user={context.user}>
-      <Header data={data} isLoading={isLoading} pageName={data?.title} />
+      <Header data={data} isLoading={isLoading} pageName={"Course Details"} />
       <Dialog
         sx={({}) => ({
           "& .MuiDialog-paper": {
@@ -395,39 +395,12 @@ function CoursDetails() {
               </Box>
             </VuiBox>
           </Card>
-          <Card
-            sx={{
-              display: "flex",
-              flexDirection: { xs: "column", sm: "row" },  // Column direction on small devices
-              alignItems: "center",
-              justifyContent: "space-between",
-              padding: 3,
-              marginTop: 1,
-              gap: 2,  // Add space between elements
-              color: "white",
-            }}
-          >
-            <VuiTypography
-              variant="body2"
-              color="white"
-              sx={{ textAlign: { xs: "center", sm: "left" } }} // Center align on small screens
-            >
-              {t("course.pending.send")}
-            </VuiTypography>
-            <VuiButton
-              variant="contained"
-              color="info"
-              sx={{ width: { xs: "100%", sm: "auto" } }}  // Full width on small screens
-            >
-              {t('course.pending.button')}
-            </VuiButton>
-          </Card>
         </Grid>
         <Grid item xs={12} xl={4}>
           <UpdateCourse data={data} isLoading={isLoading} />
         </Grid>
       </Grid>
-      <DeleteCourse coursId={coursId} />
+      <DeleteCourse courseId={courseId} />
     </DashboardLayout>
   );
 }

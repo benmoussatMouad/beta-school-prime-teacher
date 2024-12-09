@@ -33,7 +33,6 @@ function UpdateCourse({ isLoading, data: courseData }) {
       description: "",
       subject: Subjects[0],
       level: StudentsLevel[0],
-      price: 0,
       icon: null,
     },
   });
@@ -147,27 +146,6 @@ function UpdateCourse({ isLoading, data: courseData }) {
           )}
         </VuiBox>
 
-        {/* Price Field */}
-        <VuiBox mb="14px">
-          <VuiTypography component="label" variant="button" color="white" fontWeight="medium" sx={{ mb: 1 }}>
-            {t("dialog.forms.price")}
-          </VuiTypography>
-          <VuiInput
-            type="number" // Ensures that only numbers can be entered
-            placeholder={t("dialog.forms.price")}
-            {...register("price", {
-              required: t("dialog.required.price"),
-              valueAsNumber: true, // Converts input to number
-              min: { value: 0, message: t("dialog.errors.price_min") }, // Min value validation
-            })}
-          />
-          {errors.price && (
-            <VuiTypography sx={{ color: "red", fontSize: "0.7rem" }}>
-              {errors.price.message}
-            </VuiTypography>
-          )}
-        </VuiBox>
-
         {/* Subject Field */}
         <VuiBox mb="14px">
           <VuiTypography component="label" variant="button" color="white" fontWeight="medium" sx={{ mb: 1 }}>
@@ -203,17 +181,7 @@ function UpdateCourse({ isLoading, data: courseData }) {
           )}
         </VuiBox>
 
-        {/* Submit Button */}
-        <VuiBox mt="20px" display="flex" justifyContent="flex-end">
-          <VuiButton
-            color={"info"}
-            type="submit"
-            variant="contained"
-            disabled={loading || isLoading || updateLoading}
-          >
-            {t("button.confirm")}
-          </VuiButton>
-        </VuiBox>
+       
       </VuiBox>
     </Card>
   );
