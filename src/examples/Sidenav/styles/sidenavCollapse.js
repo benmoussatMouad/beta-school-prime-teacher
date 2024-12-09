@@ -54,7 +54,7 @@ function collapseItem(theme, ownerState) {
   };
 }
 
-function collapseIconBox(theme, ownerState) {
+function collapseIconBox(theme, ownerState, role, isAdmin) {
   const { palette, transitions, breakpoints, boxShadows, borders, functions } = theme;
   const { active, color } = ownerState;
 
@@ -101,13 +101,13 @@ function collapseIconBox(theme, ownerState) {
 
     backgroundColor: active ? palette[color].main : transparent.main,
     "& svg, svg g": {
-      fill: active ? white.main : palette[color].main,
+      fill: active ? white.main : (role === "ROOT" && isAdmin ? palette.success.light : role === "ADMIN" && isAdmin ? "#F883DD" : palette.info.main),
     },
   };
 }
 
-const collapseIcon = ({ palette: { white, gradients } }, { active }) => ({
-  color: active ? white.main : gradients.dark.state,
+const collapseIcon = ({ palette: { white, gradients, success, primary } }, { active, role, isAdmin }) => ({
+  color: role === "ROOT" && isAdmin ? success.main : role === "ADMIN" && isAdmin ? primary.main : active ? white.main : gradients.dark.state,
 });
 
 function collapseText(theme, ownerState) {

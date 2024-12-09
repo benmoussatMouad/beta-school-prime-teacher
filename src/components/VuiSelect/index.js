@@ -31,6 +31,7 @@ const VuiSelect = forwardRef((
     label,
     onChange,
     options,
+    isRoot,
     ...rest
   }, ref) => {
   const { t } = useTranslation();
@@ -55,7 +56,7 @@ const VuiSelect = forwardRef((
       >
         {options.map((value, index) => (
           <MenuItem key={index} value={value}>
-            {subject ? t(`subjects.${value}`) : t(`teacherClass.${value}`)}
+            {isRoot ? t(`roles.${value}`) : subject ? t(`subjects.${value}`) : t(`teacherClass.${value}`)}
           </MenuItem>
         ))}
       </StyledSelect>

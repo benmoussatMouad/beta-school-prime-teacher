@@ -7,6 +7,7 @@ import borders from "assets/theme/base/borders";
 import { useTranslation } from "react-i18next";
 import CircularProgress from "@mui/material/CircularProgress";
 import { getFiltersInputs } from "../../../utils";
+import { useAuth } from "../../../context/auth/authContext";
 
 function Table(
   {
@@ -22,11 +23,16 @@ function Table(
     teacherClass,
     totalCount,
     tableId,
+    selectedRole,
   }) {
   const { grey } = colors;
   const { size, fontWeightBold } = typography;
   const { borderWidth } = borders;
   const { t } = useTranslation();
+
+  const { user } = useAuth();
+
+  const role = user?.user?.role || null;
 
   const [sortConfig, setSortConfig] = useState({ key: "", translatedKey: "", direction: "asc" });
 
@@ -86,7 +92,7 @@ function Table(
   return (
     <>
       {/* Search Input */}
-      {getFiltersInputs({ tableId, onSearchChange, subject, teacherClass, t })}
+      {getFiltersInputs({ tableId, onSearchChange, subject, selectedRole, teacherClass, t, role })}
       {isLoading ? (
         <VuiBox display="flex" justifyContent="center" alignItems="center" py={3}>
           <CircularProgress color="info" />

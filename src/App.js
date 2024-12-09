@@ -50,6 +50,7 @@ import { useAuth } from "context/auth/authContext";
 import AdminRoute from "./providers/adminRoute";
 import { useVerifyEmail } from "./api/auth/VerifyEmail";
 import VuiLoading from "./components/VuiLoading";
+import RootRoute from "./providers/rootRoute";
 
 
 export default function App() {
@@ -148,6 +149,18 @@ export default function App() {
       }
 
       if (route.route) {
+
+        if (route.isRoot) {
+          // Use RootRoute  for root-protected routes
+          return (
+            <RootRoute
+              exact
+              path={route.route}
+              component={route.component}
+              key={route.key}
+            />
+          );
+        }
 
         if (route.isAdmin) {
           // Use AdminRoute for admin-protected routes
