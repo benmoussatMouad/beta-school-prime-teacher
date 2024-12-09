@@ -53,7 +53,6 @@ import { GiBookshelf, GiMaterialsScience } from "react-icons/gi";
 import { PiStudentFill } from "react-icons/pi";
 import { LiaChalkboardTeacherSolid } from "react-icons/lia";
 import { BiSupport } from "react-icons/bi";
-import { MdAdminPanelSettings } from "react-icons/md";
 import ResetPassword from "layouts/authentication/reset-password";
 import ForgetPassword from "layouts/authentication/forget-password";
 import Demands from "./layouts/demands";
@@ -105,7 +104,7 @@ const routes = [
     component: AllCourses,
     noCollapse: true,
     isProtected: true,
-    isRoot: true,
+    isAdmin: true,
   },
   {
     type: "collapse",
