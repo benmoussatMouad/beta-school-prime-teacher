@@ -66,6 +66,11 @@ export const FiltersStudentsLevel = [
   "OTHER",
 ];
 
+export const FiltersRoles = [
+  "TEACHER",
+  "ADMIN",
+];
+
 export const getToken = () => {
   try {
     // Retrieve the token from localStorage
@@ -176,11 +181,11 @@ export const courseData = [
   },
 ];
 
-export const getFiltersInputs = ({ tableId, onSearchChange, subject, teacherClass, t }) => {
+export const getFiltersInputs = ({ tableId, onSearchChange, subject, selectedRole, teacherClass, t, role }) => {
   switch (tableId) {
     case "teachers":
       return <Grid container spacing={2}>
-        <Grid item xs={12} sm={6} md={3}>
+        <Grid item xs={12} sm={6} md={role === "ROOT" ? 2.5 : 3}>
           <VuiInput
             placeholder={t("signup.forms.firstName")}
             fullWidth
@@ -189,7 +194,7 @@ export const getFiltersInputs = ({ tableId, onSearchChange, subject, teacherClas
             name="firstName"
           />
         </Grid>
-        <Grid item xs={12} sm={6} md={3}>
+        <Grid item xs={6} md={role === "ROOT" ? 2.5 : 3}>
           <VuiInput
             placeholder={t("signup.forms.lastName")}
             fullWidth
@@ -198,7 +203,7 @@ export const getFiltersInputs = ({ tableId, onSearchChange, subject, teacherClas
             name="lastName"
           />
         </Grid>
-        <Grid item xs={12} sm={6} md={3}>
+        <Grid item xs={6} md={role === "ROOT" ? 2.5 : 3}>
           <VuiInput
             placeholder={t("signup.forms.email")}
             fullWidth
@@ -207,15 +212,26 @@ export const getFiltersInputs = ({ tableId, onSearchChange, subject, teacherClas
             name="email"
           />
         </Grid>
-        <Grid item sx={{ display: "flex", alignItems: "center" }} xs={12} sm={6} md={3}>
+        <Grid item sx={{ display: "flex", alignItems: "center" }} xs={6} sm={6} md={role === "ROOT" ? 2.5 : 3}>
           <VuiSelect
             onChange={onSearchChange}
             label={t("signup.forms.subject")}
             options={FiltersSubjects}
             value={subject || FiltersSubjects[0]}
             name={"subject"}
+            sx={{ my: 1 }}
           />
         </Grid>
+        {role === "ROOT" ? <Grid item sx={{ display: "flex", alignItems: "center" }} xs={6} sm={6} md={2}>
+          <VuiSelect
+            isRoot={true}
+            onChange={onSearchChange}
+            options={FiltersRoles}
+            value={selectedRole || FiltersRoles[0]}
+            name={"roles"}
+            sx={{ my: 1 }}
+          />
+        </Grid> : ""}
       </Grid>;
     case "courses":
       return <Grid container spacing={2}>

@@ -76,7 +76,7 @@ export const teacherTableData = (t, data, handleOpen, user) => {
     ),
     [t("demands.table.email")]: <Function content={item.email} />,
     [t("demands.table.institution")]: (
-      <Function content={item.Teacher.institution} />
+      <Function content={item.Teacher?.institution} />
     ),
     [t("demands.table.yearsOfExperience")]: (
       <VuiTypography
@@ -86,7 +86,7 @@ export const teacherTableData = (t, data, handleOpen, user) => {
         display="flex"
         justifyContent="center"
       >
-        {item.Teacher.yearsOfExperience}
+        {item.Teacher?.yearsOfExperience}
       </VuiTypography>
     ),
     [t("demands.table.status")]: (
@@ -99,12 +99,12 @@ export const teacherTableData = (t, data, handleOpen, user) => {
       >
         <VuiBadge
           variant="standard"
-          badgeContent={t(`teachers.status.${item.Teacher.status}`)}
+          badgeContent={t(`teachers.status.${item.Teacher?.status}`)}
           color="success"
           size="xs"
           container
           sx={({ palette, borders: { borderRadius, borderWidth } }) => {
-            const color = getStatusColor(item.Teacher.status, palette);
+            const color = getStatusColor(item.Teacher?.status, palette);
             return {
               background: color,
               border: `${borderWidth[1]} solid ${color}`,
@@ -115,8 +115,8 @@ export const teacherTableData = (t, data, handleOpen, user) => {
         />
       </VuiTypography>
     ),
-    [t("demands.table.subject")]: <Function content={t(`subjects.${item.Teacher.subject}`)} />,
-    [t("demands.table.role")]: <Function content={item.role} />,
+    [t("demands.table.subject")]: <Function content={t(`subjects.${item.Teacher?.subject}`)} />,
+    [t("demands.table.role")]: <Function content={t(`roles.${item.role}`)} />,
     [t("demands.table.isEmailVerified")]: (
       <VuiTypography
         variant="caption"

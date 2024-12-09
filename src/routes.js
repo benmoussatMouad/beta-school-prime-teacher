@@ -49,16 +49,18 @@ import SignUp from "layouts/authentication/sign-up";
 // Vision UI Dashboard React icons
 import { IoHome } from "react-icons/io5";
 import { BsFillEnvelopePaperFill, BsFillPersonFill } from "react-icons/bs";
-import { GiMaterialsScience } from "react-icons/gi";
+import { GiBookshelf, GiMaterialsScience } from "react-icons/gi";
 import { PiStudentFill } from "react-icons/pi";
 import { LiaChalkboardTeacherSolid } from "react-icons/lia";
 import { BiSupport } from "react-icons/bi";
+import { MdAdminPanelSettings } from "react-icons/md";
 import ResetPassword from "layouts/authentication/reset-password";
 import ForgetPassword from "layouts/authentication/forget-password";
 import Demands from "./layouts/demands";
 import Teachers from "./layouts/teachers";
 import Support from "./layouts/support";
 import CoursDetails from "./layouts/cours";
+import AllCourses from "./layouts/teachersCourses";
 
 
 const routes = [
@@ -93,6 +95,17 @@ const routes = [
     noCollapse: true,
     isProtected: true,
     isAdmin: true,
+  },
+  {
+    type: "collapse",
+    name: "Les course des enseignants",
+    key: "allCourses",
+    route: "/allCourses",
+    icon: <GiBookshelf size="15px" color="inherit" />,
+    component: AllCourses,
+    noCollapse: true,
+    isProtected: true,
+    isRoot: true,
   },
   {
     type: "collapse",

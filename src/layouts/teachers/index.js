@@ -6,7 +6,7 @@ import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
 import DashboardNavbar from "examples/Navbars/DashboardNavbar";
 import Table from "examples/Tables/Table";
 import { useTranslation } from "react-i18next";
-import { getAccessToken } from "../../utils";
+import { FiltersRoles, getAccessToken } from "../../utils";
 import linearGradient from "../../assets/theme/functions/linearGradient";
 import rgba from "../../assets/theme/functions/rgba";
 import colors from "../../assets/theme/base/colors";
@@ -17,8 +17,7 @@ import VuiButton from "../../components/VuiButton";
 import VuiBadge from "../../components/VuiBadge";
 import { useAuth } from "../../context/auth/authContext";
 import { teacherTableData } from "./data/teachersTableData";
-import { useGetTeachers } from "../../api/admin";
-import { useMakeTeacherAdmin } from "../../api/admin";
+import { useGetTeachers, useMakeTeacherAdmin } from "../../api/admin";
 
 const { black, gradients } = colors;
 const { card } = gradients;
@@ -34,10 +33,11 @@ function Teachers() {
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [subject, setSubjects] = useState("");
+  const [role, setRoles] = useState(FiltersRoles[0]);
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
 
-  const { data, isLoading } = useGetTeachers(token, firstName, lastName, email, subject, page, rowsPerPage);
+  const { data, isLoading } = useGetTeachers(token, firstName, lastName, email, subject, role, page, rowsPerPage);
   const [open, setOpen] = useState(false);
   const [selectedTeacher, setSelectedTeacher] = useState(null);
 
@@ -85,6 +85,9 @@ function Teachers() {
         } else {
           setSubjects(value);
         }
+        break;
+      case "roles":
+        setRoles(value);
         break;
       default:
         break;
@@ -137,6 +140,7 @@ function Teachers() {
               isLoading={isLoading}
               subject={subject}
               tableId={"teachers"}
+              selectedRole={role}
             />
 
           </VuiBox>
