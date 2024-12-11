@@ -111,9 +111,11 @@ const Welcome = () => {
         backgroundSize: "cover",
         borderRadius: "20px",
         height: "100%",
+        marginRight: { xs: "20px", md: "15%", lg: "20%", xl: "0" },
+        marginLeft: { xs: "20px", md: "15%", lg: "20%", xl: "0" },
         [breakpoints.only("xl")]: {
-          gridArea: "1 / 1 / 2 / 2",
-        },
+        gridArea: "1 / 1 / 2 / 2",
+      },
       })}
     >
       <VuiBox display="flex" flexDirection="column">
