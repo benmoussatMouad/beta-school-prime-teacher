@@ -223,6 +223,7 @@
       "lastName": "Le nom est requis.",
       "level": "Le niveau de l'étudiant est requis",
       "password": "Le mot de passe est requis.",
+      "phone": "Le numéro est incorrecte",
       "school": "L'école est requise.",
       "subject": "Le sujet est requis"
     },
@@ -303,8 +304,15 @@
     "description": "Entrez et confirmez votre nouveau mot de passe",
     "reset": "Réinitialiser votre mot de passe"
   },
+  "roles": {
+    "ADMIN": "ADMIN",
+    "NONE": "Aucun",
+    "STUDENT": "STUDENT",
+    "TEACHER": "ENSEIGNANT"
+  },
   "routes": {
     "account-pages": "Pages de compte",
+    "administrateurs": "Administrateurs",
     "allCourses": "Les Cours",
     "cours": "Cours",
     "courses": "Mes Cours",
@@ -313,8 +321,7 @@
     "profile": "Profil",
     "students": "Étudiants",
     "support": "Support",
-    "teachers": "Les Enseignants",
-    "administrateurs": "Administrateurs"
+    "teachers": "Les Enseignants"
   },
   "signup": {
     "already": "Vous avez déjà un compte ?",
@@ -326,6 +333,7 @@
       "lastName": "Nom",
       "lastNameAr": "Nom en arabe",
       "password": "Mot de passe",
+      "phone": "Numero de Telephone",
       "school": "École",
       "subject": "Sujet",
       "upload": "Télécharger un avatar",
@@ -339,6 +347,7 @@
       "lastName": "Belmiloud",
       "lastNameAr": "بل ميلود",
       "password": "Votre mot de passe",
+      "phone": "0558394567",
       "school": "Votre école",
       "subject": "Votre sujet",
       "years": "Vos années d'expérience"
@@ -434,11 +443,5 @@
     "table": {
       "title": "Les enseignants"
     }
-  },
-  "roles": {
-    "NONE": "Aucun",
-    "ADMIN": "ADMIN",
-    "TEACHER": "ENSEIGNANT",
-    "STUDENT": "STUDENT"
   }
 }
