@@ -202,6 +202,7 @@
   },
   "forms": {
     "confirmPassword": "Confirmer le mot de passe",
+    "descriptions": "Description",
     "email": "E-mail",
     "firstName": "Prénom",
     "forgetPassword": "Mot de passe oublié",
@@ -285,7 +286,7 @@
       "unVerified": "Non vérifié"
     },
     "description": "Mise à jour de la photo",
-    "myDescirption": "Je suis un professeur de mathématiques passionné avec plusieurs années d'expérience. J'ai toujours été fasciné par la logique et la précision exigées par les mathématiques, et j'aime partager cette passion avec mes élèves chaque jour",
+    "myDescirption": "Vous n'avez pas encore de description",
     "project": {
       "title": "Mes données"
     },
