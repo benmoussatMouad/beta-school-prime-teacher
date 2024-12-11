@@ -24,7 +24,7 @@ import typography from "assets/theme/base/typography";
 // Vision UI Dashboard React helper functions
 import pxToRem from "assets/theme/functions/pxToRem";
 
-const { light, text, dark } = colors;
+const { text } = colors;
 const { borderRadius } = borders;
 const { size } = typography;
 
@@ -39,9 +39,8 @@ export default {
       color: text.main,
       transition: "background-color 300ms ease, color 300ms ease",
 
-      "&:hover, &:focus, &.Mui-selected, &.Mui-selected:hover, &.Mui-selected:focus": {
-        backgroundColor: light.main,
-        color: dark.main,
+      "&.Mui-selected": {
+        margin: 5,
       },
     },
   },

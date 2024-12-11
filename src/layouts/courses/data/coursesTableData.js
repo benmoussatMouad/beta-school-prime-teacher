@@ -1,10 +1,10 @@
-// Vision UI Dashboard React components
 import VuiBox from "components/VuiBox";
 import VuiTypography from "components/VuiTypography";
 import VuiButton from "../../../components/VuiButton";
 import React from "react";
 import VuiAvatar from "../../../components/VuiAvatar";
 import { GiOpenBook } from "react-icons/gi";
+import moment from "moment/moment";
 
 function Icon({ image, name }) {
   return (
@@ -44,13 +44,17 @@ export const coursesTableData = (t, data) => {
         <Function content={course.title} />
       ),
       [t("courses.table.subject")]: (
-        <Function content={t(`subjects.${course.subject}`)} />
+        <VuiTypography variant="caption" fontWeight="medium" color="white">
+          {t(`subjects.${course.teacher.subject}`)}
+        </VuiTypography>
       ),
       [t("courses.table.level")]: (
-        <Function content={course.class} />
+        <VuiTypography variant="caption" fontWeight="medium" color="white">
+          {t(`teacherClass.${course.class[0]}`)}
+        </VuiTypography>
       ),
       [t("courses.table.createdAt")]: (
-        <Function content={" 2024-01-05"} />
+        <Function content={moment(course.createdAt).format("DD/MM/YYYY hh:mm")} />
       ),
       [t("demands.table.view")]: (
         <VuiButton

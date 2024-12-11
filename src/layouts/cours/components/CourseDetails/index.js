@@ -10,14 +10,14 @@ import VuiTypography from "components/VuiTypography";
 import VuiInput from "components/VuiInput";
 import { useTranslation } from "react-i18next";
 import VuiSelect from "../../../../components/VuiSelect";
-import { StudentsLevel, Subjects } from "../../../../utils";
+import { CourseLevel, EducationalBranches, StudentsLevel } from "../../../../utils";
 import VuiButton from "../../../../components/VuiButton";
 import VuiAvatar from "../../../../components/VuiAvatar";
 import { GiOpenBook } from "react-icons/gi";
 import { useUpdateCourse } from "../../../../api/courses/updateCourse";
+import Grid from "@mui/material/Grid";
 
 function UpdateCourse({ isLoading, data: courseData }) {
-
   const { mutate, isLoading: updateLoading } = useUpdateCourse();
 
   const { t } = useTranslation();
@@ -27,13 +27,21 @@ function UpdateCourse({ isLoading, data: courseData }) {
     formState: { errors },
     setValue,
     watch,
+    // getValues,
   } = useForm({
     defaultValues: {
       title: "",
       description: "",
-      subject: Subjects[0],
-      level: StudentsLevel[0],
-      icon: null,
+      teacherClasses: [StudentsLevel[0]], // Mandatory array of valid values
+      educationalBranches: [EducationalBranches[0]], // Mandatory array of valid values
+      level: CourseLevel[0], // Mandatory dropdown
+      price: 0, // Mandatory positive integer
+      discount: 0, // Optional, 0-100
+      duration: null, // Optional, positive integer
+      language: "", // Optional string
+      maxParticipants: null, // Optional positive integer
+      //enrollmentDeadline: null,
+      icon: null, // Optional file
     },
   });
 
@@ -46,9 +54,15 @@ function UpdateCourse({ isLoading, data: courseData }) {
     if (!isLoading && courseData) {
       setValue("title", courseData.title);
       setValue("description", courseData.description);
-      setValue("subject", courseData.subject || Subjects[0]);
-      setValue("level", courseData.level || StudentsLevel[0]);
-
+      setValue("teacherClasses", courseData.class || [StudentsLevel[0]]);
+      setValue("educationalBranches", courseData.EducationalBranch || [EducationalBranches[0]]);
+      setValue("level", courseData.level || CourseLevel[0]);
+      setValue("price", courseData.price || 0);
+      setValue("discount", courseData.discount || 0);
+      setValue("duration", courseData.duration || 0);
+      setValue("language", courseData.language || "");
+      setValue("maxParticipants", courseData.maxParticipants || 0);
+      //setValue("enrollmentDeadline", moment(courseData.enrollmentDeadline).format("YYYY-MM-DD") || 0);
       if (courseData.icon) {
         setIconPreview(courseData.icon.url);
       }
@@ -67,8 +81,30 @@ function UpdateCourse({ isLoading, data: courseData }) {
     const formData = new FormData();
     formData.append("title", data.title);
     formData.append("description", data.description);
-    formData.append("subject", data.subject);
-    formData.append("teacherClass", data.level);
+
+    if (data.teacherClasses.length > 1) {
+      data.teacherClasses.forEach((item) =>
+        formData.append("teacherClasses", item),
+      );
+    } else {
+      formData.append("teacherClasses[0]", data.teacherClasses[0]);
+    }
+
+    if (data.educationalBranches.length > 1) {
+      data.educationalBranches.forEach((item) =>
+        formData.append("educationalBranches", item),
+      );
+    } else {
+      formData.append("educationalBranches[0]", data.educationalBranches[0]);
+    }
+
+    formData.append("level", data.level);
+    formData.append("price", data.price);
+    formData.append("discount", data.discount);
+    formData.append("duration", data.duration);
+    formData.append("language", data.language);
+    formData.append("maxParticipants", data.maxParticipants);
+
     if (watchIcon) {
       formData.append("icon", watchIcon);
     }
@@ -78,9 +114,9 @@ function UpdateCourse({ isLoading, data: courseData }) {
       coursId: courseData.id,
     });
   };
-
+  
   return (
-    <Card sx={{ minHeight: "490px", height: "100%" }}>
+    <Card sx={{ minHeight: "490px" }}>
       <VuiBox mb="26px">
         <VuiTypography variant="lg" fontWeight="bold" color="white" textTransform="capitalize">
           {t("course.update.title")}
@@ -92,16 +128,20 @@ function UpdateCourse({ isLoading, data: courseData }) {
           <VuiTypography component="label" variant="button" color="white" fontWeight="medium" sx={{ mb: 2 }}>
             {t("dialog.course.icon")}
           </VuiTypography>
-          {iconPreview ? <VuiAvatar
-            src={iconPreview}
-            sx={{ width: 100, height: 100, cursor: "pointer" }}
-            onClick={() => document.getElementById("avatar-file-input").click()} // Trigger file input click
-          /> : <GiOpenBook
-            color={"white"}
-            size={60}
-            style={{ cursor: "pointer" }}
-            onClick={() => document.getElementById("avatar-file-input").click()} />
-          }
+          {iconPreview ? (
+            <VuiAvatar
+              src={iconPreview}
+              sx={{ width: 100, height: 100, cursor: "pointer" }}
+              onClick={() => document.getElementById("avatar-file-input").click()}
+            />
+          ) : (
+            <GiOpenBook
+              color={"white"}
+              size={60}
+              style={{ cursor: "pointer" }}
+              onClick={() => document.getElementById("avatar-file-input").click()}
+            />
+          )}
           <input
             type="file"
             id="avatar-file-input"
@@ -110,76 +150,155 @@ function UpdateCourse({ isLoading, data: courseData }) {
             onChange={handleAvatarChange}
           />
           {errors.icon && (
-            <VuiTypography sx={{ color: "red", fontSize: "0.7rem" }}>{errors.icon.message}</VuiTypography>
-          )}
-        </VuiBox>
-
-        {/* Title Field */}
-        <VuiBox mb="14px">
-          <VuiTypography component="label" variant="button" color="white" fontWeight="medium" sx={{ mb: 0 }}>
-            {t("dialog.forms.title")}
-          </VuiTypography>
-          <VuiInput
-            placeholder={t("dialog.forms.title")}
-            {...register("title", { required: t("dialog.required.title") })}
-          />
-          {errors.title && (
-            <VuiTypography sx={{ color: "red", fontSize: "0.7rem" }}>{errors.title.message}</VuiTypography>
-          )}
-        </VuiBox>
-
-        {/* Description Field */}
-        <VuiBox mb="14px">
-          <VuiTypography component="label" variant="button" color="white" fontWeight="medium" sx={{ mb: 1 }}>
-            {t("dialog.forms.description")}
-          </VuiTypography>
-          <VuiInput
-            placeholder={t("dialog.forms.description")}
-            multiline
-            rows={4}
-            {...register("description", { required: t("dialog.required.description") })}
-          />
-          {errors.description && (
             <VuiTypography sx={{ color: "red", fontSize: "0.7rem" }}>
-              {errors.description.message}
+              {errors.icon.message}
             </VuiTypography>
           )}
         </VuiBox>
 
-        {/* Subject Field */}
-        <VuiBox mb="14px">
-          <VuiTypography component="label" variant="button" color="white" fontWeight="medium" sx={{ mb: 1 }}>
-            {t("dialog.forms.subjects")}
-          </VuiTypography>
-          <VuiSelect
-            {...register("subject", { required: t("dialog.required.subject") })}
-            value={watch("subject")}
-            onChange={(e) => setValue("subject", e.target.value)}
-            label={t("dialog.forms.subjects")}
-            options={Subjects}
-          />
-          {errors.subject && (
-            <VuiTypography sx={{ color: "red", fontSize: "0.7rem" }}>{errors.subject.message}</VuiTypography>
-          )}
-        </VuiBox>
+        <Grid container spacing={2}>
+          {/* Title Field */}
+          <Grid item xs={12}>
+            <VuiTypography component="label" variant="button" color="white" fontWeight="medium">
+              {t("dialog.forms.title")}
+            </VuiTypography>
+            <VuiInput
+              placeholder={t("dialog.forms.title")}
+              {...register("title", { required: t("dialog.required.title") })}
+            />
+            {errors.title && (
+              <VuiTypography sx={{ color: "red", fontSize: "0.7rem" }}>
+                {errors.title.message}
+              </VuiTypography>
+            )}
+          </Grid>
 
-        {/* Student Level Field */}
-        <VuiBox mb="14px">
-          <VuiTypography component="label" variant="button" color="white" fontWeight="medium" sx={{ mb: 1 }}>
-            {t("dialog.forms.level")}
-          </VuiTypography>
-          <VuiSelect
-            t={false}
-            {...register("level", { required: t("dialog.required.level") })}
-            value={watch("level")}
-            onChange={(e) => setValue("level", e.target.value)}
-            label={t("dialog.forms.level")}
-            options={StudentsLevel}
-          />
-          {errors.level && (
-            <VuiTypography sx={{ color: "red", fontSize: "0.7rem" }}>{errors.level.message}</VuiTypography>
-          )}
-        </VuiBox>
+          {/* Description Field */}
+          <Grid item xs={12}>
+            <VuiTypography component="label" variant="button" color="white" fontWeight="medium">
+              {t("dialog.forms.description")}
+            </VuiTypography>
+            <VuiInput
+              placeholder={t("dialog.forms.description")}
+              multiline
+              rows={4}
+              {...register("description", { required: t("dialog.required.description") })}
+            />
+            {errors.description && (
+              <VuiTypography sx={{ color: "red", fontSize: "0.7rem" }}>
+                {errors.description.message}
+              </VuiTypography>
+            )}
+          </Grid>
+
+          {/* Price Field */}
+          <Grid item xs={12}>
+            <VuiTypography component="label" variant="button" color="white" fontWeight="medium">
+              {t("dialog.forms.price")}
+            </VuiTypography>
+            <VuiInput
+              type="number"
+              min="0" // Ensures the input does not allow values below 0
+              placeholder={t("dialog.forms.price")}
+              {...register("price", {
+                required: t("dialog.required.price"),
+                valueAsNumber: true,
+                min: { value: 0, message: t("dialog.errors.price_min") }, // Ensures validation in JavaScript
+              })}
+              onChange={(e) => {
+                const value = Math.max(0, parseInt(e.target.value || 0)); // Prevent going below 0
+                setValue("price", value); // Update react-hook-form state
+              }}
+            />
+            {errors.price && (
+              <VuiTypography sx={{ color: "red", fontSize: "0.7rem" }}>
+                {errors.price.message}
+              </VuiTypography>
+            )}
+          </Grid>
+
+          {/* Language */}
+          <Grid item xs={12} sm={6}>
+            <VuiTypography component="label" variant="button" color="white" fontWeight="medium">
+              {t("dialog.forms.language")}
+            </VuiTypography>
+            <VuiInput placeholder={t("dialog.forms.language")} {...register("language")} />
+          </Grid>
+
+          {/* Teacher Classes */}
+          <Grid item xs={12} sm={6}>
+            <VuiTypography component="label" variant="button" color="white" fontWeight="medium">
+              {t("dialog.forms.teacherClasses")}
+            </VuiTypography>
+            <VuiSelect
+              {...register("teacherClasses")}
+              value={watch("teacherClasses")}
+              onChange={(e) => {
+                const selected = e.target.value;
+                if (selected.length > 0) {
+                  setValue("teacherClasses", selected);
+                }
+              }}
+              multiple
+              typeSelect={"teacherClasses"}
+              options={StudentsLevel}
+            />
+          </Grid>
+
+          {/* Educational Branches */}
+          <Grid item xs={12} sm={6}>
+            <VuiTypography component="label" variant="button" color="white" fontWeight="medium">
+              {t("dialog.forms.educationalBranches")}
+            </VuiTypography>
+            <VuiSelect
+              {...register("educationalBranches")}
+              value={watch("educationalBranches")}
+              onChange={(e) => {
+                const selected = e.target.value;
+                if (selected.length > 0) {
+                  setValue("educationalBranches", selected);
+                }
+              }}
+              multiple
+              options={EducationalBranches}
+              typeSelect={"educationalBranches"}
+            />
+          </Grid>
+
+          {/* Discount Field */}
+          <Grid item xs={12} sm={6}>
+            <VuiBox>
+              <VuiTypography
+                component="label"
+                variant="button"
+                fontWeight="medium"
+                color="white"
+                sx={{ mb: 1 }}
+              >
+                {t("dialog.forms.discount")}
+              </VuiTypography>
+              <VuiInput
+                type="number"
+                placeholder={t("dialog.forms.discount")}
+                {...register("discount", {
+                  valueAsNumber: true,
+                  min: { value: 0, message: t("dialog.errors.discount_min") },
+                  max: { value: 100, message: t("dialog.errors.discount_max") },
+                })}
+                onChange={(e) => {
+                  const value = Math.max(0, parseInt(e.target.value || 0)); // Prevent going below 0
+                  setValue("discount", value); // Update react-hook-form state
+                }}
+              />
+              {errors.discount && (
+                <VuiTypography sx={{ color: "red", fontSize: "0.8rem", mt: 0.5 }}>
+                  {errors.discount.message}
+                </VuiTypography>
+              )}
+            </VuiBox>
+
+          </Grid>
+        </Grid>
 
         {/* Submit Button */}
         <VuiBox mt="20px" display="flex" justifyContent="flex-end">
@@ -189,7 +308,7 @@ function UpdateCourse({ isLoading, data: courseData }) {
             variant="contained"
             disabled={loading || isLoading || updateLoading}
           >
-            {t("button.confirm")}
+            {t("button.submit")}
           </VuiButton>
         </VuiBox>
       </VuiBox>

@@ -64,11 +64,6 @@ function VuiAlert({ color, dismissible, children, ...rest }) {
   return null;
 }
 
-// Setting default values for the props of VuiAlert
-VuiAlert.defaultProps = {
-  color: "info",
-  dismissible: false,
-};
 
 // Typechecking props of the VuiAlert
 VuiAlert.propTypes = {

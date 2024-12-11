@@ -66,6 +66,7 @@ function Overview() {
   const { mutate } = useDeleteTeacher();
 
   const handleConfirmDialogClose = (confirmed) => {
+
     if (confirmed) {
       mutate();
     }
@@ -228,6 +229,7 @@ function Overview() {
         </Grid>
       </Grid>
 
+      {/* Update Picture Confirmation Dialog */}
       <Dialog
         sx={({}) => ({
           "& .MuiDialog-paper": {
