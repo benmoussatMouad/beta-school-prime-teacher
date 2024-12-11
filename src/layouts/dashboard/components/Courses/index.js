@@ -251,13 +251,12 @@ function Courses() {
       {/* Courses Table */}
       <VuiBox display="flex" justifyContent="space-between" alignItems="center" mb="32px">
         <VuiBox>
-          <VuiTypography color="white" variant="lg" mb="6px" gutterBottom fontWeight="bold">
+          <VuiTypography color="white" variant="h3" mb="6px" fontWeight="bold">
             {t("dashboard.myCourses")}
           </VuiTypography>
-          <VuiBadge color="warning" variant="gradient" badgeContent="En cours de development" size="lg" />
         </VuiBox>
-        <VuiButton onClick={() => setOpenDialog(true)} color="info" variant="gradient" size="small">
-          + {t("dashboard.coursesCard.addCourse")}
+        <VuiButton onClick={() => setOpenDialog(true)} color="primary" variant="gradient" size="medium">
+          <VuiTypography variant="button" color="white">+ {t("dashboard.coursesCard.addCourse")}</VuiTypography>
         </VuiButton>
       </VuiBox>
       <VuiBox>

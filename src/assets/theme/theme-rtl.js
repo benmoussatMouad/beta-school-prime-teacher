@@ -22,7 +22,7 @@ import { createTheme } from "@mui/material/styles";
 // Vision UI Dashboard React base styles
 import colors from "assets/theme/base/colors";
 import breakpoints from "assets/theme/base/breakpoints";
-import typography from "assets/theme/base/typography";
+import typography from "assets/theme/base/typography-rtl";
 import boxShadows from "assets/theme/base/boxShadows";
 import borders from "assets/theme/base/borders";
 import globals from "assets/theme/base/globals";
