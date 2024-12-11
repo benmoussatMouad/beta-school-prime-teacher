@@ -240,6 +240,7 @@
   },
   "forms": {
     "confirmPassword": "Confirmer le mot de passe",
+    "descriptions": "Description",
     "email": "E-mail",
     "firstName": "Prénom",
     "forgetPassword": "Mot de passe oublié",
@@ -261,6 +262,7 @@
       "lastName": "Le nom est requis.",
       "level": "Le niveau de l'étudiant est requis",
       "password": "Le mot de passe est requis.",
+      "phone": "Le numéro est incorrecte",
       "school": "L'école est requise.",
       "subject": "Le sujet est requis"
     },
@@ -327,7 +329,7 @@
       "unVerified": "Non vérifié"
     },
     "description": "Mise à jour de la photo",
-    "myDescirption": "Je suis un professeur de mathématiques passionné avec plusieurs années d'expérience. J'ai toujours été fasciné par la logique et la précision exigées par les mathématiques, et j'aime partager cette passion avec mes élèves chaque jour",
+    "myDescirption": "Vous n'avez pas encore de description",
     "project": {
       "title": "Mes données"
     },
@@ -375,6 +377,7 @@
       "lastName": "Nom",
       "lastNameAr": "Nom en arabe",
       "password": "Mot de passe",
+      "phone": "Numero de Telephone",
       "school": "École",
       "subject": "Sujet",
       "upload": "Télécharger un avatar",
@@ -388,6 +391,7 @@
       "lastName": "Belmiloud",
       "lastNameAr": "بل ميلود",
       "password": "Votre mot de passe",
+      "phone": "0558394567",
       "school": "Votre école",
       "subject": "Votre sujet",
       "years": "Vos années d'expérience"

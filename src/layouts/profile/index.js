@@ -103,6 +103,7 @@ function Overview() {
           <Grid
             item
             xs={12}
+            md={6}
             xl={3}
             xxl={3}
             sx={({ breakpoints }) => ({
@@ -113,7 +114,7 @@ function Overview() {
           >
             <ProfileInfoCard
               title={t("profile.card.title")}
-              description={t("profile.myDescirption")}
+              description={context.user.teacher?.description || t('profile.myDescirption')}
               info={{
                 [t("forms.fullName")]: `${context.user.user?.firstName}  ${context.user.user?.lastName}`,
                 [t("forms.email")]: context.user.user?.email,
@@ -127,6 +128,7 @@ function Overview() {
           <Grid
             item
             xs={12}
+            md={6}
             xl={5}
             xxl={6}
             sx={({ breakpoints }) => ({
@@ -140,10 +142,10 @@ function Overview() {
         </Grid>
       </VuiBox>
       <Grid container spacing={3} mb="30px">
-        <Grid item xs={12} xl={3} height="100%">
+        <Grid item xs={12} xl={3} md={6} height="100%">
           <PlatformSettings />
         </Grid>
-        <Grid item xs={12} xl={9}>
+        <Grid item xs={12} xl={9} md={6}>
           <Card>
             <VuiBox display="flex" flexDirection="column" height="100%">
               <VuiBox display="flex" flexDirection="column" mb="24px">

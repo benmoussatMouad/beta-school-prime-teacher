@@ -49,7 +49,7 @@ function SignUp() {
     let fieldsToValidate = [];
     switch (activeStep) {
       case 0:
-        fieldsToValidate = ["firstName", "firstNameAr", "lastName", "email", "password"];
+        fieldsToValidate = ["firstName", "firstNameAr", "lastName", "email", "phone", "password"];
         break;
       case 1:
         fieldsToValidate = ["subject", "institution", "yearsOfExperience"];
@@ -79,11 +79,16 @@ function SignUp() {
 
     // Append text fields
     formData.append("email", formDataState.email);
+    formData.append("phone", formDataState.phone);
     formData.append("firstName", formDataState.firstName);
-    formData.append("firstNameAr", formDataState.firstNameAr);
+    if (formDataState.firstNameAr) {
+      formData.append("firstNameAr", formDataState.firstNameAr);
+    }
     formData.append("institution", formDataState.institution);
     formData.append("lastName", formDataState.lastName);
-    formData.append("lastNameAr", formDataState.lastNameAr);
+    if (formDataState.lastNameAr) {
+      formData.append("lastNameAr", formDataState.lastNameAr);
+    }
     formData.append("password", formDataState.password);
     formData.append("subject", formDataState.subject);
     formData.append("yearsOfExperience", formDataState.yearsOfExperience);
@@ -114,7 +119,12 @@ function SignUp() {
       case 0:
         return (
           <VuiBox sx={{ display: "flex", flexDirection: "column", justifyContent: "center" }}>
-            <VuiBox sx={{ display: "flex", flexDirection: "row", justifyContent: "space-between", width: "100%" }}>
+            <VuiBox sx={{
+              display: "flex",
+              flexDirection: { md: "row", sm: "column" },
+              justifyContent: "space-between",
+              width: "100%",
+            }}>
               <VuiBox px={1}>
                 <VuiTypography sx={{ margin: "10px 0" }} component="label" variant="button" color="white"
                                fontWeight="medium">
@@ -144,7 +154,7 @@ function SignUp() {
               </VuiBox></VuiBox>
             <VuiBox sx={{
               display: "flex",
-              flexDirection: "row",
+              flexDirection: { md: "row", sm: "column" },
               justifyContent: "space-between",
               width: "100%",
               margin: "10px 0",
@@ -178,48 +188,79 @@ function SignUp() {
                 />
               </VuiBox>
             </VuiBox>
-            <VuiTypography px={1} sx={{ margin: "10px 0" }} component="label" variant="button" color="white"
-                           fontWeight="medium">
-              {t("signup.forms.email")}
-            </VuiTypography>
-            <VuiInput
-              mx={1}
-              {...register("email", {
-                required: t("forms.required.email"),
-                pattern: { value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/, message: t("forms.required.email") },
-              })}
-              placeholder={t("signup.placeholder.email")}
-              type="email"
-              error={!!errors.email}
-              value={formDataState.email}
-              onChange={(e) => setFormData({ ...formDataState, email: e.target.value })}
-            />
-            {errors.email &&
-              <VuiTypography sx={{ color: "red", fontSize: "0.7rem" }}>{errors.email.message}</VuiTypography>
-            }
-            <VuiTypography sx={{ margin: "10px 0" }} component="label" variant="button" color="white"
-                           fontWeight="medium">
-              {t("signup.forms.password")}
-            </VuiTypography>
-            <VuiInput
-              {...register("password", {
-                required: t("forms.required.password"),
-                minLength: { value: 6, message: t("") },
-              })}
-              placeholder={t("signup.placeholder.password")}
-              type={showPassword ? "text" : "password"}
-              error={!!errors.password}
-              value={formDataState.password}
-              onChange={(e) => setFormData({ ...formDataState, password: e.target.value })}
-              endAdornment={
-                <IconButton sx={{ position: "absolute", right: 25 }} onClick={() => setShowPassword(!showPassword)}>
-                  {showPassword ? <VisibilityOff color="white" /> : <Visibility color="white" />}
-                </IconButton>
-              }
-            />
-            {errors.password &&
-              <VuiTypography sx={{ color: "red", fontSize: "0.7rem" }}>{errors.password.message}</VuiTypography>
-            }
+            <VuiBox
+              sx={{ display: "flex", flexDirection: { md: "row", sm: "column" }, justifyContent: "space-between" }}>
+              {/*Email field*/}
+              <VuiBox px={1}>
+                <VuiTypography px={1} sx={{ margin: "10px 0" }} component="label" variant="button" color="white"
+                               fontWeight="medium">
+                  {t("signup.forms.email")}
+                </VuiTypography>
+                <VuiInput
+                  mx={1}
+                  {...register("email", {
+                    required: t("forms.required.email"),
+                    pattern: { value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/, message: t("forms.required.email") },
+                  })}
+                  placeholder={t("signup.placeholder.email")}
+                  type="email"
+                  error={!!errors.email}
+                  value={formDataState.email}
+                  onChange={(e) => setFormData({ ...formDataState, email: e.target.value })}
+                />
+                {errors.email &&
+                  <VuiTypography sx={{ color: "red", fontSize: "0.7rem" }}>{errors.email.message}</VuiTypography>
+                }
+              </VuiBox>
+
+              {/*Phone field*/}
+              <VuiBox px={1}>
+                <VuiTypography px={1} sx={{ margin: "10px 0" }} component="label" variant="button" color="white"
+                               fontWeight="medium">
+                  {t("signup.forms.phone")}
+                </VuiTypography>
+                <VuiInput
+                  mx={1}
+                  {...register("phone", {
+                    required: t("forms.required.phone"),
+                    pattern: { value: /^(00213|\+213|0)(5|6|7)[0-9]{8}$/, message: t("forms.required.phone") },
+                  })}
+                  placeholder={t("signup.placeholder.phone")}
+                  type="phone"
+                  error={!!errors.phone}
+                  value={formDataState.phone}
+                  onChange={(e) => setFormData({ ...formDataState, phone: e.target.value })}
+                />
+                {errors.phone &&
+                  <VuiTypography sx={{ color: "red", fontSize: "0.7rem" }}>{errors.phone.message}</VuiTypography>
+                }
+              </VuiBox>
+            </VuiBox>
+            {/*Password field*/}
+            <VuiBox px={1}>
+              <VuiTypography sx={{ margin: "10px 0" }} component="label" variant="button" color="white"
+                             fontWeight="medium">
+                {t("signup.forms.password")}
+              </VuiTypography>
+              <VuiInput
+                {...register("password", {
+                  required: t("forms.required.password"),
+                  minLength: { value: 6, message: t("") },
+                })}
+                placeholder={t("signup.placeholder.password")}
+                type={showPassword ? "text" : "password"}
+                error={!!errors.password}
+                value={formDataState.password}
+                onChange={(e) => setFormData({ ...formDataState, password: e.target.value })}
+                endAdornment={
+                  <IconButton sx={{ position: "absolute", right: 25 }} onClick={() => setShowPassword(!showPassword)}>
+                    {showPassword ? <VisibilityOff color="white" /> : <Visibility color="white" />}
+                  </IconButton>
+                }
+              />
+              {errors.password &&
+                <VuiTypography sx={{ color: "red", fontSize: "0.7rem" }}>{errors.password.message}</VuiTypography>
+              }</VuiBox>
           </VuiBox>
         );
       case 1:
