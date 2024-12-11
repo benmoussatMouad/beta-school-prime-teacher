@@ -80,6 +80,7 @@
       "views": "Vues"
     }
   },
+  "currentEnrollment": "Inscription actuelle",
   "dashboard": {
     "course": "Cours",
     "coursesCard": {
@@ -135,20 +136,34 @@
     },
     "description": "Cette action changera votre photo de profil. Voulez-vous continuer ?",
     "errors": {
-      "price_min": "Prix min"
+      "duration_min": "Durée",
+      "price_min": "Prix min",
+      "required": "Champ vide"
     },
     "forms": {
       "attachments": "Les pièces jointes",
       "description": "Description du cours",
-      "level": "Niveaux des étudiants",
+      "discount": "Remise",
+      "duration": "Durée",
+      "educationalBranches": "Branches ",
+      "enableDiscount": "Permettre une réduction",
+      "enrollmentDeadline": "Délai d'inscription",
+      "language": "Langue",
+      "level": "Niveau de difficulté",
+      "maxParticipants": "Max participants",
       "price": "Prix",
+      "selectteacherClasses": "Sélectionner l'enseignant Classes",
       "subjects": "Sujet du cours",
+      "teacherClasses": "Année d'étude",
       "title": "Titre du cours",
       "video": "Vidéo"
     },
     "required": {
       "description": "La description est obligatoire",
+      "educationalBranches": "Branches requises",
+      "language": "Langue requise",
       "price": "Prix requis",
+      "teacherClasses": "Année d'études requise",
       "title": "Un titre est requis",
       "video": "Vidéo requise "
     },
@@ -157,6 +172,17 @@
       "attachments": "Télécharger des pièces jointes",
       "video": "Télécharger la vidéo"
     }
+  },
+  "educationalBranches": {
+    "ALL_BRANCHES": "Tous les branches",
+    "MIDDLE_GENERAL": "Éducation moyenne générale",
+    "PRIMARY_GENERAL": "Éducation primaire générale",
+    "SECONDARY_ARTS": "Secondaire - Arts",
+    "SECONDARY_LITERATURE": "Secondaire - Littérature",
+    "SECONDARY_MANAGEMENT_ECONOMIES": "Secondaire - Gestion et Économie",
+    "SECONDARY_MATHEMATICS": "Secondaire - Mathématiques",
+    "SECONDARY_SCIENCE": "Secondaire - Sciences",
+    "SECONDARY_TECHNIQUE_MATH": "Secondaire - Technique et Mathématiques"
   },
   "faq": {
     "1": {
@@ -244,6 +270,11 @@
     "years": "Années d'expérience",
     "yearsOfExperience": "Années d'expérience"
   },
+  "level": {
+    "ADVANCED": "Avancé",
+    "BEGINNER": "Débutant",
+    "INTERMEDIATE": "Intermédiaire"
+  },
   "login": {
     "already": "Vous n'avez pas de compte ?",
     "description": "Veuillez entrer votre adresse e-mail et votre mot de passe pour vous connecter",
@@ -315,8 +346,15 @@
     "description": "Entrez et confirmez votre nouveau mot de passe",
     "reset": "Réinitialiser votre mot de passe"
   },
+  "roles": {
+    "ADMIN": "ADMIN",
+    "NONE": "Aucun",
+    "STUDENT": "STUDENT",
+    "TEACHER": "ENSEIGNANT"
+  },
   "routes": {
     "account-pages": "Pages de compte",
+    "administrateurs": "Administrateurs",
     "allCourses": "Les Cours",
     "cours": "Cours",
     "courses": "Mes Cours",
@@ -325,8 +363,7 @@
     "profile": "Profil",
     "students": "Étudiants",
     "support": "Support",
-    "teachers": "Les Enseignants",
-    "administrateurs": "Administrateurs"
+    "teachers": "Les Enseignants"
   },
   "signup": {
     "already": "Vous avez déjà un compte ?",
@@ -423,15 +460,20 @@
     }
   },
   "teacherClass": {
-    "AM2": "AM2",
-    "AM3": "AM3",
-    "AS1": "AS1",
-    "AS2": "AS2",
-    "AS3": "AS3",
+    "MIDDLE_1": "Moyen - Première année (AM1)",
+    "MIDDLE_2": "Moyen - Deuxième année (AM2)",
+    "MIDDLE_3": "Moyen - Troisième année (AM3)",
+    "MIDDLE_4": "Moyen - Quatrième année",
     "NONE": "Aucun",
     "OTHER": "Autre",
-    "TM2": "TM2",
-    "TM3": "TM3"
+    "PRIMARY_1": "Primaire - Première année",
+    "PRIMARY_2": "Primaire - Deuxième année",
+    "PRIMARY_3": "Primaire - Troisième année",
+    "PRIMARY_4": "Primaire - Quatrième année",
+    "PRIMARY_5": "Primaire - Cinquième année",
+    "SECONDARY_1": "Secondaire - Première année (AS1)",
+    "SECONDARY_2": "Secondaire - Deuxième année (AS2)",
+    "SECONDARY_3": "Secondaire - Troisième année (AS3)"
   },
   "teachers": {
     "page": {
@@ -446,11 +488,5 @@
     "table": {
       "title": "Les enseignants"
     }
-  },
-  "roles": {
-    "NONE": "Aucun",
-    "ADMIN": "ADMIN",
-    "TEACHER": "ENSEIGNANT",
-    "STUDENT": "STUDENT"
   }
 }

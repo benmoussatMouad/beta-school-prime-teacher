@@ -32,9 +32,26 @@ const VuiSelect = forwardRef((
     onChange,
     options,
     isRoot,
+    typeSelect,
     ...rest
   }, ref) => {
   const { t } = useTranslation();
+
+  const renderText = (value) => {
+    switch (typeSelect) {
+      case "educationalBranches":
+        return t(`educationalBranches.${value}`);
+      case "teacherClasses":
+        return t(`teacherClass.${value}`);
+      case "level":
+        return t(`level.${value}`);
+      case "subjects":
+        return t(`subjects.${value}`);
+      case "roles":
+        return t(`roles.${value}`);
+    }
+  };
+
   return (
     <FormControl fullWidth>
       {/* Use dynamic label */}
@@ -56,7 +73,7 @@ const VuiSelect = forwardRef((
       >
         {options.map((value, index) => (
           <MenuItem key={index} value={value}>
-            {isRoot ? t(`roles.${value}`) : subject ? t(`subjects.${value}`) : t(`teacherClass.${value}`)}
+            {renderText(value)}
           </MenuItem>
         ))}
       </StyledSelect>

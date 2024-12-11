@@ -80,6 +80,7 @@
       "views": "المشاهدات"
     }
   },
+  "currentEnrollment": "جميع المسجلين",
   "dashboard": {
     "course": "دورة",
     "coursesCard": {
@@ -135,20 +136,34 @@
     },
     "description": "سيؤدي هذا الإجراء إلى تغيير صورة ملفك الشخصي. هل تريد المتابعة؟",
     "errors": {
-      "price_min": "الحد الأدنى لسعر الخطأ"
+      "duration_min": "المدة",
+      "price_min": "الحد الأدنى لسعر الخطأ",
+      "required": "ملء الفراغ"
     },
     "forms": {
       "attachments": "الملحقات",
       "description": "وصف الدورة",
-      "level": "مستويات الطلاب",
+      "discount": "تخفيض",
+      "duration": "مدة الدورة",
+      "educationalBranches": "فروع التعليم",
+      "enableDiscount": "تفعيل الخصم",
+      "enrollmentDeadline": "الموعد النهائي للتسجيل",
+      "language": "اللغة",
+      "level": "مستوى الصعوبة ",
+      "maxParticipants": "الحد الأقصى للمشاركين",
       "price": "السعر",
+      "selectteacherClasses": "تحديد فصول المعلم",
       "subjects": "موضوع الدورة",
+      "teacherClasses": "سنة الدراسة",
       "title": "عنوان الدورة",
       "video": "الفيديو"
     },
     "required": {
       "description": "الوصف مطلوب",
+      "educationalBranches": "الفروع المطلوبة",
+      "language": "اللغة المطلوبة",
       "price": "السعر المطلوب",
+      "teacherClasses": "السنة الدراسية المطلوبة",
       "title": "العنوان مطلوب",
       "video": "الفيديو المطلوب "
     },
@@ -157,6 +172,17 @@
       "attachments": "رفع المرفقات",
       "video": "رفع الفيديو"
     }
+  },
+  "educationalBranches": {
+    "ALL_BRANCHES": "جميع الفروع",
+    "MIDDLE_GENERAL": "التعليم المتوسط العام",
+    "PRIMARY_GENERAL": "التعليم الابتدائي العام",
+    "SECONDARY_ARTS": "الثانوية - الفنون",
+    "SECONDARY_LITERATURE": "الثانوية - الأدب",
+    "SECONDARY_MANAGEMENT_ECONOMIES": "الثانوية - الإدارة والاقتصاد",
+    "SECONDARY_MATHEMATICS": "الثانوية - الرياضيات",
+    "SECONDARY_SCIENCE": "الثانوية - العلوم",
+    "SECONDARY_TECHNIQUE_MATH": "الثانوية - التقنية والرياضيات"
   },
   "faq": {
     "1": {
@@ -244,6 +270,11 @@
     "years": "سنوات الخبرة",
     "yearsOfExperience": "سنوات الخبرة"
   },
+  "level": {
+    "ADVANCED": "متقدم",
+    "BEGINNER": "مبتدئ",
+    "INTERMEDIATE": "متوسط"
+  },
   "login": {
     "already": "ليس لديك حساب؟",
     "description": "أدخل عنوان بريدك الإلكتروني وكلمة المرور لتسجيل الدخول",
@@ -315,8 +346,15 @@
     "description": "أدخل كلمة المرور الجديدة وقم بتأكيدها",
     "reset": "إعادة تعيين كلمة المرور الخاصة بك"
   },
+  "roles": {
+    "ADMIN": "المشرف",
+    "NONE": "لا يوجد",
+    "STUDENT": "طالب",
+    "TEACHER": "مدرس"
+  },
   "routes": {
     "account-pages": "صفحات الحساب",
+    "administrateurs": "المشرفون",
     "allCourses": "دورات المعلمين",
     "cours": "الدورة",
     "courses": "الدورات",
@@ -325,8 +363,7 @@
     "profile": "الملف الشخصي",
     "students": "الطلاب",
     "support": "الدعم",
-    "teachers": "المعلمون",
-    "administrateurs": "المشرفون"
+    "teachers": "المعلمون"
   },
   "signup": {
     "already": "هل لديك حساب؟",
@@ -423,15 +460,20 @@
     }
   },
   "teacherClass": {
-    "AM2": "AM2",
-    "AM3": "AM3",
-    "AS1": "AS1",
-    "AS2": "AS2",
-    "AS3": "AS3",
-    "NONE": "لا يوجد",
-    "OTHER": "آخر",
-    "TM2": "TM2",
-    "TM3": "TM3"
+    "MIDDLE_1": "المتوسط - السنة الأولى (متوسط أول)",
+    "MIDDLE_2": "المتوسط - السنة الثانية (متوسط ثاني)",
+    "MIDDLE_3": "المتوسط - السنة الثالثة (متوسط ثالث)",
+    "MIDDLE_4": "المتوسط - السنة الرابعة",
+    "NONE": "لا شيء",
+    "OTHER": "أخرى",
+    "PRIMARY_1": "الابتدائي - السنة الأولى",
+    "PRIMARY_2": "الابتدائي - السنة الثانية",
+    "PRIMARY_3": "الابتدائي - السنة الثالثة",
+    "PRIMARY_4": "الابتدائي - السنة الرابعة",
+    "PRIMARY_5": "الابتدائي - السنة الخامسة",
+    "SECONDARY_1": "الثانوي - السنة الأولى (ثانوي أول)",
+    "SECONDARY_2": "الثانوي - السنة الثانية (ثانوي ثاني)",
+    "SECONDARY_3": "الثانوي - السنة الثالثة (ثانوي ثالث)"
   },
   "teachers": {
     "page": {
@@ -446,11 +488,5 @@
     "table": {
       "title": "المدرسين"
     }
-  },
-  "roles": {
-    "NONE": "لا يوجد",
-    "ADMIN": "المشرف",
-    "STUDENT": "طالب",
-    "TEACHER": "مدرس"
   }
 }

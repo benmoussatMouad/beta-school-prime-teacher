@@ -31,14 +31,41 @@ export const Subjects = [
   "ENGLISH",
 ];
 
+export const EducationalBranches = [
+  // Primary Education
+  "PRIMARY_GENERAL",
+  // Middle Education
+  "MIDDLE_GENERAL",
+  // Secondary Education
+  "SECONDARY_SCIENCE",
+  "SECONDARY_ARTS",
+  "SECONDARY_LITERATURE",
+  "SECONDARY_MATHEMATICS",
+  "SECONDARY_TECHNIQUE_MATH",
+  "SECONDARY_MANAGEMENT_ECONOMIES",
+
+  "ALL_BRANCHES",
+];
+
+export const CourseLevel = [
+  "BEGINNER",
+  "INTERMEDIATE",
+  "ADVANCED",
+];
+
 export const StudentsLevel = [
-  "AS1",
-  "AS2",
-  "AS3",
-  "AM2",
-  "AM3",
-  "TM2",
-  "TM3",
+  "PRIMARY_1",
+  "PRIMARY_2",
+  "PRIMARY_3",
+  "PRIMARY_4",
+  "PRIMARY_5",
+  "MIDDLE_1", // Equivalent to AM1
+  "MIDDLE_2", // Equivalent to AM2
+  "MIDDLE_3", // Equivalent to AM3
+  "MIDDLE_4",
+  "SECONDARY_1", // Equivalent to AS1
+  "SECONDARY_2",// Equivalent to AS2
+  "SECONDARY_3", // Equivalent to AS3
   "OTHER",
 ];
 
@@ -56,13 +83,18 @@ export const FiltersSubjects = [
 
 export const FiltersStudentsLevel = [
   "NONE",
-  "AS1",
-  "AS2",
-  "AS3",
-  "AM2",
-  "AM3",
-  "TM2",
-  "TM3",
+  "PRIMARY_1",
+  "PRIMARY_2",
+  "PRIMARY_3",
+  "PRIMARY_4",
+  "PRIMARY_5",
+  "MIDDLE_1", // Equivalent to AM1
+  "MIDDLE_2", // Equivalent to AM2
+  "MIDDLE_3", // Equivalent to AM3
+  "MIDDLE_4",
+  "SECONDARY_1", // Equivalent to AS1
+  "SECONDARY_2",// Equivalent to AS2
+  "SECONDARY_3", // Equivalent to AS3
   "OTHER",
 ];
 
@@ -214,6 +246,7 @@ export const getFiltersInputs = ({ tableId, onSearchChange, subject, selectedRol
         </Grid>
         <Grid item sx={{ display: "flex", alignItems: "center" }} xs={6} sm={6} md={role === "ROOT" ? 2.5 : 3}>
           <VuiSelect
+            typeSelect={"subjects"}
             onChange={onSearchChange}
             label={t("signup.forms.subject")}
             options={FiltersSubjects}
@@ -225,6 +258,7 @@ export const getFiltersInputs = ({ tableId, onSearchChange, subject, selectedRol
         {role === "ROOT" ? <Grid item sx={{ display: "flex", alignItems: "center" }} xs={6} sm={6} md={2}>
           <VuiSelect
             isRoot={true}
+            typeSelect={"roles"}
             onChange={onSearchChange}
             options={FiltersRoles}
             value={selectedRole || FiltersRoles[0]}
@@ -251,6 +285,7 @@ export const getFiltersInputs = ({ tableId, onSearchChange, subject, selectedRol
             options={FiltersSubjects}
             value={subject || FiltersSubjects[0]}
             name={"subject"}
+            typeSelect={"subjects"}
           />
         </Grid>
         <Grid item sx={{ display: "flex", alignItems: "center" }} xs={12} md={4}>
@@ -261,6 +296,7 @@ export const getFiltersInputs = ({ tableId, onSearchChange, subject, selectedRol
             options={FiltersStudentsLevel}
             value={teacherClass || FiltersStudentsLevel[0]}
             name={"teacherClass"}
+            typeSelect={"teacherClasses"}
           />
         </Grid>
 

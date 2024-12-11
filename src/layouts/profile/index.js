@@ -66,7 +66,6 @@ function Overview() {
   const { mutate } = useDeleteTeacher();
 
   const handleConfirmDialogClose = (confirmed) => {
-
     if (confirmed) {
       mutate();
     }

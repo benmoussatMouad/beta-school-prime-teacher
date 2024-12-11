@@ -235,6 +235,7 @@ function SignUp() {
               onChange={(e) => setFormData({ ...formDataState, subject: e.target.value })}
               label={t("signup.forms.subject")}
               options={Subjects}
+              typeSelect={"subjects"}
             />
             {errors.subject &&
               <VuiTypography sx={{ color: "red", fontSize: "0.7rem" }}>{errors.subject.message}</VuiTypography>}
@@ -295,7 +296,8 @@ function SignUp() {
               onChange={handleAvatarChange}
               style={{ display: "none" }}
             />
-            <Avatar src={avatarPreview} sx={{ width: 100, height: 100, cursor: "pointer" }} onClick={() => document.querySelector("input[type=\"file\"]").click()} />
+            <Avatar src={avatarPreview} sx={{ width: 100, height: 100, cursor: "pointer" }}
+                    onClick={() => document.querySelector("input[type=\"file\"]").click()} />
             {errors.profilePic &&
               <VuiTypography sx={{ color: "red", fontSize: "0.7rem" }}>{errors.profilePic.message}</VuiTypography>}
           </VuiBox>

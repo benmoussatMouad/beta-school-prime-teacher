@@ -283,15 +283,17 @@ function CoursDetails() {
                 {t("cours.description")}
               </VuiTypography>
             </VuiBox>
-            <VuiTypography color={"white"} variant="h4" component="h2" gutterBottom
-                           fontWeight="bold">
-              {data.title} {/* Assuming data has a title property */}
+            <VuiTypography color={"white"} variant="h4" component="h2" gutterBottom fontWeight="bold">
+              {data.title}
             </VuiTypography>
             <VuiTypography color={"white"} variant="subtitle1" gutterBottom>
               {`${t("Instructor")}: ${user.lastName} ${user.firstName}`} {/* Assuming data has an instructor property */}
             </VuiTypography>
             <VuiTypography color={"white"} variant="body1" sx={{ textAlign: "justify", mt: 1 }}>
               {data.description}
+            </VuiTypography>
+            <VuiTypography color={"white"} variant="subtitle2" sx={{ textAlign: "justify", mt: 1 }}>
+              {`${t("currentEnrollment")}: ${data.currentEnrollment || "0"}`} {/* Assuming data has an instructor property */}
             </VuiTypography>
           </Card>
           <Card sx={{

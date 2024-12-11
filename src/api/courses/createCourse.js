@@ -21,7 +21,6 @@ export function useCreateCourse() {
     mutationFn: createCourseFn,
     onSuccess: (data) => {
       // Trigger success Snackbar
-      console.log(data);
       showSnackBar(dispatch, t("course.create.success"), "success");
       history.push(`/cours/${data.id}`);
       queryClient.invalidateQueries("courses");

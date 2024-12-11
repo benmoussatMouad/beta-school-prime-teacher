@@ -33,9 +33,9 @@ import { useTranslation } from "react-i18next";
 import { coursesTableData } from "./data/coursesTableData";
 import VuiBadge from "../../components/VuiBadge";
 import Table from "examples/Tables/Table";
-import { useGetCourses } from "../../api/courses";
 import { useState } from "react";
 import { getAccessToken } from "../../utils";
+import { useGetAdminCourses } from "../../api/courses/getAdminCourses";
 
 function AllCourses() {
 
@@ -48,7 +48,7 @@ function AllCourses() {
   const token = getAccessToken();
 
   const { user } = useAuth();
-  const { data, isLoading } = useGetCourses(token, title, teacherClass, subject, page, rowsPerPage);
+  const { data, isLoading } = useGetAdminCourses(token, title, teacherClass, subject, page, rowsPerPage);
 
   const { t } = useTranslation();
 
