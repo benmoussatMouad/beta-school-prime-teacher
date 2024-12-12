@@ -1,5 +1,11 @@
 {
+  "ACCEPTED": "Le cours est ACCEPTÉ",
   "Instructor": "Instructeur",
+  "PENDING": "Le cours est en attente d'acceptation par l'administration",
+  "REJECT": "Le cours est REFUSÉ",
+  "TO_REVIEW": "Le cours est en mode révision pour que l'administration l'accepte",
+  "UNDER_CREATION": "Le cours est en mode création",
+  "UNKNOWN_STATUS": "Le cours a un statut inconnu",
   "announcement": {
     "title": "Annonces"
   },
@@ -40,6 +46,9 @@
     "title": "Mes cours"
   },
   "course": {
+    "acceptCourse": {
+      "success": "Accepter le cours avec succès "
+    },
     "accountDeletion": {
       "description": "Êtes-vous sûr de supprimer le cours ?",
       "title": "Supprimer le cours"
@@ -49,6 +58,7 @@
     },
     "filter": {
       "level": "Niveau",
+      "status": "Status",
       "subject": "Sujet",
       "title": "Titre"
     },
@@ -61,9 +71,15 @@
       "send": "Ce cours est actuellement en phase de création. Cliquez sur le bouton ci-dessous pour demander l'approbation de l'administrateur.",
       "title": "Ce cours est encore en attente, veuillez attendre que l'administrateur l'approuve."
     },
+    "rejectCourse": {
+      "success": "Rejeter le cours avec succès "
+    },
     "update": {
       "success": "Vous mettez à jour le cours avec succès",
       "title": "Mettre à jour votre cours "
+    },
+    "updateToReview": {
+      "success": "Mise à jour à réviser"
     }
   },
   "courses": {
@@ -118,6 +134,10 @@
     }
   },
   "dialog": {
+    "approveCourse": {
+      "description": "Confirmez que vous acceptez de la demande",
+      "title": "Approuver le cours"
+    },
     "chapter": {
       "title": "Créer un nouveau chapitre pour le cours"
     },
@@ -157,6 +177,11 @@
       "teacherClasses": "Année d'étude",
       "title": "Titre du cours",
       "video": "Vidéo"
+    },
+    "rejectCourse": {
+      "description": "Confirmer le rejet de la demande",
+      "notePlaceholder": "Laissez une note pour le refus du cours",
+      "title": "Rejeter le cours"
     },
     "required": {
       "description": "La description est obligatoire",
@@ -492,5 +517,13 @@
     "table": {
       "title": "Les enseignants"
     }
+  },
+  "status": {
+    "NONE": "Aucun",
+    "UNDER_CREATION": "En cours de création",
+    "PENDING": "En attente",
+    "ACCEPTED": "Accepté",
+    "TO_REVIEW": "À revoir",
+    "REJECT": "Rejeté"
   }
 }

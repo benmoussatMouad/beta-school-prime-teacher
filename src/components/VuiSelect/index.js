@@ -49,6 +49,8 @@ const VuiSelect = forwardRef((
         return t(`subjects.${value}`);
       case "roles":
         return t(`roles.${value}`);
+      case "status":
+        return t(`status.${value}`);
     }
   };
 

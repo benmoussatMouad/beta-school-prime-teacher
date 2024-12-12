@@ -48,7 +48,7 @@ function Courses() {
   const token = getAccessToken();
 
   const { user } = useAuth();
-  const { data, isLoading } = useGetCourses(token, title, teacherClass, subject, page, rowsPerPage);
+  const { data, isLoading } = useGetCourses({ token, title, teacherClass, subject, page, rowsPerPage });
 
   const { t } = useTranslation();
 

@@ -143,7 +143,7 @@ export const teacherTableData = (t, data, handleOpen, user) => {
         />
       </VuiTypography>
     ),
-    [t("demands.table.action")]: role === "ROOT" ? (
+    [t("demands.table.action")]: role === "ROOT" && item.role !== "ADMIN" ? (
       <VuiButton
         variant="contained"
         sx={{ padding: "0px", height: "30px" }}

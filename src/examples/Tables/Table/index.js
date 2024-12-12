@@ -21,6 +21,7 @@ function Table(
     isLoading,
     subject,
     teacherClass,
+    status,
     totalCount,
     tableId,
     selectedRole,
@@ -92,7 +93,7 @@ function Table(
   return (
     <>
       {/* Search Input */}
-      {getFiltersInputs({ tableId, onSearchChange, subject, selectedRole, teacherClass, t, role })}
+      {getFiltersInputs({ tableId, onSearchChange, subject, selectedRole, teacherClass, status, t, role })}
       {isLoading ? (
         <VuiBox display="flex" justifyContent="center" alignItems="center" py={3}>
           <CircularProgress color="info" />

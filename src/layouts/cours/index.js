@@ -37,6 +37,8 @@ import { useLocation } from "react-router-dom";
 import { useGetCourse } from "../../api/courses/getCourse";
 import VuiLoading from "../../components/VuiLoading";
 import DeleteCourse from "./components/DeleteCourse";
+import { useUpdateToReview } from "../../api/courses/sendToReview";
+import ActionsCourse from "./components/Actions/Actions";
 
 const { black, gradients } = colors;
 const { card } = gradients;
@@ -58,6 +60,7 @@ function CoursDetails() {
   const swiperRef = useRef(null); // Create a ref for Swiper
 
   const { data, isLoading } = useGetCourse(coursId);
+  const { mutate: updateToReview } = useUpdateToReview();
 
   const {
     register,
@@ -106,6 +109,10 @@ function CoursDetails() {
     reset();
   };
 
+  const changeStatusToReview = async () => {
+    await updateToReview(data.id);
+  };
+
   if (isLoading) {
     return <VuiLoading />;
   }
@@ -144,6 +151,9 @@ function CoursDetails() {
   }
 
   const user = context.user.user;
+  const teacher = context.user.teacher;
+
+  const myOwnCourse = data?.teacherId === teacher?.id;
 
   return (
     <DashboardLayout user={context.user}>
@@ -276,7 +286,11 @@ function CoursDetails() {
         </DialogActions>
       </Dialog>
       <Grid container spacing={3} my="20px">
-        <Grid item xs={12} xl={8}>
+        <Grid item xs={12} xl={myOwnCourse ? 8 : 12}>
+          {
+            user.role === "ROOT" || user.role === "ADMIN" ? data.status === "TO_REVIEW" &&
+              <ActionsCourse coursId={data.id} /> : ""
+          }
           <Card>
             <VuiBox sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", mb: 2 }}>
               <VuiTypography variant="lg" sx={{ mb: 2 }} fontWeight="bold" color="white" textTransform="capitalize">
@@ -296,17 +310,16 @@ function CoursDetails() {
               {`${t("currentEnrollment")}: ${data.currentEnrollment || "0"}`} {/* Assuming data has an instructor property */}
             </VuiTypography>
           </Card>
-          <Card sx={{
-            marginTop: 1,
-          }}>
+          <Card sx={{ marginTop: 1 }}>
             <VuiBox display="flex" flexDirection="column" height="100%">
               <VuiBox sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", mb: 2 }}>
                 <VuiTypography variant="lg" sx={{ mb: 2 }} fontWeight="bold" color="white" textTransform="capitalize">
                   {t("chapters.title")}
                 </VuiTypography>
-                <VuiButton onClick={() => setOpenDialog(true)} color="info" variant="gradient" size="small">
-                  + {t("chapter.create")}
-                </VuiButton>
+                {myOwnCourse &&
+                  <VuiButton onClick={() => setOpenDialog(true)} color="info" variant="gradient" size="small">
+                    + {t("chapter.create")}
+                  </VuiButton>}
               </VuiBox>
               {/* Overflow controlled Box container */}
               <Box
@@ -415,8 +428,8 @@ function CoursDetails() {
               </Box>
             </VuiBox>
           </Card>
-          <Card
-            sx={{
+          {data.status === "UNDER_CREATION" && myOwnCourse ?
+            <Card sx={{
               display: "flex",
               flexDirection: { xs: "column", sm: "row" },  // Column direction on small devices
               alignItems: "center",
@@ -426,28 +439,35 @@ function CoursDetails() {
               gap: 2,  // Add space between elements
               color: "white",
             }}
-          >
-            <VuiTypography
-              variant="body2"
-              color="white"
-              sx={{ textAlign: { xs: "center", sm: "left" } }} // Center align on small screens
             >
-              {t("course.pending.send")}
-            </VuiTypography>
-            <VuiButton
-              variant="contained"
-              color="info"
-              sx={{ width: { xs: "100%", sm: "auto" } }}  // Full width on small screens
-            >
-              {t("course.pending.button")}
-            </VuiButton>
-          </Card>
+              <VuiTypography
+                variant="body2"
+                color="white"
+                sx={{ textAlign: { xs: "center", sm: "left" } }} // Center align on small screens
+              >
+                {t("course.pending.send")}
+              </VuiTypography>
+              <VuiButton
+                variant="contained"
+                color="info"
+                sx={{ width: { xs: "100%", sm: "auto" } }}  // Full width on small screens
+                onClick={changeStatusToReview}
+              >
+                {t("course.pending.button")}
+              </VuiButton>
+            </Card> : ""}
         </Grid>
-        <Grid item xs={12} xl={4}>
-          <UpdateCourse data={data} isLoading={isLoading} />
-        </Grid>
+        {
+          myOwnCourse && <Grid item xs={12} xl={4}>
+            <UpdateCourse data={data} isLoading={isLoading} />
+          </Grid>
+        }
       </Grid>
-      <DeleteCourse coursId={coursId} />
+      {
+        user.role === "ROOT" || myOwnCourse ?
+          <DeleteCourse coursId={coursId} /> : ""
+      }
+
     </DashboardLayout>
   );
 }

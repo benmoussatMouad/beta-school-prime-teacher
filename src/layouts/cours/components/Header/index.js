@@ -64,6 +64,27 @@ function Header({ pageName, data }) {
   const open2 = Boolean(anchorEl2);
 
 
+  const renderNote = () => {
+    if (data.statusNote && data.status === "REJECT") {
+      return `${data.statusNote}`;
+    } else {
+      switch (data.status) {
+        case "UNDER_CREATION":
+          return t("UNDER_CREATION");
+        case "PENDING":
+          return t("PENDING");
+        case "ACCEPTED":
+          return t("ACCEPTED");
+        case "TO_REVIEW":
+          return t("TO_REVIEW");
+        case "REJECT":
+          return t("REJECT");
+        default:
+          return t("UNKNOWN_STATUS"); // If an unknown status is encountered
+      }
+    }
+  };
+
   return (
     <VuiBox position="relative">
       <DashboardNavbar pageName={pageName} light />
@@ -71,7 +92,7 @@ function Header({ pageName, data }) {
         <Grid container alignItems="center" justifyContent="space-between"
               sx={{ gap: { xs: "16px", sm: "12px", md: "8px" }, color: "white", textAlign: "center" }}>
           <VuiTypography variant="h6" sx={{ fontWeight: "bold", width: "100%" }} color="white">
-            {t("course.pending.title")}
+            {renderNote()}
           </VuiTypography>
         </Grid>
       </Card>
