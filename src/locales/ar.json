@@ -317,6 +317,7 @@
     "signin": "تسجيل حساب جديد",
     "welcome": "سعيد برؤيتك!"
   },
+  "note": "ملاحظة",
   "placeholder": {
     "email": "بريدك الإلكتروني",
     "firstName": "اسمك الأول",
@@ -442,6 +443,14 @@
     "updateProfile": "تم تحديث الملف الشخصي بنجاح!",
     "verifyEmail": "تم التحقق من بريدك الإلكتروني بنجاح!"
   },
+  "status": {
+    "ACCEPTED": "مقبول",
+    "NONE": "لا شيء",
+    "PENDING": "قيد الانتظار",
+    "REJECT": "مرفوض",
+    "TO_REVIEW": "للمراجعة",
+    "UNDER_CREATION": "تحت الإنشاء"
+  },
   "students": {
     "table": {
       "action": "الإجراء",
@@ -517,13 +526,5 @@
     "table": {
       "title": "المدرسين"
     }
-  },
-  "status": {
-    "NONE": "لا شيء",
-    "UNDER_CREATION": "تحت الإنشاء",
-    "PENDING": "قيد الانتظار",
-    "ACCEPTED": "مقبول",
-    "TO_REVIEW": "للمراجعة",
-    "REJECT": "مرفوض"
   }
 }

@@ -51,7 +51,7 @@ export function useGetAdminCourses(
     role,
     courseStatus,
     page = 0,
-    limit = 100,
+    limit = 5,
   }) {
   // Consolidate options for clarity and extendibility
   const queryOptions = { role, title, teacherClass, subject, courseStatus, page, limit };

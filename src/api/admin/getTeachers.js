@@ -10,7 +10,7 @@ const buildQueryParams = (
     subject = "",
     role = "",
     page = 0,
-    limit = 10,
+    limit = 5,
   }) => {
   const params = {};
 
@@ -47,7 +47,7 @@ export function useGetTeachers(
     subject = "",
     role = "",
     page = 1,
-    limit = 10,
+    limit = 5,
   }) {
   const queryOptions = { firstName, lastName, email, subject, role, page, limit };
 

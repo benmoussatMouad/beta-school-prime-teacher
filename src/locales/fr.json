@@ -317,6 +317,7 @@
     "signin": "Créer un nouveau compte",
     "welcome": "Ravi de vous revoir !"
   },
+  "note": "Note",
   "placeholder": {
     "email": "Votre e-mail",
     "firstName": "Votre prénom",
@@ -442,6 +443,14 @@
     "updateProfile": "Profil mis à jour avec succès !",
     "verifyEmail": "Votre e-mail a été vérifié avec succès !"
   },
+  "status": {
+    "ACCEPTED": "Accepté",
+    "NONE": "Aucun",
+    "PENDING": "En attente",
+    "REJECT": "Rejeté",
+    "TO_REVIEW": "À revoir",
+    "UNDER_CREATION": "En cours de création"
+  },
   "students": {
     "table": {
       "action": "Action",
@@ -517,13 +526,5 @@
     "table": {
       "title": "Les enseignants"
     }
-  },
-  "status": {
-    "NONE": "Aucun",
-    "UNDER_CREATION": "En cours de création",
-    "PENDING": "En attente",
-    "ACCEPTED": "Accepté",
-    "TO_REVIEW": "À revoir",
-    "REJECT": "Rejeté"
   }
 }

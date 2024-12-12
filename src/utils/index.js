@@ -275,7 +275,7 @@ export const getFiltersInputs = ({ tableId, onSearchChange, subject, selectedRol
           />
         </Grid> : ""}
       </Grid>;
-    case "courses":
+    case "teachersCourses":
       return <Grid container spacing={2}>
         <Grid item xs={12} md={role === "ROOT" ? 3 : 4}>
           <VuiInput
@@ -319,6 +319,51 @@ export const getFiltersInputs = ({ tableId, onSearchChange, subject, selectedRol
               typeSelect={"status"}
             />
           </Grid> : ""}
+
+      </Grid>;
+    case "courses":
+      return <Grid container spacing={2}>
+        <Grid item xs={12} md={3}>
+          <VuiInput
+            placeholder={t("course.filter.title")}
+            fullWidth
+            onChange={onSearchChange}
+            sx={{ my: 1 }}
+            name="title"
+          />
+        </Grid>
+        <Grid item sx={{ display: "flex", alignItems: "center" }} xs={12} md={3}>
+          <VuiSelect
+            onChange={onSearchChange}
+            label={t("course.filter.subject")}
+            options={FiltersSubjects}
+            value={subject || FiltersSubjects[0]}
+            name={"subject"}
+            typeSelect={"subjects"}
+          />
+        </Grid>
+        <Grid item sx={{ display: "flex", alignItems: "center" }} xs={12} md={3}>
+          <VuiSelect
+            t={false}
+            onChange={onSearchChange}
+            label={t("course.filter.level")}
+            options={FiltersStudentsLevel}
+            value={teacherClass || FiltersStudentsLevel[0]}
+            name={"teacherClass"}
+            typeSelect={"teacherClasses"}
+          />
+        </Grid>
+        <Grid item sx={{ display: "flex", alignItems: "center" }} xs={12} md={3}>
+          <VuiSelect
+            t={false}
+            onChange={onSearchChange}
+            label={t("course.filter.status")}
+            options={FiltersStatus}
+            value={status || FiltersStatus[0]}
+            name={"status"}
+            typeSelect={"status"}
+          />
+        </Grid>
 
       </Grid>;
   }

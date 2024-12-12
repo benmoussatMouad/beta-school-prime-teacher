@@ -48,7 +48,7 @@ export function useGetDemands(
     subject = "",
     role = "",
     page = 0,
-    limit = 10,
+    limit = 5,
   }) {
   const queryOptions = { firstName, lastName, email, subject, role, page, limit };
 

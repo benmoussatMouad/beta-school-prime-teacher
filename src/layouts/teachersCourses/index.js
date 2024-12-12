@@ -142,7 +142,7 @@ function AllCourses() {
               subject={subject}
               teacherClass={teacherClass}
               status={courseStatus}
-              tableId={"courses"}
+              tableId={"teachersCourses"}
             />
           </VuiBox>
         </Card>

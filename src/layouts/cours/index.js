@@ -53,7 +53,6 @@ function CoursDetails() {
   const { t } = useTranslation();
   const context = useAuth();
   const [openDialog, setOpenDialog] = useState(false); // Dialog state for confirmation
-
   const [controller] = useVisionUIController();
   const { direction } = controller;
 
@@ -428,7 +427,7 @@ function CoursDetails() {
               </Box>
             </VuiBox>
           </Card>
-          {data.status === "UNDER_CREATION" && myOwnCourse ?
+          {(data.status === "UNDER_CREATION" || data.status === "REJECT") && myOwnCourse ?
             <Card sx={{
               display: "flex",
               flexDirection: { xs: "column", sm: "row" },  // Column direction on small devices

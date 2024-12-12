@@ -65,23 +65,26 @@ function Header({ pageName, data }) {
 
 
   const renderNote = () => {
-    if (data.statusNote && data.status === "REJECT") {
-      return `${data.statusNote}`;
-    } else {
-      switch (data.status) {
-        case "UNDER_CREATION":
-          return t("UNDER_CREATION");
-        case "PENDING":
-          return t("PENDING");
-        case "ACCEPTED":
-          return t("ACCEPTED");
-        case "TO_REVIEW":
-          return t("TO_REVIEW");
-        case "REJECT":
-          return t("REJECT");
-        default:
-          return t("UNKNOWN_STATUS"); // If an unknown status is encountered
-      }
+    switch (data.status) {
+      case "UNDER_CREATION":
+        return t("UNDER_CREATION");
+      case "PENDING":
+        return t("PENDING");
+      case "ACCEPTED":
+        return t("ACCEPTED");
+      case "TO_REVIEW":
+        return t("TO_REVIEW");
+      case "REJECT":
+        return <VuiBox>
+          <VuiTypography variant="subtitle2" color="white" fontWeight="medium">
+            {t("REJECT")}
+          </VuiTypography>
+          <VuiTypography variant="caption" color="white" fontWeight="medium">
+            {t('note')}: {data.statusNote}
+          </VuiTypography>
+        </VuiBox>;
+      default:
+        return t("UNKNOWN_STATUS"); // If an unknown status is encountered
     }
   };
 

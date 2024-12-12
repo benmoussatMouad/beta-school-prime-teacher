@@ -44,6 +44,8 @@ function Courses() {
   const [subject, setSubjects] = useState("");
   const [title, setTitle] = useState("");
   const [teacherClass, setTeacherClass] = useState("");
+  const [courseStatus, setStatus] = useState("");
+
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const [openDialog, setOpenDialog] = useState(false);
@@ -51,7 +53,7 @@ function Courses() {
   const token = getAccessToken();
 
   const { user } = useAuth();
-  const { data, isLoading } = useGetCourses({ token, title, teacherClass, subject, page, rowsPerPage });
+  const { data, isLoading } = useGetCourses({ token, title, teacherClass, subject, courseStatus, page, rowsPerPage });
 
   const { t } = useTranslation();
 
@@ -76,6 +78,13 @@ function Courses() {
           setTeacherClass("");
         } else {
           setTeacherClass(value);
+        }
+        break;
+      case "status":
+        if (value === "NONE") {
+          setStatus("");
+        } else {
+          setStatus(value);
         }
         break;
       default:
@@ -139,6 +148,7 @@ function Courses() {
               subject={subject}
               teacherClass={teacherClass}
               tableId={"courses"}
+              status={courseStatus}
             />
           </VuiBox>
         </Card>

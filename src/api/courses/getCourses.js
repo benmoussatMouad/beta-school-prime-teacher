@@ -7,6 +7,7 @@ const buildQueryParams = (
     title,
     teacherClass,
     subject,
+    courseStatus,
     page,
     limit,
   }) => {
@@ -15,6 +16,7 @@ const buildQueryParams = (
   if (title) params.title = title;
   if (teacherClass) params.teacherClass = teacherClass;
   if (subject) params.subject = subject;
+  if (courseStatus) params.status = courseStatus;
   if (page !== undefined) params.page = page + 1; // API generally expects 1-based pages
   if (limit !== undefined) params.limit = limit;
 
@@ -40,10 +42,11 @@ export function useGetCourses(
     title = "",
     teacherClass = "",
     subject = "",
+    courseStatus,
     page = 0,
-    limit = 100,
+    limit = 5,
   }) {
-  const queryOptions = { title, teacherClass, subject, page, limit };
+  const queryOptions = { title, teacherClass, subject, courseStatus, page, limit };
 
   return useQuery(
     ["courses", token, queryOptions], // Use queryOptions for dynamic query key
