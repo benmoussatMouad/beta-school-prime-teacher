@@ -36,6 +36,8 @@ import Table from "examples/Tables/Table";
 import { useGetCourses } from "../../api/courses";
 import { useState } from "react";
 import { getAccessToken } from "../../utils";
+import CreateCoursDialog from "../../examples/Dialogs/CreateCours";
+import VuiButton from "../../components/VuiButton";
 
 function Courses() {
 
@@ -44,6 +46,7 @@ function Courses() {
   const [teacherClass, setTeacherClass] = useState("");
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
+  const [openDialog, setOpenDialog] = useState(false);
 
   const token = getAccessToken();
 
@@ -89,16 +92,25 @@ function Courses() {
     setPage(0); // Reset page to 0 whenever rows per page is changed
   };
 
+
+  const closeDialog = () => {
+    setOpenDialog(false);
+  };
+
   return (
     <DashboardLayout user={user}>
       <DashboardNavbar pageName={"Mes Cours"} />
+      <CreateCoursDialog closeDialog={closeDialog} openDialog={openDialog} />
       <VuiBox py={3}>
         <Card>
-          <VuiBox display="flex" justifyContent="space-between" alignItems="center">
+          <VuiBox display="flex" justifyContent="space-between" alignItems="center" mb={1}>
             <VuiTypography variant="lg" color="white">
               {t("cours.title")}
               <VuiBadge color="warning" variant="gradient" badgeContent="En cours de development" size="lg" />
             </VuiTypography>
+            <VuiButton onClick={() => setOpenDialog(true)} color="info" variant="gradient" size="small">
+              + {t("dashboard.coursesCard.addCourse")}
+            </VuiButton>
           </VuiBox>
           <VuiBox
             sx={{
