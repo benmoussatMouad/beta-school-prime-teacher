@@ -117,7 +117,7 @@ function Courses() {
               {t("cours.title")}
               <VuiBadge color="warning" variant="gradient" badgeContent="En cours de development" size="lg" />
             </VuiTypography>
-            <VuiButton onClick={() => setOpenDialog(true)} color="info" variant="gradient" size="small">
+            <VuiButton onClick={() => setOpenDialog(true)} color="primary" variant="gradient" size="medium" >
               + {t("dashboard.coursesCard.addCourse")}
             </VuiButton>
           </VuiBox>
