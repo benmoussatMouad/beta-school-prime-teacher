@@ -4,7 +4,6 @@ import { apiClient } from "../apiClient";
 // Helper function to build query params
 const buildQueryParams = (
   {
-    role,
     title,
     teacherClass,
     subject,
@@ -14,11 +13,7 @@ const buildQueryParams = (
   }) => {
   let params = {};
 
-  if (role === "ADMIN") {
-    params.status = "TO_REVIEW";
-  }
 
-  // Add params only if they have values
   if (title) params.title = title;
   if (teacherClass) params.teacherClass = teacherClass;
   if (subject) params.subject = subject;
@@ -33,7 +28,7 @@ const buildQueryParams = (
 const fetchCourses = async (token, queryOptions) => {
   const params = buildQueryParams(queryOptions);
 
-  const response = await apiClient.get("/course/admin", {
+  const response = await apiClient.get("/course", {
     headers: { Authorization: `Bearer ${token}` },
     params,
   });
@@ -42,7 +37,7 @@ const fetchCourses = async (token, queryOptions) => {
 };
 
 // Custom hook
-export function useGetAdminCourses(
+export function useGetAllCourses(
   {
     token,
     title,

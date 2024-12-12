@@ -59,7 +59,8 @@ import Demands from "./layouts/demands";
 import Teachers from "./layouts/teachers";
 import Support from "./layouts/support";
 import CoursDetails from "./layouts/cours";
-import AllCourses from "./layouts/teachersCourses";
+import AllCourses from "./layouts/allCourses";
+import PendingCourses from "./layouts/pendingCourses";
 
 
 const routes = [
@@ -104,7 +105,19 @@ const routes = [
     component: AllCourses,
     noCollapse: true,
     isProtected: true,
+    isRoot: true,
+  },
+  {
+    type: "collapse",
+    name: "Les course des enseignants",
+    key: "pendingCourses",
+    route: "/pendingCourses",
+    icon: <GiBookshelf size="15px" color="inherit" />,
+    component: PendingCourses,
+    noCollapse: true,
+    isProtected: true,
     isAdmin: true,
+    onlyAdmin: true,
   },
   {
     type: "collapse",

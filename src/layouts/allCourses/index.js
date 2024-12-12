@@ -35,7 +35,7 @@ import VuiBadge from "../../components/VuiBadge";
 import Table from "examples/Tables/Table";
 import { useState } from "react";
 import { getAccessToken } from "../../utils";
-import { useGetAdminCourses } from "../../api/courses/getAdminCourses";
+import { useGetAllCourses } from "../../api/courses/getAllCourses";
 
 function AllCourses() {
 
@@ -53,7 +53,7 @@ function AllCourses() {
   const {
     data,
     isLoading,
-  } = useGetAdminCourses({
+  } = useGetAllCourses({
       token, title, teacherClass, subject, role, courseStatus, page, rowsPerPage,
     },
   );
