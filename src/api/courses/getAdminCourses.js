@@ -1,9 +1,10 @@
 import { useQuery } from "react-query";
 import { apiClient } from "../apiClient";
 
-// Helper function to build query parameters
+// Helper function to build query params
 const buildQueryParams = (
   {
+    role,
     title,
     teacherClass,
     subject,
@@ -11,13 +12,18 @@ const buildQueryParams = (
     page,
     limit,
   }) => {
-  const params = {};
+  let params = {};
 
+  if (role === "ADMIN") {
+    params.status = "TO_REVIEW";
+  }
+
+  // Add params only if they have values
   if (title) params.title = title;
   if (teacherClass) params.teacherClass = teacherClass;
   if (subject) params.subject = subject;
   if (courseStatus) params.status = courseStatus;
-  if (page !== undefined) params.page = page + 1; // API generally expects 1-based pages
+  if (page !== undefined) params.page = page + 1;
   if (limit !== undefined) params.limit = limit;
 
   return params;
@@ -27,7 +33,7 @@ const buildQueryParams = (
 const fetchCourses = async (token, queryOptions) => {
   const params = buildQueryParams(queryOptions);
 
-  const response = await apiClient.get("/course/me", {
+  const response = await apiClient.get("/course/admin", {
     headers: { Authorization: `Bearer ${token}` },
     params,
   });
@@ -36,23 +42,25 @@ const fetchCourses = async (token, queryOptions) => {
 };
 
 // Custom hook
-export function useGetCourses(
+export function useGetAdminCourses(
   {
     token,
-    title = "",
-    teacherClass = "",
-    subject = "",
+    title,
+    teacherClass,
+    subject,
+    role,
     courseStatus,
     page = 0,
     limit = 5,
   }) {
-  const queryOptions = { title, teacherClass, subject, courseStatus, page, limit };
+  // Consolidate options for clarity and extendibility
+  const queryOptions = { role, title, teacherClass, subject, courseStatus, page, limit };
 
   return useQuery(
-    ["courses", token, queryOptions], // Use queryOptions for dynamic query key
-    () => fetchCourses(token, queryOptions), // Pass queryOptions to fetchCourses
+    ["courses", token, queryOptions],
+    () => fetchCourses(token, queryOptions),
     {
-      enabled: !!token, // Only fetch if token exists
+      enabled: !!token, // Only run if token exists
       refetchOnWindowFocus: true,
     },
   );

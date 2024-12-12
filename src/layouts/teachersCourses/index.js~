@@ -36,24 +36,19 @@ import Table from "examples/Tables/Table";
 import { useGetCourses } from "../../api/courses";
 import { useState } from "react";
 import { getAccessToken } from "../../utils";
-import CreateCoursDialog from "../../examples/Dialogs/CreateCours";
-import VuiButton from "../../components/VuiButton";
 
-function Courses() {
+function TeachersCourses() {
 
   const [subject, setSubjects] = useState("");
   const [title, setTitle] = useState("");
   const [teacherClass, setTeacherClass] = useState("");
-  const [courseStatus, setStatus] = useState("");
-
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
-  const [openDialog, setOpenDialog] = useState(false);
 
   const token = getAccessToken();
 
   const { user } = useAuth();
-  const { data, isLoading } = useGetCourses({ token, title, teacherClass, subject, courseStatus, page, rowsPerPage });
+  const { data, isLoading } = useGetCourses(token, title, teacherClass, subject, page, rowsPerPage);
 
   const { t } = useTranslation();
 
@@ -80,13 +75,6 @@ function Courses() {
           setTeacherClass(value);
         }
         break;
-      case "status":
-        if (value === "NONE") {
-          setStatus("");
-        } else {
-          setStatus(value);
-        }
-        break;
       default:
         break;
     }
@@ -101,25 +89,16 @@ function Courses() {
     setPage(0); // Reset page to 0 whenever rows per page is changed
   };
 
-
-  const closeDialog = () => {
-    setOpenDialog(false);
-  };
-
   return (
     <DashboardLayout user={user}>
       <DashboardNavbar pageName={"Mes Cours"} />
-      <CreateCoursDialog closeDialog={closeDialog} openDialog={openDialog} />
       <VuiBox py={3}>
         <Card>
-          <VuiBox display="flex" justifyContent="space-between" alignItems="center" mb={1}>
+          <VuiBox display="flex" justifyContent="space-between" alignItems="center">
             <VuiTypography variant="lg" color="white">
               {t("cours.title")}
               <VuiBadge color="warning" variant="gradient" badgeContent="En cours de development" size="lg" />
             </VuiTypography>
-            <VuiButton onClick={() => setOpenDialog(true)} color="info" variant="gradient" size="small">
-              + {t("dashboard.coursesCard.addCourse")}
-            </VuiButton>
           </VuiBox>
           <VuiBox
             sx={{
@@ -148,7 +127,6 @@ function Courses() {
               subject={subject}
               teacherClass={teacherClass}
               tableId={"courses"}
-              status={courseStatus}
             />
           </VuiBox>
         </Card>
@@ -157,4 +135,4 @@ function Courses() {
   );
 }
 
-export default Courses;
+export default TeachersCourses;

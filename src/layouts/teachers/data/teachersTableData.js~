@@ -116,7 +116,7 @@ export const teacherTableData = (t, data, handleOpen, user) => {
       </VuiTypography>
     ),
     [t("demands.table.subject")]: <Function content={t(`subjects.${item.Teacher?.subject}`)} />,
-    [t("demands.table.role")]: <Function content={t(`roles.${item.role}`)} />,
+    [t("demands.table.role")]: <Function content={t(`roles`)} />,
     [t("demands.table.isEmailVerified")]: (
       <VuiTypography
         variant="caption"
@@ -143,7 +143,7 @@ export const teacherTableData = (t, data, handleOpen, user) => {
         />
       </VuiTypography>
     ),
-    [t("demands.table.action")]: role === "ROOT" && item.role !== "ADMIN" ? (
+    [t("demands.table.action")]: role === "ROOT" ? (
       <VuiButton
         variant="contained"
         sx={{ padding: "0px", height: "30px" }}

@@ -21,10 +21,9 @@ function Table(
     isLoading,
     subject,
     teacherClass,
-    status,
     totalCount,
     tableId,
-    selectedRole,
+    selectedRole
   }) {
   const { grey } = colors;
   const { size, fontWeightBold } = typography;
@@ -93,7 +92,7 @@ function Table(
   return (
     <>
       {/* Search Input */}
-      {getFiltersInputs({ tableId, onSearchChange, subject, selectedRole, teacherClass, status, t, role })}
+      {getFiltersInputs({ tableId, onSearchChange, subject, teacherClass, t, role })}
       {isLoading ? (
         <VuiBox display="flex" justifyContent="center" alignItems="center" py={3}>
           <CircularProgress color="info" />

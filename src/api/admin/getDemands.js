@@ -1,51 +1,63 @@
 import { useQuery } from "react-query";
 import { apiClient } from "../apiClient";
 
+// Helper function to build query parameters
+const buildQueryParams = (
+  {
+    firstName,
+    lastName,
+    email,
+    subject,
+    role,
+    page,
+    limit,
+  }) => {
+  const params = { status: "IN_PROGRESS" }; // Default status
 
-const createGetDemandsFn = async (
-  token,
-  firstName = "",
-  lastName = "",
-  email = "",
-  subject = "",
-  role = "",
-  page = 0,
-  limit = 10,
-) => {
-  const params = {
-    status: "IN_PROGRESS", // Example filter, adjust based on your need
-  };
-
-
-  // Conditionally add query params if they have values
+  // Conditionally add params only if they have values
   if (firstName) params.firstName = firstName;
   if (lastName) params.lastName = lastName;
   if (email) params.email = email;
   if (subject) params.subject = subject;
   if (role) params.role = role;
-  if (page) params.page = page + 1;
-  if (limit) params.limit = limit;
+  if (page !== undefined) params.page = page + 1;
+  if (limit !== undefined) params.limit = limit;
 
+  return params;
+};
+
+// API call function
+const fetchDemands = async (token, queryOptions) => {
+  const params = buildQueryParams(queryOptions);
 
   const response = await apiClient.get("/teacher", {
     headers: { Authorization: `Bearer ${token}` },
-    params: params, // Send only the parameters that exist
+    params,
   });
 
-  return response.data;  // Ensure response has the expected structure
+  return response.data; // Ensure response has the expected structure
 };
 
+// Custom hook
+export function useGetDemands(
+  {
+    token,
+    firstName = "",
+    lastName = "",
+    email = "",
+    subject = "",
+    role = "",
+    page = 0,
+    limit = 5,
+  }) {
+  const queryOptions = { firstName, lastName, email, subject, role, page, limit };
 
-export function useGetDemands(token, firstName, lastName, email, subject, role, page = 1, limit = 10) {
   return useQuery(
-    ["demands", token, firstName, lastName, email, subject, role, page, limit], // Include sortConfig in the query key
-    () => createGetDemandsFn(token, firstName, lastName, email, subject, role, page, limit), // Pass sortConfig to the function
+    ["demands", token, queryOptions], // Use queryOptions for a dynamic key
+    () => fetchDemands(token, queryOptions),
     {
       enabled: !!token, // Only run if token exists
       refetchOnWindowFocus: true,
     },
   );
 }
-
-
-

@@ -33,14 +33,15 @@ import { useTranslation } from "react-i18next";
 import { coursesTableData } from "./data/coursesTableData";
 import VuiBadge from "../../components/VuiBadge";
 import Table from "examples/Tables/Table";
-import { useGetCourses } from "../../api/courses";
 import { useState } from "react";
 import { getAccessToken } from "../../utils";
+import { useGetAdminCourses } from "../../api/courses/getAdminCourses";
 
 function AllCourses() {
 
   const [subject, setSubjects] = useState("");
   const [title, setTitle] = useState("");
+  const [courseStatus, setStatus] = useState("");
   const [teacherClass, setTeacherClass] = useState("");
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
@@ -48,7 +49,14 @@ function AllCourses() {
   const token = getAccessToken();
 
   const { user } = useAuth();
-  const { data, isLoading } = useGetCourses(token, title, teacherClass, subject, page, rowsPerPage);
+  const role = user?.user?.role;
+  const {
+    data,
+    isLoading,
+  } = useGetAdminCourses({
+      token, title, teacherClass, subject, role, courseStatus, page, rowsPerPage,
+    },
+  );
 
   const { t } = useTranslation();
 
@@ -73,6 +81,13 @@ function AllCourses() {
           setTeacherClass("");
         } else {
           setTeacherClass(value);
+        }
+        break;
+      case "status":
+        if (value === "NONE") {
+          setStatus("");
+        } else {
+          setStatus(value);
         }
         break;
       default:
@@ -126,7 +141,8 @@ function AllCourses() {
               isLoading={isLoading}
               subject={subject}
               teacherClass={teacherClass}
-              tableId={"courses"}
+              status={courseStatus}
+              tableId={"teachersCourses"}
             />
           </VuiBox>
         </Card>

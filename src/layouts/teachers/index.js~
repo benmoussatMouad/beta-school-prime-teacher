@@ -33,11 +33,11 @@ function Teachers() {
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [subject, setSubjects] = useState("");
-  const [role, setRoles] = useState(FiltersRoles[0]);
+  const [role, setRoles] = useState(FiltersRoles[1]);
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
 
-  const { data, isLoading } = useGetTeachers({ token, firstName, lastName, email, subject, role, page, rowsPerPage });
+  const { data, isLoading } = useGetTeachers(token, firstName, lastName, email, subject, role, page, rowsPerPage);
   const [open, setOpen] = useState(false);
   const [selectedTeacher, setSelectedTeacher] = useState(null);
 

@@ -1,11 +1,4 @@
 {
-  "ACCEPTED": "Le cours est ACCEPTÉ",
-  "Instructor": "Instructeur",
-  "PENDING": "Le cours est en attente d'acceptation par l'administration",
-  "REJECT": "Le cours est REFUSÉ",
-  "TO_REVIEW": "Le cours est en mode révision pour que l'administration l'accepte",
-  "UNDER_CREATION": "Le cours est en mode création",
-  "UNKNOWN_STATUS": "Le cours a un statut inconnu",
   "announcement": {
     "title": "Annonces"
   },
@@ -35,7 +28,6 @@
     "title": "Les chapitres"
   },
   "cours": {
-    "description": "Description",
     "table": {
       "action": "Action",
       "budget": "Budget",
@@ -46,9 +38,6 @@
     "title": "Mes cours"
   },
   "course": {
-    "acceptCourse": {
-      "success": "Accepter le cours avec succès "
-    },
     "accountDeletion": {
       "description": "Êtes-vous sûr de supprimer le cours ?",
       "title": "Supprimer le cours"
@@ -58,7 +47,6 @@
     },
     "filter": {
       "level": "Niveau",
-      "status": "Status",
       "subject": "Sujet",
       "title": "Titre"
     },
@@ -66,20 +54,9 @@
       "button": "Accéder au tableau de bord",
       "title": "Aucun cours n'a été trouvé. Veuillez en créer un !"
     },
-    "pending": {
-      "button": "Demande d'approbation",
-      "send": "Ce cours est actuellement en phase de création. Cliquez sur le bouton ci-dessous pour demander l'approbation de l'administrateur.",
-      "title": "Ce cours est encore en attente, veuillez attendre que l'administrateur l'approuve."
-    },
-    "rejectCourse": {
-      "success": "Rejeter le cours avec succès "
-    },
     "update": {
       "success": "Vous mettez à jour le cours avec succès",
       "title": "Mettre à jour votre cours "
-    },
-    "updateToReview": {
-      "success": "Mise à jour à réviser"
     }
   },
   "courses": {
@@ -96,7 +73,6 @@
       "views": "Vues"
     }
   },
-  "currentEnrollment": "Inscription actuelle",
   "dashboard": {
     "course": "Cours",
     "coursesCard": {
@@ -134,10 +110,6 @@
     }
   },
   "dialog": {
-    "approveCourse": {
-      "description": "Confirmez que vous acceptez de la demande",
-      "title": "Approuver le cours"
-    },
     "chapter": {
       "title": "Créer un nouveau chapitre pour le cours"
     },
@@ -155,40 +127,16 @@
       "title": "Supprimer le cours"
     },
     "description": "Cette action changera votre photo de profil. Voulez-vous continuer ?",
-    "errors": {
-      "duration_min": "Durée",
-      "price_min": "Prix min",
-      "required": "Champ vide"
-    },
     "forms": {
       "attachments": "Les pièces jointes",
       "description": "Description du cours",
-      "discount": "Remise",
-      "duration": "Durée",
-      "educationalBranches": "Branches ",
-      "enableDiscount": "Permettre une réduction",
-      "enrollmentDeadline": "Délai d'inscription",
-      "language": "Langue",
-      "level": "Niveau de difficulté",
-      "maxParticipants": "Max participants",
-      "price": "Prix",
-      "selectteacherClasses": "Sélectionner l'enseignant Classes",
+      "level": "Niveaux des étudiants",
       "subjects": "Sujet du cours",
-      "teacherClasses": "Année d'étude",
       "title": "Titre du cours",
       "video": "Vidéo"
     },
-    "rejectCourse": {
-      "description": "Confirmer le rejet de la demande",
-      "notePlaceholder": "Laissez une note pour le refus du cours",
-      "title": "Rejeter le cours"
-    },
     "required": {
       "description": "La description est obligatoire",
-      "educationalBranches": "Branches requises",
-      "language": "Langue requise",
-      "price": "Prix requis",
-      "teacherClasses": "Année d'études requise",
       "title": "Un titre est requis",
       "video": "Vidéo requise "
     },
@@ -197,17 +145,6 @@
       "attachments": "Télécharger des pièces jointes",
       "video": "Télécharger la vidéo"
     }
-  },
-  "educationalBranches": {
-    "ALL_BRANCHES": "Tous les branches",
-    "MIDDLE_GENERAL": "Éducation moyenne générale",
-    "PRIMARY_GENERAL": "Éducation primaire générale",
-    "SECONDARY_ARTS": "Secondaire - Arts",
-    "SECONDARY_LITERATURE": "Secondaire - Littérature",
-    "SECONDARY_MANAGEMENT_ECONOMIES": "Secondaire - Gestion et Économie",
-    "SECONDARY_MATHEMATICS": "Secondaire - Mathématiques",
-    "SECONDARY_SCIENCE": "Secondaire - Sciences",
-    "SECONDARY_TECHNIQUE_MATH": "Secondaire - Technique et Mathématiques"
   },
   "faq": {
     "1": {
@@ -265,7 +202,6 @@
   },
   "forms": {
     "confirmPassword": "Confirmer le mot de passe",
-    "descriptions": "Description",
     "email": "E-mail",
     "firstName": "Prénom",
     "forgetPassword": "Mot de passe oublié",
@@ -287,7 +223,6 @@
       "lastName": "Le nom est requis.",
       "level": "Le niveau de l'étudiant est requis",
       "password": "Le mot de passe est requis.",
-      "phone": "Le numéro est incorrecte",
       "school": "L'école est requise.",
       "subject": "Le sujet est requis"
     },
@@ -296,11 +231,6 @@
     "upload": "Télécharger un avatar",
     "years": "Années d'expérience",
     "yearsOfExperience": "Années d'expérience"
-  },
-  "level": {
-    "ADVANCED": "Avancé",
-    "BEGINNER": "Débutant",
-    "INTERMEDIATE": "Intermédiaire"
   },
   "login": {
     "already": "Vous n'avez pas de compte ?",
@@ -317,7 +247,6 @@
     "signin": "Créer un nouveau compte",
     "welcome": "Ravi de vous revoir !"
   },
-  "note": "Note",
   "placeholder": {
     "email": "Votre e-mail",
     "firstName": "Votre prénom",
@@ -355,7 +284,7 @@
       "unVerified": "Non vérifié"
     },
     "description": "Mise à jour de la photo",
-    "myDescirption": "Vous n'avez pas encore de description",
+    "myDescirption": "Je suis un professeur de mathématiques passionné avec plusieurs années d'expérience. J'ai toujours été fasciné par la logique et la précision exigées par les mathématiques, et j'aime partager cette passion avec mes élèves chaque jour",
     "project": {
       "title": "Mes données"
     },
@@ -374,15 +303,8 @@
     "description": "Entrez et confirmez votre nouveau mot de passe",
     "reset": "Réinitialiser votre mot de passe"
   },
-  "roles": {
-    "ADMIN": "ADMIN",
-    "NONE": "Aucun",
-    "STUDENT": "STUDENT",
-    "TEACHER": "ENSEIGNANT"
-  },
   "routes": {
     "account-pages": "Pages de compte",
-    "administrateurs": "Administrateurs",
     "allCourses": "Les Cours",
     "cours": "Cours",
     "courses": "Mes Cours",
@@ -391,7 +313,8 @@
     "profile": "Profil",
     "students": "Étudiants",
     "support": "Support",
-    "teachers": "Les Enseignants"
+    "teachers": "Les Enseignants",
+    "administrateurs": "Administrateurs"
   },
   "signup": {
     "already": "Vous avez déjà un compte ?",
@@ -403,7 +326,6 @@
       "lastName": "Nom",
       "lastNameAr": "Nom en arabe",
       "password": "Mot de passe",
-      "phone": "Numero de Telephone",
       "school": "École",
       "subject": "Sujet",
       "upload": "Télécharger un avatar",
@@ -417,7 +339,6 @@
       "lastName": "Belmiloud",
       "lastNameAr": "بل ميلود",
       "password": "Votre mot de passe",
-      "phone": "0558394567",
       "school": "Votre école",
       "subject": "Votre sujet",
       "years": "Vos années d'expérience"
@@ -442,14 +363,6 @@
     "signup": "Utilisateur enregistré avec succès !",
     "updateProfile": "Profil mis à jour avec succès !",
     "verifyEmail": "Votre e-mail a été vérifié avec succès !"
-  },
-  "status": {
-    "ACCEPTED": "Accepté",
-    "NONE": "Aucun",
-    "PENDING": "En attente",
-    "REJECT": "Rejeté",
-    "TO_REVIEW": "À revoir",
-    "UNDER_CREATION": "En cours de création"
   },
   "students": {
     "table": {
@@ -498,20 +411,15 @@
     }
   },
   "teacherClass": {
-    "MIDDLE_1": "Moyen - Première année (AM1)",
-    "MIDDLE_2": "Moyen - Deuxième année (AM2)",
-    "MIDDLE_3": "Moyen - Troisième année (AM3)",
-    "MIDDLE_4": "Moyen - Quatrième année",
+    "AM2": "AM2",
+    "AM3": "AM3",
+    "AS1": "AS1",
+    "AS2": "AS2",
+    "AS3": "AS3",
     "NONE": "Aucun",
     "OTHER": "Autre",
-    "PRIMARY_1": "Primaire - Première année",
-    "PRIMARY_2": "Primaire - Deuxième année",
-    "PRIMARY_3": "Primaire - Troisième année",
-    "PRIMARY_4": "Primaire - Quatrième année",
-    "PRIMARY_5": "Primaire - Cinquième année",
-    "SECONDARY_1": "Secondaire - Première année (AS1)",
-    "SECONDARY_2": "Secondaire - Deuxième année (AS2)",
-    "SECONDARY_3": "Secondaire - Troisième année (AS3)"
+    "TM2": "TM2",
+    "TM3": "TM3"
   },
   "teachers": {
     "page": {
@@ -526,5 +434,10 @@
     "table": {
       "title": "Les enseignants"
     }
+  },
+  "roles": {
+    "ADMIN": "ADMIN",
+    "TEACHER": "ENSEIGNANT",
+    "STUDENT": "STUDENT"
   }
 }

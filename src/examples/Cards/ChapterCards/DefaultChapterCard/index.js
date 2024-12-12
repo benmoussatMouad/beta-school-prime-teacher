@@ -141,7 +141,7 @@ function ChapterCard({ image, label, title, description, action, duration, id, r
               };
             }}
           >
-            {ressources.map(el => <VuiBox
+            {ressources?.map(el => <VuiBox
               key={el}
               sx={{
                 border: `${borderWidth[1]} solid ${white.main}`,
