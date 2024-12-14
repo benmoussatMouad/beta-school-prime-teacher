@@ -40,8 +40,8 @@ const WelcomeMark = ({ user: { user, teacher } }) => {
           </VuiTypography>
           <VuiTypography color="text" variant="h6" fontWeight="regular" mb="auto">
             {t("dashboard.welcomeCard.description")}
-            <br /> {t("dashboard.welcomeCard.subject")} <br />
-            {subject ? <Chip sx={{ marginTop: "5px" }} color={"info"} label={t(`subjects.${subject}`)} /> : ""}
+            <br /> {t("dashboard.welcomeCard.subject")+ ':  '}
+            {subject ? <VuiBadge mx={1} size={'md'} container color={"info"} badgeContent={t(`subjects.${subject}`)} /> : ""}
           </VuiTypography>
         </VuiBox>
 

@@ -113,9 +113,8 @@ function Courses() {
       <VuiBox py={3}>
         <Card>
           <VuiBox display="flex" justifyContent="space-between" alignItems="center" mb={1}>
-            <VuiTypography variant="h3" color="white">
+            <VuiTypography variant="h3" color="white" mb={1}>
               {t("cours.title")}
-              <VuiBadge color="warning" variant="gradient" badgeContent="En cours de development" size="lg" />
             </VuiTypography>
             <VuiButton onClick={() => setOpenDialog(true)} color="primary" variant="gradient" size="medium" >
               + {t("dashboard.coursesCard.addCourse")}
