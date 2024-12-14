@@ -18,6 +18,7 @@
     "back": "Retour",
     "buttonCooldown": "Intervalle de repos",
     "cancel": "Annuler",
+    "close": "Fermer",
     "confirm": "Confirmer",
     "forgetButton01": "Réessayez dans",
     "forgetButton02": "Envoyer le lien de réinitialisation",
@@ -188,6 +189,10 @@
       "title": "Titre du cours",
       "video": "Vidéo"
     },
+    "loading": "Chargement...",
+    "no": {
+      "video": "Aucune vidéo trouvée"
+    },
     "rejectCourse": {
       "description": "Confirmer le rejet de la demande",
       "notePlaceholder": "Laissez une note pour le refus du cours",
@@ -206,6 +211,9 @@
     "upload": {
       "attachments": "Télécharger des pièces jointes",
       "video": "Télécharger la vidéo"
+    },
+    "view": {
+      "chapter": "Voir le chapitre"
     }
   },
   "educationalBranches": {
@@ -482,6 +490,7 @@
     "ISLAMIC_STUDIES": "Études islamiques",
     "MATHEMATICS": "Mathématiques",
     "NONE": "Aucun",
+    "OTHER": "Autres",
     "PHYSICS": "Physique",
     "SCIENCE": "Science"
   },

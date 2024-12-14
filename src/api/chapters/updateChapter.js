@@ -4,8 +4,8 @@ import { showSnackBar, useVisionUIController } from "../../context";
 import { useTranslation } from "react-i18next";
 import { queryClient } from "../../providers/queryProvider";
 
-const updateChapterFn = async ({ chapterId, formData }) => {
-  const response = await apiClient.put(`/chapter/${chapterId}`, formData);
+const updateChapterFn = async ({ chapterId, formData, signal }) => {
+  const response = await apiClient.put(`/chapter/${chapterId}`, formData, { signal });
   return response.data;
 };
 

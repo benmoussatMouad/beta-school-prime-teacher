@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { CircularProgress, Dialog, DialogActions, DialogContent, DialogTitle, Grid } from "@mui/material";
 import linearGradient from "../../assets/theme/functions/linearGradient";
 import rgba from "../../assets/theme/functions/rgba";
@@ -27,8 +27,9 @@ function CreateChapter({ closeDialog, openDialog, courseId }) {
   const { mutate } = useCreateChapter();
 
   const [isLoading, setIsLoading] = useState(false);
-  const [progress, setProgress] = useState(0); // Track simulated progress
   const [videoPreview, setVideoPreview] = useState(null);
+
+  const abortControllerRef = useRef(null); // Ref for AbortController
 
   const {
     register,
@@ -70,7 +71,6 @@ function CreateChapter({ closeDialog, openDialog, courseId }) {
     }
 
     setIsLoading(true);
-    setProgress(0); // Ensure the progress starts from 0
     const payload = {
       title: data.title,
       description: data.description,
@@ -86,41 +86,39 @@ function CreateChapter({ closeDialog, openDialog, courseId }) {
       });
     }
 
+    // Create an AbortController for this mutation
+    abortControllerRef.current = new AbortController();
 
-    // Simulate progress
-    const simulateProgress = () => {
-      setProgress((prev) => {
-        if (prev >= 90) return prev; // Stop the progress at 90%. Success will set it to 100%.
-        return prev + 10; // Increment progress by 10%
-      });
-    };
-
-    const interval = setInterval(simulateProgress, 500); // Update progress every 500ms
-
-    // Pass `setProgress` to the mutate function to update progress
     mutate(
-      { courseId, formData }, {
+      { courseId, formData, signal: abortControllerRef.current.signal }, {
         onSuccess: () => {
-          clearInterval(interval); // Stop simulating progress
-          setProgress(100); // Set progress to 100%
           setIsLoading(false);
           closeDialog(); // Close dialog
           reset(); // Reset the form
           setVideoPreview(null); // Clear the video preview
         },
         onError: () => {
-          clearInterval(interval); // Stop the interval on error
           setIsLoading(false);
-          setProgress(0); // Reset progress on failure
         },
       },
     );
   };
 
+  // Close dialog and cancel mutation
+  const handleCloseDialog = () => {
+    if (abortControllerRef.current) {
+      // Abort the ongoing request
+      abortControllerRef.current.abort();
+      abortControllerRef.current = null; // Reset the controller
+    }
+    setIsLoading(false); // Reset the loading state
+    closeDialog(); // Call the parent prop to close the dialog
+  };
+
   return (
     <Dialog
       open={openDialog}
-      onClose={closeDialog}
+      onClose={handleCloseDialog}
       sx={{
         "& .MuiDialog-paper": {
           background: linearGradient(card.main, card.state, card.deg),
@@ -134,11 +132,19 @@ function CreateChapter({ closeDialog, openDialog, courseId }) {
         },
       }}
     >
-      {!isLoading ? <DialogTitle>
-        <VuiTypography color="white" fontWeight="bold">
-          {t("dialog.chapter.title")}
-        </VuiTypography>
-      </DialogTitle> : ""}
+      {isLoading ? (
+        <DialogTitle>
+          <VuiTypography color="white" fontWeight="bold">
+            {t("dialog.loading")}
+          </VuiTypography>
+        </DialogTitle>
+      ) : (
+        <DialogTitle>
+          <VuiTypography color="white" fontWeight="bold">
+            {t("dialog.chapter.title")}
+          </VuiTypography>
+        </DialogTitle>
+      )}
       <DialogContent>
         <VuiBox as="form">
           {
@@ -153,9 +159,6 @@ function CreateChapter({ closeDialog, openDialog, courseId }) {
                   width: "300px",
                 }}>
                   <CircularProgress color="info" />
-                  <VuiTypography variant="caption" color="white" mt={1}>
-                    Uploading... {progress}%
-                  </VuiTypography>
                 </VuiBox>
               ) :
               <Grid container spacing={3}>
@@ -244,7 +247,7 @@ function CreateChapter({ closeDialog, openDialog, courseId }) {
       </DialogContent>
       <DialogActions>
         <VuiBox display="flex" justifyContent="right" width="100%" gap={2}>
-          <VuiButton disabled={isLoading} onClick={closeDialog} color="secondary">{t("button.cancel")}</VuiButton>
+          <VuiButton onClick={handleCloseDialog} color="secondary">{t("button.cancel")}</VuiButton>
           <VuiButton disabled={isLoading} onClick={handleSubmit(onSubmit)}
                      color="info">{t("button.confirm")}</VuiButton>
         </VuiBox>

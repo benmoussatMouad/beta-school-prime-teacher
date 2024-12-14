@@ -4,8 +4,14 @@ import { showSnackBar, useVisionUIController } from "../../context";
 import { useTranslation } from "react-i18next";
 import { queryClient } from "../../providers/queryProvider";
 
-const createChapterFn = async ({ courseId, formData }) => {
-  const response = await apiClient.post(`/chapter/${courseId}`, formData);
+const createChapterFn = async ({ courseId, formData, signal }) => {
+  const response = await apiClient.post(
+    `/chapter/${courseId}`,
+    formData,
+    {
+      signal, // Pass the signal here
+    }
+  );
   return response.data;
 };
 

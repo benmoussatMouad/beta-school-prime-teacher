@@ -42,7 +42,21 @@ const { borderWidth, borderRadius } = borders;
 const { xxl } = boxShadows;
 
 
-function ChapterCard({ image, label, title, description, action, duration, id, ressources, onClick }) {
+function ChapterCard(
+  {
+    image,
+    label,
+    title,
+    description,
+    action,
+    duration,
+    id,
+    ressources,
+    openToEdit,
+    myOwnCourse,
+    openToView,
+  }) {
+
   const [anchorEl, setAnchorEl] = useState(null);
 
   const { t } = useTranslation();
@@ -83,7 +97,6 @@ function ChapterCard({ image, label, title, description, action, duration, id, r
     deleteAttachment({ chapterId: id, attachmentId });
   };
 
-
   return (
     <VuiBox
       sx={{
@@ -94,16 +107,16 @@ function ChapterCard({ image, label, title, description, action, duration, id, r
         position: "relative",
       }}
     >
-      <VuiButton
-        onClick={() => onClick(id)}
+      {myOwnCourse && <VuiButton
+        onClick={() => openToEdit(id)}
         color={"success"}
         variant={"text"}
         sx={{ position: "absolute", top: "10px", left: "10px", zIndex: 100 }}
         size={"large"}
       >
         <MdEdit />
-      </VuiButton>
-      <VuiButton
+      </VuiButton>}
+      {myOwnCourse && <VuiButton
         onClick={handleOpenDialog} // Open dialog on click
         color={"error"}
         size={"large"}
@@ -111,7 +124,7 @@ function ChapterCard({ image, label, title, description, action, duration, id, r
         sx={{ position: "absolute", top: "10px", right: "10px", zIndex: 100 }}
       >
         <MdDelete />
-      </VuiButton>
+      </VuiButton>}
       <VuiBox
         component="img"
         src={image}
@@ -123,6 +136,7 @@ function ChapterCard({ image, label, title, description, action, duration, id, r
             height: "200px",
           },
         })}
+        onClick={() => openToView(id)}
       />
       <VuiBox
         sx={({ breakpoints }) => ({
@@ -204,11 +218,11 @@ function ChapterCard({ image, label, title, description, action, duration, id, r
               }}>
                 {t("demands.table.view")}
               </VuiButton>
-              <VuiButton variant={"text"} color={"error"} size={"large"} onClick={() => {
+              {myOwnCourse && <VuiButton variant={"text"} color={"error"} size={"large"} onClick={() => {
                 handleDeleteAttachment(el.id);
               }}>
                 <MdDelete />
-              </VuiButton>
+              </VuiButton>}
             </VuiBox>)}
           </Popover>
           <VuiBox sx={{ textAlign: "right", width: "100%" }} display="flex" alignSelf="center"

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { CircularProgress, Dialog, DialogActions, DialogContent, DialogTitle, Grid } from "@mui/material";
 import linearGradient from "../../assets/theme/functions/linearGradient";
 import rgba from "../../assets/theme/functions/rgba";
@@ -31,6 +31,8 @@ function UpdateChapter({ closeDialog, openDialog, chapterId }) {
 
   const { data: chapterData, isLoading: isFetching } = useGetChapter(token, chapterId);
   const { mutate } = useUpdateChapter();
+
+  const abortControllerRef = useRef(null); // Create a ref for AbortController
 
   const { data: viewChapter } = useViewChapter(token, chapterId);
 
@@ -73,6 +75,12 @@ function UpdateChapter({ closeDialog, openDialog, chapterId }) {
         setVideoPreview(viewChapter?.url || null);
       }
     }
+
+    return () => {
+      if (abortControllerRef.current) {
+        abortControllerRef.current.abort(); // Abort any pending requests
+      }
+    };
   }, [chapterData, viewChapter?.url, reset]);
 
   const handleFileChange = (e, fieldName) => {
@@ -81,10 +89,13 @@ function UpdateChapter({ closeDialog, openDialog, chapterId }) {
       setValue(fieldName, files, { shouldValidate: true });
 
       if (fieldName === "video") {
+        if (videoPreview) {
+          URL.revokeObjectURL(videoPreview); // Cleanup old preview URL
+        }
         setVideoPreview(URL.createObjectURL(files));
       }
     } else {
-      setValue(fieldName, null); // Handle case when no file is selected
+      setValue(fieldName, null);
     }
   };
 
@@ -98,14 +109,21 @@ function UpdateChapter({ closeDialog, openDialog, chapterId }) {
     if (data.description) formData.append("description", data.description);
     if (data.video) formData.append("video", data.video);
     if (data.attachments.length) {
-      data.attachments.forEach((file, index) => {
-        formData.append(`attachments[${index}]`, file); // Attach each selected file
+      data.attachments.forEach((file) => {
+        formData.append(`attachments`, file); // Attach each selected file
       });
     }
 
+    // Ensure any previous abort controller is cleared
+    if (abortControllerRef.current) {
+      abortControllerRef.current.abort();
+    }
+
+    // Create an AbortController instance
+    abortControllerRef.current = new AbortController();
 
     mutate(
-      { chapterId, formData },
+      { chapterId, formData, signal: abortControllerRef.current.signal },
       {
         onSuccess: () => {
           setIsLoading(false);
@@ -118,10 +136,19 @@ function UpdateChapter({ closeDialog, openDialog, chapterId }) {
     );
   };
 
+  const handleCloseDialog = () => {
+    if (abortControllerRef.current) {
+      abortControllerRef.current.abort(); // Abort the ongoing request
+      abortControllerRef.current = null; // Reset the controller
+    }
+    setIsLoading(false); // Reset loading state
+    closeDialog(); // Call the parent prop to close the dialog
+  };
+
   return (
     <Dialog
       open={openDialog}
-      onClose={closeDialog}
+      onClose={handleCloseDialog}
       sx={{
         "& .MuiDialog-paper": {
           background: linearGradient(card.main, card.state, card.deg),
@@ -135,11 +162,19 @@ function UpdateChapter({ closeDialog, openDialog, chapterId }) {
         },
       }}
     >
-      {!isLoading || !isFetching ? <DialogTitle>
-        <VuiTypography color="white" fontWeight="bold">
-          {t("dialog.chapter.update")}
-        </VuiTypography>
-      </DialogTitle> : ""}
+      {isLoading ? (
+        <DialogTitle>
+          <VuiTypography color="white" fontWeight="bold">
+            {t("dialog.loading")}
+          </VuiTypography>
+        </DialogTitle>
+      ) : (
+        <DialogTitle>
+          <VuiTypography color="white" fontWeight="bold">
+            {t("dialog.chapter.title")}
+          </VuiTypography>
+        </DialogTitle>
+      )}
       <DialogContent>
         <VuiBox as="form">
           {
@@ -242,7 +277,7 @@ function UpdateChapter({ closeDialog, openDialog, chapterId }) {
       </DialogContent>
       <DialogActions>
         <VuiBox display="flex" justifyContent="right" width="100%" gap={2}>
-          <VuiButton onClick={closeDialog} color="secondary">{t("button.cancel")}</VuiButton>
+          <VuiButton onClick={handleCloseDialog} color="secondary">{t("button.cancel")}</VuiButton>
           <VuiButton disabled={isLoading || isFetching} onClick={handleSubmit(onSubmit)}
                      color="info">{t("button.confirm")}</VuiButton>
         </VuiBox>

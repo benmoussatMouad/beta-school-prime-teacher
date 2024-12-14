@@ -35,6 +35,7 @@ import ActionsCourse from "./components/Actions/Actions";
 import NotFound from "../../examples/NotFound/NotFound";
 import CreateChapter from "../../examples/Dialogs/CreateChapter";
 import UpdateChapter from "../../examples/Dialogs/UpdateChapter";
+import ViewChapter from "../../examples/Dialogs/ViewChapter";
 
 
 function CoursDetails() {
@@ -95,15 +96,21 @@ function CoursDetails() {
   const openToView = (id) => {
     setOpenViewDialog({
       open: true,
-      coursId: id,
+      chapterId: id,
     });
   };
+
 
   return (
     <DashboardLayout user={context.user}>
       <Header data={data} isLoading={isLoading} pageName={data?.title} />
       <CreateChapter closeDialog={closeDialog} openDialog={openCreateDialog} courseId={data.id} />
       <UpdateChapter closeDialog={closeDialog} openDialog={openUpdateDialog.open} chapterId={openUpdateDialog.coursId} />
+      <ViewChapter
+        openDialog={openViewDialog.open}
+        closeDialog={closeDialog}
+        chapterId={openViewDialog.chapterId}
+      />
       <Grid container spacing={3} my="20px">
         <Grid item xs={12} xl={myOwnCourse ? 8 : 12}>
           {
@@ -214,7 +221,9 @@ function CoursDetails() {
                             }}
                             duration={convertSecondsToMinutes(chapter.duration)}
                             ressources={chapter.attachments}
-                            onClick={openToEdit}
+                            openToEdit={openToEdit}
+                            myOwnCourse={myOwnCourse}
+                            openToView={openToView}
                           />
                         </SwiperSlide>
                       ))
