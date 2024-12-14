@@ -5,7 +5,6 @@ import { useTranslation } from "react-i18next";
 import VuiBox from "components/VuiBox";
 import VuiTypography from "components/VuiTypography";
 import VuiButton from "components/VuiButton";
-import VuiBadge from "../../../../components/VuiBadge";
 
 import Table from "examples/Tables/Example";
 import data from "./data";
@@ -19,7 +18,7 @@ function Courses() {
 
   const token = getAccessToken();
 
-  const { data: courses, isLoading: isLoadingCourses } = useGetCourses(token);
+  const { data: courses, isLoading: isLoadingCourses } = useGetCourses({ token });
 
   const { t } = useTranslation();
   const { columns, rows } = data(courses?.courses);

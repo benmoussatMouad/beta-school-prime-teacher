@@ -282,8 +282,6 @@ function UpdateCourse({ isLoading, data: courseData }) {
                 placeholder={t("dialog.forms.discount")}
                 {...register("discount", {
                   valueAsNumber: true,
-                  min: { value: 0, message: t("dialog.errors.discount_min") },
-                  max: { value: 100, message: t("dialog.errors.discount_max") },
                 })}
                 onChange={(e) => {
                   const value = Math.max(0, parseInt(e.target.value || 0)); // Prevent going below 0

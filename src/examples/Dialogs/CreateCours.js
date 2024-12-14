@@ -400,8 +400,6 @@ function CreateCoursDialog({ closeDialog, openDialog }) {
                         placeholder={t("dialog.forms.discount")}
                         {...register("discount", {
                           valueAsNumber: true,
-                          min: { value: 0, message: t("dialog.errors.discount_min") },
-                          max: { value: 100, message: t("dialog.errors.discount_max") },
                         })}
                         onInput={(e) => {
                           if (e.target.value < 0) e.target.value = 0;

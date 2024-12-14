@@ -6,6 +6,7 @@ export const apiClient = axios.create({
   baseURL: getEnvSafely("REACT_APP_API_URL"),
   headers: {
     Accept: "application/json",
+    "Access-Control-Allow-Origin": "*",
   },
   validateStatus: (status) => {
     return status >= 200 && status < 400; // Treat 3xx and 2xx as successful
