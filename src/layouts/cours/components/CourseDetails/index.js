@@ -133,6 +133,10 @@ function UpdateCourse({ isLoading, data: courseData }) {
     mutate({
       formData: formData,
       coursId: courseData.id,
+    }, {
+      onSuccess: () => {
+        setWatchIcon(null);
+      },
     });
   };
 
