@@ -4,22 +4,28 @@ import { showSnackBar, useVisionUIController } from "../../context";
 import { useTranslation } from "react-i18next";
 import { queryClient } from "../../providers/queryProvider";
 
-const rejectCourseFn = async ({ coursId, statusNote }) => {
-  const response = await apiClient.patch(`/course/${coursId}/reject`, { statusNote });
+const createChapterFn = async ({ courseId, formData, signal }) => {
+  const response = await apiClient.post(
+    `/chapter/${courseId}`,
+    formData,
+    {
+      signal, // Pass the signal here
+    }
+  );
   return response.data;
 };
 
-export function useRejectCourse() {
+export function useCreateChapter() {
   const [, dispatch] = useVisionUIController(); // Get dispatch from context
   const { t } = useTranslation();
 
   return useMutation({
-    mutationFn: rejectCourseFn,
+    mutationFn: createChapterFn,
     onSuccess: (data) => {
       // Trigger success Snackbar
-      showSnackBar(dispatch, t("course.rejectCourse.success"), "success");
+      showSnackBar(dispatch, t("chapter.create.successfully"), "success");
       // Invalidate courses to refresh the cache
-      queryClient.invalidateQueries(["course", data.id]);
+      queryClient.invalidateQueries(["course", data.courseId]);
     },
     onError: (err) => {
       // Trigger error Snackbar

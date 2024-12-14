@@ -23,14 +23,18 @@
 import VuiBox from "components/VuiBox";
 import VuiTypography from "components/VuiTypography";
 import VuiButton from "components/VuiButton";
-import { Popover } from "@mui/material";
-import { useState } from "react";
+import { Dialog, DialogActions, DialogContent, DialogTitle, Popover, Typography } from "@mui/material";
+import React, { useState } from "react";
 import colors from "../../../../assets/theme/base/colors";
 import borders from "../../../../assets/theme/base/borders";
 import boxShadows from "../../../../assets/theme/base/boxShadows";
 import linearGradient from "../../../../assets/theme/functions/linearGradient";
 import rgba from "../../../../assets/theme/functions/rgba";
 import { useTranslation } from "react-i18next";
+import { MdDelete, MdEdit } from "react-icons/md";
+import { useDeleteChapter } from "../../../../api/chapters/deleteChapter";
+import { saveAs } from "file-saver";
+import { useDeleteAttachment } from "../../../../api/chapters/deleteAttachment";
 
 const { black, white, gradients } = colors;
 const { card } = gradients;
@@ -38,20 +42,60 @@ const { borderWidth, borderRadius } = borders;
 const { xxl } = boxShadows;
 
 
-function ChapterCard({ image, label, title, description, action, duration, id, ressources }) {
+function ChapterCard(
+  {
+    image,
+    label,
+    title,
+    description,
+    action,
+    duration,
+    id,
+    ressources,
+    openToEdit,
+    myOwnCourse,
+    openToView,
+  }) {
+
   const [anchorEl, setAnchorEl] = useState(null);
 
   const { t } = useTranslation();
 
+  const { mutate } = useDeleteChapter(id);
+  const { mutate: deleteAttachment } = useDeleteAttachment();
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
-
   const handleClose = () => {
     setAnchorEl(null);
   };
-
   const open = Boolean(anchorEl);
+  const [isDialogOpen, setIsDialogOpen] = useState(false); // State for dialog visibility
+  // Open the confirmation dialog
+  const handleOpenDialog = () => {
+    setIsDialogOpen(true);
+  };
+
+  // Close the confirmation dialog
+  const handleCloseDialog = () => {
+    setIsDialogOpen(false);
+  };
+
+  // Perform the delete action
+  const handleDelete = async () => {
+    mutate(id, {
+      onSuccess: () => {
+        setIsDialogOpen(false); // Close the dialog on success
+      },
+      onError: () => {
+        setIsDialogOpen(false);
+      },
+    });
+  };
+
+  const handleDeleteAttachment = (attachmentId) => {
+    deleteAttachment({ chapterId: id, attachmentId });
+  };
 
   return (
     <VuiBox
@@ -60,20 +104,40 @@ function ChapterCard({ image, label, title, description, action, duration, id, r
         flexDirection: "column",
         boxShadow: "none",
         overflow: "visible",
+        position: "relative",
       }}
     >
+      {myOwnCourse && <VuiButton
+        onClick={() => openToEdit(id)}
+        color={"success"}
+        variant={"text"}
+        sx={{ position: "absolute", top: "10px", left: "10px", zIndex: 100 }}
+        size={"large"}
+      >
+        <MdEdit />
+      </VuiButton>}
+      {myOwnCourse && <VuiButton
+        onClick={handleOpenDialog} // Open dialog on click
+        color={"error"}
+        size={"large"}
+        variant={"text"}
+        sx={{ position: "absolute", top: "10px", right: "10px", zIndex: 100 }}
+      >
+        <MdDelete />
+      </VuiButton>}
       <VuiBox
         component="img"
         src={image}
         mb="8px"
         borderRadius="15px"
         sx={({ breakpoints }) => ({
+          cursor: "pointer",
           [breakpoints.up("xl")]: {
             height: "200px",
           },
         })}
+        onClick={() => openToView(id)}
       />
-
       <VuiBox
         sx={({ breakpoints }) => ({
           [breakpoints.only("xl")]: {
@@ -105,14 +169,14 @@ function ChapterCard({ image, label, title, description, action, duration, id, r
           </VuiTypography>
         </VuiBox>
         <VuiBox display="flex" justifyContent="space-between" alignItems="center">
-          <VuiButton
+          {!ressources.length ? "" : <VuiButton
             variant="outlined"
             size="small"
             color={action.color}
             onClick={handleClick}
           >
             {action.label}
-          </VuiButton>
+          </VuiButton>}
           <Popover
             id={id}
             open={open}
@@ -135,30 +199,72 @@ function ChapterCard({ image, label, title, description, action, duration, id, r
                   wordWrap: "break-word",
                   backgroundClip: "border-box",
                   border: `${borderWidth[0]} solid ${rgba(black.main, 0.125)}`,
-                  borderRadius: borderRadius.xl,
+                  borderRadius: "8px",
                   boxShadow: xxl,
                 },
               };
             }}
           >
-            {ressources?.map(el => <VuiBox
-              key={el}
+            {!ressources.length ? "" : ressources?.map(el => <VuiBox
+              key={el.id}
               sx={{
                 border: `${borderWidth[1]} solid ${white.main}`,
-                borderRadius: borderRadius.xl,
+                borderRadius: "8px",
                 padding: "0.5em",
               }}>
-              <VuiTypography variant={"caption"} color={"white"} sx={{ p: 2 }}>PDF {el}</VuiTypography>
-              <VuiButton color={"info"} size={"small"}> {t("demands.table.view")} </VuiButton>
+              <VuiTypography variant={"caption"} color={"white"} sx={{ p: 2 }}>{el?.file?.fileName} </VuiTypography>
+              <VuiButton color={"info"} size={"small"} onClick={() => {
+                saveAs(el?.file?.url, el?.file?.fileName);
+              }}>
+                {t("demands.table.view")}
+              </VuiButton>
+              {myOwnCourse && <VuiButton variant={"text"} color={"error"} size={"large"} onClick={() => {
+                handleDeleteAttachment(el.id);
+              }}>
+                <MdDelete />
+              </VuiButton>}
             </VuiBox>)}
           </Popover>
-          <VuiBox display="flex">
+          <VuiBox sx={{ textAlign: "right", width: "100%" }} display="flex" alignSelf="center"
+                  justifyContent="flex-end">
             <VuiTypography variant={"caption"} color={"white"}>
-              {duration}
+              {duration} {t("minute")}
             </VuiTypography>
           </VuiBox>
         </VuiBox>
       </VuiBox>
+      {/* Confirmation Dialog */}
+      <Dialog sx={({}) => ({
+        "& .MuiDialog-paper": {
+          display: "flex",
+          flexDirection: "column",
+          background: linearGradient(card.main, card.state, card.deg),
+          backdropFilter: "blur(120px)",
+          position: "relative",
+          minWidth: 0,
+          padding: "22px",
+          wordWrap: "break-word",
+          backgroundClip: "border-box",
+          border: `${borderWidth[0]} solid ${rgba(black.main, 0.125)}`,
+          borderRadius: borderRadius.xl,
+          boxShadow: xxl,
+        },
+      })} open={isDialogOpen} onClose={handleCloseDialog}>
+        <DialogTitle color={"#ffffff"}>{t("dialog.deleteCourse.title")}</DialogTitle>
+        <DialogContent>
+          <Typography color={"#ffffff"}>{t("dialog.deleteCourse.description")}</Typography>
+        </DialogContent>
+        <DialogActions>
+          {/* Cancel Button */}
+          <VuiButton onClick={handleCloseDialog} color="secondary">
+            {t("button.cancel")}
+          </VuiButton>
+          {/* Confirm Delete Button */}
+          <VuiButton onClick={handleDelete} color="error">
+            {t("button.confirm")}
+          </VuiButton>
+        </DialogActions>
+      </Dialog>
     </VuiBox>
   );
 }

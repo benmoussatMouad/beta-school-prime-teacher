@@ -33,6 +33,7 @@ const VuiButton = forwardRef(
       variant={variant === "gradient" ? "contained" : variant}
       size={size}
       ownerState={{ color, variant, size, circular, iconOnly }}
+
     >
       {children}
     </VuiButtonRoot>
