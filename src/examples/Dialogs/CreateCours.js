@@ -17,6 +17,8 @@ import { useState } from "react";
 import { useCreateCourse } from "../../api/courses";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
+import PopperIcon from "../Popper/IconsPopper";
+
 
 const { black, gradients } = colors;
 const { card } = gradients;
@@ -26,6 +28,7 @@ const { xxl } = boxShadows;
 function CreateCoursDialog({ closeDialog, openDialog }) {
 
   const [iconPreview, setIconPreview] = useState(null);
+  const [popperAnchor, setPopperAnchor] = useState(null); // To manage Popper visibility
 
   const { mutate, isLoading } = useCreateCourse();
 
@@ -63,6 +66,21 @@ function CreateCoursDialog({ closeDialog, openDialog }) {
     }
   };
 
+  // Converts a predefined icon URL into a File
+  const urlToFile = async (url, filename) => {
+    const response = await fetch(url);
+    const blob = await response.blob();
+    return new File([blob], filename, { type: blob.type });
+  };
+
+  // Handle predefined icon selection
+  const handlePredefinedIconClick = (iconUrl, index) => {
+    urlToFile(iconUrl, `icon${index + 1}.png`).then((file) => {
+      setValue("icon", file, { shouldValidate: true }); // Set the selected file in the form
+      setIconPreview(URL.createObjectURL(file)); // Update preview
+    });
+  };
+
 
   const onSubmit = (data) => {
     const formData = new FormData();
@@ -96,9 +114,11 @@ function CreateCoursDialog({ closeDialog, openDialog }) {
     if (data.language) formData.append("language", data.language);
     if (data.maxParticipants) formData.append("maxParticipants", data.maxParticipants);
     if (data.enrollmentDeadline) formData.append("enrollmentDeadline", data.enrollmentDeadline);
+    // Ensure the icon is a file
     if (data.icon instanceof File) {
       formData.append("icon", data.icon);
     }
+
 
     mutate(formData, {
       onSuccess: () => {
@@ -107,6 +127,20 @@ function CreateCoursDialog({ closeDialog, openDialog }) {
       },
     });
   };
+
+// Open Popover when hovering over the trigger
+  const handlePopperOpen = (event) => {
+    setPopperAnchor(event.currentTarget);
+  };
+
+
+  // Close Popover with a slight delay to account for hover transitions
+  const handlePopperClose = () => {
+    setPopperAnchor(null);
+  };
+
+  const isPopperOpen = Boolean(popperAnchor);
+
 
   return (
     <Dialog
@@ -169,6 +203,8 @@ function CreateCoursDialog({ closeDialog, openDialog }) {
                     p: 2,
                     background: rgba(black.main, 0.1),
                   }}
+                  onMouseEnter={handlePopperOpen}  // Open on mouse enter
+                  onMouseLeave={handlePopperClose} // Close on mouse leave
                 >
                   <VuiTypography component="label" variant="button" fontWeight="bold" color="white" sx={{ mb: 2 }}>
                     {t("dialog.course.icon")}
@@ -212,7 +248,16 @@ function CreateCoursDialog({ closeDialog, openDialog }) {
                     <VuiTypography
                       sx={{ color: "red", fontSize: "0.8rem", mt: 1 }}>{errors.icon.message}</VuiTypography>
                   )}
+                  {/* Popover for Icon Selection */}
+                  <PopperIcon
+                    watch={watch}
+                    handlePredefinedIconClick={handlePredefinedIconClick}
+                    popperAnchor={popperAnchor}
+                    isPopperOpen={isPopperOpen}
+                    handlePopperClose={handlePopperClose}
+                  />
                 </VuiBox>
+
               </Grid>
 
               {/* Title Field */}
@@ -297,12 +342,12 @@ function CreateCoursDialog({ closeDialog, openDialog }) {
                 <VuiBox>
                   <VuiTypography component="label" variant="button" fontWeight="medium" color="white"
                                  sx={{ mb: 1, display: "block" }}>
-                    {t("dialog.forms.language")} <span style={{ color: "red" }}>*</span>
+                    {t("dialog.forms.language")}
                   </VuiTypography>
                   <VuiInput
                     sx={{ borderColor: rgba(black.main, 0.1), borderRadius: borderRadius.md }}
                     placeholder={t("dialog.forms.language")}
-                    {...register("language", { required: t("dialog.required.language") })}
+                    {...register("language")}
                   />
                   {errors.language && (
                     <VuiTypography sx={{ color: "red", fontSize: "0.8rem" }}>

@@ -168,6 +168,7 @@ function CreateChapter({ closeDialog, openDialog, courseId }) {
                     {t("dialog.forms.title")}
                   </VuiTypography>
                   <VuiInput
+                    sx={{ borderColor: rgba(black.main, 0.1), borderRadius: borderRadius.md }}
                     placeholder={t("dialog.forms.title")}
                     {...register("title", { required: t("dialog.required.title") })}
                     error={!!errors.title}
@@ -182,6 +183,7 @@ function CreateChapter({ closeDialog, openDialog, courseId }) {
                     {t("dialog.forms.description")}
                   </VuiTypography>
                   <VuiInput
+                    sx={{ borderColor: rgba(black.main, 0.1), borderRadius: borderRadius.md }}
                     placeholder={t("dialog.forms.description")}
                     multiline
                     rows={4}
