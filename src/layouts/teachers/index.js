@@ -110,7 +110,7 @@ function Teachers() {
       <VuiBox py={3}>
         <Card>
           <VuiBox display="flex" justifyContent="space-between" alignItems="center">
-            <VuiTypography variant="lg" color="white">
+            <VuiTypography variant="h3" color="white" mb={1}>
               {t("teachers.table.title")}
             </VuiTypography>
           </VuiBox>

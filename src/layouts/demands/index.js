@@ -112,7 +112,7 @@ function Demands() {
       <VuiBox py={3}>
         <Card>
           <VuiBox display="flex" justifyContent="space-between" alignItems="center">
-            <VuiTypography variant="lg" color="white">
+            <VuiTypography variant="h3" color="white">
               {t("demands.table.title")}
             </VuiTypography>
           </VuiBox>

@@ -49,6 +49,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination } from "swiper/modules";
 import { courseData } from "../../utils";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
+import CarInformations from "./components/CarInformations";
 
 
 const { black, gradients } = colors;
@@ -146,86 +147,88 @@ function Overview() {
           <PlatformSettings />
         </Grid>
         <Grid item xs={12} xl={9} md={6}>
-          <Card>
-            <VuiBox display="flex" flexDirection="column" height="100%">
-              <VuiBox display="flex" flexDirection="column" mb="24px">
-                <VuiBox>
-                  <VuiTypography color="white" variant="lg" fontWeight="bold" mb="6px">
-                    {t("profile.project.title")}
-                  </VuiTypography>
-                  <VuiBadge badgeContent="A concevoir" color="warning" variant="gradient" size="lg" />
-                </VuiBox>
-                <VuiTypography color="text" variant="button" fontWeight="regular">
-                  {t("profile.project.descirption")}
-                </VuiTypography>
-              </VuiBox>
-              <Box sx={{ width: "100%", position: "relative" }}>
-                <Swiper
-                  ref={swiperRef} // Pass the ref to Swiper
-                  modules={[Navigation, Pagination]}
-                  spaceBetween={20}
-                  slidesPerView={1}
-                  navigation={false} // Disable default navigation buttons
-                  loop={true} // Enable looping
-                  breakpoints={{
-                    600: {
-                      slidesPerView: 1, // One slide per view on small screens
-                    },
-                    1024: {
-                      slidesPerView: 2, // Two slides per view on medium screens
-                    },
-                    1440: {
-                      slidesPerView: 3, // Three slides per view on larger screens
-                    },
-                  }}
-                >
-                  {courseData.map((course) => (
-                    <SwiperSlide style={{ maxWidth: "350px" }} key={course.id}>
-                      <ChapterCard
-                        id={course.id}
-                        image={course.image}
-                        label={course.label}
-                        title={course.title}
-                        description={course.description}
-                        action={{
-                          color: "white",
-                          label: t("chapters.ressources"),
-                        }}
-                        duration={course.duration}
-                        ressources={course.ressources}
-                      />
-                    </SwiperSlide>
-                  ))}
-                </Swiper>
+          <CarInformations/>
 
-                {/* Custom Navigation Buttons */}
-                <VuiButton
-                  variant={"outlined"}
-                  onClick={() => swiperRef.current.swiper.slidePrev()}
-                  sx={{
-                    position: "absolute",
-                    left: "20px",
-                    top: "45%",
-                    zIndex: 10,
-                  }}
-                >
-                  <FaChevronLeft />
-                </VuiButton>
-                <VuiButton
-                  variant={"outlined"}
-                  onClick={() => swiperRef.current.swiper.slideNext()}
-                  sx={{
-                    position: "absolute",
-                    right: "20px",
-                    top: "45%",
-                    zIndex: 10,
-                  }}
-                >
-                  <FaChevronRight />
-                </VuiButton>
-              </Box>
-            </VuiBox>
-          </Card>
+        {/*  <Card>*/}
+        {/*    <VuiBox display="flex" flexDirection="column" height="100%">*/}
+        {/*      <VuiBox display="flex" flexDirection="column" mb="24px">*/}
+        {/*        <VuiBox>*/}
+        {/*          <VuiTypography color="white" variant="lg" fontWeight="bold" mb="6px">*/}
+        {/*            {t("profile.project.title")}*/}
+        {/*          </VuiTypography>*/}
+        {/*          <VuiBadge badgeContent="A concevoir" color="warning" variant="gradient" size="lg" />*/}
+        {/*        </VuiBox>*/}
+        {/*        <VuiTypography color="text" variant="button" fontWeight="regular">*/}
+        {/*          {t("profile.project.descirption")}*/}
+        {/*        </VuiTypography>*/}
+        {/*      </VuiBox>*/}
+        {/*      <Box sx={{ width: "100%", position: "relative" }}>*/}
+        {/*        <Swiper*/}
+        {/*          ref={swiperRef} // Pass the ref to Swiper*/}
+        {/*          modules={[Navigation, Pagination]}*/}
+        {/*          spaceBetween={20}*/}
+        {/*          slidesPerView={1}*/}
+        {/*          navigation={false} // Disable default navigation buttons*/}
+        {/*          loop={true} // Enable looping*/}
+        {/*          breakpoints={{*/}
+        {/*            600: {*/}
+        {/*              slidesPerView: 1, // One slide per view on small screens*/}
+        {/*            },*/}
+        {/*            1024: {*/}
+        {/*              slidesPerView: 2, // Two slides per view on medium screens*/}
+        {/*            },*/}
+        {/*            1440: {*/}
+        {/*              slidesPerView: 3, // Three slides per view on larger screens*/}
+        {/*            },*/}
+        {/*          }}*/}
+        {/*        >*/}
+        {/*          {courseData.map((course) => (*/}
+        {/*            <SwiperSlide style={{ maxWidth: "350px" }} key={course.id}>*/}
+        {/*              <ChapterCard*/}
+        {/*                id={course.id}*/}
+        {/*                image={course.image}*/}
+        {/*                label={course.label}*/}
+        {/*                title={course.title}*/}
+        {/*                description={course.description}*/}
+        {/*                action={{*/}
+        {/*                  color: "white",*/}
+        {/*                  label: t("chapters.ressources"),*/}
+        {/*                }}*/}
+        {/*                duration={course.duration}*/}
+        {/*                ressources={course.ressources}*/}
+        {/*              />*/}
+        {/*            </SwiperSlide>*/}
+        {/*          ))}*/}
+        {/*        </Swiper>*/}
+
+        {/*        /!* Custom Navigation Buttons *!/*/}
+        {/*        <VuiButton*/}
+        {/*          variant={"outlined"}*/}
+        {/*          onClick={() => swiperRef.current.swiper.slidePrev()}*/}
+        {/*          sx={{*/}
+        {/*            position: "absolute",*/}
+        {/*            left: "20px",*/}
+        {/*            top: "45%",*/}
+        {/*            zIndex: 10,*/}
+        {/*          }}*/}
+        {/*        >*/}
+        {/*          <FaChevronLeft />*/}
+        {/*        </VuiButton>*/}
+        {/*        <VuiButton*/}
+        {/*          variant={"outlined"}*/}
+        {/*          onClick={() => swiperRef.current.swiper.slideNext()}*/}
+        {/*          sx={{*/}
+        {/*            position: "absolute",*/}
+        {/*            right: "20px",*/}
+        {/*            top: "45%",*/}
+        {/*            zIndex: 10,*/}
+        {/*          }}*/}
+        {/*        >*/}
+        {/*          <FaChevronRight />*/}
+        {/*        </VuiButton>*/}
+        {/*      </Box>*/}
+        {/*    </VuiBox>*/}
+        {/*  </Card>*/}
 
         </Grid>
       </Grid>

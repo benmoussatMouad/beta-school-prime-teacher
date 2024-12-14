@@ -6,6 +6,9 @@
   "TO_REVIEW": "Le cours est en mode révision pour que l'administration l'accepte",
   "UNDER_CREATION": "Le cours est en mode création",
   "UNKNOWN_STATUS": "Le cours a un statut inconnu",
+  "allCourses": {
+    "title": "Tous les cours"
+  },
   "announcement": {
     "title": "Annonces"
   },
@@ -169,7 +172,7 @@
       "enableDiscount": "Permettre une réduction",
       "enrollmentDeadline": "Délai d'inscription",
       "language": "Langue",
-      "level": "Niveau de difficulté",
+      "level": "Niveaux des étudiants",
       "maxParticipants": "Max participants",
       "price": "Prix",
       "selectteacherClasses": "Sélectionner l'enseignant Classes",
@@ -355,7 +358,7 @@
       "unVerified": "Non vérifié"
     },
     "description": "Mise à jour de la photo",
-    "myDescirption": "Vous n'avez pas encore de description",
+    "myDescirption": "Je suis un professeur de mathématiques passionné avec plusieurs années d'expérience. J'ai toujours été fasciné par la logique et la précision exigées par les mathématiques, et j'aime partager cette passion avec mes élèves chaque jour",
     "project": {
       "title": "Mes données"
     },
@@ -387,7 +390,7 @@
     "cours": "Cours",
     "courses": "Mes Cours",
     "dashboard": "Tableau de bord",
-    "demands": "Demands",
+    "demands": "Demandes",
     "pendingCourses": "Les Cours en attente",
     "profile": "Profil",
     "students": "Étudiants",
@@ -499,6 +502,11 @@
     }
   },
   "teacherClass": {
+    "AM2": "AM2",
+    "AM3": "AM3",
+    "AS1": "AS1",
+    "AS2": "AS2",
+    "AS3": "AS3",
     "MIDDLE_1": "Moyen - Première année (AM1)",
     "MIDDLE_2": "Moyen - Deuxième année (AM2)",
     "MIDDLE_3": "Moyen - Troisième année (AM3)",
@@ -512,7 +520,9 @@
     "PRIMARY_5": "Primaire - Cinquième année",
     "SECONDARY_1": "Secondaire - Première année (AS1)",
     "SECONDARY_2": "Secondaire - Deuxième année (AS2)",
-    "SECONDARY_3": "Secondaire - Troisième année (AS3)"
+    "SECONDARY_3": "Secondaire - Troisième année (AS3)",
+    "TM2": "TM2",
+    "TM3": "TM3"
   },
   "teachers": {
     "page": {

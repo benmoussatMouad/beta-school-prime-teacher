@@ -48,7 +48,7 @@ function Students() {
         <VuiBox mb={3}>
           <Card>
             <VuiBox display="flex" justifyContent="space-between" alignItems="center" mb="22px">
-              <VuiTypography variant="lg" color="white">
+              <VuiTypography variant="h3" color="white">
                 {t("students.title")}
                 <VuiBadge color="warning" variant="gradient" badgeContent="En cours de development" size="lg"/>
               </VuiTypography>

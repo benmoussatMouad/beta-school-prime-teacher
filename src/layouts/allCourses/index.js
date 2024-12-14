@@ -110,9 +110,8 @@ function AllCourses() {
       <VuiBox py={3}>
         <Card>
           <VuiBox display="flex" justifyContent="space-between" alignItems="center">
-            <VuiTypography variant="lg" color="white">
-              {t("cours.title")}
-              <VuiBadge color="warning" variant="gradient" badgeContent="En cours de development" size="lg" />
+            <VuiTypography variant="h3" color="white" mb={1}>
+              {t("allCourses.title")}
             </VuiTypography>
           </VuiBox>
           <VuiBox

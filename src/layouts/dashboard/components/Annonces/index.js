@@ -45,7 +45,7 @@ function Annonces() {
 
       </VuiBox>
       <VuiBox mb="16px">
-        <VuiTypography variant="lg" fontWeight="bold" mb="5px" color="white">
+        <VuiTypography variant="h4" fontWeight="bold" mb="5px" color="white">
           {t("announcement.title")}
         </VuiTypography>
         <VuiBadge color="warning" variant="gradient" badgeContent="En cours de development" size="lg" />

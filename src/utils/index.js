@@ -79,6 +79,7 @@ export const FiltersSubjects = [
   "ARABIC",
   "FRENCH",
   "ENGLISH",
+  "OTHER"
 ];
 
 export const FiltersStudentsLevel = [
