@@ -5,6 +5,7 @@ import Grid from "@mui/material/Grid";
 import VuiInput from "../components/VuiInput";
 import VuiSelect from "../components/VuiSelect";
 import React from "react";
+import moment from "moment";
 
 export function getEnvSafely(envKey, defaultValue) {
   const value = process.env[envKey];
@@ -19,6 +20,10 @@ export function getEnvSafely(envKey, defaultValue) {
 
   return value;
 }
+
+export const convertSecondsToMinutes = (seconds) => {
+  return Math.round(moment.duration(seconds, "seconds").asMinutes());
+};
 
 export const Subjects = [
   "MATHEMATICS",

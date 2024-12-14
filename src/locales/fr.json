@@ -18,6 +18,7 @@
     "back": "Retour",
     "buttonCooldown": "Intervalle de repos",
     "cancel": "Annuler",
+    "close": "Fermer",
     "confirm": "Confirmer",
     "forgetButton01": "Réessayez dans",
     "forgetButton02": "Envoyer le lien de réinitialisation",
@@ -28,7 +29,13 @@
     "submit": "Soumettre"
   },
   "chapter": {
-    "create": "Créer un chapitre"
+    "create": {
+      "successfully": "Chapitre créer avec succès",
+      "title": "Créer un chapitre"
+    },
+    "update": {
+      "successfully": "Le chapitre a été mis à jour avec succès"
+    }
   },
   "chapters": {
     "ressources": "Les ressources",
@@ -139,7 +146,8 @@
       "title": "Approuver le cours"
     },
     "chapter": {
-      "title": "Créer un nouveau chapitre pour le cours"
+      "title": "Créer un nouveau chapitre pour le cours",
+      "update": "Mise à jour du chapitre"
     },
     "course": {
       "description": "Remplir les champs afin de créer un cours",
@@ -155,6 +163,9 @@
       "title": "Supprimer le cours"
     },
     "description": "Cette action changera votre photo de profil. Voulez-vous continuer ?",
+    "error": {
+      "invalidVideo": "Vidéo non valide"
+    },
     "errors": {
       "duration_min": "Durée",
       "price_min": "Prix min",
@@ -178,6 +189,10 @@
       "title": "Titre du cours",
       "video": "Vidéo"
     },
+    "loading": "Chargement...",
+    "no": {
+      "video": "Aucune vidéo trouvée"
+    },
     "rejectCourse": {
       "description": "Confirmer le rejet de la demande",
       "notePlaceholder": "Laissez une note pour le refus du cours",
@@ -196,6 +211,9 @@
     "upload": {
       "attachments": "Télécharger des pièces jointes",
       "video": "Télécharger la vidéo"
+    },
+    "view": {
+      "chapter": "Voir le chapitre"
     }
   },
   "educationalBranches": {
@@ -317,6 +335,7 @@
     "signin": "Créer un nouveau compte",
     "welcome": "Ravi de vous revoir !"
   },
+  "minute": "Min",
   "note": "Note",
   "placeholder": {
     "email": "Votre e-mail",
@@ -442,6 +461,7 @@
     "sendVerifyEmail": "Vérifiez votre e-mail pour les instructions de vérification.",
     "signup": "Utilisateur enregistré avec succès !",
     "updateProfile": "Profil mis à jour avec succès !",
+    "uploadVideo": "La vidéo a été téléchargée avec succès ",
     "verifyEmail": "Votre e-mail a été vérifié avec succès !"
   },
   "status": {
@@ -470,6 +490,7 @@
     "ISLAMIC_STUDIES": "Études islamiques",
     "MATHEMATICS": "Mathématiques",
     "NONE": "Aucun",
+    "OTHER": "Autres",
     "PHYSICS": "Physique",
     "SCIENCE": "Science"
   },

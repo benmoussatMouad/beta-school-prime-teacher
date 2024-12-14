@@ -131,7 +131,19 @@ function CreateCoursDialog({ closeDialog, openDialog }) {
       open={openDialog}
       onClose={closeDialog}
     >
-      <DialogTitle color={"#ffffff"}>{t("dialog.course.title")}</DialogTitle>
+      {isLoading ? (
+        <DialogTitle>
+          <VuiTypography color="white" fontWeight="bold">
+            {t("dialog.loading")}
+          </VuiTypography>
+        </DialogTitle>
+      ) : (
+        <DialogTitle>
+          <VuiTypography color="white" fontWeight="bold">
+            {t("dialog.chapter.title")}
+          </VuiTypography>
+        </DialogTitle>
+      )}
       <DialogContent>
         {isLoading ? <Box sx={{
             display: "flex",
@@ -400,8 +412,6 @@ function CreateCoursDialog({ closeDialog, openDialog }) {
                         placeholder={t("dialog.forms.discount")}
                         {...register("discount", {
                           valueAsNumber: true,
-                          min: { value: 0, message: t("dialog.errors.discount_min") },
-                          max: { value: 100, message: t("dialog.errors.discount_max") },
                         })}
                         onInput={(e) => {
                           if (e.target.value < 0) e.target.value = 0;
