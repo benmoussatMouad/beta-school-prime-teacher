@@ -16,9 +16,11 @@ import VuiAvatar from "../../../../components/VuiAvatar";
 import { GiOpenBook } from "react-icons/gi";
 import { useUpdateCourse } from "../../../../api/courses/updateCourse";
 import Grid from "@mui/material/Grid";
+import PopperIcon from "../../../../examples/Popper/IconsPopper";
 
 function UpdateCourse({ isLoading, data: courseData }) {
   const { mutate, isLoading: updateLoading } = useUpdateCourse();
+  const [popperAnchor, setPopperAnchor] = useState(null); // To manage Popper visibility
 
   const { t } = useTranslation();
   const {
@@ -77,6 +79,21 @@ function UpdateCourse({ isLoading, data: courseData }) {
     }
   };
 
+  // Converts a predefined icon URL into a File
+  const urlToFile = async (url, filename) => {
+    const response = await fetch(url);
+    const blob = await response.blob();
+    return new File([blob], filename, { type: blob.type });
+  };
+
+  // Handle predefined icon selection
+  const handlePredefinedIconClick = (iconUrl, index) => {
+    urlToFile(iconUrl, `icon${index + 1}.png`).then((file) => {
+      setValue("icon", file, { shouldValidate: true }); // Set the selected file in the form
+      setIconPreview(URL.createObjectURL(file)); // Update preview
+    });
+  };
+
   const onSubmit = async (data) => {
     const formData = new FormData();
     formData.append("title", data.title);
@@ -102,11 +119,15 @@ function UpdateCourse({ isLoading, data: courseData }) {
     formData.append("price", data.price);
     formData.append("discount", data.discount);
     formData.append("duration", data.duration);
-    formData.append("language", data.language);
+    if (data.language) formData.append("language", data.language);
     formData.append("maxParticipants", data.maxParticipants);
 
     if (watchIcon) {
       formData.append("icon", watchIcon);
+    }
+
+    if (data.icon instanceof File) {
+      formData.append("icon", data.icon);
     }
 
     mutate({
@@ -114,7 +135,19 @@ function UpdateCourse({ isLoading, data: courseData }) {
       coursId: courseData.id,
     });
   };
-  
+
+  // Open Popover when hovering over the trigger
+  const handlePopperOpen = (event) => {
+    setPopperAnchor(event.currentTarget);
+  };
+
+  // Close Popover with a slight delay to account for hover transitions
+  const handlePopperClose = () => {
+    setPopperAnchor(null);
+  };
+
+  const isPopperOpen = Boolean(popperAnchor);
+
   return (
     <Card sx={{ minHeight: "490px" }}>
       <VuiBox mb="26px">
@@ -124,7 +157,12 @@ function UpdateCourse({ isLoading, data: courseData }) {
       </VuiBox>
       <VuiBox as={"form"} onSubmit={handleSubmit(onSubmit)}>
         {/* Icon Upload */}
-        <VuiBox display="flex" flexDirection="column" alignItems="center">
+        <VuiBox
+          onMouseEnter={handlePopperOpen}
+          display="flex"
+          flexDirection="column"
+          alignItems="center"
+        >
           <VuiTypography component="label" variant="button" color="white" fontWeight="medium" sx={{ mb: 2 }}>
             {t("dialog.course.icon")}
           </VuiTypography>
@@ -154,6 +192,13 @@ function UpdateCourse({ isLoading, data: courseData }) {
               {errors.icon.message}
             </VuiTypography>
           )}
+          <PopperIcon
+            watch={watch}
+            handlePredefinedIconClick={handlePredefinedIconClick}
+            popperAnchor={popperAnchor}
+            isPopperOpen={isPopperOpen}
+            handlePopperClose={handlePopperClose}
+          />
         </VuiBox>
 
         <Grid container spacing={2}>

@@ -171,7 +171,7 @@ function UpdateChapter({ closeDialog, openDialog, chapterId }) {
       ) : (
         <DialogTitle>
           <VuiTypography color="white" fontWeight="bold">
-            {t("dialog.chapter.title")}
+            {t("dialog.chapter.update")}
           </VuiTypography>
         </DialogTitle>
       )}
@@ -198,6 +198,7 @@ function UpdateChapter({ closeDialog, openDialog, chapterId }) {
                     {t("dialog.forms.title")}
                   </VuiTypography>
                   <VuiInput
+                    sx={{ borderColor: rgba(black.main, 0.1), borderRadius: borderRadius.md }}
                     placeholder={t("dialog.forms.title")}
                     {...register("title", { required: t("dialog.required.title") })}
                     error={!!errors.title}
@@ -212,6 +213,7 @@ function UpdateChapter({ closeDialog, openDialog, chapterId }) {
                     {t("dialog.forms.description")}
                   </VuiTypography>
                   <VuiInput
+                    sx={{ borderColor: rgba(black.main, 0.1), borderRadius: borderRadius.md }}
                     placeholder={t("dialog.forms.description")}
                     multiline
                     rows={4}
