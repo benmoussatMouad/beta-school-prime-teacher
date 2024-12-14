@@ -191,16 +191,16 @@ function ChapterCard({ image, label, title, description, action, duration, id, r
               };
             }}
           >
-            {ressources?.map(el => <VuiBox
+            {!ressources.length ? "" : ressources?.map(el => <VuiBox
               key={el.id}
               sx={{
                 border: `${borderWidth[1]} solid ${white.main}`,
                 borderRadius: "8px",
                 padding: "0.5em",
               }}>
-              <VuiTypography variant={"caption"} color={"white"} sx={{ p: 2 }}>{el.file.fileName} </VuiTypography>
+              <VuiTypography variant={"caption"} color={"white"} sx={{ p: 2 }}>{el?.file?.fileName} </VuiTypography>
               <VuiButton color={"info"} size={"small"} onClick={() => {
-                saveAs(el.file.url, el.file.fileName);
+                saveAs(el?.file?.url, el?.file?.fileName);
               }}>
                 {t("demands.table.view")}
               </VuiButton>
