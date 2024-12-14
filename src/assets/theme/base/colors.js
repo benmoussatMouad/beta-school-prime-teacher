@@ -1,30 +1,7 @@
-/**
-
-=========================================================
-* Vision UI  React - v1.0.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/vision-ui-pro-react
-* Copyright 2021 Creative Tim (https://www.creative-tim.com/)
-
-* Design and Coded by Simmmple & Creative Tim
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Visionware.
-
-*/
-
-/**
- * The base colors for the Vision UI Dashboard  Material.
- * You can add new color using this file.
- * You can customized the colors for the entire Vision UI Dashboard  Material using thie file.
- */
-
 export default {
   // Vision UI Colors
   background: {
-    default: "#f8f9fa",
+    default: "#f8f9fa", // Light background
   },
 
   sidenav: {
@@ -32,8 +9,8 @@ export default {
   },
 
   text: {
-    main: "#a0aec0",
-    focus: "#ffffff",
+    main: "#2d3748", // Dark text for contrast
+    focus: "#000000", // Dark focus text
   },
 
   transparent: {
@@ -89,7 +66,7 @@ export default {
   },
 
   borderCol: {
-    main: "#56577a",
+    main: "#d1d5db", // Lighter border color
     red: "#e31a1a",
     navbar: "rgba(226, 232, 240, 0.3)",
   },
@@ -105,19 +82,6 @@ export default {
       400: "#0f4a91",
       500: "#073a78",
       600: "#012654",
-    },
-  },
-
-  infoDisappearing: {
-    main: "#0075ffff",
-    focus: "#3993feff",
-    charts: {
-      100: "#2d8cfcff",
-      200: "#2370ccee",
-      300: "#2370ccaa",
-      400: "#0f4a9155",
-      500: "#073a7833",
-      600: "#01265400",
     },
   },
 
@@ -166,36 +130,24 @@ export default {
       state: "rgba(255, 255, 255, 0) 100%",
     },
 
-    borderDark: {
-      angle: "69.43% 69.43% at 50% 50%",
-      main: "#ffffff 0%",
-      state: "rgba(255, 255, 255, 0) 100%",
-    },
-
-    cover: {
-      deg: "159.02",
-      main: "#0f123b 14.25%",
-      state: "#090d2e 56.45%",
-      stateSecondary: "#020515 86.14%",
-    },
-
     cardDark: {
       deg: "126.97",
-      main: "rgba(6, 11, 40, 0.74) 28.26%",
-      state: "rgba(10, 14, 35, 0.71) 91.2%",
+      main: "rgba(6, 11, 40, 0.55) 28.26%",  // Lighter shade with reduced opacity
+      state: "rgba(10, 14, 35, 0.5) 91.2%",  // Lighter shade with reduced opacity
     },
 
     cardLight: {
       deg: "127.09",
-      main: "rgba(6, 11, 40, 0.94) 19.41%",
-      state: "rgba(10, 14, 35, 0.49) 76.65%",
+      main: "rgba(6, 11, 40, 0.74) 19.41%",  // Lighter shade with reduced opacity
+      state: "rgba(10, 14, 35, 0.39) 76.65%",  // Lighter shade with reduced opacity
     },
 
     card: {
       deg: "127.09",
-      main: "rgba(6, 11, 40, 0.94) 19.41%",
-      state: "rgba(10, 14, 35, 0.49) 76.65%",
+      main: "rgba(6, 11, 40, 0.74) 19.41%",  // Lighter shade with reduced opacity
+      state: "rgba(10, 14, 35, 0.39) 76.65%",  // Lighter shade with reduced opacity
     },
+
 
     menu: {
       deg: "126.97",
@@ -432,22 +384,22 @@ export default {
   },
 
   inputColors: {
-    backgroundColor: "#0f1535",
-    borderColor: { main: "rgba(226, 232, 240, 0.3)", focus: "rgba(226, 232, 240, 0.6)" },
-    boxShadow: "#628fc2",
+    backgroundColor: "#ffffff", // Lighter background for inputs
+    borderColor: { main: "rgba(226, 232, 240, 0.6)", focus: "rgba(226, 232, 240, 0.8)" },
+    boxShadow: "#b3c6e6", // Light shadow
     error: "#fd5c70",
     success: "#66d432",
   },
 
   sliderColors: {
-    thumb: { borderColor: "#d9d9d9" },
+    thumb: { borderColor: "#b0b8c1" }, // Lighter thumb color for sliders
   },
 
   circleSliderColors: {
-    background: "#d3d3d3",
+    background: "#d1d9e6", // Lighter background for the circle slider
   },
 
   tabs: {
-    indicator: { boxShadow: "#ddd" },
+    indicator: { boxShadow: "#ddd" }, // Subtle shadow for tabs indicator
   },
 };
