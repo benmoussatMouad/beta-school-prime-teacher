@@ -13,7 +13,7 @@
     "title": "Annonces"
   },
   "banner": {
-    "button": "Vérifiez votre e-mail",
+    "button": "Cliquez vérifier votre e-mail",
     "title": "Votre e-mail n'a pas encore été vérifié !"
   },
   "button": {
@@ -32,10 +32,7 @@
     "submit": "Soumettre"
   },
   "chapter": {
-    "create": {
-      "successfully": "Chapitre créer avec succès",
-      "title": "Créer un chapitre"
-    },
+    "create": "Créer un chapitre",
     "update": {
       "successfully": "Le chapitre a été mis à jour avec succès"
     }
@@ -46,7 +43,7 @@
   },
   "choose-a-predefined-icon": "Choisir une icône prédéfinie",
   "cours": {
-    "description": "Description",
+    "description": "Détails du cours",
     "table": {
       "action": "Action",
       "budget": "Budget",
@@ -66,6 +63,12 @@
     },
     "create": {
       "success": "Créer un cours avec succès !"
+    },
+    "details": {
+      "priceDetails": "Informations de tarif",
+      "schoolGains": "Gains de l'ecole (40%)",
+      "teacherGains": "Vos Gains (60%)",
+      "totalPrice": "Prix total"
     },
     "filter": {
       "level": "Niveau",
@@ -107,12 +110,18 @@
       "views": "Vues"
     }
   },
-  "currentEnrollment": "Inscription actuelle",
+  "currentEnrollment": "Inscriptions actuelles",
   "dashboard": {
     "course": "Cours",
     "coursesCard": {
       "addCourse": "Ajouter un cours"
     },
+    "emailVerification1": "Vérifiez votre email pour pouvoir",
+    "emailVerification2": "utiliser la plateforme",
+    "inProgressMessage1": "Votre compte est en cours d'examen,",
+    "inProgressMessage2": "nous vous accepterons bientôt.",
+    "isAccepted1": "Votre compte a été accepté, vous",
+    "isAccepted2": "pouvez désormais créer vos propres cours",
     "myCourses": "Mes cours",
     "newViewers": "Nouveaux visiteurs",
     "numberOfCourses": "Nombre de cours",
@@ -410,7 +419,7 @@
     "cours": "Cours",
     "courses": "Mes Cours",
     "dashboard": "Tableau de bord",
-    "demands": "Demandes",
+    "demands": "Demands",
     "pendingCourses": "Les Cours en attente",
     "profile": "Profil",
     "students": "Étudiants",

@@ -10,7 +10,6 @@ import VuiBadge from "../../../../components/VuiBadge";
 
 const WelcomeMark = ({ user: { user, teacher } }) => {
   const [{ direction }] = useVisionUIController();
-
   const subject = teacher?.subject;
 
   const { t, i18n } = useTranslation();
@@ -34,14 +33,32 @@ const WelcomeMark = ({ user: { user, teacher } }) => {
                         size="md" sx={{ position: "relative", top: "-1rem", color: "black", ml: "10px" }} />
             )}
             {user && user.role === "ROOT" && (
-              <VuiBadge badgeContent={t("dashboard.welcomeCard.superadmin")} container color="success" variant="contained"
+              <VuiBadge badgeContent={t("dashboard.welcomeCard.superadmin")} container color="success"
+                        variant="contained"
                         size="md" sx={{ position: "relative", top: "-1rem", color: "black", ml: "10px" }} />
             )}
           </VuiTypography>
           <VuiTypography color="text" variant="h6" fontWeight="regular" mb="auto">
             {t("dashboard.welcomeCard.description")}
-            <br /> {t("dashboard.welcomeCard.subject")+ ':  '}
-            {subject ? <VuiBadge mx={1} size={'md'} container color={"info"} badgeContent={t(`subjects.${subject}`)} /> : ""}
+            <br /> {t("dashboard.welcomeCard.subject") + ":  "}
+            {subject ?
+              <VuiBadge mx={1} size={"md"} container color={"info"} badgeContent={t(`subjects.${subject}`)} /> : ""}
+          </VuiTypography>
+          <VuiTypography my={2} color={teacher && teacher.status === 'ACCEPTED' ? 'success' : 'warning'} variant="h6" fontWeight="regular" mb="auto">
+            {/*Email verification notice*/}
+            {user && !user.isEmailVerified ? t("dashboard.emailVerification1") : ""}
+            {user && !user.isEmailVerified ? <br /> : ""}
+            {user && !user.isEmailVerified ? t("dashboard.emailVerification2") : ""}
+
+            {/*Account in progress notice*/}
+            {user && user.isEmailVerified && teacher && teacher.status == "IN_PROGRESS" ? t("dashboard.inProgressMessage1") : ""}
+            {user && user.isEmailVerified && teacher && teacher.status == "IN_PROGRESS" ? <br /> : ""}
+            {user && user.isEmailVerified && teacher && teacher.status == "IN_PROGRESS" ? t("dashboard.inProgressMessage2") : ""}
+
+            {/*  Account accepted notice*/}
+            {user && user.isEmailVerified && teacher && teacher.status == "ACCEPTED" ? t("dashboard.isAccepted1") : ""}
+            {user && user.isEmailVerified && teacher && teacher.status == "ACCEPTED" ? <br /> : ""}
+            {user && user.isEmailVerified && teacher && teacher.status == "ACCEPTED" ? t("dashboard.isAccepted2") : ""}
           </VuiTypography>
         </VuiBox>
 

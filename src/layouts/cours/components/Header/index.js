@@ -34,6 +34,7 @@ import VuiBadge from "../../../../components/VuiBadge";
 import { useAuth } from "../../../../context/auth/authContext";
 import { useState } from "react";
 import Popper from "@mui/material/Popper/BasePopper";
+import i18n from "../../../../i18n";
 
 function Header({ pageName, data }) {
 
@@ -91,14 +92,14 @@ function Header({ pageName, data }) {
   return (
     <VuiBox position="relative">
       <DashboardNavbar pageName={pageName} light />
-      <Card sx={{ px: 1, mt: 1 }}>
-        <Grid container alignItems="center" justifyContent="space-between"
-              sx={{ gap: { xs: "16px", sm: "12px", md: "8px" }, color: "white", textAlign: "center" }}>
-          <VuiTypography variant="h6" sx={{ fontWeight: "bold", width: "100%" }} color="white">
-            {renderNote()}
-          </VuiTypography>
-        </Grid>
-      </Card>
+      {/*<Card sx={{ px: 1, mt: 1 }}>*/}
+      {/*  <Grid container alignItems="center" justifyContent="space-between"*/}
+      {/*        sx={{ gap: { xs: "16px", sm: "12px", md: "8px" }, color: "white", textAlign: "center" }}>*/}
+      {/*    <VuiTypography variant="h6" sx={{ fontWeight: "bold", width: "100%" }} color="white">*/}
+      {/*      {renderNote()}*/}
+      {/*    </VuiTypography>*/}
+      {/*  </Grid>*/}
+      {/*</Card>*/}
 
       <Card sx={{ px: 3, mt: 2 }}>
         <Grid container alignItems="center" justifyContent="space-between"
@@ -115,7 +116,12 @@ function Header({ pageName, data }) {
               </VuiBox>
             )}
             <VuiBox sx={{ textAlign: { xs: "center", md: "left" }, ml: 2 }}>
-              <VuiTypography variant="h6" color="white" fontWeight="bold">
+              <VuiTypography variant="h2" color="white" fontWeight="bold"
+              sx={{
+                textOverflow: "ellipsis",
+                overflow: "hidden",
+                whiteSpace: "nowrap"
+              }}>
                 {data.title}
               </VuiTypography>
             </VuiBox>
@@ -135,84 +141,17 @@ function Header({ pageName, data }) {
               justifyContent: { xs: "center", md: "flex-end" },
               flexDirection: { xs: "column", md: "row" },
             }}>
-              <VuiBadge color="warning" variant="gradient" container badgeContent={`${data.price}DA`} size="lg"
-                        sx={{ fontSize: { xs: "1rem", md: "1.2rem" } }} />
+
+              <VuiAvatar src={user.user.profilePic.url} alt="profile-image" variant="rounded" size="lg" shadow="sm" />
               <VuiTypography color={"white"} sx={{
-                ml: { xs: 0, md: 2 },
+                ml: { xs: 0, md: 0 },
                 fontSize: { xs: "0.8rem", md: "1rem" },
                 textAlign: { xs: "center", md: "left" },
               }} variant="caption">
-                {`${user.user.lastName} ${user.user.firstName}`}
+                {i18n.language == "fr" ? `${user.user.lastName} ${user.user.firstName}` : `${user.user.firstNameAr} ${user.user.lastNameAr}`}
               </VuiTypography>
-
-              {/* First Popover */}
-              <VuiTypography color={"white"} sx={{
-                ml: { xs: 0, md: 2 },
-                fontSize: { xs: "0.8rem", md: "1rem" },
-                textAlign: { xs: "center", md: "left" },
-              }} variant="caption" onMouseEnter={handlePopoverOpen1} onMouseLeave={handlePopoverClose1}>
-                {t(`educationalBranches.${data?.EducationalBranch?.[0]}`)}
-              </VuiTypography>
-              <Popper
-                id="mouse-over-popover1"
-                open={open1}
-                anchorEl={anchorEl1}
-                placement="bottom"
-                sx={{
-                  pointerEvents: "none",
-                  borderRadius: "8px",
-                  boxShadow: "0px 4px 12px rgba(0, 0, 0, 0.2)",
-                  padding: "8px 16px",
-                  fontSize: "0.9rem",
-                }}
-              >
-                <VuiTypography
-                  sx={{ p: 1, display: "flex", flexDirection: "column", alignItems: "center", gap: "5px" }}
-                >
-                  {data.EducationalBranch.slice(1).map((el, index) => (
-                    <span style={{ color: "white", fontSize: "0.9rem" }}
-                          key={index}>{t(`educationalBranches.${el}`)}</span>
-                  ))}
-                </VuiTypography>
-              </Popper>
-
-              {/* Second Popover */}
-              <VuiTypography color={"white"} sx={{
-                ml: { xs: 0, md: 2 },
-                fontSize: { xs: "0.8rem", md: "1rem" },
-                textAlign: { xs: "center", md: "left" },
-              }} variant="caption" onMouseEnter={handlePopoverOpen2} onMouseLeave={handlePopoverClose2}>
-                {t(`teacherClass.${data?.class?.[0]}`)}
-              </VuiTypography>
-              <Popper
-                id="mouse-over-popover2"
-                open={open2}
-                anchorEl={anchorEl2}
-                placement="bottom"
-                sx={{
-                  borderRadius: "8px",
-                  boxShadow: "0px 4px 12px rgba(0, 0, 0, 0.2)",
-                  padding: "8px 16px",
-                  pointerEvents: "none",
-                  fontSize: "0.9rem",
-                  backgroundColor: "rgba(0, 0, 0, 0.8)",
-                }}
-              >
-                <VuiTypography
-                  sx={{
-                    padding: "8px",
-                    display: "flex",
-                    flexDirection: "column",
-                    alignItems: "center",
-                    gap: "10px",
-                    color: "white",
-                  }}
-                >
-                  {data.class.slice(1).map((el, index) => (
-                    <span key={index} style={{ color: "white", fontSize: "0.9rem" }}>{t(`teacherClass.${el}`)}</span>
-                  ))}
-                </VuiTypography>
-              </Popper>
+              <VuiBadge color="primary" variant="gradient" container badgeContent={`${data.price}DA`} size="lg"
+                        sx={{ fontSize: { xs: "1rem", md: "1.2rem" } }} />
             </VuiBox>
           </Grid>
         </Grid>

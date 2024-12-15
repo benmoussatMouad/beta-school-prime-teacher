@@ -92,7 +92,7 @@ function DashboardLayout({ children, user }) {
             padding: "2px 20px ",
             minHeight: "0px",
             position: "fixed",
-            bottom: 0,
+            top: 0,
             left: 0,
             right: 0,
             zIndex: 10000,

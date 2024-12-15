@@ -13,7 +13,7 @@
     "title": "اعلانات"
   },
   "banner": {
-    "button": "تحقق من البريد الإلكتروني",
+    "button": "اضعط هنا لتحقق من البريد الإلكتروني",
     "title": "لم يتم التحقق من بريدك الإلكتروني بعد!"
   },
   "button": {
@@ -32,10 +32,7 @@
     "submit": "إرسال"
   },
   "chapter": {
-    "create": {
-      "successfully": "إنشاء الفصل بنجاح",
-      "title": "إنشاء فصل"
-    },
+    "create": "إنشاء فصل",
     "update": {
       "successfully": "تم تحديث الفصل بنجاح "
     }
@@ -46,7 +43,7 @@
   },
   "choose-a-predefined-icon": "اختر أيقونة محددة مسبقًا",
   "cours": {
-    "description": "الوصف",
+    "description": "معلومات الدورة",
     "table": {
       "action": "الإجراء",
       "budget": "الميزانية",
@@ -66,6 +63,12 @@
     },
     "create": {
       "success": "إنشاء الدورة بنجاح!"
+    },
+    "details": {
+      "priceDetails": "معلومات التسعير",
+      "schoolGains": "عائدات المدرسة (40٪)",
+      "teacherGains": "أرباحك (60%)",
+      "totalPrice": "السعر الإجمالي"
     },
     "filter": {
       "level": "المستوى",
@@ -108,12 +111,18 @@
       "views": "المشاهدات"
     }
   },
-  "currentEnrollment": "جميع المسجلين",
+  "currentEnrollment": "عدد المسجلين",
   "dashboard": {
     "course": "دورة",
     "coursesCard": {
       "addCourse": "أضف دورة"
     },
+    "emailVerification1": "قم بالتحقق من بريدك الإلكتروني حتى",
+    "emailVerification2": "تتمكن من استخدام المنصة",
+    "inProgressMessage1": "حسابك قيد المراجعة،",
+    "inProgressMessage2": " وسوف نقوم بقبولك قريبًا",
+    "isAccepted1": "لقد تم قبول حسابك،",
+    "isAccepted2": " يمكنك إنشاء دوراتك الخاصة الآن",
     "myCourses": "دوراتي",
     "newViewers": "المشاهدين الجدد",
     "numberOfCourses": "عدد الدورات",

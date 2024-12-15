@@ -36,6 +36,17 @@ import NotFound from "../../examples/NotFound/NotFound";
 import CreateChapter from "../../examples/Dialogs/CreateChapter";
 import UpdateChapter from "../../examples/Dialogs/UpdateChapter";
 import ViewChapter from "../../examples/Dialogs/ViewChapter";
+import VuiProgress from "../../components/VuiProgress";
+import List from "@mui/material/List";
+import VuiBadge from "../../components/VuiBadge";
+import VuiAvatar from "../../components/VuiAvatar";
+import i18n from "../../i18n";
+import ProfilesList from "../../examples/Lists/ProfilesList";
+import avatar from "../../assets/theme/components/avatar";
+import NotificationItem from "../../examples/Items/NotificationItem";
+import Popper from "@mui/material/Popper/BasePopper";
+import MiniStatisticsCard from "../../examples/Cards/StatisticsCards/MiniStatisticsCard";
+import { IoCard, IoNotifications } from "react-icons/io5";
 
 
 function CoursDetails() {
@@ -55,7 +66,27 @@ function CoursDetails() {
 
   const { data, isLoading } = useGetCourse(coursId);
   const { mutate: updateToReview } = useUpdateToReview();
+  // Separate states for handling each Popover
+  const [anchorEl1, setAnchorEl1] = useState(null);
+  const [anchorEl2, setAnchorEl2] = useState(null);
 
+  const handlePopoverOpen1 = (event) => {
+    setAnchorEl1(event.currentTarget);
+  };
+
+  const handlePopoverClose1 = () => {
+    setAnchorEl1(null);
+  };
+
+  const handlePopoverOpen2 = (event) => {
+    setAnchorEl2(event.currentTarget);
+  };
+
+  const handlePopoverClose2 = () => {
+    setAnchorEl2(null);
+  };
+  const open1 = Boolean(anchorEl1);
+  const open2 = Boolean(anchorEl2);
 
   const changeStatusToReview = async () => {
     await updateToReview(data.id);
@@ -99,13 +130,36 @@ function CoursDetails() {
       chapterId: id,
     });
   };
-
+  const renderNote = () => {
+    switch (data.status) {
+      case "UNDER_CREATION":
+        return t("UNDER_CREATION");
+      case "PENDING":
+        return t("PENDING");
+      case "ACCEPTED":
+        return t("ACCEPTED");
+      case "TO_REVIEW":
+        return t("TO_REVIEW");
+      case "REJECT":
+        return <VuiBox>
+          <VuiTypography variant="subtitle2" color="white" fontWeight="medium">
+            {t("REJECT")}
+          </VuiTypography>
+          <VuiTypography variant="caption" color="white" fontWeight="medium">
+            {t("note")}: {data.statusNote}
+          </VuiTypography>
+        </VuiBox>;
+      default:
+        return t("UNKNOWN_STATUS"); // If an unknown status is encountered
+    }
+  };
 
   return (
     <DashboardLayout user={context.user}>
       <Header data={data} isLoading={isLoading} pageName={data?.title} />
       <CreateChapter closeDialog={closeDialog} openDialog={openCreateDialog} courseId={data.id} />
-      <UpdateChapter closeDialog={closeDialog} openDialog={openUpdateDialog.open} chapterId={openUpdateDialog.coursId} />
+      <UpdateChapter closeDialog={closeDialog} openDialog={openUpdateDialog.open}
+                     chapterId={openUpdateDialog.coursId} />
       <ViewChapter
         openDialog={openViewDialog.open}
         closeDialog={closeDialog}
@@ -113,38 +167,130 @@ function CoursDetails() {
       />
       <Grid container spacing={3} my="20px">
         <Grid item xs={12} xl={myOwnCourse ? 8 : 12}>
+          {(data.status === "UNDER_CREATION" || data.status === "REJECT") && myOwnCourse ?
+            <VuiBox
+              sx={{
+                display: "flex",
+                flexDirection: { xs: "column", sm: "row" },  // Column direction on small devices
+                alignItems: "center",
+                justifyContent: "space-between",
+                padding: 3,
+                marginBottom: 1,
+                gap: 2,  // Add space between elements
+                // color: "white",
+              }}
+              bgColor="warning"
+              variant="gradient"
+              borderRadius="lg"
+            >
+              <VuiTypography
+                variant="body2"
+                color="white"
+                sx={{ textAlign: { xs: "center", sm: "left" } }} // Center align on small screens
+              >
+                {t("course.pending.send")}
+              </VuiTypography>
+              <VuiButton
+                variant="contained"
+                color="info"
+                sx={{ width: { xs: "100%", sm: "auto" } }}  // Full width on small screens
+                onClick={changeStatusToReview}
+              >
+                {t("course.pending.button")}
+              </VuiButton>
+            </VuiBox> : ""}
           {
             user.role === "ROOT" || user.role === "ADMIN" ? data.status === "TO_REVIEW" &&
               <ActionsCourse coursId={data.id} /> : ""
           }
           <Card>
-            <VuiBox sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", mb: 2 }}>
-              <VuiTypography variant="lg" sx={{ mb: 2 }} fontWeight="bold" color="white" textTransform="capitalize">
-                {t("cours.description")}
-              </VuiTypography>
-            </VuiBox>
-            <VuiTypography color={"white"} variant="h4" component="h2" gutterBottom fontWeight="bold">
-              {data.title}
-            </VuiTypography>
-            <VuiTypography color={"white"} variant="subtitle1" gutterBottom>
-              {`${t("Instructor")}: ${user.lastName} ${user.firstName}`} {/* Assuming data has an instructor property */}
-            </VuiTypography>
-            <VuiTypography color={"white"} variant="body1" sx={{ textAlign: "justify", mt: 1 }}>
-              {data.description}
-            </VuiTypography>
-            <VuiTypography color={"white"} variant="subtitle2" sx={{ textAlign: "justify", mt: 1 }}>
-              {`${t("currentEnrollment")}: ${data.currentEnrollment || "0"}`} {/* Assuming data has an instructor property */}
-            </VuiTypography>
+            <Grid container>
+              <Grid item xs={8} sx={{ p: 1, pr: 5 }}>
+                <VuiBox
+                  sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", mb: 2 }}>
+                  <VuiTypography variant="h3" sx={{ mb: 0 }} fontWeight="bold" color="white" textTransform="capitalize">
+                    {t("cours.description")}
+                  </VuiTypography>
+                </VuiBox>
+                <VuiTypography color={"white"} variant="h4" component="h2" mb={2}>
+                  {t('courses.table.title')}: {data.title}
+                </VuiTypography>
+                <VuiTypography color={"white"} variant="h4" component="h2" mb={2}>
+                  {t('courses.table.description')}:
+                </VuiTypography>
+                <VuiBox borderRadius={"lg"} sx={{ p: 3, mb: 1, border: "1px solid #234576" }}>
+                  <VuiTypography color={"white"} variant="body2"
+                                 sx={{ textAlign: "justify", mt: 1, lineHeight: 1.1 }}>
+                    {data.description}
+                  </VuiTypography>
+                </VuiBox>
+                <VuiBadge badgeContent={`${t("currentEnrollment")}: ${data.currentEnrollment || "0"}`}
+                          color={"primary"} container variant="contained" size={'lg'} sx={{ textAlign: "justify", mt: 1 }}/>
+              </Grid>
+              <Grid item xs={4} sx={{ py: 1 }}>
+                <VuiTypography color={"white"}>
+                  {t("course.details.priceDetails")}
+                </VuiTypography>
+                <VuiBox bgColor={"dark"} opacity={1} borderRadius="lg" sx={{ p: 3, mb: 1 }} variant={"contained"}>
+                  <VuiBox sx={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                    <VuiTypography color={"white"} variant="body2" component="h2">
+                      {t("course.details.totalPrice")}
+                    </VuiTypography>
+                    <VuiTypography color={"white"} variant="caption" component="h2">
+                      {data.price} DZD
+                    </VuiTypography>
+                  </VuiBox>
+                  <VuiBox sx={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                    <VuiTypography color={"white"} variant="body2" component="h2">
+                      {t("course.details.schoolGains")}
+                    </VuiTypography>
+                    <VuiTypography color={"white"} variant="caption" component="h2">
+                      {data.price * 0.4} DZD
+                    </VuiTypography>
+                  </VuiBox>
+                  <VuiBox sx={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                    <VuiTypography color={"white"} variant="body2" component="h2">
+                      {t("course.details.teacherGains")}
+                    </VuiTypography>
+                    <VuiTypography color={"white"} variant="caption" component="h2">
+                      {data.price * 0.6} DZD
+                    </VuiTypography>
+                  </VuiBox>
+                </VuiBox>
+                <VuiTypography color={"white"}>
+                  {t("dialog.forms.educationalBranches")}
+                </VuiTypography>
+                {data.EducationalBranch.map((el, index) => (
+                  <VuiBadge container sx={{
+                    ml: { xs: 0, md: 2 },
+                    fontSize: { xs: "0.8rem", md: "1rem" },
+                    textAlign: { xs: "center", md: "left" },
+                  }} size={"xs"} variant={"contained"} style={{ color: "white", fontSize: "0.9rem" }}
+                            key={index} badgeContent={t(`educationalBranches.${el}`)} />
+                ))}
+                <VuiTypography color={"white"}>
+                  {t("dialog.forms.teacherClasses")}
+                </VuiTypography>
+                {data.class.map((el, index) => (
+                  <VuiBadge container sx={{
+                    ml: { xs: 0, md: 2 },
+                    fontSize: { xs: "0.8rem", md: "1rem" },
+                    textAlign: { xs: "center", md: "left" },
+                  }} size={"xs"} style={{ color: "white", fontSize: "0.9rem" }}
+                            key={index} variant={"contained"} badgeContent={t(`teacherClass.${el}`)} />
+                ))}
+              </Grid>
+            </Grid>
           </Card>
           <Card sx={{ marginTop: 1 }}>
             <VuiBox display="flex" flexDirection="column" height="100%">
               <VuiBox sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", mb: 3 }}>
-                <VuiTypography variant="lg" fontWeight="bold" color="white" textTransform="capitalize">
+                <VuiTypography variant="h3" fontWeight="bold" color="white" textTransform="capitalize">
                   {t("chapters.title")}
                 </VuiTypography>
                 {myOwnCourse &&
                   <VuiButton onClick={() => setOpenCreateDialog(true)} color="primary" variant="gradient" size="medium">
-                    + {t("chapter.create.title")}
+                    + {t("chapter.create")}
                   </VuiButton>
                 }
               </VuiBox>
@@ -181,6 +327,7 @@ function CoursDetails() {
                       <VuiTypography color={"white"}>
                         {t("demands.table.nodata")}
                       </VuiTypography>
+                      <VuiProgress value="50" />
                     </VuiBox> : isLoading ? (
                       Array.from(new Array(3)).map((_, index) => (
                         <SwiperSlide style={{ maxWidth: "350px" }} key={index}>
@@ -265,37 +412,23 @@ function CoursDetails() {
               </Box>
             </VuiBox>
           </Card>
-          {(data.status === "UNDER_CREATION" || data.status === "REJECT") && myOwnCourse ?
-            <Card sx={{
-              display: "flex",
-              flexDirection: { xs: "column", sm: "row" },  // Column direction on small devices
-              alignItems: "center",
-              justifyContent: "space-between",
-              padding: 3,
-              marginTop: 1,
-              gap: 2,  // Add space between elements
-              color: "white",
-            }}
-            >
-              <VuiTypography
-                variant="body2"
-                color="white"
-                sx={{ textAlign: { xs: "center", sm: "left" } }} // Center align on small screens
-              >
-                {t("course.pending.send")}
-              </VuiTypography>
-              <VuiButton
-                variant="contained"
-                color="info"
-                sx={{ width: { xs: "100%", sm: "auto" } }}  // Full width on small screens
-                onClick={changeStatusToReview}
-              >
-                {t("course.pending.button")}
-              </VuiButton>
-            </Card> : ""}
         </Grid>
         {
-          myOwnCourse && <Grid item xs={12} xl={4}>
+          myOwnCourse &&
+          <Grid item xs={12} xl={4}>
+            <VuiBox bgColor={
+              data.status === "UNDER_CREATION" ? "info" :
+                data.status === "IN_REVIEW" ? "warning" :
+                  data.status === "REJECTED" ? "error" :
+                    data.status === "ACCEPTED" ? "success" :
+                      "primary"} borderRadius="lg" sx={{ p: 3, mb: 1 }}>
+              <Grid container alignItems="center" justifyContent="space-between"
+                    sx={{ gap: { xs: "16px", sm: "12px", md: "8px" }, color: "white", textAlign: "center" }}>
+                <VuiTypography variant="h6" sx={{ fontWeight: "bold", width: "100%" }} color="white">
+                  {renderNote()}
+                </VuiTypography>
+              </Grid>
+            </VuiBox>
             <UpdateCourse data={data} isLoading={isLoading} />
           </Grid>
         }
