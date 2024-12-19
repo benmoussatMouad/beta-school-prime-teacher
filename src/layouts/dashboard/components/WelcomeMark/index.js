@@ -73,7 +73,7 @@ const WelcomeMark = ({ user: { user, teacher } }) => {
             display: "inline-flex",
             alignItems: "center",
             cursor: "pointer",
-
+            zIndex: "1000",
             "& .material-icons-round": {
               fontSize: "1.125rem",
               transform: `translate(2px, -0.5px)`,

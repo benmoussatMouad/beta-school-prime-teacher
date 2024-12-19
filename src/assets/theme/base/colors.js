@@ -255,7 +255,7 @@ export default {
 
     error: {
       main: "#f53c2b",
-      state: "#f53c2b",
+      state: "#f48a61",
     },
 
     light: {

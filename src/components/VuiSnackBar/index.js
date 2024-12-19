@@ -3,7 +3,7 @@ import { IconButton, Snackbar, SnackbarContent } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import { hideSnackBar, useVisionUIController } from "../../context";
 
-const VisionUISnackBar = () => {
+const VisionUISnackBar = (autoHideDuration) => {
   const [controller, dispatch] = useVisionUIController();
   const { snackBarOpen, snackBarMessage, snackBarSeverity, direction } = controller;
 
@@ -19,7 +19,7 @@ const VisionUISnackBar = () => {
   return (
     <Snackbar
       open={snackBarOpen}
-      autoHideDuration={6000}
+      autoHideDuration={autoHideDuration}
       onClose={handleClose}
       anchorOrigin={anchorOrigin}
     >

@@ -35,6 +35,8 @@ import { MdDelete, MdEdit } from "react-icons/md";
 import { useDeleteChapter } from "../../../../api/chapters/deleteChapter";
 import { saveAs } from "file-saver";
 import { useDeleteAttachment } from "../../../../api/chapters/deleteAttachment";
+import bgCard from "assets/images/welcome-profile.png"
+import backgroundImage from "../../../../assets/images/sidenav/sidenav-card-background.png";
 
 const { black, white, gradients } = colors;
 const { card } = gradients;
@@ -100,6 +102,9 @@ function ChapterCard(
   return (
     <VuiBox
       sx={{
+        background: `url(${bgCard})`,
+        padding: "10px",
+        borderRadius: "15px",
         display: "flex",
         flexDirection: "column",
         boxShadow: "none",
@@ -110,21 +115,23 @@ function ChapterCard(
       {myOwnCourse && <VuiButton
         onClick={() => openToEdit(id)}
         color={"success"}
-        variant={"text"}
+        variant={"contained"}
         sx={{ position: "absolute", top: "10px", left: "10px", zIndex: 100 }}
-        size={"large"}
+        size={"md"}
       >
         <MdEdit />
       </VuiButton>}
       {myOwnCourse && <VuiButton
         onClick={handleOpenDialog} // Open dialog on click
         color={"error"}
-        size={"large"}
-        variant={"text"}
+        size={"md"}
+        variant={"contained"}
         sx={{ position: "absolute", top: "10px", right: "10px", zIndex: 100 }}
       >
         <MdDelete />
       </VuiButton>}
+      {myOwnCourse &&
+        <MdDelete  sx={{ position: "absolute", top: "20px", right: "10px", zIndex: 100 }} />}
       <VuiBox
         component="img"
         src={image}
@@ -170,7 +177,7 @@ function ChapterCard(
         </VuiBox>
         <VuiBox display="flex" justifyContent="space-between" alignItems="center">
           {!ressources.length ? "" : <VuiButton
-            variant="outlined"
+            variant="contained"
             size="small"
             color={action.color}
             onClick={handleClick}

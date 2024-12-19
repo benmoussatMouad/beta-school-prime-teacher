@@ -44,6 +44,10 @@ import sidenavLogoLabel from "examples/Sidenav/styles/sidenav";
 // Vision UI Dashboard React context
 import { setMiniSidenav, setTransparentSidenav, useVisionUIController } from "context";
 import { useTranslation } from "react-i18next";
+import VuiButton from "../../components/VuiButton";
+import SidenavCard from "./SidenavCard";
+import { getRefreshToken } from "../../utils";
+import { useLogout } from "../../api";
 
 // Vision UI Dashboard React icons
 
@@ -54,10 +58,16 @@ function Sidenav({ color, brandName, routes, user, ...rest }) {
   const location = useLocation();
   const { pathname } = location;
   const collapseName = pathname.split("/").slice(1)[0];
+  const { mutate } = useLogout();
 
   const { t } = useTranslation();
   const closeSidenav = () => setMiniSidenav(dispatch, true);
 
+  const logout = async () => {
+    const refreshToken = getRefreshToken();
+    console.log(refreshToken);
+    await mutate(refreshToken);
+  };
 
   const role = user?.user?.role || null;
 
@@ -218,6 +228,18 @@ function Sidenav({ color, brandName, routes, user, ...rest }) {
           },
         })}
       >
+        <VuiBox mt={2}>
+          <VuiButton
+            color={'error'}
+            onClick={logout}
+            rel="noreferrer"
+            variant="gradient"
+            circular
+            fullWidth
+          >
+            <Icon>logout</Icon>
+          </VuiButton>
+        </VuiBox>
       </VuiBox>
     </SidenavRoot>
   );

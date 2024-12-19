@@ -186,6 +186,10 @@
     },
     "forms": {
       "attachments": "Les pièces jointes",
+      "chapter": {
+        "description": "Description du chapitre",
+        "title": "Titre du chapitre"
+      },
       "description": "Description du cours",
       "discount": "Remise",
       "duration": "Durée",
@@ -202,7 +206,10 @@
       "title": "Titre du cours",
       "video": "Vidéo"
     },
-    "loading": "Chargement...",
+    "loading": {
+      "details": "Si vous cliquez ailleurs ou sur le bouton Annuler, le téléchargement sera annulé.",
+      "title": "Téléchargement en cours"
+    },
     "no": {
       "video": "Aucune vidéo trouvée"
     },

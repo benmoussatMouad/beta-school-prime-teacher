@@ -205,7 +205,7 @@ function CoursDetails() {
           }
           <Card>
             <Grid container>
-              <Grid item xs={8} sx={{ p: 1, pr: 5 }}>
+              <Grid item xs={12} lg={8} sx={{ p: 1, pr: 5 }}>
                 <VuiBox
                   sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", mb: 2 }}>
                   <VuiTypography variant="h3" sx={{ mb: 0 }} fontWeight="bold" color="white" textTransform="capitalize">
@@ -227,7 +227,7 @@ function CoursDetails() {
                 <VuiBadge badgeContent={`${t("currentEnrollment")}: ${data.currentEnrollment || "0"}`}
                           color={"primary"} container variant="contained" size={'lg'} sx={{ textAlign: "justify", mt: 1 }}/>
               </Grid>
-              <Grid item xs={4} sx={{ py: 1 }}>
+              <Grid item xs={12} lg={4} sx={{ py: 1 }}>
                 <VuiTypography color={"white"}>
                   {t("course.details.priceDetails")}
                 </VuiTypography>
@@ -363,7 +363,7 @@ function CoursDetails() {
                             title={chapter.title}
                             description={chapter.description}
                             action={{
-                              color: "white",
+                              color: "dark",
                               label: t("chapters.ressources"),
                             }}
                             duration={convertSecondsToMinutes(chapter.duration)}

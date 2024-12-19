@@ -15,6 +15,10 @@ import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import AttachFileIcon from "@mui/icons-material/AttachFile";
 import VideoPlayer from "../VideoPlayer/VideoPlayer";
 import { useCreateChapter } from "../../api/chapters/createChapter";
+import { apiClient } from "../../api";
+import VuiLoading from "../../components/VuiLoading";
+import VuiSnackBar from "../../components/VuiSnackBar";
+import { showSnackBar, useVisionUIController } from "../../context";
 
 const { black, gradients } = colors;
 const { card } = gradients;
@@ -25,9 +29,12 @@ function CreateChapter({ closeDialog, openDialog, courseId }) {
   const { t } = useTranslation();
 
   const { mutate } = useCreateChapter();
+  const [, dispatch] = useVisionUIController(); // Get dispatch for Snackbar
 
   const [isLoading, setIsLoading] = useState(false);
   const [videoPreview, setVideoPreview] = useState(null);
+  const [uploadProgress, setUploadProgress] = useState(0);
+  const [openAbortMessage, setOpenAbortMessage] = useState(false);
 
   const abortControllerRef = useRef(null); // Ref for AbortController
 
@@ -64,44 +71,115 @@ function CreateChapter({ closeDialog, openDialog, courseId }) {
   };
 
 
-  const onSubmit = (data) => {
-
+  // const onSubmit = (data) => {
+  //   if (!data.video) {
+  //     return; // Ensure there's a video file
+  //   }
+  //
+  //   setIsLoading(true); // Show loading spinner or progress bar
+  //
+  //   // Payload creation
+  //   const formData = new FormData();
+  //   formData.append("title", data.title);
+  //   formData.append("description", data.description);
+  //   if (data.video) formData.append("video", data.video);
+  //   if (data.attachments.length) {
+  //     data.attachments.forEach((file) => formData.append("attachments", file));
+  //   }
+  //
+  //   const xhr = new XMLHttpRequest(); // Create a new XHR instance
+  //
+  //   // Set up progress tracking
+  //   xhr.upload.onprogress = (event) => {
+  //     if (event.lengthComputable) {
+  //       const percentCompleted = Math.round((event.loaded / event.total) * 100);
+  //       console.log(`Upload progress: ${percentCompleted}%`);
+  //       // Example: Update the state for progress or use it for a visual indicator
+  //       // You can replace this `console.log` with a setState call to update a progress bar
+  //     }
+  //   };
+  //
+  //   // Handle server response
+  //   xhr.onload = () => {
+  //     if (xhr.status === 200) {
+  //       console.log('Upload successful:', xhr.responseText);
+  //       setIsLoading(false);
+  //       closeDialog(); // Close the dialog
+  //       reset(); // Reset the form
+  //       setVideoPreview(null); // Clear the video preview
+  //     } else {
+  //       console.error('Upload failed:', xhr.status, xhr.statusText);
+  //       setIsLoading(false); // Hide the loader
+  //     }
+  //   };
+  //
+  //   // Handle errors
+  //   xhr.onerror = () => {
+  //     console.error('An error occurred during the request.');
+  //     setIsLoading(false); // Hide the loader
+  //   };
+  //
+  //   // Configure the XHR request
+  //   xhr.open("POST", `https://prime-beta-school-back-end.onrender.com/v1/api/course/${courseId}/chapter`, true); // Replace with your endpoint
+  //   xhr.setRequestHeader("Authorization", `Bearer <your_token>`); // Add authorization header if required
+  //
+  //   // Send the form data
+  //   xhr.send(formData);
+  // };
+  const onSubmit = async (data) => {
     if (!data.video) {
-      return;
+      return; // Ensure there's a video file
     }
 
-    setIsLoading(true);
-    const payload = {
-      title: data.title,
-      description: data.description,
-    };
+    setIsLoading(true); // Show loading spinner or progress bar
+    setUploadProgress(0);
 
+    if (abortControllerRef.current) {
+      abortControllerRef.current.abort(); // Abort any previous request
+    }
+    abortControllerRef.current = new AbortController();
+    const { signal } = abortControllerRef.current;
+
+    // Payload creation
     const formData = new FormData();
-    formData.append("title", payload.title);
-    formData.append("description", payload.description);
+    formData.append("title", data.title);
+    formData.append("description", data.description);
     if (data.video) formData.append("video", data.video);
     if (data.attachments.length) {
-      data.attachments.forEach((file) => {
-        formData.append(`attachments`, file);
-      });
+      data.attachments.forEach((file) => formData.append("attachments", file));
     }
 
-    // Create an AbortController for this mutation
-    abortControllerRef.current = new AbortController();
+    try {
+      // POST request using `apiClient`
+      const response = await apiClient.post(
+        `/chapter/${courseId}`,
+        formData,
+        {
+          onUploadProgress: (event) => {
+            if (event.lengthComputable) {
+              const percentCompleted = Math.round((event.loaded / event.total) * 100);
+              console.log(`Upload progress: ${percentCompleted}%`);
+              setUploadProgress(percentCompleted);
+            }
+          },
+          headers: {
+            "Content-Type": "multipart/form-data", // Set required content type for file uploads
+          },
+          signal
+        }
+      );
 
-    mutate(
-      { courseId, formData, signal: abortControllerRef.current.signal }, {
-        onSuccess: () => {
-          setIsLoading(false);
-          closeDialog(); // Close dialog
-          reset(); // Reset the form
-          setVideoPreview(null); // Clear the video preview
-        },
-        onError: () => {
-          setIsLoading(false);
-        },
-      },
-    );
+      // Handle successful response
+      console.log("Upload successful:", response.data);
+      setIsLoading(false); // Hide loader
+      closeDialog(); // Close the dialog
+      reset(); // Reset the form
+      setVideoPreview(null); // Clear the video preview
+    } catch (error) {
+      // Handle error responses
+      console.error("Upload failed:", error.response?.status, error.response?.statusText || error.message);
+      setIsLoading(false); // Hide loader
+    }
   };
 
   // Close dialog and cancel mutation
@@ -112,6 +190,8 @@ function CreateChapter({ closeDialog, openDialog, courseId }) {
       abortControllerRef.current = null; // Reset the controller
     }
     setIsLoading(false); // Reset the loading state
+    setUploadProgress(0)
+
     closeDialog(); // Call the parent prop to close the dialog
   };
 
@@ -135,8 +215,13 @@ function CreateChapter({ closeDialog, openDialog, courseId }) {
       {isLoading ? (
         <DialogTitle>
           <VuiTypography color="white" fontWeight="bold">
-            {t("dialog.loading")}
+            {t("dialog.loading.title")}
           </VuiTypography>
+          <VuiBox sx={{ width: "40%" }}>
+            <VuiTypography color="white" variant="caption" sx={{ textWrap: "break-word" }}>
+              {t("dialog.loading.details")}
+            </VuiTypography>
+          </VuiBox>
         </DialogTitle>
       ) : (
         <DialogTitle>
@@ -152,24 +237,25 @@ function CreateChapter({ closeDialog, openDialog, courseId }) {
                 <VuiBox sx={{
                   display: "flex",
                   flexDirection: "column",
-                  gap: 2,
                   alignItems: "center",
                   justifyContent: "center",
                   height: "200px",
                   width: "300px",
                 }}>
-                  <CircularProgress color="info" />
+                  <CircularProgress thickness={5} variant="determinate" size={80} color="info" value={uploadProgress} />
+                  <br />
+                  <VuiTypography color={"white"} fontWeight={"bold"} mt={2} variant={"h5"}>{uploadProgress}%</VuiTypography>
                 </VuiBox>
               ) :
               <Grid container spacing={3}>
                 {/* Title Input */}
                 <Grid item xs={12}>
                   <VuiTypography component="label" variant="button" color="white" fontWeight="medium">
-                    {t("dialog.forms.title")}
+                    {t("dialog.forms.chapter.title")}
                   </VuiTypography>
                   <VuiInput
                     sx={{ borderColor: rgba(black.main, 0.1), borderRadius: borderRadius.md }}
-                    placeholder={t("dialog.forms.title")}
+                    placeholder={t("dialog.forms.chapter.title")}
                     {...register("title", { required: t("dialog.required.title") })}
                     error={!!errors.title}
                   />
@@ -180,11 +266,11 @@ function CreateChapter({ closeDialog, openDialog, courseId }) {
                 {/* Description Input */}
                 <Grid item xs={12}>
                   <VuiTypography component="label" variant="button" color="white" fontWeight="medium">
-                    {t("dialog.forms.description")}
+                    {t("dialog.forms.chapter.description")}
                   </VuiTypography>
                   <VuiInput
                     sx={{ borderColor: rgba(black.main, 0.1), borderRadius: borderRadius.md }}
-                    placeholder={t("dialog.forms.description")}
+                    placeholder={t("dialog.forms.chapter.description")}
                     multiline
                     rows={4}
                     {...register("description", { required: t("dialog.required.description") })}
