@@ -31,12 +31,14 @@ import boxShadows from "../../../../assets/theme/base/boxShadows";
 import linearGradient from "../../../../assets/theme/functions/linearGradient";
 import rgba from "../../../../assets/theme/functions/rgba";
 import { useTranslation } from "react-i18next";
-import { MdDelete, MdEdit } from "react-icons/md";
+import { MdDelete, MdEdit, MdPlayArrow } from "react-icons/md";
 import { useDeleteChapter } from "../../../../api/chapters/deleteChapter";
 import { saveAs } from "file-saver";
 import { useDeleteAttachment } from "../../../../api/chapters/deleteAttachment";
 import bgCard from "assets/images/welcome-profile.png"
 import backgroundImage from "../../../../assets/images/sidenav/sidenav-card-background.png";
+import { FaCirclePlay } from "react-icons/fa6";
+import { FaPlay } from "react-icons/fa";
 
 const { black, white, gradients } = colors;
 const { card } = gradients;
@@ -130,20 +132,25 @@ function ChapterCard(
       >
         <MdDelete />
       </VuiButton>}
-      {myOwnCourse &&
-        <MdDelete  sx={{ position: "absolute", top: "20px", right: "10px", zIndex: 100 }} />}
+      <VuiButton
+        onClick={() => openToView(id)} // Open dialog on click
+        color={"info"}
+        size={"md"}
+        variant={"text"}
+        sx={{
+          position: "absolute", top: "25%", right: "50%", transform: "translate(50%, -50%)", "&:hover": {
+            transform: "translate(50%, -50%)",
+          }, zIndex: 100,
+        }}
+      >
+        <FaPlay size={"45px"} sx={{ position: "relative", top: "-50%", right: "-50%" }} />
+      </VuiButton>
       <VuiBox
         component="img"
         src={image}
         mb="8px"
         borderRadius="15px"
-        sx={({ breakpoints }) => ({
-          cursor: "pointer",
-          [breakpoints.up("xl")]: {
-            height: "200px",
-          },
-        })}
-        onClick={() => openToView(id)}
+
       />
       <VuiBox
         sx={({ breakpoints }) => ({

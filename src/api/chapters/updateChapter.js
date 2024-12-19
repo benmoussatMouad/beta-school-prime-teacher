@@ -4,8 +4,13 @@ import { showSnackBar, useVisionUIController } from "../../context";
 import { useTranslation } from "react-i18next";
 import { queryClient } from "../../providers/queryProvider";
 
-const updateChapterFn = async ({ chapterId, formData, signal }) => {
-  const response = await apiClient.put(`/chapter/${chapterId}`, formData, { signal });
+const updateChapterFn = async ({ chapterId, formData, signal, onProgress }) => {
+  const response = await apiClient.put(`/chapter/${chapterId}`, formData, { signal, onUploadProgress: (progressEvent) => {
+      const total = progressEvent.total || 1; // Prevent division by 0
+      const progress = Math.round((progressEvent.loaded * 100) / total);
+      if (onProgress) {
+        onProgress(progress); // Call the provided callback with progress
+      } }});
   return response.data;
 };
 

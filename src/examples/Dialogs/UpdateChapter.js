@@ -18,6 +18,8 @@ import { useUpdateChapter } from "../../api/chapters/updateChapter";
 import { useGetChapter } from "../../api/chapters/getChapter";
 import { getAccessToken } from "../../utils";
 import { useViewChapter } from "../../api/chapters/viewChapter";
+import { IoIosWarning } from "react-icons/io";
+import { MdCancel } from "react-icons/md";
 
 const { black, gradients } = colors;
 const { card } = gradients;
@@ -38,6 +40,8 @@ function UpdateChapter({ closeDialog, openDialog, chapterId }) {
 
   const [isLoading, setIsLoading] = useState(false);
   const [videoPreview, setVideoPreview] = useState(null);
+  const [uploadedVideo, setUploadedVideo] = useState(null);
+  const [uploadProgress, setUploadProgress] = useState(0);
 
   const {
     register,
@@ -55,7 +59,7 @@ function UpdateChapter({ closeDialog, openDialog, chapterId }) {
     },
   });
 
-  const watchVideo = watch("video");
+  let watchVideo = watch("video");
   const watchAttachments = watch("attachments");
 
   // Prefill form fields when chapterData changes
@@ -72,7 +76,7 @@ function UpdateChapter({ closeDialog, openDialog, chapterId }) {
         setVideoPreview(URL.createObjectURL(watchVideo));
       } else {
         // Otherwise, fall back to the video from viewChapter (backend)
-        setVideoPreview(viewChapter?.url || null);
+        // setVideoPreview(viewChapter?.url || null);
       }
     }
 
@@ -93,18 +97,21 @@ function UpdateChapter({ closeDialog, openDialog, chapterId }) {
           URL.revokeObjectURL(videoPreview); // Cleanup old preview URL
         }
         setVideoPreview(URL.createObjectURL(files));
+        setUploadedVideo(files);
       }
     } else {
       setValue(fieldName, null);
     }
   };
 
+  const handleProgress = (progress) => {
+    setUploadProgress(progress); // Update progress in real-time
+  };
 
   const onSubmit = (data) => {
     setIsLoading(true);
 
     const formData = new FormData();
-    formData.append("id", chapterId); // Include chapterId for update
     if (data.title) formData.append("title", data.title); // Include only updated fields
     if (data.description) formData.append("description", data.description);
     if (data.video) formData.append("video", data.video);
@@ -123,7 +130,7 @@ function UpdateChapter({ closeDialog, openDialog, chapterId }) {
     abortControllerRef.current = new AbortController();
 
     mutate(
-      { chapterId, formData, signal: abortControllerRef.current.signal },
+      { chapterId, formData, signal: abortControllerRef.current.signal, onProgress: handleProgress },
       {
         onSuccess: () => {
           setIsLoading(false);
@@ -165,7 +172,7 @@ function UpdateChapter({ closeDialog, openDialog, chapterId }) {
       {isLoading ? (
         <DialogTitle>
           <VuiTypography color="white" fontWeight="bold">
-            {t("dialog.loading")}
+            {t("dialog.loading.title")}
           </VuiTypography>
         </DialogTitle>
       ) : (
@@ -176,10 +183,15 @@ function UpdateChapter({ closeDialog, openDialog, chapterId }) {
         </DialogTitle>
       )}
       <DialogContent>
+        <VuiTypography paragraph variant='caption' sx={{lineHeight: "1.1em"}} color="white" fontWeight="regular">
+          <IoIosWarning size={"18px"} color="warning"/>
+          {t('chapter.update.caution')}
+        </VuiTypography>
         <VuiBox as="form">
           {
             isLoading || isFetching ? (
-                <VuiBox sx={{
+              isFetching?
+                (<VuiBox sx={{
                   display: "flex",
                   flexDirection: "column",
                   gap: 2,
@@ -187,15 +199,29 @@ function UpdateChapter({ closeDialog, openDialog, chapterId }) {
                   justifyContent: "center",
                   height: "200px",
                   width: "300px",
+                  margin: "auto",
                 }}>
                   <CircularProgress color="info" />
+                </VuiBox>) :
+                <VuiBox sx={{
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  height: "200px",
+                  width: "300px",
+                  margin: "auto",
+                }}>
+                  <CircularProgress thickness={5} variant="determinate" size={80} color="info" value={uploadProgress} />
+                  <br />
+                  <VuiTypography color={"white"} fontWeight={"bold"} mt={2} variant={"h5"}>{uploadProgress}%</VuiTypography>
                 </VuiBox>
               ) :
               <Grid container spacing={3}>
                 {/* Title Input */}
                 <Grid item xs={12}>
                   <VuiTypography component="label" variant="button" color="white" fontWeight="medium">
-                    {t("dialog.forms.title")}
+                    {t("dialog.forms.chapter.title")}
                   </VuiTypography>
                   <VuiInput
                     sx={{ borderColor: rgba(black.main, 0.1), borderRadius: borderRadius.md }}
@@ -210,7 +236,7 @@ function UpdateChapter({ closeDialog, openDialog, chapterId }) {
                 {/* Description Input */}
                 <Grid item xs={12}>
                   <VuiTypography component="label" variant="button" color="white" fontWeight="medium">
-                    {t("dialog.forms.description")}
+                    {t("dialog.forms.chapter.description")}
                   </VuiTypography>
                   <VuiInput
                     sx={{ borderColor: rgba(black.main, 0.1), borderRadius: borderRadius.md }}
@@ -241,9 +267,28 @@ function UpdateChapter({ closeDialog, openDialog, chapterId }) {
                              onClick={() => document.getElementById("video-upload").click()}>
                     {t("dialog.upload.video")}
                   </VuiButton>
-                  {watchVideo && <VuiTypography variant="caption" color="info">{watchVideo.name}</VuiTypography>}
-                  {!watchVideo &&
-                    <VuiTypography color="error" variant="caption">{t("dialog.required.video")}</VuiTypography>}
+                  {uploadedVideo && (
+                    <>
+                      <VuiTypography variant="caption" color="info">{uploadedVideo.name}</VuiTypography>
+                      {/* Add Delete Button */}
+                      <VuiButton
+                        color="error"
+                        variant="outlined"
+                        startIcon={<MdCancel size={"18px"} color="warning"/>}
+                        onClick={() => {
+                          setValue("video", null); // Clear the video field
+                          if (videoPreview) URL.revokeObjectURL(videoPreview); // Clean up preview URL
+                          setVideoPreview(null); // Remove video preview
+                          setUploadedVideo(null)
+                        }}
+                        sx={{
+                          mt: 1, // Add spacing above the delete button
+                        }}
+                      >
+                        {t("dialog.delete.video")}
+                      </VuiButton>
+                    </>
+                    )}
                   {videoPreview && <VuiBox mt={2}><VideoPlayer videoSrc={videoPreview} /></VuiBox>}
                 </Grid>
 

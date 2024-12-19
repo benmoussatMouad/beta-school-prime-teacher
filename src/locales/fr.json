@@ -34,6 +34,7 @@
   "chapter": {
     "create": "Créer un chapitre",
     "update": {
+      "caution": "Si vous ne téléchargez aucune vidéo, la dernière vidéo ne sera pas supprimée. Si vous téléchargez des pièces jointes, elles seront ajoutées aux pièces jointes actuelles. Si vous souhaitez supprimer des pièces jointes actuelles, supprimez-les dans la vue du cours en cliquant sur le bouton Pièces jointes.",
       "successfully": "Le chapitre a été mis à jour avec succès"
     }
   },
@@ -166,6 +167,9 @@
       "description": "Remplir les champs afin de créer un cours",
       "icon": "Téléchargez l'icône de votre cours",
       "title": "Créer un cours "
+    },
+    "delete": {
+      "video": "Supprimez la video"
     },
     "deleteAccount": {
       "description": "Êtes-vous sûr  supprime votre compte",
@@ -392,6 +396,15 @@
       "Verified": "Vérifié",
       "title": "Informations du profil",
       "unVerified": "Non vérifié"
+    },
+    "data": {
+      "days": "Jour(s)",
+      "lifetimeEarnings": "Tous les gains",
+      "schoolGains": "Gains de l'ecole",
+      "sinceLastMonth": "Depuis le mois dernier",
+      "soldCourses": "Cours vendus",
+      "soldCoursesLastMonth": "Cours vendus le mois dernier",
+      "toBePaid": "À rendre ce mois-ci"
     },
     "description": "Mise à jour de la photo",
     "myDescirption": "Je suis un professeur de mathématiques passionné avec plusieurs années d'expérience. J'ai toujours été fasciné par la logique et la précision exigées par les mathématiques, et j'aime partager cette passion avec mes élèves chaque jour",

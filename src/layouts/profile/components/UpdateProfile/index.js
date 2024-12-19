@@ -284,6 +284,7 @@ const UpdateProfile = () => {
 										onChange={(e) => handleInputChange("subject", e.target.value)} // Sync changes
 										options={Subjects}
 										placeholder={t("placeholder.subject")}
+										typeSelect={"subjects"}
 									/>
 								</VuiBox>
 							</Grid>

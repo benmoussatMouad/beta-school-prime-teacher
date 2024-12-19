@@ -32,17 +32,14 @@ import CircularProgress from '@mui/material/CircularProgress';
 import { useTranslation } from "react-i18next";
 import VuiBadge from "../../../../components/VuiBadge";
 import { FaMoneyBillAlt } from "react-icons/fa";
+import { GrTransaction } from "react-icons/gr";
+import { IoIosSchool } from "react-icons/io";
 const CarInformations = () => {
   const { gradients, info } = colors;
   const { cardContent } = gradients;
   const { t } = useTranslation();
   return (
-    <Card
-      sx={({ breakpoints }) => ({
-        [breakpoints.up('xxl')]: {
-          maxHeight: '400px'
-        }
-      })}>
+    <Card>
       <VuiBox display='flex' flexDirection='column'>
         <VuiTypography variant='h4' color='white' fontWeight='bold' mb='6px'>
           {t('profile.project.title')}
@@ -73,14 +70,13 @@ const CarInformations = () => {
             })}
             alignItems='center'>
             <VuiBox sx={{ position: 'relative', display: 'inline-flex' }}>
-              {/*<CircularProgress variant='determinate' value={60} size={170} color='info' />*/}
               <VuiBox mx={7} display='flex' flexDirection='column' justifyContent='center' alignItems='center'>
                 <FaMoneyBillAlt color='#09AD8F' size='40px' />
                 <VuiTypography color='white' variant='h2' mt='6px' fontWeight='bold' mb='4px'>
-                  23 000 DA
+                  {"23000DZD"}
                 </VuiTypography>
                 <VuiTypography color='text' variant='caption'>
-                  Dues ce mois
+                  {t('profile.data.toBePaid')}
                 </VuiTypography>
               </VuiBox>
             </VuiBox>
@@ -90,10 +86,10 @@ const CarInformations = () => {
               flexDirection='column'
               sx={{ textAlign: 'center' }}>
               <VuiTypography color='white' variant='lg' fontWeight='bold' mb='2px' mt='18px'>
-                2 jours
+                { "2 " + t('profile.data.days')}
               </VuiTypography>
               <VuiTypography color='text' variant='button' fontWeight='regular'>
-                depuis la fin du mois
+                {t('profile.data.sinceLastMonth')}
               </VuiTypography>
             </VuiBox>
           </VuiBox>
@@ -126,7 +122,7 @@ const CarInformations = () => {
                 }}>
                 <VuiBox display='flex' flexDirection='column' mr='auto'>
                   <VuiTypography color='text' variant='caption' fontWeight='medium' mb='2px'>
-                    Battery Health
+                    {t('profile.data.lifetimeEarnings')}
                   </VuiTypography>
                   <VuiTypography
                     color='white'
@@ -137,7 +133,7 @@ const CarInformations = () => {
                         fontSize: '20px'
                       }
                     })}>
-                    76%
+                    250000DZD
                   </VuiTypography>
                 </VuiBox>
                 <VuiBox
@@ -150,7 +146,7 @@ const CarInformations = () => {
                     width: '56px',
                     height: '56px'
                   }}>
-                  <VuiBox component='img' src={carProfile} />
+                  <FaMoneyBillAlt color='#fff' size='24px' />
                 </VuiBox>
               </VuiBox>
             </Grid>
@@ -164,9 +160,6 @@ const CarInformations = () => {
                   borderRadius: '20px'
                 }}>
                 <VuiBox display='flex' flexDirection='column' mr='auto'>
-                  <VuiTypography color='text' variant='caption' fontWeight='medium' mb='2px'>
-                    Efficiency
-                  </VuiTypography>
                   <VuiTypography
                     color='white'
                     variant='h4'
@@ -176,14 +169,23 @@ const CarInformations = () => {
                         fontSize: '20px'
                       }
                     })}>
-                    +20%
+                    85
+                  </VuiTypography>
+                  <VuiTypography color='text' variant='caption' fontWeight='medium' mb='2px'>
+                    {t('profile.data.soldCourses')}
                   </VuiTypography>
                 </VuiBox>
-                <VuiBox sx={{ maxHeight: '75px' }}>
-                  <LineChart
-                    lineChartData={lineChartDataProfile1}
-                    lineChartOptions={lineChartOptionsProfile1}
-                  />
+                <VuiBox
+                  display='flex'
+                  justifyContent='center'
+                  alignItems='center'
+                  sx={{
+                    background: info.main,
+                    borderRadius: '12px',
+                    width: '56px',
+                    height: '56px'
+                  }}>
+                  <GrTransaction color='#fff' size='24px' />
                 </VuiBox>
               </VuiBox>
             </Grid>
@@ -198,9 +200,6 @@ const CarInformations = () => {
                   minHeight: '110px'
                 }}>
                 <VuiBox display='flex' flexDirection='column' mr='auto'>
-                  <VuiTypography color='text' variant='caption' fontWeight='medium' mb='2px'>
-                    Consumption
-                  </VuiTypography>
                   <VuiTypography
                     color='white'
                     variant='h4'
@@ -210,7 +209,10 @@ const CarInformations = () => {
                         fontSize: '20px'
                       }
                     })}>
-                    163W/km
+                    10
+                  </VuiTypography>
+                  <VuiTypography color='text' variant='caption' fontWeight='medium' mb='2px'>
+                    {t('profile.data.soldCoursesLastMonth')}
                   </VuiTypography>
                 </VuiBox>
                 <VuiBox
@@ -223,7 +225,7 @@ const CarInformations = () => {
                     width: '56px',
                     height: '56px'
                   }}>
-                  <VuiBox component='img' src={WhiteLightning} />
+                  <GrTransaction color='#fff' size='24px' />
                 </VuiBox>
               </VuiBox>
             </Grid>
@@ -238,7 +240,7 @@ const CarInformations = () => {
                 }}>
                 <VuiBox display='flex' flexDirection='column' mr='auto'>
                   <VuiTypography color='text' variant='caption' fontWeight='medium' mb='2px'>
-                    This Week
+                    {t('profile.data.schoolGains')}
                   </VuiTypography>
                   <VuiTypography
                     color='white'
@@ -249,14 +251,20 @@ const CarInformations = () => {
                         fontSize: '20px'
                       }
                     })}>
-                    1.342km
+                    40%
                   </VuiTypography>
                 </VuiBox>
-                <VuiBox sx={{ maxHeight: '75px' }}>
-                  <LineChart
-                    lineChartData={lineChartDataProfile2}
-                    lineChartOptions={lineChartOptionsProfile2}
-                  />
+                <VuiBox
+                  display='flex'
+                  justifyContent='center'
+                  alignItems='center'
+                  sx={{
+                    background: info.main,
+                    borderRadius: '12px',
+                    width: '56px',
+                    height: '56px'
+                  }}>
+                  <IoIosSchool color='#fff' size='24px' />
                 </VuiBox>
               </VuiBox>
             </Grid>

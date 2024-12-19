@@ -54,7 +54,7 @@ function ViewChapter({ closeDialog, openDialog, chapterId }) {
       {isLoading ? (
         <DialogTitle>
           <VuiTypography color="white" fontWeight="bold">
-            {t("dialog.loading")}
+            {t("dialog.loading.title")}
           </VuiTypography>
         </DialogTitle>
       ) : (
@@ -81,26 +81,7 @@ function ViewChapter({ closeDialog, openDialog, chapterId }) {
             <CircularProgress color="info" />
           </VuiBox>
         ) : (
-          <Grid container spacing={3}>
-            {/* Title Display */}
-            <Grid item xs={12}>
-              <VuiTypography variant="button" color="white" fontWeight="medium">
-                {t("dialog.forms.title")}
-              </VuiTypography>
-              <VuiTypography color="info" variant="body2">
-                {title || t("dialog.no.data")}
-              </VuiTypography>
-            </Grid>
-
-            {/* Description Display */}
-            <Grid item xs={12}>
-              <VuiTypography variant="button" color="white" fontWeight="medium">
-                {t("dialog.forms.description")}
-              </VuiTypography>
-              <VuiTypography color="info" variant="body2">
-                {description || t("dialog.no.data")}
-              </VuiTypography>
-            </Grid>
+          <Grid container spacing={1}>
 
             {/* Video Display */}
             <Grid item xs={12} display={"flex"} flexDirection={"column"} textAlign="center">
@@ -116,6 +97,25 @@ function ViewChapter({ closeDialog, openDialog, chapterId }) {
                   {t("dialog.no.video")}
                 </VuiTypography>
               )}
+            </Grid>
+            {/* Title Display */}
+            <Grid item xs={12}>
+              <VuiTypography variant="button" color="white" fontWeight="medium">
+                {t("dialog.forms.chapter.title")}
+              </VuiTypography>
+              <VuiTypography color="info" variant="body2">
+                {title || t("dialog.no.data")}
+              </VuiTypography>
+            </Grid>
+
+            {/* Description Display */}
+            <Grid item xs={12}>
+              <VuiTypography variant="button" color="white" fontWeight="medium">
+                {t("dialog.forms.chapter.description")}
+              </VuiTypography>
+              <VuiTypography color="info" variant="body2">
+                {description || t("dialog.no.data")}
+              </VuiTypography>
             </Grid>
           </Grid>
         )}
