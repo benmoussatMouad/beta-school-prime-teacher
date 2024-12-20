@@ -32,7 +32,9 @@
     "submit": "Soumettre"
   },
   "chapter": {
-    "create": "Créer un chapitre",
+    "create": {
+      "successfully": "Chapitre créé avec succès"
+    },
     "update": {
       "caution": "Si vous ne téléchargez aucune vidéo, la dernière vidéo ne sera pas supprimée. Si vous téléchargez des pièces jointes, elles seront ajoutées aux pièces jointes actuelles. Si vous souhaitez supprimer des pièces jointes actuelles, supprimez-les dans la vue du cours en cliquant sur le bouton Pièces jointes.",
       "successfully": "Le chapitre a été mis à jour avec succès"

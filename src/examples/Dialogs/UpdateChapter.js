@@ -63,29 +63,29 @@ function UpdateChapter({ closeDialog, openDialog, chapterId }) {
   const watchAttachments = watch("attachments");
 
   // Prefill form fields when chapterData changes
-  useEffect(() => {
-    if (chapterData) {
-      reset({
-        title: chapterData.title || "",
-        description: chapterData.description || "",
-        video: null, // Maintain the uploaded video if it exists
-        attachments: [],
-      });
-
-      if (watchVideo) {
-        setVideoPreview(URL.createObjectURL(watchVideo));
-      } else {
-        // Otherwise, fall back to the video from viewChapter (backend)
-        // setVideoPreview(viewChapter?.url || null);
-      }
-    }
-
-    return () => {
-      if (abortControllerRef.current) {
-        abortControllerRef.current.abort(); // Abort any pending requests
-      }
-    };
-  }, [chapterData, viewChapter?.url, reset]);
+  // useEffect(() => {
+  //   if (chapterData) {
+  //     reset({
+  //       title: chapterData.title || "",
+  //       description: chapterData.description || "",
+  //       video: null, // Maintain the uploaded video if it exists
+  //       attachments: [],
+  //     });
+  //
+  //     if (watchVideo) {
+  //       // setVideoPreview(URL.createObjectURL(watchVideo));
+  //     } else {
+  //       // Otherwise, fall back to the video from viewChapter (backend)
+  //       // setVideoPreview(viewChapter?.url || null);
+  //     }
+  //   }
+  //
+  //   return () => {
+  //     if (abortControllerRef.current) {
+  //       abortControllerRef.current.abort(); // Abort any pending requests
+  //     }
+  //   };
+  // }, [chapterData, viewChapter?.url, reset]);
 
   const handleFileChange = (e, fieldName) => {
     const files = fieldName === "attachments" ? Array.from(e.target.files) : e.target.files[0];

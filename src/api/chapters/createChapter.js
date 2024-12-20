@@ -4,12 +4,18 @@ import { showSnackBar, useVisionUIController } from "../../context";
 import { useTranslation } from "react-i18next";
 import { queryClient } from "../../providers/queryProvider";
 
-const createChapterFn = async ({ courseId, formData, signal }) => {
+const createChapterFn = async ({ courseId, formData, signal, onProgress }) => {
   const response = await apiClient.post(
     `/chapter/${courseId}`,
     formData,
     {
-      signal, // Pass the signal here
+      signal,
+      onUploadProgress: (progressEvent) => {
+        const total = progressEvent.total || 1; // Prevent division by 0
+        const progress = Math.round((progressEvent.loaded * 100) / total);
+        if (onProgress) {
+          onProgress(progress); // Call the provided callback with progress
+        } }// Pass the signal here
     }
   );
   return response.data;

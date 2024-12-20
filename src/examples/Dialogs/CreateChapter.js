@@ -126,6 +126,9 @@ function CreateChapter({ closeDialog, openDialog, courseId }) {
   //   // Send the form data
   //   xhr.send(formData);
   // };
+  const handleProgress = (progress) => {
+    setUploadProgress(progress); // Update progress in real-time
+  };
   const onSubmit = async (data) => {
     if (!data.video) {
       return; // Ensure there's a video file
@@ -149,37 +152,53 @@ function CreateChapter({ closeDialog, openDialog, courseId }) {
       data.attachments.forEach((file) => formData.append("attachments", file));
     }
 
-    try {
-      // POST request using `apiClient`
-      const response = await apiClient.post(
-        `/chapter/${courseId}`,
-        formData,
-        {
-          onUploadProgress: (event) => {
-            if (event.lengthComputable) {
-              const percentCompleted = Math.round((event.loaded / event.total) * 100);
-              console.log(`Upload progress: ${percentCompleted}%`);
-              setUploadProgress(percentCompleted);
-            }
-          },
-          headers: {
-            "Content-Type": "multipart/form-data", // Set required content type for file uploads
-          },
-          signal
-        }
-      );
+    mutate(
+      { courseId, formData, signal: abortControllerRef.current.signal, onProgress: handleProgress },
+      {
+        onSuccess: () => {
+          setIsLoading(false);
+          closeDialog(); // Close dialog on success
+        },
+        onError: () => {
+          setIsLoading(false);
+        },
+      },
+    );
 
-      // Handle successful response
-      console.log("Upload successful:", response.data);
-      setIsLoading(false); // Hide loader
-      closeDialog(); // Close the dialog
-      reset(); // Reset the form
-      setVideoPreview(null); // Clear the video preview
-    } catch (error) {
-      // Handle error responses
-      console.error("Upload failed:", error.response?.status, error.response?.statusText || error.message);
-      setIsLoading(false); // Hide loader
-    }
+    // try {
+    //   // POST request using `apiClient`
+    //   const response = await apiClient.post(
+    //     `/chapter/${courseId}`,
+    //     formData,
+    //     {
+    //       onUploadProgress: (event) => {
+    //         if (event.lengthComputable) {
+    //           const percentCompleted = Math.round((event.loaded / event.total) * 100);
+    //           setUploadProgress(percentCompleted);
+    //         }
+    //       },
+    //       headers: {
+    //         "Content-Type": "multipart/form-data", // Set required content type for file uploads
+    //       },
+    //       signal
+    //     }
+    //   );
+    //
+    //   // Handle successful response
+    //   console.log("Upload successful:", response.data);
+    //   setIsLoading(false); // Hide loader
+    //   closeDialog(); // Close the dialog
+    //   reset(); // Reset the form
+    //   setVideoPreview(null); // Clear the video preview
+    // } catch (error) {
+    //   closeDialog(); // Close the dialog
+    //   reset(); // Reset the form
+    //   // Handle error responses
+    //   console.error("Upload failed:", error.response?.status, error.response?.statusText || error.message);
+    //   setIsLoading(false); // Hide loader
+    //   setVideoPreview(null); // Clear the video preview
+    //
+    // }
   };
 
   // Close dialog and cancel mutation
@@ -217,8 +236,8 @@ function CreateChapter({ closeDialog, openDialog, courseId }) {
           <VuiTypography color="white" fontWeight="bold">
             {t("dialog.loading.title")}
           </VuiTypography>
-          <VuiBox sx={{ width: "40%" }}>
-            <VuiTypography color="white" variant="caption" sx={{ textWrap: "break-word" }}>
+          <VuiBox>
+            <VuiTypography paragraph color="white" variant="caption" sx={{ textWrap: "break-word" }}>
               {t("dialog.loading.details")}
             </VuiTypography>
           </VuiBox>
@@ -241,6 +260,7 @@ function CreateChapter({ closeDialog, openDialog, courseId }) {
                   justifyContent: "center",
                   height: "200px",
                   width: "300px",
+                  margin: "auto"
                 }}>
                   <CircularProgress thickness={5} variant="determinate" size={80} color="info" value={uploadProgress} />
                   <br />

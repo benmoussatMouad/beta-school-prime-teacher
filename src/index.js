@@ -38,7 +38,7 @@ root.render(
     <VisionUIControllerProvider>
       <ReactQueryProvider>
         <AuthProvider>
-          <VisionUISnackBar />
+          <VisionUISnackBar/>
           <I18nextProvider i18n={i18n}>
             <App />
           </I18nextProvider>
