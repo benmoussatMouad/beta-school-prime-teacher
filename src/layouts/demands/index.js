@@ -38,7 +38,7 @@ function Demands() {
   const [rowsPerPage, setRowsPerPage] = useState(5);
 
 
-  const { data, isLoading } = useGetDemands({ token, firstName, lastName, email, subject, role, page, rowsPerPage });
+  const { data, isLoading } = useGetDemands({ token, firstName, lastName, email, subject, role, page, limit: rowsPerPage });
   const [open, setOpen] = useState(false);
   const [selectedTeacher, setSelectedTeacher] = useState(null);
 

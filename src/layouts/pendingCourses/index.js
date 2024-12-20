@@ -54,7 +54,7 @@ function PendingCourses() {
     data,
     isLoading,
   } = useGetPendingCourses({
-      token, title, teacherClass, subject, role, courseStatus, page, rowsPerPage,
+      token, title, teacherClass, subject, role, courseStatus, page, limit:rowsPerPage,
     },
   );
 

@@ -53,7 +53,7 @@ function Courses() {
   const token = getAccessToken();
 
   const { user } = useAuth();
-  const { data, isLoading } = useGetCourses({ token, title, teacherClass, subject, courseStatus, page, rowsPerPage });
+  const { data, isLoading } = useGetCourses({ token, title, teacherClass, subject, courseStatus, page, limit:rowsPerPage });
 
   const { t } = useTranslation();
 
