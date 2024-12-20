@@ -1,4 +1,5 @@
 /*!
+/*!
 
 =========================================================
 * Vision UI Free React - v1.0.0
@@ -79,6 +80,11 @@ import buttonBase from "assets/theme/components/buttonBase";
 import icon from "assets/theme/components/icon";
 import svgIcon from "assets/theme/components/svgIcon";
 import link from "assets/theme/components/link";
+import dialogActionsStyles from "assets/theme/components/dialog/dialogActions";
+import dialogContentStyles from "assets/theme/components/dialog/dialogContent";
+import dialogContentTextStyles from "assets/theme/components/dialog/dialogContentText";
+import dialogTitleStyles from "assets/theme/components/dialog/dialogTitle";
+
 
 export default createTheme({
   breakpoints: { ...breakpoints },
@@ -116,6 +122,10 @@ export default createTheme({
     MuiMenuItem: { ...menuItem },
     MuiSwitch: { ...switchButton },
     MuiDivider: { ...divider },
+    MuiDialogActions: { ...dialogActionsStyles }, // Apply custom dialog actions styles
+    MuiDialogContent: { ...dialogContentStyles }, // Apply custom dialog content styles
+    MuiDialogContentText: { ...dialogContentTextStyles }, // Apply custom dialog content text styles
+    MuiDialogTitle: { ...dialogTitleStyles }, // Apply custom dialog title styles
     MuiTableContainer: { ...tableContainer },
     MuiTableHead: { ...tableHead },
     MuiTableCell: { ...tableCell },

@@ -87,9 +87,9 @@ function Dashboard() {
                 </Grid>
               </VuiBox>
             </Grid>
-            <Grid item xs={12} lg={3} xl={3}>
-              <SubscribersRate />
-            </Grid>
+            {/*<Grid item xs={12} lg={3} xl={3}>*/}
+            {/*  <SubscribersRate />*/}
+            {/*</Grid>*/}
           </Grid>
         </VuiBox>
         <Grid container spacing={3} direction="row" justifyContent="center" alignItems="stretch">

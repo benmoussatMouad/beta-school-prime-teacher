@@ -18,6 +18,7 @@ import { useCreateCourse } from "../../api/courses";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import PopperIcon from "../Popper/IconsPopper";
+import pxToRem from "../../assets/theme/functions/pxToRem";
 
 
 const { black, gradients } = colors;
@@ -178,7 +179,22 @@ function CreateCoursDialog({ closeDialog, openDialog }) {
           </VuiTypography>
         </DialogTitle>
       )}
-      <DialogContent>
+      <DialogContent sx={{
+        "&::-webkit-scrollbar": {
+          width: "8px",
+        },
+        "&::-webkit-scrollbar-track": {
+          background: "#4f5179", // Track color
+          borderRadius: "4px",
+        },
+        "&::-webkit-scrollbar-thumb": {
+          backgroundColor: "#f0f0f0", // Thumb color
+          borderRadius: "4px",
+          border: "2px solid #0F1643",
+        },
+        "&::-webkit-scrollbar-thumb:hover": {
+          backgroundColor: "rgba(31,44,132,0.95)",
+        },}}>
         {isLoading ? <Box sx={{
             display: "flex",
             justifyContent: "center",

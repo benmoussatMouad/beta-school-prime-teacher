@@ -31,6 +31,21 @@ const { borderWidth, borderColor } = borders;
 export default {
   styleOverrides: {
     root: {
+      "&::-webkit-scrollbar": {
+        width: "8px",
+      },
+      "&::-webkit-scrollbar-track": {
+        background: "#0e143d", // Track color
+        borderRadius: "4px",
+      },
+      "&::-webkit-scrollbar-thumb": {
+        backgroundColor: "#f0f0f0", // Thumb color
+        borderRadius: "4px",
+        border: "2px solid #0F1643",
+      },
+      "&::-webkit-scrollbar-thumb:hover": {
+        backgroundColor: "rgba(15,22,67,0.95)",
+      },
       padding: pxToRem(16),
       fontSize: size.md,
       color: text.main,

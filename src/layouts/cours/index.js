@@ -213,10 +213,10 @@ function CoursDetails() {
                   </VuiTypography>
                 </VuiBox>
                 <VuiTypography color={"white"} variant="h4" component="h2" mb={2}>
-                  {t('courses.table.title')}: {data.title}
+                  {t("courses.table.title")}: {data.title}
                 </VuiTypography>
                 <VuiTypography color={"white"} variant="h4" component="h2" mb={2}>
-                  {t('courses.table.description')}:
+                  {t("courses.table.description")}:
                 </VuiTypography>
                 <VuiBox borderRadius={"lg"} sx={{ p: 3, mb: 1, border: "1px solid #234576" }}>
                   <VuiTypography color={"white"} variant="body2"
@@ -225,7 +225,8 @@ function CoursDetails() {
                   </VuiTypography>
                 </VuiBox>
                 <VuiBadge badgeContent={`${t("currentEnrollment")}: ${data.currentEnrollment || "0"}`}
-                          color={"primary"} container variant="contained" size={'lg'} sx={{ textAlign: "justify", mt: 1 }}/>
+                          color={"primary"} container variant="contained" size={"lg"}
+                          sx={{ textAlign: "justify", mt: 1 }} />
               </Grid>
               <Grid item xs={12} lg={4} sx={{ py: 1 }}>
                 <VuiTypography color={"white"}>
@@ -245,7 +246,7 @@ function CoursDetails() {
                       {t("course.details.schoolGains")}
                     </VuiTypography>
                     <VuiTypography color={"white"} variant="caption" component="h2">
-                      {data.price * 0.4} DZD
+                      {Math.round(data.price * 0.4)} DZD
                     </VuiTypography>
                   </VuiBox>
                   <VuiBox sx={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
@@ -253,7 +254,7 @@ function CoursDetails() {
                       {t("course.details.teacherGains")}
                     </VuiTypography>
                     <VuiTypography color={"white"} variant="caption" component="h2">
-                      {data.price * 0.6} DZD
+                      {Math.round(data.price * 0.6)} DZD
                     </VuiTypography>
                   </VuiBox>
                 </VuiBox>
@@ -359,7 +360,7 @@ function CoursDetails() {
                           <ChapterCard
                             id={chapter.id}
                             image={chapter.thumbnail.url}
-                            label={'#'+index}
+                            label={"#" + (index + 1)}
                             title={chapter.title}
                             description={chapter.description}
                             action={{
