@@ -33,6 +33,7 @@
   },
   "chapter": {
     "create": {
+      "button": "Creer un chapitre",
       "successfully": "Chapitre créé avec succès"
     },
     "update": {

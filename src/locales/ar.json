@@ -33,6 +33,7 @@
   },
   "chapter": {
     "create": {
+      "button": "انشاء فصل",
       "successfully": "تم انشاء الفصل بنجاح"
     },
     "update": {

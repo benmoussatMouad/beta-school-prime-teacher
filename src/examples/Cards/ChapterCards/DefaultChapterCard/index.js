@@ -160,7 +160,7 @@ function ChapterCard(
         })}
       >
         <VuiBox>
-          <VuiTypography variant="xxs" color="text" fontWeight="medium" textTransform="capitalize">
+          <VuiTypography variant="caption" color="text" fontWeight="medium" textTransform="capitalize">
             {label}
           </VuiTypography>
         </VuiBox>
@@ -171,26 +171,31 @@ function ChapterCard(
             target="_blank"
             rel="noreferrer"
             color="white"
-            variant="h5"
+            variant="h4"
             textTransform="capitalize"
           >
             {title}
           </VuiTypography>
         </VuiBox>
-        <VuiBox mb={3} lineHeight={0}>
-          <VuiTypography variant="button" fontWeight="regular" color="text">
+        <VuiBox mb={3}>
+          <VuiTypography sx={{
+            overflow: "hidden",
+            textOverflow: "ellipsis",
+            maxHeight: "200px", // Set the width limit where you want the text to truncate
+          }} paragraph variant="button" fontWeight="regular" color="white">
             {description}
           </VuiTypography>
         </VuiBox>
         <VuiBox display="flex" justifyContent="space-between" alignItems="center">
-          {!ressources.length ? "" : <VuiButton
+          <VuiButton
             variant="contained"
+            disabled={!ressources.length}
             size="small"
             color={action.color}
-            onClick={handleClick}
+            onClick={!ressources.length ? null : handleClick}
           >
             {action.label}
-          </VuiButton>}
+          </VuiButton>
           <Popover
             id={id}
             open={open}

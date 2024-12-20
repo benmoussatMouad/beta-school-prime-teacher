@@ -290,7 +290,7 @@ function CoursDetails() {
                 </VuiTypography>
                 {myOwnCourse &&
                   <VuiButton onClick={() => setOpenCreateDialog(true)} color="primary" variant="gradient" size="medium">
-                    + {t("chapter.create")}
+                    + {t("chapter.create.button")}
                   </VuiButton>
                 }
               </VuiBox>
@@ -354,12 +354,12 @@ function CoursDetails() {
                         </SwiperSlide>
                       ))
                     ) : (
-                      data?.chapters.map((chapter) => (
+                      data?.chapters.map((chapter, index) => (
                         <SwiperSlide style={{ maxWidth: "350px" }} key={chapter.id}>
                           <ChapterCard
                             id={chapter.id}
                             image={chapter.thumbnail.url}
-                            label={chapter.title}
+                            label={'#'+index}
                             title={chapter.title}
                             description={chapter.description}
                             action={{
