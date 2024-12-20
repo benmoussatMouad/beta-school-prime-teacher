@@ -6,6 +6,7 @@
   "TO_REVIEW": "Le cours est en mode révision pour que l'administration l'accepte",
   "UNDER_CREATION": "Le cours est en mode création",
   "UNKNOWN_STATUS": "Le cours a un statut inconnu",
+  "adminNote": "Note d'admin",
   "allCourses": {
     "title": "Tous les cours"
   },
@@ -64,6 +65,9 @@
     "accountDeletion": {
       "description": "Êtes-vous sûr de supprimer le cours ?",
       "title": "Supprimer le cours"
+    },
+    "adminAction": {
+      "message": "Choisissez d'approuver ou non ce cours"
     },
     "create": {
       "success": "Créer un cours avec succès !"

@@ -146,7 +146,7 @@ function CoursDetails() {
             {t("REJECT")}
           </VuiTypography>
           <VuiTypography variant="caption" color="white" fontWeight="medium">
-            {t("note")}: {data.statusNote}
+            {t("adminNote")}: {data.statusNote}
           </VuiTypography>
         </VuiBox>;
       default:
@@ -418,8 +418,8 @@ function CoursDetails() {
           <Grid item xs={12} xl={4}>
             <VuiBox bgColor={
               data.status === "UNDER_CREATION" ? "info" :
-                data.status === "IN_REVIEW" ? "warning" :
-                  data.status === "REJECTED" ? "error" :
+                data.status === "TO_REVIEW" ? "warning" :
+                  data.status === "REJECT" ? "error" :
                     data.status === "ACCEPTED" ? "success" :
                       "primary"} borderRadius="lg" sx={{ p: 3, mb: 1 }}>
               <Grid container alignItems="center" justifyContent="space-between"

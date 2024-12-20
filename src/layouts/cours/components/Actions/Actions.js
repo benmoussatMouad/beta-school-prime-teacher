@@ -12,6 +12,7 @@ import boxShadows from "../../../../assets/theme/base/boxShadows";
 import { useAcceptCourse } from "../../../../api/courses/accepterCourse";
 import { useRejectCourse } from "../../../../api/courses/rejectCourse";
 import VuiInput from "../../../../components/VuiInput";
+import VuiTypography from "../../../../components/VuiTypography";
 
 const { black, gradients } = colors;
 const { card } = gradients;
@@ -111,22 +112,28 @@ function ActionsCourse({ coursId }) {
           flexDirection="row"
           height="100%"
         >
-          <VuiButton
-            onClick={() => handleOpenDialog("approve")}
-            color={"info"}
-            size={"large"}
-            variant={"gradient"}
-          >
-            {t("button.approve")}
-          </VuiButton>
-          <VuiButton
-            onClick={() => handleOpenDialog("reject")}
-            color={"error"}
-            size={"large"}
-            variant={"gradient"}
-          >
-            {t("button.reject")}
-          </VuiButton>
+          <VuiTypography variant='h5' color="white">
+            {t('course.adminAction.message')}
+          </VuiTypography>
+          <VuiBox>
+            <VuiButton
+              sx={{marginRight: "10px"}}
+              onClick={() => handleOpenDialog("approve")}
+              color={"info"}
+              size={"large"}
+              variant={"gradient"}
+            >
+              {t("button.approve")}
+            </VuiButton>
+            <VuiButton
+              onClick={() => handleOpenDialog("reject")}
+              color={"error"}
+              size={"large"}
+              variant={"gradient"}
+            >
+              {t("button.reject")}
+            </VuiButton>
+          </VuiBox>
         </VuiBox>
       </Card>
     </>

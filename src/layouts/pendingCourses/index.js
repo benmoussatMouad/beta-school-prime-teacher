@@ -111,8 +111,7 @@ function PendingCourses() {
         <Card>
           <VuiBox display="flex" justifyContent="space-between" alignItems="center">
             <VuiTypography variant="h3" color="white">
-              {t("cours.title")}
-              <VuiBadge color="warning" variant="gradient" badgeContent="En cours de development" size="lg" />
+              {t("routes.pendingCourses")}
             </VuiTypography>
           </VuiBox>
           <VuiBox
