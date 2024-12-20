@@ -49,7 +49,7 @@ export function useGetPendingCourses(
   const queryOptions = { title, teacherClass, subject, courseStatus, page, limit };
 
   return useQuery(
-    ["courses", token, queryOptions], // Use queryOptions for dynamic query key
+    ["getPendingCourses", token, queryOptions], // Use queryOptions for dynamic query key
     () => fetchCourses(token, queryOptions), // Pass queryOptions to fetchCourses
     {
       enabled: !!token, // Only fetch if token exists

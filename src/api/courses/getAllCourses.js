@@ -52,7 +52,7 @@ export function useGetAllCourses(
   const queryOptions = { role, title, teacherClass, subject, courseStatus, page, limit };
 
   return useQuery(
-    ["courses", token, queryOptions],
+    ["getAllCourses", token, queryOptions],
     () => fetchCourses(token, queryOptions),
     {
       enabled: !!token, // Only run if token exists
