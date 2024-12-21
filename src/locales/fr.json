@@ -182,6 +182,10 @@
       "description": "Êtes-vous sûr  supprime votre compte",
       "title": "Cette action supprime votre compte. Voulez-vous continuer ?"
     },
+    "deleteChapter": {
+      "description": "Etes-vous sûr de vouloir supprimer ce chapitre ? vous ne pourrez pas le récupérer après la suppression.",
+      "title": "Supression du chaptire"
+    },
     "deleteCourse": {
       "description": "Êtes-vous sûr de vouloir supprimer ce cours ?",
       "title": "Supprimer le cours"
@@ -219,6 +223,7 @@
     },
     "loading": {
       "details": "Si vous cliquez ailleurs ou sur le bouton Annuler, le téléchargement sera annulé.",
+      "end": "Il reste juste un peu de temps",
       "title": "Téléchargement en cours"
     },
     "no": {

@@ -21,7 +21,7 @@ export function useDeleteChapter(chapterId) {
     onSuccess: ({ message }) => {
       // Update successful
       showSnackBar(dispatch, message, "success");
-      queryClient.invalidateQueries(["chapter", chapterId]);
+      queryClient.invalidateQueries("course");
     },
     onError: (err) => {
       // Handle errors gracefully and show a Snackbar message

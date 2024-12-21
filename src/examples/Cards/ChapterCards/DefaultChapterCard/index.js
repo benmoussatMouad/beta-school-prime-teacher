@@ -23,7 +23,15 @@
 import VuiBox from "components/VuiBox";
 import VuiTypography from "components/VuiTypography";
 import VuiButton from "components/VuiButton";
-import { Dialog, DialogActions, DialogContent, DialogTitle, Popover, Typography } from "@mui/material";
+import {
+  CircularProgress,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
+  Popover,
+  Typography,
+} from "@mui/material";
 import React, { useState } from "react";
 import colors from "../../../../assets/theme/base/colors";
 import borders from "../../../../assets/theme/base/borders";
@@ -62,6 +70,7 @@ function ChapterCard(
   }) {
 
   const [anchorEl, setAnchorEl] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   const { t } = useTranslation();
 
@@ -87,12 +96,15 @@ function ChapterCard(
 
   // Perform the delete action
   const handleDelete = async () => {
+    setIsLoading(true)
     mutate(id, {
       onSuccess: () => {
         setIsDialogOpen(false); // Close the dialog on success
+        setIsLoading(false)
       },
       onError: () => {
         setIsDialogOpen(false);
+        setIsLoading(false)
       },
     });
   };
@@ -269,20 +281,36 @@ function ChapterCard(
           boxShadow: xxl,
         },
       })} open={isDialogOpen} onClose={handleCloseDialog}>
-        <DialogTitle color={"#ffffff"}>{t("dialog.deleteCourse.title")}</DialogTitle>
+        <DialogTitle color={"#ffffff"}>{t("dialog.deleteChapter.title")}</DialogTitle>
         <DialogContent>
-          <Typography color={"#ffffff"}>{t("dialog.deleteCourse.description")}</Typography>
+          <Typography color={"#ffffff"}>{t("dialog.deleteChapter.description")}</Typography>
         </DialogContent>
-        <DialogActions>
-          {/* Cancel Button */}
-          <VuiButton onClick={handleCloseDialog} color="secondary">
-            {t("button.cancel")}
-          </VuiButton>
-          {/* Confirm Delete Button */}
-          <VuiButton onClick={handleDelete} color="error">
-            {t("button.confirm")}
-          </VuiButton>
-        </DialogActions>
+        {(isLoading) ? (
+          <VuiBox sx={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+            height: "200px",
+            width: "300px",
+            margin: "auto",
+          }}>
+            <CircularProgress color="info" />
+          </VuiBox>
+        ) : (
+          <>
+            <DialogActions>
+              {/* Cancel Button */}
+              <VuiButton onClick={handleCloseDialog} color="secondary">
+                {t("button.cancel")}
+              </VuiButton>
+              {/* Confirm Delete Button */}
+              <VuiButton onClick={handleDelete} color="error">
+                {t("button.confirm")}
+              </VuiButton>
+            </DialogActions>
+          </>
+        )}
       </Dialog>
     </VuiBox>
   );

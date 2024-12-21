@@ -4,7 +4,7 @@ import VuiBox from "../../../../components/VuiBox";
 import VuiTypography from "../../../../components/VuiTypography";
 import VuiButton from "../../../../components/VuiButton";
 import { useTranslation } from "react-i18next";
-import { Dialog, DialogActions, DialogContent, DialogTitle, Typography } from "@mui/material";
+import { CircularProgress, Dialog, DialogActions, DialogContent, DialogTitle, Typography } from "@mui/material";
 import linearGradient from "../../../../assets/theme/functions/linearGradient";
 import rgba from "../../../../assets/theme/functions/rgba";
 import colors from "../../../../assets/theme/base/colors";
@@ -21,12 +21,23 @@ const { xxl } = boxShadows;
 function DeleteCourse({ coursId }) {
 
   const [openDialog, setOpenDialog] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const { mutate } = useDeleteCourse();
   const { t } = useTranslation();
 
   const handleConfirmDialogClose = (confirmed) => {
     if (confirmed) {
-      mutate(coursId);
+      setIsLoading(true);
+      mutate(coursId, {
+        onSuccess: () => {
+          setOpenDialog(false); // Close the dialog on success
+          setIsLoading(false)
+        },
+        onError: () => {
+          setOpenDialog(false);
+          setIsLoading(false)
+        },
+      });
     }
     setOpenDialog(false);
   };
@@ -58,14 +69,30 @@ function DeleteCourse({ coursId }) {
         <DialogContent>
           <Typography color={"#ffffff"}>{t("dialog.deleteCourse.description")}</Typography>
         </DialogContent>
-        <DialogActions>
-          <VuiButton onClick={() => handleConfirmDialogClose(false)} color="secondary">
-            {t("button.cancel")}
-          </VuiButton>
-          <VuiButton onClick={() => handleConfirmDialogClose(true)} color="info">
-            {t("button.confirm")}
-          </VuiButton>
-        </DialogActions>
+        {isLoading ? (
+          <VuiBox sx={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+            height: "200px",
+            width: "300px",
+            margin: "auto",
+          }}>
+            <CircularProgress color="info" />
+          </VuiBox>
+        ) : (
+          <>
+            <DialogActions>
+              <VuiButton onClick={() => handleConfirmDialogClose(false)} color="secondary">
+                {t("button.cancel")}
+              </VuiButton>
+              <VuiButton onClick={() => handleConfirmDialogClose(true)} color="info">
+                {t("button.confirm")}
+              </VuiButton>
+            </DialogActions>
+          </>
+        )}
       </Dialog>
       <Card>
         <VuiBox display="flex" sx={{ width: "100%", justifyContent: "space-between", alignItems: "center" }}

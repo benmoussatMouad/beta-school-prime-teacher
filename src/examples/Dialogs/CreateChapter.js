@@ -164,41 +164,6 @@ function CreateChapter({ closeDialog, openDialog, courseId }) {
         },
       },
     );
-
-    // try {
-    //   // POST request using `apiClient`
-    //   const response = await apiClient.post(
-    //     `/chapter/${courseId}`,
-    //     formData,
-    //     {
-    //       onUploadProgress: (event) => {
-    //         if (event.lengthComputable) {
-    //           const percentCompleted = Math.round((event.loaded / event.total) * 100);
-    //           setUploadProgress(percentCompleted);
-    //         }
-    //       },
-    //       headers: {
-    //         "Content-Type": "multipart/form-data", // Set required content type for file uploads
-    //       },
-    //       signal
-    //     }
-    //   );
-    //
-    //   // Handle successful response
-    //   console.log("Upload successful:", response.data);
-    //   setIsLoading(false); // Hide loader
-    //   closeDialog(); // Close the dialog
-    //   reset(); // Reset the form
-    //   setVideoPreview(null); // Clear the video preview
-    // } catch (error) {
-    //   closeDialog(); // Close the dialog
-    //   reset(); // Reset the form
-    //   // Handle error responses
-    //   console.error("Upload failed:", error.response?.status, error.response?.statusText || error.message);
-    //   setIsLoading(false); // Hide loader
-    //   setVideoPreview(null); // Clear the video preview
-    //
-    // }
   };
 
   // Close dialog and cancel mutation
@@ -260,11 +225,14 @@ function CreateChapter({ closeDialog, openDialog, courseId }) {
                   justifyContent: "center",
                   height: "200px",
                   width: "300px",
-                  margin: "auto"
+                  margin: "auto",
                 }}>
                   <CircularProgress thickness={5} variant="determinate" size={80} color="info" value={uploadProgress} />
                   <br />
-                  <VuiTypography color={"white"} fontWeight={"bold"} mt={2} variant={"h5"}>{uploadProgress}%</VuiTypography>
+                  {uploadProgress === 100 ? <VuiTypography color={"white"} fontWeight={"bold"} mt={2}
+                                                           variant={"h5"}>{t('dialog.loading.end')}</VuiTypography> :<VuiTypography color={"white"} fontWeight={"bold"} mt={2}
+                                                           variant={"h5"}>{uploadProgress}%</VuiTypography>}
+
                 </VuiBox>
               ) :
               <Grid container spacing={3}>
