@@ -9,8 +9,8 @@ export default {
   },
 
   text: {
-    main: "#2d3748", // Dark text for contrast
-    focus: "#000000", // Dark focus text
+    main: "#dfe4f0", // Dark text for contrast
+    focus: "#8b8c90", // Dark focus text
   },
 
   transparent: {
@@ -384,7 +384,7 @@ export default {
   },
 
   inputColors: {
-    backgroundColor: "#ffffff", // Lighter background for inputs
+    backgroundColor: "#1E244B", // Lighter background for inputs
     borderColor: { main: "rgba(226, 232, 240, 0.6)", focus: "rgba(226, 232, 240, 0.8)" },
     boxShadow: "#b3c6e6", // Light shadow
     error: "#fd5c70",
