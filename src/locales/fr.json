@@ -14,7 +14,7 @@
     "title": "Annonces"
   },
   "banner": {
-    "button": "Cliquez vérifier votre e-mail",
+    "button": "Vérifiez votre e-mail",
     "title": "Votre e-mail n'a pas encore été vérifié !"
   },
   "button": {
@@ -33,10 +33,7 @@
     "submit": "Soumettre"
   },
   "chapter": {
-    "create": {
-      "button": "Creer un chapitre",
-      "successfully": "Chapitre créé avec succès"
-    },
+    "create": "Créer un chapitre",
     "update": {
       "caution": "Si vous ne téléchargez aucune vidéo, la dernière vidéo ne sera pas supprimée. Si vous téléchargez des pièces jointes, elles seront ajoutées aux pièces jointes actuelles. Si vous souhaitez supprimer des pièces jointes actuelles, supprimez-les dans la vue du cours en cliquant sur le bouton Pièces jointes.",
       "successfully": "Le chapitre a été mis à jour avec succès"
@@ -156,7 +153,7 @@
       "role": "Rôle",
       "status": "Statut",
       "subject": "Sujet ",
-      "title": "Demande",
+      "title": "Demandes d'adhésion",
       "view": "Voir",
       "yearsOfExperience": "Années d'expérience"
     }
@@ -187,7 +184,7 @@
       "title": "Supression du chaptire"
     },
     "deleteCourse": {
-      "description": "Êtes-vous sûr de vouloir supprimer ce cours ? Vous ne pourrez pas le récupérer après la suppression. Les étudiants qui ont acheté ce cours peuvent le consulter.",
+      "description": "Êtes-vous sûr de vouloir supprimer ce cours ?",
       "title": "Supprimer le cours"
     },
     "description": "Cette action changera votre photo de profil. Voulez-vous continuer ?",
@@ -451,7 +448,7 @@
     "cours": "Cours",
     "courses": "Mes Cours",
     "dashboard": "Tableau de bord",
-    "demands": "Demands",
+    "demands": "Demandes d'adhésion",
     "pendingCourses": "Les Cours en attente",
     "profile": "Profil",
     "students": "Étudiants",
