@@ -26,7 +26,7 @@ import boxShadows from "assets/theme/base/boxShadows";
 import rgba from "assets/theme/functions/rgba";
 
 const { black, gradients } = colors;
-const { card } = gradients;
+const { cardDark } = gradients;
 const { borderWidth, borderRadius } = borders;
 const { xxl } = boxShadows;
 
@@ -35,7 +35,7 @@ export default {
     root: {
       display: "flex",
       flexDirection: "column",
-      background: linearGradient(card.main, card.state, card.deg),
+      background: linearGradient(cardDark.main, cardDark.state, cardDark.deg),
       backdropFilter: "blur(120px)",
       position: "relative",
       minWidth: 0,
