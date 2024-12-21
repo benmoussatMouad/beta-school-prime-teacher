@@ -185,19 +185,24 @@ function Demands() {
               }}
             />
             <Box>
-              <VuiTypography variant="subtitle1" color="white">
-                {t("popup.fullName")}: {selectedTeacher?.firstName} {selectedTeacher?.lastName}
+              <VuiTypography variant="subtitle2" color="white">
+                <b>{t("popup.fullName")}</b>: {selectedTeacher?.firstName} {selectedTeacher?.lastName}
               </VuiTypography>
               <VuiTypography mt={"10px"} variant="subtitle2" color="white">
-                {t("popup.role")}: {t(`subjects.${selectedTeacher?.Teacher?.subject}`)}
+                <b>{t("popup.subject")}</b>: {t(`subjects.${selectedTeacher?.Teacher?.subject}`)}
               </VuiTypography>
               <VuiTypography mt={"10px"} variant="subtitle2" color="white">
-                {t("popup.email")}: {selectedTeacher?.email || t("popup.noEmail")}
+                <b>{t("popup.email")}</b>: {selectedTeacher?.email || t("popup.noEmail")}
               </VuiTypography>
               <VuiTypography mt={"10px"} variant="subtitle2" color="white">
-                {t("forms.institution")}: {selectedTeacher?.Teacher?.institution}
+                <b>{t("popup.phone")}</b>: {selectedTeacher?.phone || t("popup.noPhone")}
               </VuiTypography>
-              <VuiBadge
+              <VuiTypography mt={"10px"} variant="subtitle2" color="white">
+                <b>{t("forms.institution")}</b>: {selectedTeacher?.Teacher?.institution}
+              </VuiTypography>
+              <VuiTypography mt={"10px"} variant="subtitle2" color="white">
+                <b>{t("forms.emailVerified")}</b>:
+                <VuiBadge
                 variant="standard"
                 badgeContent={t(`profile.card.${selectedTeacher.isEmailVerified ? "Verified" : "unVerified"}`)}
                 color="success"
@@ -210,6 +215,7 @@ function Demands() {
                   color: white.main,
                 })}
               />
+              </VuiTypography>
             </Box>
           </Box>
           <VuiTypography variant="body1" color="white">

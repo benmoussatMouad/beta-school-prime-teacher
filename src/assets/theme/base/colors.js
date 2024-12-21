@@ -117,7 +117,12 @@ export default {
       main: "rgba(255, 255, 255, 0) -22.38%",
       state: "rgba(255, 255, 255, 0.039) 70.38%",
     },
-
+    cover: {
+      deg: "159.02",
+      main: "#0f123b 14.25%",
+      state: "#090d2e 56.45%",
+      stateSecondary: "#020515 86.14%",
+    },
     sidenav: {
       deg: "127.09",
       main: "rgba(6, 11, 40, 0.94) 19.41%",

@@ -318,6 +318,7 @@
     "confirmPassword": "Confirmer le mot de passe",
     "descriptions": "Description",
     "email": "E-mail",
+    "emailVerified": "Vérification de l'email",
     "firstName": "Prénom",
     "forgetPassword": "Mot de passe oublié",
     "fullName": "Nom complet",
@@ -383,13 +384,16 @@
   "popup": {
     "defaultName": "Utilisateur",
     "demand": {
-      "description": "Si vous cliquez sur ces deux boutons, vous pouvez approuver ou rejeter le profil de l'enseignant.Votre action approuvera ou rejettera l'enseignant"
+      "description": "Voulez vous accepter la demande de cet enseignant?"
     },
     "description": "Vous êtes sur le point de prendre une mesure pour {{name}}, qui est un(e) Professor {{role}}.",
     "email": "Email",
     "fullName": "Nom complet",
     "noEmail": "Email non fourni",
+    "noPhone": "Pas de numero",
+    "phone": "Numero de telephone",
     "role": "Rôle",
+    "subject": "Matière",
     "teachers": {
       "description": "Le clic de confirmation fera de l'enseignant un administrateur"
     },

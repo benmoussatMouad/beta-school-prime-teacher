@@ -192,6 +192,9 @@ function Teachers() {
                 {t("popup.email")}: {selectedTeacher?.email || t("popup.noEmail")}
               </VuiTypography>
               <VuiTypography mt={"10px"} variant="subtitle2" color="white">
+                {t("popup.email")}: {selectedTeacher?.phone || t("popup.noPhone")}
+              </VuiTypography>
+              <VuiTypography mt={"10px"} variant="subtitle2" color="white">
                 {t("forms.institution")}: {selectedTeacher?.Teacher?.institution}
               </VuiTypography>
               <VuiBadge
