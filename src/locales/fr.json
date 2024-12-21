@@ -187,7 +187,7 @@
       "title": "Supression du chaptire"
     },
     "deleteCourse": {
-      "description": "Êtes-vous sûr de vouloir supprimer ce cours ?",
+      "description": "Êtes-vous sûr de vouloir supprimer ce cours ? Vous ne pourrez pas le récupérer après la suppression. Les étudiants qui ont acheté ce cours peuvent le consulter.",
       "title": "Supprimer le cours"
     },
     "description": "Cette action changera votre photo de profil. Voulez-vous continuer ?",

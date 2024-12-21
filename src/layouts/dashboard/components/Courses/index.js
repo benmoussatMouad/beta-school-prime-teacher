@@ -11,6 +11,7 @@ import data from "./data";
 import { getAccessToken } from "../../../../utils";
 import { useGetCourses } from "../../../../api/courses";
 import CreateCoursDialog from "../../../../examples/Dialogs/CreateCours";
+import { coursesTableData } from "../../../courses/data/coursesTableData";
 
 
 function Courses() {
@@ -21,7 +22,7 @@ function Courses() {
   const { data: courses, isLoading: isLoadingCourses } = useGetCourses({ token });
 
   const { t } = useTranslation();
-  const { columns, rows } = data(courses?.courses);
+  const { columns, rows } = coursesTableData(t, courses?.courses);
 
   const closeDialog = () => {
     setOpenDialog(false);
