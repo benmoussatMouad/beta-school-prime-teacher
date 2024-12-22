@@ -65,6 +65,7 @@ function CoursDetails() {
   const swiperRef = useRef(null); // Create a ref for Swiper
 
   const { data, isLoading } = useGetCourse(coursId);
+  const course = data?.course;
   const { mutate: updateToReview } = useUpdateToReview();
   // Separate states for handling each Popover
   const [anchorEl1, setAnchorEl1] = useState(null);
@@ -89,21 +90,21 @@ function CoursDetails() {
   const open2 = Boolean(anchorEl2);
 
   const changeStatusToReview = async () => {
-    await updateToReview(data.id);
+    await updateToReview(course.id);
   };
 
   if (isLoading) {
     return <VuiLoading />;
   }
 
-  if (!data) {
+  if (!course) {
     return <NotFound user={context.user} />;
   }
 
   const user = context.user.user;
   const teacher = context.user.teacher;
 
-  const myOwnCourse = data?.teacherId === teacher?.id;
+  const myOwnCourse = course?.teacherId === teacher?.id;
 
   const closeDialog = () => {
     setOpenCreateDialog(false);
@@ -131,7 +132,7 @@ function CoursDetails() {
     });
   };
   const renderNote = () => {
-    switch (data.status) {
+    switch (course.status) {
       case "UNDER_CREATION":
         return t("UNDER_CREATION");
       case "PENDING":
@@ -146,7 +147,7 @@ function CoursDetails() {
             {t("REJECT")}
           </VuiTypography>
           <VuiTypography variant="caption" color="white" fontWeight="medium">
-            {t("adminNote")}: {data.statusNote}
+            {t("adminNote")}: {course.statusNote}
           </VuiTypography>
         </VuiBox>;
       default:
@@ -156,8 +157,8 @@ function CoursDetails() {
 
   return (
     <DashboardLayout user={context.user}>
-      <Header data={data} isLoading={isLoading} pageName={data?.title} />
-      <CreateChapter closeDialog={closeDialog} openDialog={openCreateDialog} courseId={data.id} />
+      <Header data={course} courseOwner={data.teacher.user} myOwnCourse={myOwnCourse} isLoading={isLoading} pageName={course?.title} />
+      <CreateChapter closeDialog={closeDialog} openDialog={openCreateDialog} courseId={course.id} />
       <UpdateChapter closeDialog={closeDialog} openDialog={openUpdateDialog.open}
                      chapterId={openUpdateDialog.coursId} />
       <ViewChapter
@@ -167,7 +168,7 @@ function CoursDetails() {
       />
       <Grid container spacing={3} my="20px">
         <Grid item xs={12} xl={myOwnCourse ? 8 : 12}>
-          {(data.status === "UNDER_CREATION" || data.status === "REJECT") && myOwnCourse ?
+          {(course.status === "UNDER_CREATION" || course.status === "REJECT") && myOwnCourse ?
             <VuiBox
               sx={{
                 display: "flex",
@@ -200,8 +201,8 @@ function CoursDetails() {
               </VuiButton>
             </VuiBox> : ""}
           {
-            user.role === "ROOT" || user.role === "ADMIN" ? data.status === "TO_REVIEW" &&
-              <ActionsCourse coursId={data.id} /> : ""
+            user.role === "ROOT" || user.role === "ADMIN" ? course.status === "TO_REVIEW" &&
+              <ActionsCourse coursId={course.id} /> : ""
           }
           <Card>
             <Grid container>
@@ -213,7 +214,7 @@ function CoursDetails() {
                   </VuiTypography>
                 </VuiBox>
                 <VuiTypography color={"white"} variant="h4" component="h2" mb={2}>
-                  {t("courses.table.title")}: {data.title}
+                  {t("courses.table.title")}: {course.title}
                 </VuiTypography>
                 <VuiTypography color={"white"} variant="h4" component="h2" mb={2}>
                   {t("courses.table.description")}:
@@ -221,10 +222,10 @@ function CoursDetails() {
                 <VuiBox borderRadius={"lg"} sx={{ p: 3, mb: 1, border: "1px solid #234576" }}>
                   <VuiTypography color={"white"} variant="body2"
                                  sx={{ textAlign: "justify", mt: 1, lineHeight: 1.1 }}>
-                    {data.description}
+                    {course.description}
                   </VuiTypography>
                 </VuiBox>
-                <VuiBadge badgeContent={`${t("currentEnrollment")}: ${data.currentEnrollment || "0"}`}
+                <VuiBadge badgeContent={`${t("currentEnrollment")}: ${course.currentEnrollment || "0"}`}
                           color={"primary"} container variant="contained" size={"lg"}
                           sx={{ textAlign: "justify", mt: 1 }} />
               </Grid>
@@ -238,7 +239,7 @@ function CoursDetails() {
                       {t("course.details.totalPrice")}
                     </VuiTypography>
                     <VuiTypography color={"white"} variant="caption" component="h2">
-                      {data.price} DZD
+                      {course.price} DZD
                     </VuiTypography>
                   </VuiBox>
                   <VuiBox sx={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
@@ -246,7 +247,7 @@ function CoursDetails() {
                       {t("course.details.schoolGains")}
                     </VuiTypography>
                     <VuiTypography color={"white"} variant="caption" component="h2">
-                      {Math.round(data.price * 0.4)} DZD
+                      {Math.round(course.price * 0.4)} DZD
                     </VuiTypography>
                   </VuiBox>
                   <VuiBox sx={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
@@ -254,14 +255,14 @@ function CoursDetails() {
                       {t("course.details.teacherGains")}
                     </VuiTypography>
                     <VuiTypography color={"white"} variant="caption" component="h2">
-                      {Math.round(data.price * 0.6)} DZD
+                      {Math.round(course.price * 0.6)} DZD
                     </VuiTypography>
                   </VuiBox>
                 </VuiBox>
                 <VuiTypography color={"white"}>
                   {t("dialog.forms.educationalBranches")}
                 </VuiTypography>
-                {data.EducationalBranch.map((el, index) => (
+                {course.EducationalBranch.map((el, index) => (
                   <VuiBadge container sx={{
                     ml: { xs: 0, md: 2 },
                     fontSize: { xs: "0.8rem", md: "1rem" },
@@ -272,7 +273,7 @@ function CoursDetails() {
                 <VuiTypography color={"white"}>
                   {t("dialog.forms.teacherClasses")}
                 </VuiTypography>
-                {data.class.map((el, index) => (
+                {course.class.map((el, index) => (
                   <VuiBadge container sx={{
                     ml: { xs: 0, md: 2 },
                     fontSize: { xs: "0.8rem", md: "1rem" },
@@ -309,7 +310,7 @@ function CoursDetails() {
                   spaceBetween={20}
                   slidesPerView={1}
                   navigation={false} // Disable default navigation buttons
-                  loop={data?.chapters?.length > 4} // Enable looping
+                  loop={course?.chapters?.length > 4} // Enable looping
                   breakpoints={{
                     600: {
                       slidesPerView: 1, // One slide per view on small screens
@@ -322,7 +323,7 @@ function CoursDetails() {
                     },
                   }}
                 >
-                  {!data?.chapters.length ?
+                  {!course?.chapters.length ?
                     <VuiBox display="flex" justifyContent="center" sx={{ height: "300px" }} alignItems="flex-start"
                             py={3}>
                       <VuiTypography color={"white"}>
@@ -355,7 +356,7 @@ function CoursDetails() {
                         </SwiperSlide>
                       ))
                     ) : (
-                      data?.chapters.map((chapter, index) => (
+                      course?.chapters.map((chapter, index) => (
                         <SwiperSlide style={{ maxWidth: "350px" }} key={chapter.id}>
                           <ChapterCard
                             id={chapter.id}
@@ -379,7 +380,7 @@ function CoursDetails() {
                 </Swiper>
 
                 {/* Custom Navigation Buttons */}
-                {!data?.chapters.length ? "" : <VuiButton
+                {!course?.chapters.length ? "" : <VuiButton
                   color={"info"}
                   onClick={() =>
                     swiperRef.current.swiper.slidePrev() // Keep functionality the same
@@ -395,7 +396,7 @@ function CoursDetails() {
                   <FaChevronLeft />
                 </VuiButton>
                 }
-                {!data?.chapters.length ? "" : <VuiButton
+                {!course?.chapters.length ? "" : <VuiButton
                   color={"info"}
                   onClick={() =>
                     swiperRef.current.swiper.slideNext() // Keep functionality the same
@@ -418,10 +419,10 @@ function CoursDetails() {
           myOwnCourse &&
           <Grid item xs={12} xl={4}>
             <VuiBox bgColor={
-              data.status === "UNDER_CREATION" ? "info" :
-                data.status === "TO_REVIEW" ? "warning" :
-                  data.status === "REJECT" ? "error" :
-                    data.status === "ACCEPTED" ? "success" :
+              course.status === "UNDER_CREATION" ? "info" :
+                course.status === "TO_REVIEW" ? "warning" :
+                  course.status === "REJECT" ? "error" :
+                    course.status === "ACCEPTED" ? "success" :
                       "primary"} borderRadius="lg" sx={{ p: 3, mb: 1 }}>
               <Grid container alignItems="center" justifyContent="space-between"
                     sx={{ gap: { xs: "16px", sm: "12px", md: "8px" }, color: "white", textAlign: "center" }}>
@@ -430,7 +431,7 @@ function CoursDetails() {
                 </VuiTypography>
               </Grid>
             </VuiBox>
-            <UpdateCourse data={data} isLoading={isLoading} />
+            <UpdateCourse data={course} isLoading={isLoading} />
           </Grid>
         }
       </Grid>

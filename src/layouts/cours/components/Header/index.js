@@ -35,9 +35,10 @@ import { useAuth } from "../../../../context/auth/authContext";
 import { useState } from "react";
 import Popper from "@mui/material/Popper/BasePopper";
 import i18n from "../../../../i18n";
+import { useGetCourse } from "../../../../api/courses/getCourse";
+import { useGetTeacher } from "../../../../api/admin";
 
-function Header({ pageName, data }) {
-
+function Header({ pageName, data, courseOwner }) {
   const { user } = useAuth();
   const { t } = useTranslation();
 
@@ -117,11 +118,11 @@ function Header({ pageName, data }) {
             )}
             <VuiBox sx={{ textAlign: { xs: "center", md: "left" }, ml: 2 }}>
               <VuiTypography variant="h2" color="white" fontWeight="bold"
-              sx={{
-                textOverflow: "ellipsis",
-                overflow: "hidden",
-                whiteSpace: "nowrap"
-              }}>
+                             sx={{
+                               textOverflow: "ellipsis",
+                               overflow: "hidden",
+                               whiteSpace: "nowrap",
+                             }}>
                 {data.title}
               </VuiTypography>
             </VuiBox>
@@ -142,13 +143,13 @@ function Header({ pageName, data }) {
               flexDirection: { xs: "column", md: "row" },
             }}>
 
-              <VuiAvatar src={user.user.profilePic.url} alt="profile-image" variant="rounded" size="lg" shadow="sm" />
+              <VuiAvatar src={courseOwner.profilePic.url} alt="profile-image" variant="rounded" size="lg" shadow="sm" />
               <VuiTypography color={"white"} sx={{
                 ml: { xs: 0, md: 0 },
                 fontSize: { xs: "0.8rem", md: "1rem" },
                 textAlign: { xs: "center", md: "left" },
               }} variant="caption">
-                {i18n.language == "fr" ? `${user.user.lastName} ${user.user.firstName}` : `${user.user.firstNameAr} ${user.user.lastNameAr}`}
+                {i18n.language === "fr" ? `${courseOwner.lastName} ${courseOwner.firstName}` : `${courseOwner.firstNameAr || courseOwner.lastName} ${courseOwner.lastNameAr || courseOwner.firstName}`}
               </VuiTypography>
               <VuiBadge color="primary" variant="gradient" container badgeContent={`${data.price}DA`} size="lg"
                         sx={{ fontSize: { xs: "1rem", md: "1.2rem" } }} />
