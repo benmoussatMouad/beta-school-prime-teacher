@@ -7,6 +7,7 @@
   "UNDER_CREATION": "Le cours est en mode création",
   "UNKNOWN_STATUS": "Le cours a un statut inconnu",
   "adminNote": "Note d'admin",
+  "redirect_mobile": "En vous redirigeant vers l'app...",
   "allCourses": {
     "title": "Tous les cours"
   },

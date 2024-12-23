@@ -61,6 +61,8 @@ import Support from "./layouts/support";
 import CoursDetails from "./layouts/cours";
 import AllCourses from "./layouts/allCourses";
 import PendingCourses from "./layouts/pendingCourses";
+import ResetPasswordStudent from "layouts/students/reset";
+import VerifyEmailStudent from "layouts/students/verify";
 
 
 const routes = [
@@ -202,6 +204,24 @@ const routes = [
     key: "reset-password",
     route: "/authentication/forget-password",
     component: ForgetPassword,
+    noCollapse: true,
+    isGuestOnly: true,
+  },
+  {
+    type: "route",
+    name: "Réinitialiser le mot de passe",
+    key: "reset-student-password",
+    route: "/student/reset-password",
+    component: ResetPasswordStudent,
+    noCollapse: true,
+    isGuestOnly: true,
+  },
+  {
+    type: "route",
+    name: "Verifier l'email",
+    key: "verify-student-password",
+    route: "/student/verify",
+    component: VerifyEmailStudent,
     noCollapse: true,
     isGuestOnly: true,
   },
