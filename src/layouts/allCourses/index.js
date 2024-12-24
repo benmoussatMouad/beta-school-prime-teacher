@@ -54,7 +54,7 @@ function AllCourses() {
     data,
     isLoading,
   } = useGetAllCourses({
-      token, title, teacherClass, subject, role, courseStatus, page, rowsPerPage,
+      token, title, teacherClass, subject, role, courseStatus, page, limit:rowsPerPage,
     },
   );
 

@@ -226,7 +226,7 @@ function UpdateChapter({ closeDialog, openDialog, chapterId }) {
                   <VuiInput
                     sx={{ borderColor: rgba(black.main, 0.1), borderRadius: borderRadius.md }}
                     placeholder={t("dialog.forms.title")}
-                    {...register("title", { required: t("dialog.required.title") })}
+                    {...register("title")}
                     error={!!errors.title}
                   />
                   {errors.title &&
@@ -243,7 +243,7 @@ function UpdateChapter({ closeDialog, openDialog, chapterId }) {
                     placeholder={t("dialog.forms.description")}
                     multiline
                     rows={4}
-                    {...register("description", { required: t("dialog.required.description") })}
+                    {...register("description")}
                     error={!!errors.description}
                   />
                   {errors.description &&

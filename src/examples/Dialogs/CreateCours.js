@@ -169,7 +169,7 @@ function CreateCoursDialog({ closeDialog, openDialog }) {
       {isLoading ? (
         <DialogTitle>
           <VuiTypography color="white" fontWeight="bold">
-            {t("dialog.loading")}
+            {t("dialog.loading.title")}
           </VuiTypography>
         </DialogTitle>
       ) : (

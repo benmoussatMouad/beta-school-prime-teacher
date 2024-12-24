@@ -47,6 +47,7 @@ import NotificationItem from "../../examples/Items/NotificationItem";
 import Popper from "@mui/material/Popper/BasePopper";
 import MiniStatisticsCard from "../../examples/Cards/StatisticsCards/MiniStatisticsCard";
 import { IoCard, IoNotifications } from "react-icons/io5";
+import RevertCourse from "./components/RevertCourse";
 
 
 function CoursDetails() {
@@ -292,7 +293,7 @@ function CoursDetails() {
                 </VuiTypography>
                 {myOwnCourse &&
                   <VuiButton onClick={() => setOpenCreateDialog(true)} color="primary" variant="gradient" size="medium">
-                    + {t("chapter.create.button")}
+                    + {t("chapter.create")}
                   </VuiButton>
                 }
               </VuiBox>
@@ -414,6 +415,19 @@ function CoursDetails() {
               </Box>
             </VuiBox>
           </Card>
+          {!myOwnCourse && <VuiBox my={2} bgColor={
+            course.status === "UNDER_CREATION" ? "info" :
+              course.status === "TO_REVIEW" ? "warning" :
+                course.status === "REJECT" ? "error" :
+                  course.status === "ACCEPTED" ? "success" :
+                    "primary"} borderRadius="lg" sx={{ p: 3, mb: 1 }}>
+            <Grid container alignItems="center" justifyContent="space-between"
+                  sx={{ gap: { xs: "16px", sm: "12px", md: "8px" }, color: "white", textAlign: "center" }}>
+              <VuiTypography variant="h6" sx={{ fontWeight: "bold", width: "100%" }} color="white">
+                {renderNote()}
+              </VuiTypography>
+            </Grid>
+          </VuiBox>}
         </Grid>
         {
           myOwnCourse &&
@@ -435,6 +449,9 @@ function CoursDetails() {
           </Grid>
         }
       </Grid>
+      {
+        user.role === "ROOT" && (course.status === 'ACCEPTED' || course.status === 'REJECT')  ? <RevertCourse coursId={coursId} /> : ""
+      }
       {
         user.role === "ROOT" || myOwnCourse ? <DeleteCourse coursId={coursId} /> : ""
       }

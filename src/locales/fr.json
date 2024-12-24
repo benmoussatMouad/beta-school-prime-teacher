@@ -7,7 +7,6 @@
   "UNDER_CREATION": "Le cours est en mode création",
   "UNKNOWN_STATUS": "Le cours a un statut inconnu",
   "adminNote": "Note d'admin",
-  "redirect_mobile": "En vous redirigeant vers l'app...",
   "allCourses": {
     "title": "Tous les cours"
   },
@@ -94,6 +93,16 @@
     "rejectCourse": {
       "success": "Rejeter le cours avec succès "
     },
+    "revert": {
+      "button": {
+        "revertCourse": "Réinitialiser le cours"
+      },
+      "description": {
+        "willLeadToCourseBeingUnderCreation": "Cette action entraînera la mise du cours en mode création. Cela permettra à l'enseignant de mettre à jour les informations du cours, mais celui-ci ne sera pas disponible à l'achat tant que la création du cours ne sera pas terminée. Toute modification affectera les cours déjà achetés."
+      },
+      "title": "Rétablir le cours"
+    },
+    "reverted": "",
     "update": {
       "success": "Vous mettez à jour le cours avec succès",
       "title": "Mettre à jour votre cours "
@@ -160,6 +169,9 @@
     }
   },
   "dialog": {
+    "action": {
+      "canNotGoBack": "Cette action ne peut pas être annulée."
+    },
     "approveCourse": {
       "description": "Confirmez que vous acceptez de la demande",
       "title": "Approuver le cours"
@@ -240,6 +252,9 @@
       "teacherClasses": "Année d'études requise",
       "title": "Un titre est requis",
       "video": "Vidéo requise "
+    },
+    "revertCourse": {
+      "areYouSureToRevert": "Êtes-vous sûr de vouloir réinitialiser ce cours ?"
     },
     "title": "Êtes-vous sûr de vouloir mettre à jour votre photo de profil ?",
     "upload": {
@@ -436,6 +451,7 @@
     "title": "Mettre à jour les informations",
     "welcome": "Bienvenue !"
   },
+  "redirect_mobile": "En vous redirigeant vers l'app...",
   "resetPassword": {
     "description": "Entrez et confirmez votre nouveau mot de passe",
     "reset": "Réinitialiser votre mot de passe"
