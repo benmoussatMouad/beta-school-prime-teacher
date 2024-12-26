@@ -24,7 +24,7 @@ COPY --from=build /react-app/build /usr/share/nginx/html
 
 # Create the Nginx configuration directly in the Dockerfile
 RUN echo 'server { \
-    listen 80; \
+    listen 4000; \
     server_name localhost; \
     root /usr/share/nginx/html; \
     index index.html; \
@@ -42,8 +42,7 @@ RUN echo 'server { \
     error_page 404 /index.html; \
 }' > /etc/nginx/conf.d/default.conf
 
-# Expose port 80 to access the application
-EXPOSE 80
+EXPOSE 4000
 
 # Start nginx
 CMD ["nginx", "-g", "daemon off;"]
