@@ -411,7 +411,10 @@
     "role": "Rôle",
     "subject": "Matière",
     "teachers": {
-      "description": "Le clic de confirmation fera de l'enseignant un administrateur"
+      "description": {
+        "makeAdmin": "Le clic de confirmation fera de l'enseignant un administrateur",
+        "unMakeAdmin": "Retirer les privilèges d’administrateur de cet utilisateur."
+      }
     },
     "title": "Action pour {{name}}"
   },

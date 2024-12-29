@@ -5,22 +5,22 @@ import { useTranslation } from "react-i18next";
 import { queryClient } from "../../providers/queryProvider";
 
 // Function to handle the API call for updating the teacher profile
-const createTeacherAdminFn = async (teacherId) => {
-  const response = await apiClient.put(`/teacher/admin/${teacherId}`);
+const createUnMakeTeacherAdminFn = async (teacherId) => {
+  const response = await apiClient.put(`/teacher/noadmin/${teacherId}`);
   return response.data;
 };
 
-export function useMakeTeacherAdmin() {
+export function useUnMakeTeacherAdmin() {
   const [, dispatch] = useVisionUIController(); // Get dispatch for Snackbar
 
   const { t } = useTranslation();
 
   return useMutation({
-    mutationFn: createTeacherAdminFn,
+    mutationFn: createUnMakeTeacherAdminFn,
     onSuccess: ({ message }) => {
       // Update successful
       showSnackBar(dispatch, message, "success");
-      queryClient.invalidateQueries("teachers");
+      queryClient.invalidateQueries("demands");
     },
     onError: (err) => {
       // Handle errors gracefully and show a Snackbar message

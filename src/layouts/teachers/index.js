@@ -18,11 +18,13 @@ import VuiBadge from "../../components/VuiBadge";
 import { useAuth } from "../../context/auth/authContext";
 import { teacherTableData } from "./data/teachersTableData";
 import { useGetTeachers, useMakeTeacherAdmin } from "../../api/admin";
+import { useUnMakeTeacherAdmin } from "../../api/admin/unMakeTeacherAdmin";
 
 const { black, gradients } = colors;
 const { card } = gradients;
 const { borderWidth, borderRadius } = borders;
 const { xxl } = boxShadows;
+
 
 function Teachers() {
   const { user } = useAuth();
@@ -42,6 +44,7 @@ function Teachers() {
   const [selectedTeacher, setSelectedTeacher] = useState(null);
 
   const { mutate: makeTeacherAdmin } = useMakeTeacherAdmin();
+  const { mutate: unMakeTeacherAdmin } = useUnMakeTeacherAdmin();
 
   const handleOpen = (teacher) => {
     setOpen(true);
@@ -65,6 +68,16 @@ function Teachers() {
       handleClose();
     }
   };
+
+  const UnMakeTeacherAdmin = (approve) => {
+    if (approve) {
+      unMakeTeacherAdmin(selectedTeacher?.Teacher?.id);
+      setOpen(false);
+      setSelectedTeacher(null);
+    } else {
+      handleClose();
+    }
+  }
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -213,19 +226,19 @@ function Teachers() {
             </Box>
           </Box>
           <VuiTypography variant="body1" color="white">
-            {t("popup.teachers.description")}
+            {selectedTeacher.role === 'TEACHER'? t("popup.teachers.description.makeAdmin") : t("popup.teachers.description.unMakeAdmin") }
           </VuiTypography>
         </DialogContent>
         <DialogActions sx={{ justifyContent: "space-between", padding: "16px" }}>
           <VuiButton
-            onClick={() => MakeTeacherAdmin(false)}
+            onClick={() => selectedTeacher.role === 'TEACHER' ?  MakeTeacherAdmin(false) : UnMakeTeacherAdmin(false)}
             color="secondary"
             sx={{ fontSize: "0.875rem", padding: "8px 16px" }}
           >
             {t("button.cancel")}
           </VuiButton>
           <VuiButton
-            onClick={() => MakeTeacherAdmin(true)}
+            onClick={() => selectedTeacher.role === 'TEACHER' ?  MakeTeacherAdmin(true) : UnMakeTeacherAdmin(true)}
             color="info"
             sx={{ fontSize: "0.875rem", padding: "8px 16px" }}
           >
