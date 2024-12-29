@@ -63,6 +63,8 @@ import AllCourses from "./layouts/allCourses";
 import PendingCourses from "./layouts/pendingCourses";
 import ResetPasswordStudent from "layouts/students/reset";
 import VerifyEmailStudent from "layouts/students/verify";
+import PaymentSuccess from "layouts/students/payment/success";
+import PaymentFailed from "layouts/students/payment/failed";
 
 
 const routes = [
@@ -214,7 +216,7 @@ const routes = [
     route: "/student/reset-password",
     component: ResetPasswordStudent,
     noCollapse: true,
-    isGuestOnly: true,
+    isStudent: true
   },
   {
     type: "route",
@@ -223,7 +225,25 @@ const routes = [
     route: "/student/verify",
     component: VerifyEmailStudent,
     noCollapse: true,
-    isGuestOnly: true,
+    isStudent: true
+  },
+  {
+    type: "route",
+    name: "Payment success",
+    key: "payment-success",
+    route: "/payment/success",
+    component: PaymentSuccess,
+    noCollapse: true,
+    isStudent: true,
+  },
+  {
+    type: "route",
+    name: "Payment failed",
+    key: "payment-failed",
+    route: "/payment/failed",
+    component: PaymentFailed,
+    noCollapse: true,
+    isStudent: true
   },
 ];
 
