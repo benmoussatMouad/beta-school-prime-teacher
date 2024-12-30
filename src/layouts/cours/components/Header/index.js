@@ -143,7 +143,7 @@ function Header({ pageName, data, courseOwner }) {
               flexDirection: { xs: "column", md: "row" },
             }}>
 
-              <VuiAvatar src={courseOwner.profilePic.url} alt="profile-image" variant="rounded" size="lg" shadow="sm" />
+              <VuiAvatar src={courseOwner.profilePic?.url} alt="profile-image" variant="rounded" size="lg" shadow="sm" />
               <VuiTypography color={"white"} sx={{
                 ml: { xs: 0, md: 0 },
                 fontSize: { xs: "0.8rem", md: "1rem" },

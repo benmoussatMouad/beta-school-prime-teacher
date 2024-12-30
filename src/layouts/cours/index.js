@@ -293,7 +293,7 @@ function CoursDetails() {
                 </VuiTypography>
                 {myOwnCourse &&
                   <VuiButton onClick={() => setOpenCreateDialog(true)} color="primary" variant="gradient" size="medium">
-                    + {t("chapter.create")}
+                    + {t("chapter.create.title")}
                   </VuiButton>
                 }
               </VuiBox>
