@@ -11,7 +11,10 @@
     "title": "كل الدورات"
   },
   "announcement": {
-    "title": "اعلانات"
+    "create": {
+      "successfully": "تم إنشاء الإعلان بنجاح"
+    },
+    "title": "اعلانات للتلاميذ"
   },
   "banner": {
     "button": "تحقق من البريد الإلكتروني",
@@ -392,6 +395,7 @@
   },
   "minute": "دقيقة",
   "note": "ملاحظة",
+  "operationSuccesful": "تمت العملية بنجاح",
   "placeholder": {
     "email": "بريدك الإلكتروني",
     "firstName": "اسمك الأول",
@@ -626,5 +630,6 @@
       "title": "المدرسين"
     }
   },
-  "totalWatchTime": "إجمالي وقت المشاهدة"
+  "totalWatchTime": "إجمالي وقت المشاهدة",
+  "typeHere": "اكتب هنا"
 }

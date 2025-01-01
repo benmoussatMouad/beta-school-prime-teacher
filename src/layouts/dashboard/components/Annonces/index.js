@@ -34,9 +34,52 @@ import palette from "assets/theme/base/colors";
 import VuiInput from "../../../../components/VuiInput";
 import { useTranslation } from "react-i18next";
 import VuiBadge from "../../../../components/VuiBadge";
+import { getAccessToken } from "../../../../utils";
+import { useGetAnnouncements } from "../../../../api/announcements/getAnnouncements";
+import moment from "moment/moment";
+import "moment/locale/ar-dz";
+import "moment/locale/fr";
+import i18n from "../../../../i18n";
+import VuiButton from "../../../../components/VuiButton";
+import { AiFillDelete } from "react-icons/ai";
+import { useDeleteAnnouncements } from "../../../../api/announcements/deleteAnnouncment";
+import CircularProgress from "@mui/material/CircularProgress";
+import React, { useState } from "react";
+import { BsSendFill } from "react-icons/bs";
+import { Form } from "react-hook-form";
+import { useCreateAnnouncement } from "../../../../api/announcements/createAnnouncement";
 
-function Annonces() {
+function Annonces({teacherId}) {
   const { t } = useTranslation();
+  const token = getAccessToken();
+  const { data, isLoading } = useGetAnnouncements({token, teacherId})
+  const [isDeleteLoading, setIsDeleteLoading] = useState(false);
+  const [isCreateLoading, setIsCreateLoading] = useState(false);
+  const [newMessage, setNewMessage] = useState("");
+
+  const { mutate } = useDeleteAnnouncements();
+  const {mutate: createAnnouncement} = useCreateAnnouncement();
+
+  function deleteAnnouncement(id) {
+    setIsDeleteLoading(true);
+    mutate({token, id}, {
+      onSuccess: () => setIsDeleteLoading(false),
+      onError: () => setIsDeleteLoading(false),
+    })
+  }
+
+  function createNewAnnouncement(event) {
+    event.preventDefault();
+    setIsCreateLoading(true);
+    createAnnouncement({message: newMessage}, {
+      onSuccess: () => {
+        setIsCreateLoading(false);
+        setNewMessage("");
+      },
+      onError: () => setIsCreateLoading(false),
+    })
+  }
+
   return (
     <Card className="h-100">
       <VuiBox
@@ -48,7 +91,6 @@ function Annonces() {
         <VuiTypography variant="h4" fontWeight="bold" mb="5px" color="white">
           {t("announcement.title")}
         </VuiTypography>
-        <VuiBadge color="warning" variant="gradient" badgeContent="En cours de development" size="lg" />
         {/*<VuiBox mb={2}>*/}
         {/*  <VuiBox display="flex" alignItems="center">*/}
         {/*    <BsCheckCircleFill color="green" size="15px" mr="5px" />*/}
@@ -63,31 +105,54 @@ function Annonces() {
         {/*</VuiBox>*/}
       </VuiBox>
       <VuiBox
+        sx={{
+          maxHeight: "300px",
+          overflowY: "scroll",
+        }}
         p={2}
       >
-        <TimelineItem
-          icon={<FaBell size="16px" color={palette.info.main} />}
-          title="Session directe, 24 Nov. Lien meet: https://meet.google.com/wax-kivn-kni"
-          dateTime="22 DEC 7:20 PM"
-        /> <TimelineItem
-        icon={<FaBell size="16px" color={palette.info.main} />}
-        title="Session directe, 24 Nov. Lien meet: https://meet.google.com/wax-kivn-kni"
-        dateTime="22 DEC 7:20 PM"
-      /> <TimelineItem
-        icon={<FaBell size="16px" color={palette.info.main} />}
-        title="Session directe, 24 Nov. Lien meet: https://meet.google.com/wax-kivn-kni"
-        dateTime="22 DEC 7:20 PM"
-      />
+        {data && !data.announcements?.length && !isLoading &&
+          <VuiBox display="flex" justifyContent="center" color={"grey"} alignItems="center" py={3}>
+            {t("demands.table.nodata")}
+          </VuiBox>}
+        {!isLoading && data && data.announcements?.slice().reverse().map((item, index) => (
+          <>
+            <VuiBox sx={{ display: "flex", justifyContent: "space-between" }}>
+              <TimelineItem
+                key={index}
+                icon={<FaBell size="16px" color={palette.info.main} />}
+                title={item.message}
+                dateTime={moment(item.createdAt).locale(i18n.language == "ar" ? "ar-dz" : "fr").format("hh:mm - Do MMM YYYY ") || ""}
+              />
+              <VuiButton variant="text" onClick={() => deleteAnnouncement(item.id)}>{
+                !isDeleteLoading ? < AiFillDelete /> : <CircularProgress />
+              }</VuiButton>
+            </VuiBox>
+          </>
+        ))}
       </VuiBox>
       <VuiBox
       >
-        <VuiInput
-          placeholder="Type here..."
-          icon={{
-            component: "send",
-            direction: "right",
-          }}
-        />
+        <form onSubmit={createNewAnnouncement}>
+          <VuiInput
+            value={newMessage}
+            onChange={(e) => setNewMessage(e.target.value)}
+            placeholder={t("typeHere")}
+            size="large"
+            multiline
+            maxRows={4}
+            icon={{
+              component: !isCreateLoading ? <VuiButton type="submit" variant="text" color="white"
+                                                       style={{
+                                                         position: "relative",
+                                                         left: "-23px",
+                                                         top: "-7px",
+                                                       }}><BsSendFill /> </VuiButton> :
+                <CircularProgress color="white" size="15px" />,
+              direction: "left",
+            }}
+          />
+        </form>
       </VuiBox>
     </Card>
   );

@@ -47,7 +47,7 @@ function Dashboard() {
 
   const { user } = useAuth();
   const { t } = useTranslation();
-
+  console.log(user)
   return (
     <DashboardLayout user={user}>
       <DashboardNavbar pageName={"Tableau de bord"} />
@@ -97,7 +97,7 @@ function Dashboard() {
             <Courses />
           </Grid>
           <Grid item xs={12} md={6} lg={4}>
-            <Annonces />
+            <Annonces teacherId={user?.teacher.id}/>
           </Grid>
         </Grid>
       </VuiBox>

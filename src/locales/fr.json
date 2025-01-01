@@ -11,7 +11,10 @@
     "title": "Tous les cours"
   },
   "announcement": {
-    "title": "Annonces"
+    "create": {
+      "successfully": "Annonce créée avec succès"
+    },
+    "title": "Annonces aux élèves"
   },
   "banner": {
     "button": "Vérifiez votre e-mail",
@@ -391,6 +394,7 @@
   },
   "minute": "Min",
   "note": "Note",
+  "operationSuccesful": "Opération réussie",
   "placeholder": {
     "email": "Votre e-mail",
     "firstName": "Votre prénom",
@@ -626,5 +630,6 @@
       "title": "Les enseignants"
     }
   },
-  "totalWatchTime": "Durée totale de visionnage"
+  "totalWatchTime": "Durée totale de visionnage",
+  "typeHere": "Tapez ici"
 }

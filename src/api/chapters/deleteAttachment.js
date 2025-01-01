@@ -2,14 +2,16 @@ import { useMutation } from "react-query";
 import { apiClient } from "../apiClient";
 import { showSnackBar, useVisionUIController } from "../../context";
 import { queryClient } from "../../providers/queryProvider";
+import { getAccessToken } from "../../utils";
 
 
 const createDeleteAttachmentFn = async ({ chapterId, attachmentId }) => {
+  const token = getAccessToken();
   const response = await apiClient.delete(`/chapter/${chapterId}/attachments`, {
     data: {
       ids: [attachmentId],
     },
-    headers: { Authorization: `Bearer ${chapterId}` },
+    headers: { Authorization: `Bearer ${token}` },
   });
   return response.data;  // Ensure response has the expected structure
 };
