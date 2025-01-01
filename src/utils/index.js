@@ -25,6 +25,25 @@ export const convertSecondsToMinutes = (seconds) => {
   return Math.round(moment.duration(seconds, "seconds").asMinutes());
 };
 
+
+export function formatSeconds(seconds, t) {
+  const duration = moment.duration(seconds, "seconds");
+  const hours = Math.floor(duration.asHours());
+  const minutes = Math.ceil(duration.asMinutes());
+
+  let formattedTime = "";
+  if (hours > 0) {
+    formattedTime += `${hours} ${t("hour")}`;
+  }
+  if (minutes > 0) {
+    if (formattedTime.length > 0) {
+      formattedTime += " ";
+    }
+    formattedTime += `${minutes} ${t("minute")}`;
+  }
+  return formattedTime || `0 ${t("minute")}`; // Fallback for 0 seconds case
+}
+
 export const Subjects = [
   "MATHEMATICS",
   "SCIENCE",

@@ -369,6 +369,7 @@
     "years": "سنوات الخبرة",
     "yearsOfExperience": "سنوات الخبرة"
   },
+  "hour": "ساعة",
   "level": {
     "ADVANCED": "متقدم",
     "BEGINNER": "مبتدئ",
@@ -389,7 +390,7 @@
     "signin": "تسجيل حساب جديد",
     "welcome": "سعيد برؤيتك!"
   },
-  "minute": "الدقائق",
+  "minute": "دقيقة",
   "note": "ملاحظة",
   "placeholder": {
     "email": "بريدك الإلكتروني",
@@ -624,5 +625,6 @@
     "table": {
       "title": "المدرسين"
     }
-  }
+  },
+  "totalWatchTime": "إجمالي وقت المشاهدة"
 }

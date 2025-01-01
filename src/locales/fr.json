@@ -368,6 +368,7 @@
     "years": "Années d'expérience",
     "yearsOfExperience": "Années d'expérience"
   },
+  "hour": "Heure(s)",
   "level": {
     "ADVANCED": "Avancé",
     "BEGINNER": "Débutant",
@@ -624,5 +625,6 @@
     "table": {
       "title": "Les enseignants"
     }
-  }
+  },
+  "totalWatchTime": "Durée totale de visionnage"
 }

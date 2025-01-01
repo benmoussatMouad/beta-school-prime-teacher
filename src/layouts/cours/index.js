@@ -24,7 +24,7 @@ import UpdateCourse from "./components/CourseDetails";
 import { Box, Skeleton } from "@mui/material";
 import VuiButton from "../../components/VuiButton";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
-import { convertSecondsToMinutes } from "../../utils";
+import { convertSecondsToMinutes, formatSeconds } from "../../utils";
 import { useVisionUIController } from "../../context";
 import { useLocation } from "react-router-dom";
 import { useGetCourse } from "../../api/courses/getCourse";
@@ -227,7 +227,11 @@ function CoursDetails() {
                   </VuiTypography>
                 </VuiBox>
                 <VuiBadge badgeContent={`${t("currentEnrollment")}: ${course.currentEnrollment || "0"}`}
-                          color={"primary"} container variant="contained" size={"lg"}
+                          color={"primary"} container variant="contained" size={"md"}
+                          sx={{ textAlign: "justify", mt: 1 }} />
+                <br/>
+                <VuiBadge badgeContent={`${t("totalWatchTime")}: ${formatSeconds(course.totalWatchTime, t)}`}
+                          color={"info"} container variant="contained" size={"md"}
                           sx={{ textAlign: "justify", mt: 1 }} />
               </Grid>
               <Grid item xs={12} lg={4} sx={{ py: 1 }}>
