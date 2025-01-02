@@ -24,6 +24,7 @@ function Table(
     status,
     totalCount,
     tableId,
+    wilaya,
     selectedRole,
   }) {
   const { grey } = colors;
@@ -93,7 +94,7 @@ function Table(
   return (
     <>
       {/* Search Input */}
-      {getFiltersInputs({ tableId, onSearchChange, subject, selectedRole, teacherClass, status, t, role })}
+      {getFiltersInputs({ tableId, onSearchChange, subject, selectedRole, teacherClass, status, wilaya, t, role })}
       {isLoading ? (
         <VuiBox display="flex" justifyContent="center" alignItems="center" py={3}>
           <CircularProgress color="info" />

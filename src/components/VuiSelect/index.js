@@ -51,6 +51,8 @@ const VuiSelect = forwardRef((
         return t(`roles.${value}`);
       case "status":
         return t(`status.${value}`);
+      case "wilaya":
+        return t(`wilaya.${value}`);
     }
   };
 

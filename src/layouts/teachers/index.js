@@ -19,6 +19,7 @@ import { useAuth } from "../../context/auth/authContext";
 import { teacherTableData } from "./data/teachersTableData";
 import { useGetTeachers, useMakeTeacherAdmin } from "../../api/admin";
 import { useUnMakeTeacherAdmin } from "../../api/admin/unMakeTeacherAdmin";
+import moment from "moment/moment";
 
 const { black, gradients } = colors;
 const { card } = gradients;
@@ -209,6 +210,9 @@ function Teachers() {
               </VuiTypography>
               <VuiTypography mt={"10px"} variant="subtitle2" color="white">
                 <b>{t("forms.institution")}</b>: {selectedTeacher?.Teacher?.institution}
+              </VuiTypography>
+              <VuiTypography mt={"10px"} variant="subtitle2" color="white">
+                <b>{t("forms.dateOfJoining")}</b>: {moment(selectedTeacher?.createdAt).format("DD/MM/YYYY")}
               </VuiTypography>
               <VuiBadge
                 variant="standard"

@@ -65,6 +65,7 @@ import ResetPasswordStudent from "layouts/students/reset";
 import VerifyEmailStudent from "layouts/students/verify";
 import PaymentSuccess from "layouts/students/payment/success";
 import PaymentFailed from "layouts/students/payment/failed";
+import StudentsApprovals from "./layouts/studentsApprovals";
 
 
 const routes = [
@@ -122,6 +123,17 @@ const routes = [
     isProtected: true,
     isAdmin: true,
     onlyAdmin: true,
+  },
+  {
+    type: "collapse",
+    name: "Demandes eleves",
+    key: "studentsDemands",
+    route: "/studentsDemands",
+    icon: <PiStudentFill size="15px" color="inherit" />,
+    component: StudentsApprovals,
+    noCollapse: true,
+    isProtected: true,
+    isAdmin: true,
   },
   {
     type: "collapse",

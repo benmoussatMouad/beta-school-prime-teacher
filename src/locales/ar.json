@@ -339,6 +339,7 @@
   },
   "forms": {
     "confirmPassword": "تأكيد كلمة المرور",
+    "dateOfJoining": "تاريخ الانضمام",
     "descriptions": "نبذة ذاتية",
     "email": "البريد الإلكتروني",
     "emailVerified": "التحقق من البريد الإلكتروني",
@@ -425,10 +426,11 @@
     "teachers": {
       "description": {
         "makeAdmin": "سيؤدي تأكيد النقر إلى جعل المعلم مسؤولاً",
-        "unMakeAdmin": "زالة صلاحيات المدير من هذا المستخدم."
+        "unMakeAdmin": "ازالة صلاحيات المدير من هذا المستخدم."
       }
     },
-    "title": "إجراء لـ {{name}}"
+    "title": "إجراء لـ {{name}}",
+    "wilaya": "ولاية"
   },
   "profile": {
     "accountDeletion": {
@@ -487,7 +489,8 @@
     "demands": "طلبات الانضمام",
     "pendingCourses": "الدورات قيد الانتظار",
     "profile": "الملف الشخصي",
-    "students": "الطلاب",
+    "students": "التلاميذ",
+    "studentsDemands": "طلابات التلاميذ",
     "support": "الدعم",
     "teachers": "المعلمون"
   },
@@ -551,6 +554,7 @@
     "REGISTERED": "مسجل",
     "REJECT": "مرفوض",
     "REJECTED": "مرفوض",
+    "STATUS": "الحالة",
     "TO_REVIEW": "للمراجعة",
     "UNDER_CREATION": "قيد الإنشاء"
   },
@@ -574,9 +578,10 @@
       "noPhone": "لا يوجد رقم هاتف",
       "phoneNumber": "رقم الهاتف",
       "status": "الحالة",
-      "student": "الطالب"
+      "student": "الطالب",
+      "wilaya": "الولاية"
     },
-    "title": "الطلاب"
+    "title": "التلاميذ"
   },
   "subjects": {
     "ARABIC": "العربية",
@@ -620,20 +625,20 @@
     "AS1": "AS1",
     "AS2": "AS2",
     "AS3": "AS3",
-    "MIDDLE_1": "المتوسط - السنة الأولى (متوسط أول)",
-    "MIDDLE_2": "المتوسط - السنة الثانية (متوسط ثاني)",
-    "MIDDLE_3": "المتوسط - السنة الثالثة (متوسط ثالث)",
+    "MIDDLE_1": "المتوسط - السنة الأولى",
+    "MIDDLE_2": "المتوسط - السنة الثانية",
+    "MIDDLE_3": "المتوسط - السنة الثالثة",
     "MIDDLE_4": "المتوسط - السنة الرابعة",
-    "NONE": "لا يوجد",
+    "NONE": "كل السنوات",
     "OTHER": "آخر",
     "PRIMARY_1": "الابتدائي - السنة الأولى",
     "PRIMARY_2": "الابتدائي - السنة الثانية",
     "PRIMARY_3": "الابتدائي - السنة الثالثة",
     "PRIMARY_4": "الابتدائي - السنة الرابعة",
     "PRIMARY_5": "الابتدائي - السنة الخامسة",
-    "SECONDARY_1": "الثانوي - السنة الأولى (ثانوي أول)",
-    "SECONDARY_2": "الثانوي - السنة الثانية (ثانوي ثاني)",
-    "SECONDARY_3": "الثانوي - السنة الثالثة (ثانوي ثالث)",
+    "SECONDARY_1": "الثانوي - السنة الأولى",
+    "SECONDARY_2": "الثانوي - السنة الثانية",
+    "SECONDARY_3": "الثانوي - السنة الثالثة",
     "TM2": "TM2",
     "TM3": "TM3"
   },
@@ -653,5 +658,65 @@
     }
   },
   "totalWatchTime": "إجمالي وقت المشاهدة",
-  "typeHere": "اكتب هنا"
+  "typeHere": "اكتب هنا",
+  "wilaya": {
+    "ADRAR": "أدرار",
+    "AIN_DEFLA": "عين الدفلى",
+    "AIN_TEMOUCHENT": "عين تموشنت",
+    "ALGIERS": "الجزائر",
+    "ANNABA": "عنابة",
+    "BATNA": "باتنة",
+    "BECHAR": "بشار",
+    "BEJAIA": "بجاية",
+    "BISKRA": "بسكرة",
+    "BLIDA": "البليدة",
+    "BORDJ_BADJI_MOKHTAR": "برج باجي مختار",
+    "BORDJ_BOU_ARRERIDJ": "برج بوعريريج",
+    "BOUIRA": "البويرة",
+    "BOUMERDES": "بومرداس",
+    "CHLEF": "الشلف",
+    "CONSTANTINE": "قسنطينة",
+    "DJANET": "جانت",
+    "DJELFA": "الجلفة",
+    "EL_BAYADH": "البيض",
+    "EL_MENIAA": "المنيعة",
+    "EL_MGHAIER": "المغير",
+    "EL_OUED": "الوادي",
+    "EL_TARF": "الطارف",
+    "GHARDAIA": "غرداية",
+    "GUELMA": "قالمة",
+    "ILLIZI": "إيليزي",
+    "IN_GUEZZAM": "عين قزام",
+    "IN_SALAH": "عين صالح",
+    "JIJEL": "جيجل",
+    "KHENCHLA": "خنشلة",
+    "LAGHOUAT": "الأغواط",
+    "MASCARA": "معسكر",
+    "MEDEA": "المدية",
+    "MILA": "ميلة",
+    "MOSTAGANEM": "مستغانم",
+    "MSILA": "المسيلة",
+    "NAAMA": "النعامة",
+    "NONE": "كل الولايات",
+    "ORAN": "وهران",
+    "OUARGLA": "ورقلة",
+    "OUED_EL_BABRIT": "وادي البعريط",
+    "OUM_EL_BOUAGHI": "أم البواقي",
+    "RELIZANE": "غليزان",
+    "SAIDA": "سعيدة",
+    "SETIF": "سطيف",
+    "SIDI_BEL_ABBES": "سيدي بلعباس",
+    "SKIKDA": "سكيكدة",
+    "SOUK_AHRAS": "سوق أهراس",
+    "TAMANRASSET": "تمنراست",
+    "TEBESSA": "تبسة",
+    "TIARET": "تيارت",
+    "TIMIMOUN": "تيميمون",
+    "TINDOUF": "تندوف",
+    "TIPAZA": "تيبازة",
+    "TISSEMSILT": "تيسمسيلت",
+    "TIZI_OUZOU": "تيزي وزو",
+    "TLEMCEN": "تلمسان",
+    "TOUGGOURT": "تقرت"
+  }
 }

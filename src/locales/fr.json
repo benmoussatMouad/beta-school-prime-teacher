@@ -338,6 +338,7 @@
   },
   "forms": {
     "confirmPassword": "Confirmer le mot de passe",
+    "dateOfJoining": "Date d'adhésion",
     "descriptions": "Description",
     "email": "E-mail",
     "emailVerified": "Vérification de l'email",
@@ -427,7 +428,8 @@
         "unMakeAdmin": "Retirer les privilèges d’administrateur de cet utilisateur."
       }
     },
-    "title": "Action pour {{name}}"
+    "title": "Action pour {{name}}",
+    "wilaya": "Wilaya"
   },
   "profile": {
     "accountDeletion": {
@@ -487,6 +489,7 @@
     "pendingCourses": "Les Cours en attente",
     "profile": "Profil",
     "students": "Étudiants",
+    "studentsDemands": "Demandes des nouveaux élèves",
     "support": "Support",
     "teachers": "Les Enseignants"
   },
@@ -550,6 +553,7 @@
     "REGISTERED": "Enregistré",
     "REJECT": "Rejeté",
     "REJECTED": "Rejeté",
+    "STATUS": "Status",
     "TO_REVIEW": "À revoir",
     "UNDER_CREATION": "En cours de création"
   },
@@ -573,7 +577,8 @@
       "noPhone": "Pas de numéro de téléphone",
       "phoneNumber": "Numéro de téléphone",
       "status": "Statut",
-      "student": "Étudiant"
+      "student": "Étudiant",
+      "wilaya": "Wilaya"
     },
     "title": "Étudiants"
   },
@@ -653,5 +658,65 @@
     }
   },
   "totalWatchTime": "Durée totale de visionnage",
-  "typeHere": "Tapez ici"
+  "typeHere": "Tapez ici",
+  "wilaya": {
+    "ADRAR": "Adrar",
+    "AIN_DEFLA": "Aïn Defla",
+    "AIN_TEMOUCHENT": "Aïn Témouchent",
+    "ALGIERS": "Alger",
+    "ANNABA": "Annaba",
+    "BATNA": "Batna",
+    "BECHAR": "Béchar",
+    "BEJAIA": "Béjaïa",
+    "BISKRA": "Biskra",
+    "BLIDA": "Blida",
+    "BORDJ_BADJI_MOKHTAR": "Bordj Badji Mokhtar",
+    "BORDJ_BOU_ARRERIDJ": "Bordj Bou Arreridj",
+    "BOUIRA": "Bouira",
+    "BOUMERDES": "Boumerdès",
+    "CHLEF": "Chlef",
+    "CONSTANTINE": "Constantine",
+    "DJANET": "Djanet",
+    "DJELFA": "Djelfa",
+    "EL_BAYADH": "El Bayadh",
+    "EL_MENIAA": "El Meniaa",
+    "EL_MGHAIER": "El M'Ghair",
+    "EL_OUED": "El Oued",
+    "EL_TARF": "El Tarf",
+    "GHARDAIA": "Ghardaïa",
+    "GUELMA": "Guelma",
+    "ILLIZI": "Illizi",
+    "IN_GUEZZAM": "In Guezzam",
+    "IN_SALAH": "In Salah",
+    "JIJEL": "Jijel",
+    "KHENCHLA": "Khenchela",
+    "LAGHOUAT": "Laghouat",
+    "MASCARA": "Mascara",
+    "MEDEA": "Médéa",
+    "MILA": "Mila",
+    "MOSTAGANEM": "Mostaganem",
+    "MSILA": "M'Sila",
+    "NAAMA": "Naâma",
+    "NONE": "Aucune Wilaya",
+    "ORAN": "Oran",
+    "OUARGLA": "Ouargla",
+    "OUED_EL_BABRIT": "Oued El Babrit",
+    "OUM_EL_BOUAGHI": "Oum El Bouaghi",
+    "RELIZANE": "Relizane",
+    "SAIDA": "Saïda",
+    "SETIF": "Sétif",
+    "SIDI_BEL_ABBES": "Sidi Bel Abbès",
+    "SKIKDA": "Skikda",
+    "SOUK_AHRAS": "Souk Ahras",
+    "TAMANRASSET": "Tamanrasset",
+    "TEBESSA": "Tébessa",
+    "TIARET": "Tiaret",
+    "TIMIMOUN": "Timimoun",
+    "TINDOUF": "Tindouf",
+    "TIPAZA": "Tipaza",
+    "TISSEMSILT": "Tissemsilt",
+    "TIZI_OUZOU": "Tizi Ouzou",
+    "TLEMCEN": "Tlemcen",
+    "TOUGGOURT": "Touggourt"
+  }
 }

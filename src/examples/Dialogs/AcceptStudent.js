@@ -12,6 +12,7 @@ import borders from "../../assets/theme/base/borders";
 import boxShadows from "../../assets/theme/base/boxShadows";
 import { useAcceptStudent } from "../../api/students/acceptStudent";
 import { useRejectStudent } from "../../api/students/rejectStudent";
+import moment from "moment/moment";
 
 const { black, gradients } = colors;
 const { card } = gradients;
@@ -91,12 +92,17 @@ function StudentDialog({ open, onClose, studentId }) {
             <VuiTypography mt={"10px"} variant="subtitle2" color="white">
               <b>{t("popup.class")}</b>: {t(`teacherClass.${student?.class}`)}
             </VuiTypography>
-
+            <VuiTypography mt={"10px"} variant="subtitle2" color="white">
+              <b>{t("popup.wilaya")}</b>: {t(`wilaya.${student?.wilaya}`)}
+            </VuiTypography>
             <VuiTypography mt={"10px"} variant="subtitle2" color="white">
               <b>{t("popup.email")}</b>: {student?.user?.email || t("popup.noEmail")}
             </VuiTypography>
             <VuiTypography mt={"10px"} variant="subtitle2" color="white">
               <b>{t("popup.phone")}</b>: {student?.user?.phone || t("popup.noPhone")}
+            </VuiTypography>
+            <VuiTypography mt={"10px"} variant="subtitle2" color="white">
+              <b>{t("forms.dateOfJoining")}</b>: {moment(student?.user?.createdAt).format("DD/MM/YYYY")}
             </VuiTypography>
           </Box>
         </Box>
