@@ -407,9 +407,11 @@
     "years": "سنوات خبرتك"
   },
   "popup": {
+    "class": "فصل",
     "defaultName": "المستخدم",
     "demand": {
-      "description": "هل تريد قبول طلب هذا المعلم؟"
+      "description": "هل تريد قبول طلب هذا المعلم؟",
+      "student": "هل تريد قبول الطالب"
     },
     "description": "أنت على وشك اتخاذ إجراء لـ {{name}} الذي يعمل كـ الأستاذ {{role}}.",
     "email": "البريد الإلكتروني",
@@ -418,6 +420,7 @@
     "noPhone": "لا يوجد رقم",
     "phone": "رقم الهاتف",
     "role": "الدور",
+    "status": "الوضع",
     "subject": "المادة",
     "teachers": {
       "description": {
@@ -541,19 +544,37 @@
   },
   "status": {
     "ACCEPTED": "مقبول",
+    "BLOCKED": "محظور",
+    "IN_PROGRESS": "قيد التنفيذ",
     "NONE": "لا شيء",
     "PENDING": "قيد الانتظار",
+    "REGISTERED": "مسجل",
     "REJECT": "مرفوض",
+    "REJECTED": "مرفوض",
     "TO_REVIEW": "للمراجعة",
     "UNDER_CREATION": "قيد الإنشاء"
   },
   "students": {
+    "loading": "جاري تحميل الطلاب...",
+    "noResults": "لا يوجد طلاب.",
+    "status": {
+      "accepted": "مقبول",
+      "blocked": "محظور",
+      "inProgress": "قيد التقدم",
+      "registered": "مسجل",
+      "rejected": "مرفوض",
+      "unknown": "غير معروف"
+    },
     "table": {
       "action": "الإجراء",
-      "author": "المؤلف",
-      "employed": "الموظفون",
-      "function": "الوظيفة",
-      "status": "الحالة"
+      "address": "العنوان",
+      "class": "الفصل",
+      "edit": "تعديل",
+      "noAddress": "لا يوجد عنوان",
+      "noPhone": "لا يوجد رقم هاتف",
+      "phoneNumber": "رقم الهاتف",
+      "status": "الحالة",
+      "student": "الطالب"
     },
     "title": "الطلاب"
   },
@@ -622,6 +643,7 @@
     },
     "status": {
       "ACCEPTED": "تم القبول",
+      "BLOCKED": "محظور",
       "IN_PROGRESS": "قيد التنفيذ",
       "REGISTERED": "مسجل",
       "REJECTED": "مرفوض"

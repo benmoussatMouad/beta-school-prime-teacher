@@ -406,9 +406,11 @@
     "years": "Vos années d'expérience"
   },
   "popup": {
+    "class": "Classe",
     "defaultName": "Utilisateur",
     "demand": {
-      "description": "Voulez vous accepter la demande de cet enseignant?"
+      "description": "Voulez vous accepter la demande de cet enseignant?",
+      "student": "Voulez-vous accepter l'étudiant"
     },
     "description": "Vous êtes sur le point de prendre une mesure pour {{name}}, qui est un(e) Professor {{role}}.",
     "email": "Email",
@@ -417,6 +419,7 @@
     "noPhone": "Pas de numero",
     "phone": "Numero de telephone",
     "role": "Rôle",
+    "status": "Statut",
     "subject": "Matière",
     "teachers": {
       "description": {
@@ -540,19 +543,37 @@
   },
   "status": {
     "ACCEPTED": "Accepté",
+    "BLOCKED": "Bloqué",
+    "IN_PROGRESS": "En cours",
     "NONE": "Aucun",
     "PENDING": "En attente",
+    "REGISTERED": "Enregistré",
     "REJECT": "Rejeté",
+    "REJECTED": "Rejeté",
     "TO_REVIEW": "À revoir",
     "UNDER_CREATION": "En cours de création"
   },
   "students": {
+    "loading": "Chargement des étudiants...",
+    "noResults": "Aucun étudiant trouvé.",
+    "status": {
+      "accepted": "Accepté",
+      "blocked": "Bloqué",
+      "inProgress": "En cours",
+      "registered": "Enregistré",
+      "rejected": "Rejeté",
+      "unknown": "Inconnu"
+    },
     "table": {
       "action": "Action",
-      "author": "Auteur",
-      "employed": "Employés",
-      "function": "Fonction",
-      "status": "Statut"
+      "address": "Adresse",
+      "class": "Classe",
+      "edit": "Modifier",
+      "noAddress": "Pas d'adresse",
+      "noPhone": "Pas de numéro de téléphone",
+      "phoneNumber": "Numéro de téléphone",
+      "status": "Statut",
+      "student": "Étudiant"
     },
     "title": "Étudiants"
   },
@@ -621,10 +642,11 @@
       "title": "Les enseignants"
     },
     "status": {
-      "ACCEPTED": "ACCEPTÉ",
-      "IN_PROGRESS": "IN_PROGRESS",
-      "REGISTERED": "ENREGISTRÉ",
-      "REJECTED": "REJETÉ"
+      "ACCEPTED": "Accepté",
+      "BLOCKED": "Bloqué",
+      "IN_PROGRESS": "En cours",
+      "REGISTERED": "Enregistré",
+      "REJECTED": "Rejeté"
     },
     "table": {
       "title": "Les enseignants"

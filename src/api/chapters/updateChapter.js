@@ -21,7 +21,6 @@ export function useUpdateChapter() {
   return useMutation({
     mutationFn: updateChapterFn,
     onSuccess: (data) => {
-      console.log(data);
       // Trigger success Snackbar
       showSnackBar(dispatch, data.message, "success");
       // Invalidate courses to refresh the cache

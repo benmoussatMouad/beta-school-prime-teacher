@@ -32,7 +32,6 @@ import MiniStatisticsCard from "examples/Cards/StatisticsCards/MiniStatisticsCar
 import WelcomeMark from "layouts/dashboard/components/WelcomeMark";
 import Courses from "layouts/dashboard/components/Courses";
 import Annonces from "layouts/dashboard/components/Annonces";
-import SubscribersRate from "layouts/dashboard/components/SubscribersRate";
 
 
 // Data
@@ -47,7 +46,6 @@ function Dashboard() {
 
   const { user } = useAuth();
   const { t } = useTranslation();
-  console.log(user)
   return (
     <DashboardLayout user={user}>
       <DashboardNavbar pageName={"Tableau de bord"} />

@@ -22,14 +22,10 @@ import VuiBox from "components/VuiBox";
 import VuiTypography from "components/VuiTypography";
 import VuiAvatar from "components/VuiAvatar";
 import VuiBadge from "components/VuiBadge";
+import VuiButton from "../../../components/VuiButton";
+import React from "react";
 
 // Images
-import avatar1 from "assets/images/avatar1.png";
-import avatar2 from "assets/images/avatar2.png";
-import avatar3 from "assets/images/avatar3.png";
-import avatar4 from "assets/images/avatar4.png";
-import avatar5 from "assets/images/avatar5.png";
-import avatar6 from "assets/images/avatar6.png";
 
 function Student({ image, name, email }) {
   return (
@@ -49,201 +45,115 @@ function Student({ image, name, email }) {
   );
 }
 
-function Function({ job, org }) {
-  return (
-    <VuiBox display="flex" flexDirection="column">
-      <VuiTypography variant="caption" fontWeight="medium" color="white">
-        {job}
-      </VuiTypography>
-      <VuiTypography variant="caption" color="text">
-        {org}
-      </VuiTypography>
-    </VuiBox>
-  );
-}
 
-export const studentsTableData = (t) => {
+
+export const studentsTableData = (t, students, role, handleOpen) => {
+  // Map status to corresponding color and text
+  const getStatusBadge = (status) => {
+    const statusMap = {
+      REGISTERED: {
+        label: t("students.status.registered"),
+        color: "info", // You can adjust these colors based on your theme
+      },
+      IN_PROGRESS: {
+        label: t("students.status.inProgress"),
+        color: "primary",
+      },
+      ACCEPTED: {
+        label: t("students.status.accepted"),
+        color: "success",
+      },
+      REJECTED: {
+        label: t("students.status.rejected"),
+        color: "error",
+      },
+      BLOCKED: {
+        label: t("students.status.blocked"),
+        color: "warning",
+      },
+    };
+
+    const badgeStyle = (theme) => {
+      const defaultColor = theme.palette.grey[500];
+      const badgeColor = theme.palette[statusMap[status]?.color]?.main || defaultColor;
+
+      return {
+        background: badgeColor,
+        border: `1px solid ${badgeColor}`,
+        borderRadius: theme.borders.borderRadius.md,
+        color: theme.palette.common.white,
+      };
+    };
+
+    return (
+      <VuiBadge
+        variant="standard"
+        badgeContent={statusMap[status]?.label || t("students.status.unknown")}
+        size="xs"
+        container
+        sx={(theme) => badgeStyle(theme)} // Use the computed badge style
+      />
+    );
+  };
+
+  if (!students || students.length === 0) {
+    return {
+      columns: [
+        { name: t("students.table.student"), align: "left" },
+        { name: t("students.table.phoneNumber"), align: "left" },
+        { name: t("students.table.class"), align: "center" },
+        { name: t("students.table.address"), align: "center" },
+        { name: t("students.table.status"), align: "center" },
+        { name: t("students.table.action"), align: "center" },
+      ],
+      rows: [], // Handle empty student array
+    };
+  }
+
   return {
     columns: [
-      { name: t("students.table.author"), align: "left" },
-      { name: t("students.table.function"), align: "left" },
+      { name: t("students.table.student"), align: "left" },
+      { name: t("students.table.phoneNumber"), align: "left" },
+      { name: t("students.table.class"), align: "center" },
+      { name: t("students.table.address"), align: "center" },
       { name: t("students.table.status"), align: "center" },
-      { name: t("students.table.employed"), align: "center" },
       { name: t("students.table.action"), align: "center" },
     ],
 
-    rows: [
-      {
-        [t("students.table.author")]: <Student image={avatar4} name="Amira Khalil" email="esthera@simmmple.com" />,
-        [t("students.table.function")]: <Function job="Manager" org="Organization" />,
-        [t("students.table.status")]: (
-          <VuiBadge
-            variant="standard"
-            badgeContent="Online"
-            color="success"
-            size="xs"
-            container
-            sx={({ palette: { white, success }, borders: { borderRadius, borderWidth } }) => ({
-              background: success.main,
-              border: `${borderWidth[1]} solid ${success.main}`,
-              borderRadius: borderRadius.md,
-              color: white.main,
-            })}
-          />
-        ),
-        [t("students.table.employed")]: (
-          <VuiTypography variant="caption" color="white" fontWeight="medium">
-            23/04/18
-          </VuiTypography>
-        ),
-        [t("students.table.action")]: (
-          <VuiTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
-            Edit
-          </VuiTypography>
-        ),
-      },
-      {
-        [t("students.table.author")]: <Student image={avatar2} name="Layla Rashid" email="alexa@simmmple.com" />,
-        [t("students.table.function")]: <Function job="Programator" org="Developer" />,
-        [t("students.table.status")]: (
-          <VuiBadge
-            variant="standard"
-            badgeContent="Offline"
-            size="xs"
-            container
-            sx={({ palette: { white }, borders: { borderRadius, borderWidth } }) => ({
-              background: "unset",
-              border: `${borderWidth[1]} solid ${white.main}`,
-              borderRadius: borderRadius.md,
-              color: white.main,
-            })}
-          />
-        ),
-        [t("students.table.employed")]: (
-          <VuiTypography variant="caption" color="white" fontWeight="medium">
-            11/01/19
-          </VuiTypography>
-        ),
-        [t("students.table.action")]: (
-          <VuiTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
-            Edit
-          </VuiTypography>
-        ),
-      },
-      {
-        [t("students.table.author")]: <Student image={avatar3} name="Omar Najib" email="laurent@simmmple.com" />,
-        [t("students.table.function")]: <Function job="Executive" org="Projects" />,
-        [t("students.table.status")]: (
-          <VuiBadge
-            variant="standard"
-            badgeContent="Online"
-            color="success"
-            size="xs"
-            container
-            sx={({ palette: { white, success }, borders: { borderRadius, borderWidth } }) => ({
-              background: success.main,
-              border: `${borderWidth[1]} solid ${success.main}`,
-              borderRadius: borderRadius.md,
-              color: white.main,
-            })}
-          />
-        ),
-        [t("students.table.employed")]: (
-          <VuiTypography variant="caption" color="white" fontWeight="medium">
-            19/09/17
-          </VuiTypography>
-        ),
-        [t("students.table.action")]: (
-          <VuiTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
-            Edit
-          </VuiTypography>
-        ),
-      },
-      {
-        [t("students.table.author")]: <Student image={avatar1} name="Yusuf Idrees" email="freduardo@simmmple.com" />,
-        [t("students.table.function")]: <Function job="Programator" org="Developer" />,
-        [t("students.table.status")]: (
-          <VuiBadge
-            variant="standard"
-            badgeContent="Online"
-            color="success"
-            size="xs"
-            container
-            sx={({ palette: { white, success }, borders: { borderRadius, borderWidth } }) => ({
-              background: success.main,
-              border: `${borderWidth[1]} solid ${success.main}`,
-              borderRadius: borderRadius.md,
-              color: white.main,
-            })}
-          />
-        ),
-        [t("students.table.employed")]: (
-          <VuiTypography variant="caption" color="white" fontWeight="medium">
-            24/12/08
-          </VuiTypography>
-        ),
-        [t("students.table.action")]: (
-          <VuiTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
-            Edit
-          </VuiTypography>
-        ),
-      },
-      {
-        [t("students.table.author")]: <Student image={avatar5} name="Hassan Nader" email="daniel@simmmple.com" />,
-        [t("students.table.function")]: <Function job="Manager" org="Executive" />,
-        [t("students.table.status")]: (
-          <VuiBadge
-            variant="standard"
-            badgeContent="Offline"
-            size="xs"
-            container
-            sx={({ palette: { white }, borders: { borderRadius, borderWidth } }) => ({
-              background: "unset",
-              border: `${borderWidth[1]} solid ${white.main}`,
-              borderRadius: borderRadius.md,
-              color: white.main,
-            })}
-          />
-        ),
-        [t("students.table.employed")]: (
-          <VuiTypography variant="caption" color="white" fontWeight="medium">
-            04/10/21
-          </VuiTypography>
-        ),
-        [t("students.table.action")]: (
-          <VuiTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
-            Edit
-          </VuiTypography>
-        ),
-      },
-      {
-        [t("students.table.author")]: <Student image={avatar6} name="Rayan Medjari" email="mark@simmmple.com" />,
-        [t("students.table.function")]: <Function job="Programtor" org="Developer" />,
-        status: (
-          <VuiBadge
-            variant="standard"
-            badgeContent="Offline"
-            size="xs"
-            container
-            sx={({ palette: { white }, borders: { borderRadius, borderWidth } }) => ({
-              background: "unset",
-              border: `${borderWidth[1]} solid ${white.main}`,
-              borderRadius: borderRadius.md,
-              color: white.main,
-            })}
-          />
-        ),
-        [t("students.table.employed")]: (
-          <VuiTypography variant="caption" color="white" fontWeight="medium">
-            14/09/20
-          </VuiTypography>
-        ),
-        [t("students.table.action")]: (
-          <VuiTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
-            Edit
-          </VuiTypography>
-        ),
-      },
-    ],
+    rows: students.map((student) => ({
+      [t("students.table.student")]: (
+        <Student
+          image={student.user.profilePic?.url || "default-avatar.png"}
+          name={`${student.user.firstName} ${student.user.lastName}`}
+          email={student.user.email}
+        />
+      ),
+      [t("students.table.phoneNumber")]: (
+        <VuiTypography variant="caption" color="white" fontWeight="medium">
+          {student.user.phone || t("students.table.noPhone")}
+        </VuiTypography>
+      ),
+      [t("students.table.class")]: (
+        <VuiTypography variant="caption" color="white" fontWeight="medium">
+          {t(`teacherClass.${student.class}`)}
+        </VuiTypography>
+      ),
+      [t("students.table.address")]: (
+        <VuiTypography variant="caption" color="white" fontWeight="medium">
+          {student.address || t("students.table.noAddress")}
+        </VuiTypography>
+      ),
+      [t("students.table.status")]: getStatusBadge(student.status),
+      [t("students.table.action")]: (role === "ROOT" || role === "ADMIN") && student.status === "IN_PROGRESS" ? (
+        <VuiButton
+          variant="contained"
+          sx={{ padding: "0px", height: "30px" }}
+          color="info"
+          onClick={() => handleOpen(student.id)}
+        >
+          {t("demands.table.view")}
+        </VuiButton>
+      ) : "",
+    })),
   };
 };

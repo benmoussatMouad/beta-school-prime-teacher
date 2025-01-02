@@ -45,7 +45,6 @@ import sidenavLogoLabel from "examples/Sidenav/styles/sidenav";
 import { setMiniSidenav, setTransparentSidenav, useVisionUIController } from "context";
 import { useTranslation } from "react-i18next";
 import VuiButton from "../../components/VuiButton";
-import SidenavCard from "./SidenavCard";
 import { getRefreshToken } from "../../utils";
 import { useLogout } from "../../api";
 
@@ -65,7 +64,6 @@ function Sidenav({ color, brandName, routes, user, ...rest }) {
 
   const logout = async () => {
     const refreshToken = getRefreshToken();
-    console.log(refreshToken);
     await mutate(refreshToken);
   };
 

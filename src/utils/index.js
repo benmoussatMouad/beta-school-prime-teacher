@@ -25,7 +25,6 @@ export const convertSecondsToMinutes = (seconds) => {
   return Math.round(moment.duration(seconds, "seconds").asMinutes());
 };
 
-
 export function formatSeconds(seconds, t) {
   const duration = moment.duration(seconds, "seconds");
   const hours = Math.floor(duration.asHours());
@@ -103,7 +102,7 @@ export const FiltersSubjects = [
   "ARABIC",
   "FRENCH",
   "ENGLISH",
-  "OTHER"
+  "OTHER",
 ];
 
 export const FiltersStudentsLevel = [
@@ -121,6 +120,15 @@ export const FiltersStudentsLevel = [
   "SECONDARY_2",// Equivalent to AS2
   "SECONDARY_3", // Equivalent to AS3
   "OTHER",
+];
+
+export const FiltersStudentStatus = [
+  "NONE",
+  "REGISTERED",
+  "IN_PROGRESS",
+  "ACCEPTED",
+  "REJECTED",
+  "BLOCKED",
 ];
 
 export const FiltersStatus = [
@@ -390,6 +398,51 @@ export const getFiltersInputs = ({ tableId, onSearchChange, subject, selectedRol
           />
         </Grid>
 
+      </Grid>;
+    case "students":
+      // Add filters for students
+      return <Grid container spacing={2}>
+        <Grid item xs={12} sm={6} md={role === "ROOT" ? 3 : 4}>
+          <VuiInput
+            placeholder={t("signup.forms.firstName")}
+            fullWidth
+            onChange={onSearchChange}
+            sx={{ my: 1 }}
+            name="firstName"
+          />
+        </Grid>
+        <Grid item xs={6} sm={6} md={role === "ROOT" ? 3 : 4}>
+          <VuiInput
+            placeholder={t("signup.forms.lastName")}
+            fullWidth
+            onChange={onSearchChange}
+            sx={{ my: 1 }}
+            name="lastName"
+          />
+        </Grid>
+        <Grid item sx={{ display: "flex", alignItems: "center" }} xs={6} sm={6} md={role === "ROOT" ? 3 : 4}>
+          <VuiSelect
+            t={false}
+            onChange={onSearchChange}
+            label={t("course.filter.level")}
+            options={FiltersStudentsLevel}
+            value={teacherClass || FiltersStudentsLevel[0]}
+            name={"studentsLevel"}
+            typeSelect={"teacherClasses"}
+          />
+        </Grid>
+        {role === "ROOT" ? (
+          <Grid item sx={{ display: "flex", alignItems: "center" }} xs={6} sm={6} md={3}>
+            <VuiSelect
+              onChange={onSearchChange}
+              label={t("course.filter.status")}
+              options={FiltersStudentStatus}
+              value={status || FiltersStudentStatus[0]}
+              name="status"
+              typeSelect="status"
+            />
+          </Grid>
+        ) : null}
       </Grid>;
   }
 };
