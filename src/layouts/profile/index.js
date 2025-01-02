@@ -115,13 +115,13 @@ function Overview() {
           >
             <ProfileInfoCard
               title={t("profile.card.title")}
-              description={context.user.teacher?.description || t('profile.myDescirption')}
+              description={context.user?.teacher?.description || t('profile.myDescirption')}
               info={{
                 [t("forms.fullName")]: `${context.user.user?.firstName}  ${context.user.user?.lastName}`,
                 [t("forms.email")]: context.user.user?.email,
-                [t("forms.institution")]: context.user.teacher?.institution,
-                [t("forms.subject")]: t(`subjects.${context.user.teacher?.subject}`),
-                [t("forms.yearsOfExperience")]: context.user.teacher?.yearsOfExperience,
+                [t("forms.institution")]: context.user?.teacher?.institution,
+                [t("forms.subject")]: t(`subjects.${context.user?.teacher?.subject}`),
+                [t("forms.yearsOfExperience")]: context.user?.teacher?.yearsOfExperience,
                 [t("forms.isEmailVerified")]: context.user.user?.isEmailVerified ? t("profile.card.Verified") : t("profile.card.unVerified"),
               }}
             />

@@ -103,7 +103,7 @@ function CoursDetails() {
   }
 
   const user = context.user.user;
-  const teacher = context.user.teacher;
+  const teacher = context.user?.teacher;
 
   const myOwnCourse = course?.teacherId === teacher?.id;
 

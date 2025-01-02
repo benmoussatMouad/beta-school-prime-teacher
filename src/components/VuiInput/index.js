@@ -36,6 +36,19 @@ const VuiInput = forwardRef(({ size, icon, error, success, disabled, ...rest }, 
   const { direction } = controller;
   const iconDirection = icon.direction;
 
+  // Common input props for enforcing Western numerals
+  const numericInputProps = {
+    inputMode: "numeric",
+    lang: "fr",    // Changed from "fr" to "en"
+    dir: direction,    // Force left-to-right for numbers
+    inputProps: {
+      style: {
+        unicodeBidi: "isolate",
+        textAlign: direction === "rtl" ? "right" : "left",
+      },
+    },
+  };
+
   if (icon.component && icon.direction === "left") {
     template = (
       <VuiInputWithIconRoot ref={ref} ownerState={{ error, success, disabled }}>
@@ -46,6 +59,7 @@ const VuiInput = forwardRef(({ size, icon, error, success, disabled, ...rest }, 
         </VuiInputIconBoxRoot>
         <VuiInputRoot
           {...rest}
+          {...(rest.type === "number" ? numericInputProps : {})}
           ownerState={{ size, error, success, iconDirection, direction, disabled }}
         />
       </VuiInputWithIconRoot>
@@ -55,6 +69,7 @@ const VuiInput = forwardRef(({ size, icon, error, success, disabled, ...rest }, 
       <VuiInputWithIconRoot ref={ref} ownerState={{ error, success, disabled }}>
         <VuiInputRoot
           {...rest}
+          {...(rest.type === "number" ? numericInputProps : {})}
           ownerState={{ size, error, success, iconDirection, direction, disabled }}
         />
         <VuiInputIconBoxRoot ownerState={{ size }}>
@@ -65,7 +80,14 @@ const VuiInput = forwardRef(({ size, icon, error, success, disabled, ...rest }, 
       </VuiInputWithIconRoot>
     );
   } else {
-    template = <VuiInputRoot {...rest} ref={ref} ownerState={{ size, error, success, disabled }} />;
+    template = (
+      <VuiInputRoot
+        {...rest}
+        {...(rest.type === "number" ? numericInputProps : {})}
+        ref={ref}
+        ownerState={{ size, error, success, disabled }}
+      />
+    );
   }
 
   return template;

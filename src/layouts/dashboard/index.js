@@ -97,7 +97,7 @@ function Dashboard() {
             <Courses />
           </Grid>
           <Grid item xs={12} md={6} lg={4}>
-            <Annonces teacherId={user?.teacher.id}/>
+            {user?.teacher && <Annonces teacherId={user?.teacher.id} />}
           </Grid>
         </Grid>
       </VuiBox>
