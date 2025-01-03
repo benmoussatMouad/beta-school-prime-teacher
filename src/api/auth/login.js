@@ -5,7 +5,7 @@ import { useAuth } from "../../context/auth/authContext";
 import { useTranslation } from "react-i18next";
 
 const createLoginFn = async (credentials) => {
-  const response = await apiClient.post("/auth/login", credentials);
+  const response = await apiClient.post("/auth/teacher/login", credentials);
   return response.data;
 };
 
