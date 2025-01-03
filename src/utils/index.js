@@ -121,9 +121,69 @@ export const FiltersStudentsLevel = [
   "SECONDARY_3", // Equivalent to AS3
   "OTHER",
 ];
+export const FiltersStudentWilaya = [
+  "NONE",
+  "ADRAR",
+  "CHLEF",
+  "LAGHOUAT",
+  "OUM_EL_BOUAGHI",
+  "BATNA",
+  "BEJAIA",
+  "BISKRA",
+  "BECHAR",
+  "BLIDA",
+  "BOUIRA",
+  "TAMANRASSET",
+  "TEBESSA",
+  "TLEMCEN",
+  "TIARET",
+  "TIZI_OUZOU",
+  "ALGIERS",
+  "DJELFA",
+  "JIJEL",
+  "SETIF",
+  "SAIDA",
+  "SKIKDA",
+  "SIDI_BEL_ABBES",
+  "ANNABA",
+  "GUELMA",
+  "CONSTANTINE",
+  "MEDEA",
+  "MOSTAGANEM",
+  "MSILA",
+  "MASCARA",
+  "OUARGLA",
+  "ORAN",
+  "EL_BAYADH",
+  "ILLIZI",
+  "BORDJ_BOU_ARRERIDJ",
+  "BOUMERDES",
+  "EL_TARF",
+  "TINDOUF",
+  "TISSEMSILT",
+  "EL_OUED",
+  "KHENCHLA",
+  "SOUK_AHRAS",
+  "TIPAZA",
+  "MILA",
+  "AIN_DEFLA",
+  "NAAMA",
+  "AIN_TEMOUCHENT",
+  "GHARDAIA",
+  "RELIZANE",
+  "TIMIMOUN",
+  "BORDJ_BADJI_MOKHTAR",
+  "OUED_EL_BABRIT",
+  "IN_GUEZZAM",
+  "TOUGGOURT",
+  "DJANET",
+  "IN_SALAH",
+  "EL_MGHAIER",
+  "EL_MENIAA"
+];
 
 export const FiltersStudentStatus = [
-  "NONE",
+  "STATUS",
   "REGISTERED",
   "IN_PROGRESS",
   "ACCEPTED",
@@ -254,7 +314,7 @@ export const courseData = [
   },
 ];
 
-export const getFiltersInputs = ({ tableId, onSearchChange, subject, selectedRole, teacherClass, status, t, role }) => {
+export const getFiltersInputs = ({ tableId, onSearchChange, subject, selectedRole, teacherClass, status, wilaya, t, role }) => {
   switch (tableId) {
     case "teachers":
       return <Grid container spacing={2}>
@@ -402,7 +462,7 @@ export const getFiltersInputs = ({ tableId, onSearchChange, subject, selectedRol
     case "students":
       // Add filters for students
       return <Grid container spacing={2}>
-        <Grid item xs={12} sm={6} md={role === "ROOT" ? 3 : 4}>
+        <Grid item xs={12} sm={6} md={role === "ROOT" ? 2 : 2}>
           <VuiInput
             placeholder={t("signup.forms.firstName")}
             fullWidth
@@ -411,7 +471,7 @@ export const getFiltersInputs = ({ tableId, onSearchChange, subject, selectedRol
             name="firstName"
           />
         </Grid>
-        <Grid item xs={6} sm={6} md={role === "ROOT" ? 3 : 4}>
+        <Grid item xs={6} sm={6} md={role === "ROOT" ? 2 : 2}>
           <VuiInput
             placeholder={t("signup.forms.lastName")}
             fullWidth
@@ -420,7 +480,16 @@ export const getFiltersInputs = ({ tableId, onSearchChange, subject, selectedRol
             name="lastName"
           />
         </Grid>
-        <Grid item sx={{ display: "flex", alignItems: "center" }} xs={6} sm={6} md={role === "ROOT" ? 3 : 4}>
+        <Grid item xs={6} sm={6} md={role === "ROOT" ? 2 : 2}>
+          <VuiInput
+            placeholder={t("signup.forms.email")}
+            fullWidth
+            onChange={onSearchChange}
+            sx={{ my: 1 }}
+            name="email"
+          />
+        </Grid>
+        <Grid item sx={{ display: "flex", alignItems: "center" }} xs={6} sm={6} md={role === "ROOT" ? 2 : 2}>
           <VuiSelect
             t={false}
             onChange={onSearchChange}
@@ -432,7 +501,7 @@ export const getFiltersInputs = ({ tableId, onSearchChange, subject, selectedRol
           />
         </Grid>
         {role === "ROOT" ? (
-          <Grid item sx={{ display: "flex", alignItems: "center" }} xs={6} sm={6} md={3}>
+          <Grid item sx={{ display: "flex", alignItems: "center" }} xs={6} sm={6} md={1}>
             <VuiSelect
               onChange={onSearchChange}
               label={t("course.filter.status")}
@@ -443,6 +512,70 @@ export const getFiltersInputs = ({ tableId, onSearchChange, subject, selectedRol
             />
           </Grid>
         ) : null}
+        {role === "ROOT" ? (
+          <Grid item sx={{ display: "flex", alignItems: "center" }} xs={6} sm={6} md={1}>
+            <VuiSelect
+              onChange={onSearchChange}
+              label={t("course.filter.status")}
+              options={FiltersStudentWilaya}
+              value={wilaya || FiltersStudentWilaya[0]}
+              name="wilaya"
+              typeSelect="wilaya"
+            />
+          </Grid>
+        ) : null}
+      </Grid>;
+    case "studentsApproval":
+      // Add filters for students
+      return <Grid container spacing={2}>
+        <Grid item xs={12} sm={6} md={role === "ROOT" ? 2 : 2}>
+          <VuiInput
+            placeholder={t("signup.forms.firstName")}
+            fullWidth
+            onChange={onSearchChange}
+            sx={{ my: 1 }}
+            name="firstName"
+          />
+        </Grid>
+        <Grid item xs={6} sm={6} md={role === "ROOT" ? 2 : 2}>
+          <VuiInput
+            placeholder={t("signup.forms.lastName")}
+            fullWidth
+            onChange={onSearchChange}
+            sx={{ my: 1 }}
+            name="lastName"
+          />
+        </Grid>
+        <Grid item xs={6} sm={6} md={role === "ROOT" ? 2 : 2}>
+          <VuiInput
+            placeholder={t("signup.forms.email")}
+            fullWidth
+            onChange={onSearchChange}
+            sx={{ my: 1 }}
+            name="email"
+          />
+        </Grid>
+        <Grid item sx={{ display: "flex", alignItems: "center" }} xs={6} sm={6} md={role === "ROOT" ? 2 : 2}>
+          <VuiSelect
+            t={false}
+            onChange={onSearchChange}
+            label={t("course.filter.level")}
+            options={FiltersStudentsLevel}
+            value={teacherClass || FiltersStudentsLevel[0]}
+            name={"studentsLevel"}
+            typeSelect={"teacherClasses"}
+          />
+        </Grid>
+        <Grid item sx={{ display: "flex", alignItems: "center" }} xs={6} sm={6} md={2}>
+          <VuiSelect
+            onChange={onSearchChange}
+            label={t("course.filter.status")}
+            options={FiltersStudentWilaya}
+            value={wilaya || FiltersStudentWilaya[0]}
+            name="wilaya"
+            typeSelect="wilaya"
+          />
+        </Grid>
       </Grid>;
   }
 };

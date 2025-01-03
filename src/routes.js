@@ -61,6 +61,7 @@ import Support from "./layouts/support";
 import CoursDetails from "./layouts/cours";
 import AllCourses from "./layouts/allCourses";
 import PendingCourses from "./layouts/pendingCourses";
+import StudentsApprovals from "./layouts/studentsApprovals";
 
 
 const routes = [
@@ -118,6 +119,17 @@ const routes = [
     isProtected: true,
     isAdmin: true,
     onlyAdmin: true,
+  },
+  {
+    type: "collapse",
+    name: "Demandes eleves",
+    key: "studentsDemands",
+    route: "/studentsDemands",
+    icon: <PiStudentFill size="15px" color="inherit" />,
+    component: StudentsApprovals,
+    noCollapse: true,
+    isProtected: true,
+    isAdmin: true,
   },
   {
     type: "collapse",
