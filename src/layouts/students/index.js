@@ -62,7 +62,7 @@ function Students() {
   // Function to handle limit (rows per page) change
   const handleRowsPerPage = (e) => {
     setLimit(parseInt(e.target.value, 10)); // Update rows per page
-    setPage(1); // Reset to the first page
+    setPage(0); // Reset to the first page
   };
 
   const handleOpen = (student) => {

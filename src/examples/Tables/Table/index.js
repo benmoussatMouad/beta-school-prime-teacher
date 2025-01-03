@@ -98,16 +98,16 @@ function Table(
         <VuiBox display="flex" justifyContent="center" alignItems="center" py={3}>
           <CircularProgress color="info" />
         </VuiBox>
-      ) : !rows.length ? (
-        <VuiBox display="flex" justifyContent="center" alignItems="center" py={3}>
-          {t("demands.table.nodata")}
-        </VuiBox>
       ) : (
         <>
           <TableContainer>
             <MuiTable>
               <VuiBox component="thead">
-                <TableRow>
+                {!rows.length ? (
+                  <VuiBox display="flex" justifyContent="center" alignItems="center" py={3}>
+                    {t("demands.table.nodata")}
+                  </VuiBox>
+                ) : <TableRow>
                   {columns.map(({ name, key, sortable, align }) => (
                     <VuiBox
                       key={name}
@@ -127,7 +127,7 @@ function Table(
                       {sortable && sortConfig.key === key ? (sortConfig.direction === "asc" ? "▲" : "▼") : ""}
                     </VuiBox>
                   ))}
-                </TableRow>
+                </TableRow>}
               </VuiBox>
               <TableBody>
                 {sortedRows.map((row, index) => (
