@@ -121,6 +121,17 @@ const routes = [
   },
   {
     type: "collapse",
+    name: "Demandes eleves",
+    key: "studentsDemands",
+    route: "/studentsDemands",
+    icon: <PiStudentFill size="15px" color="inherit" />,
+    component: StudentsApprovals,
+    noCollapse: true,
+    isProtected: true,
+    isAdmin: true,
+  },
+  {
+    type: "collapse",
     name: "Les cours",
     key: "courses",
     route: "/courses",

@@ -13,7 +13,7 @@ import { useState } from "react";
 import { getAccessToken } from "../../utils";
 import AcceptStudent from "../../examples/Dialogs/AcceptStudent";
 
-function Students() {
+function StudentsApprovals() {
   // States for filters, pagination, and page size
   const [selectedStudentId, setSelectedStudentId] = useState("");
   const [openDialog, setOpen] = useState(false);
@@ -21,7 +21,6 @@ function Students() {
     firstName: "",
     lastName: "",
     email: "",
-    status: "",
     studentsLevel: "",
     wilaya: "",
     sortBy: "",
@@ -40,6 +39,7 @@ function Students() {
   const { data, isLoading } = useGetAllStudents({
     token, // Use user token for authentication
     ...filters, // Pass filters dynamically
+    status: "IN_PROGRESS",
     page,
     limit,
   });
@@ -62,7 +62,7 @@ function Students() {
   // Function to handle limit (rows per page) change
   const handleRowsPerPage = (e) => {
     setLimit(parseInt(e.target.value, 10)); // Update rows per page
-    setPage(0); // Reset to the first page
+    setPage(1); // Reset to the first page
   };
 
   const handleOpen = (student) => {
@@ -90,7 +90,7 @@ function Students() {
             {/* Header Section */}
             <VuiBox display="flex" justifyContent="space-between" alignItems="center" mb="22px">
               <VuiTypography variant="h3" color="white">
-                {t("students.title")}
+                {t("routes.studentsDemands")}
               </VuiTypography>
             </VuiBox>
 
@@ -120,7 +120,7 @@ function Students() {
                 onPageChange={handlePageChange}
                 onRowsPerPageChange={handleRowsPerPage}
                 isLoading={isLoading}
-                tableId={"students"}
+                tableId={"studentsApproval"}
                 status={filters.status}
                 teacherClass={filters.studentsLevel}
                 wilaya={filters.wilaya}
@@ -133,4 +133,4 @@ function Students() {
   );
 }
 
-export default Students;
+export default StudentsApprovals;
