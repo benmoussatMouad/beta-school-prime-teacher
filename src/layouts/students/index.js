@@ -7,16 +7,18 @@ import Table from "examples/Tables/Table";
 import { useAuth } from "context/auth/authContext";
 import { useTranslation } from "react-i18next";
 import { studentsTableData } from "./data/studentsTableData";
-import VuiBadge from "../../components/VuiBadge";
+import { useGetAllEnrolledStudents } from "../../api/students/getStudentsEnrolled";
 import { useGetAllStudents } from "../../api/students/getStudents";
 import { useState } from "react";
 import { getAccessToken } from "../../utils";
 import AcceptStudent from "../../examples/Dialogs/AcceptStudent";
+import StudentActionsDialog from "../../examples/Dialogs/ActionsStudent";
 
 function Students() {
   // States for filters, pagination, and page size
   const [selectedStudentId, setSelectedStudentId] = useState("");
   const [openDialog, setOpen] = useState(false);
+  const [openActionsDialog, setActionsOpen] = useState(false);
   const [filters, setFilters] = useState({
     firstName: "",
     lastName: "",
@@ -37,7 +39,14 @@ function Students() {
   const role = user.user.role || "";
 
   // Fetch the student data
-  const { data, isLoading } = useGetAllStudents({
+  const { data, isLoading } = useGetAllEnrolledStudents({
+    token, // Use user token for authentication
+    ...filters, // Pass filters dynamically
+    page,
+    limit,
+  });
+
+  const { data: allStudent, isLoading: isLoadingAllStudent } = useGetAllStudents({
     token, // Use user token for authentication
     ...filters, // Pass filters dynamically
     page,
@@ -70,20 +79,29 @@ function Students() {
     setSelectedStudentId(student);
   };
 
+  const handleOpenActions = (student) => {
+    setActionsOpen(true);
+    setSelectedStudentId(student);
+  };
 
   const handleClose = () => {
     setOpen(false);
     setSelectedStudentId(null);
   };
 
+  const handleActionsClose = () => {
+    setActionsOpen(false);
+    setSelectedStudentId(null);
+  };
 
-  const { columns, rows } = studentsTableData(t, data?.results, role, handleOpen);
+  const { columns, rows } = studentsTableData(t, role === "ROOT" ? allStudent?.results : data?.results, role, handleOpen, handleOpenActions);
 
 
   return (
     <DashboardLayout user={user}>
       <DashboardNavbar pageName={"Les étudiants"} />
-      <AcceptStudent onClose={handleClose} open={openDialog} studentId={selectedStudentId} />
+      {selectedStudentId && <AcceptStudent onClose={handleClose} open={openDialog} studentId={selectedStudentId} />}
+      {role === "ROOT" && selectedStudentId ? <StudentActionsDialog onClose={handleActionsClose} open={openActionsDialog} studentId={selectedStudentId} /> : ""}
       <VuiBox py={3}>
         <VuiBox mb={3}>
           <Card>
@@ -119,7 +137,7 @@ function Students() {
                 rowsPerPage={limit}
                 onPageChange={handlePageChange}
                 onRowsPerPageChange={handleRowsPerPage}
-                isLoading={isLoading}
+                isLoading={isLoading || isLoadingAllStudent}
                 tableId={"students"}
                 status={filters.status}
                 teacherClass={filters.studentsLevel}

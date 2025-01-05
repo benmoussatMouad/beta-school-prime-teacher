@@ -83,7 +83,7 @@ function StudentsApprovals() {
   return (
     <DashboardLayout user={user}>
       <DashboardNavbar pageName={"Les étudiants"} />
-      <AcceptStudent onClose={handleClose} open={openDialog} studentId={selectedStudentId} />
+      {selectedStudentId && <AcceptStudent onClose={handleClose} open={openDialog} studentId={selectedStudentId} />}
       <VuiBox py={3}>
         <VuiBox mb={3}>
           <Card>

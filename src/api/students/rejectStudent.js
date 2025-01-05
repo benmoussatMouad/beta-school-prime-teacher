@@ -20,6 +20,7 @@ export function useRejectStudent() {
       // Successful rejection
       showSnackBar(dispatch, message || t("students.reject.success"), "success");
       queryClient.invalidateQueries("getAllStudents"); // Adjust query key if needed
+      queryClient.invalidateQueries("getAllEnrolledStudents"); // Adjust query key if needed
     },
     onError: (err) => {
       // Handle errors gracefully and show a Snackbar message

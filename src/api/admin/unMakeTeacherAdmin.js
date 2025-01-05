@@ -21,6 +21,7 @@ export function useUnMakeTeacherAdmin() {
       // Update successful
       showSnackBar(dispatch, message, "success");
       queryClient.invalidateQueries("demands");
+      queryClient.invalidateQueries("teachers");
     },
     onError: (err) => {
       // Handle errors gracefully and show a Snackbar message

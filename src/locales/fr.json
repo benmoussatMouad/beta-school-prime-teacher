@@ -33,7 +33,9 @@
     "reject": "Rejeter",
     "reset": "Réinitialiser le mot de passe",
     "signin": "Se connecter",
-    "submit": "Soumettre"
+    "submit": "Soumettre",
+    "block": "Bloqué",
+    "recover": "Récupérer"
   },
   "chapter": {
     "create": {
@@ -411,7 +413,9 @@
     "defaultName": "Utilisateur",
     "demand": {
       "description": "Voulez vous accepter la demande de cet enseignant?",
-      "student": "Voulez-vous accepter l'étudiant"
+      "student": "Voulez-vous accepter l'étudiant",
+      "block": "Voulez-vous bloquer cet l'étudiant?",
+      "recover": "Voulez-vous récupérer cet l'étudiant?"
     },
     "description": "Vous êtes sur le point de prendre une mesure pour {{name}}, qui est un(e) Professor {{role}}.",
     "email": "Email",

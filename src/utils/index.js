@@ -462,7 +462,7 @@ export const getFiltersInputs = ({ tableId, onSearchChange, subject, selectedRol
     case "students":
       // Add filters for students
       return <Grid container spacing={2}>
-        <Grid item xs={12} sm={6} md={role === "ROOT" ? 2 : 2}>
+        <Grid item xs={12} sm={6} md={role === "ROOT" ? 2 : 3}>
           <VuiInput
             placeholder={t("signup.forms.firstName")}
             fullWidth
@@ -471,7 +471,7 @@ export const getFiltersInputs = ({ tableId, onSearchChange, subject, selectedRol
             name="firstName"
           />
         </Grid>
-        <Grid item xs={6} sm={6} md={role === "ROOT" ? 2 : 2}>
+        <Grid item xs={6} sm={6} md={role === "ROOT" ? 2 : 3}>
           <VuiInput
             placeholder={t("signup.forms.lastName")}
             fullWidth
@@ -480,7 +480,7 @@ export const getFiltersInputs = ({ tableId, onSearchChange, subject, selectedRol
             name="lastName"
           />
         </Grid>
-        <Grid item xs={6} sm={6} md={role === "ROOT" ? 2 : 2}>
+        <Grid item xs={6} sm={6} md={role === "ROOT" ? 2 : 3}>
           <VuiInput
             placeholder={t("signup.forms.email")}
             fullWidth
@@ -489,7 +489,7 @@ export const getFiltersInputs = ({ tableId, onSearchChange, subject, selectedRol
             name="email"
           />
         </Grid>
-        <Grid item sx={{ display: "flex", alignItems: "center" }} xs={6} sm={6} md={role === "ROOT" ? 2 : 2}>
+        <Grid item sx={{ display: "flex", alignItems: "center" }} xs={6} sm={6} md={role === "ROOT" ? 2 : 3}>
           <VuiSelect
             t={false}
             onChange={onSearchChange}
@@ -501,7 +501,7 @@ export const getFiltersInputs = ({ tableId, onSearchChange, subject, selectedRol
           />
         </Grid>
         {role === "ROOT" ? (
-          <Grid item sx={{ display: "flex", alignItems: "center" }} xs={6} sm={6} md={1}>
+          <Grid item sx={{ display: "flex", alignItems: "center" }} xs={6} sm={6} md={2}>
             <VuiSelect
               onChange={onSearchChange}
               label={t("course.filter.status")}
@@ -513,7 +513,7 @@ export const getFiltersInputs = ({ tableId, onSearchChange, subject, selectedRol
           </Grid>
         ) : null}
         {role === "ROOT" ? (
-          <Grid item sx={{ display: "flex", alignItems: "center" }} xs={6} sm={6} md={1}>
+          <Grid item sx={{ display: "flex", alignItems: "center" }} xs={6} sm={6} md={2}>
             <VuiSelect
               onChange={onSearchChange}
               label={t("course.filter.status")}
@@ -528,7 +528,7 @@ export const getFiltersInputs = ({ tableId, onSearchChange, subject, selectedRol
     case "studentsApproval":
       // Add filters for students
       return <Grid container spacing={2}>
-        <Grid item xs={12} sm={6} md={role === "ROOT" ? 2 : 2}>
+        <Grid item xs={12} sm={6} md={3}>
           <VuiInput
             placeholder={t("signup.forms.firstName")}
             fullWidth
@@ -537,7 +537,7 @@ export const getFiltersInputs = ({ tableId, onSearchChange, subject, selectedRol
             name="firstName"
           />
         </Grid>
-        <Grid item xs={6} sm={6} md={role === "ROOT" ? 2 : 2}>
+        <Grid item xs={6} sm={6} md={3}>
           <VuiInput
             placeholder={t("signup.forms.lastName")}
             fullWidth
@@ -546,7 +546,7 @@ export const getFiltersInputs = ({ tableId, onSearchChange, subject, selectedRol
             name="lastName"
           />
         </Grid>
-        <Grid item xs={6} sm={6} md={role === "ROOT" ? 2 : 2}>
+        <Grid item xs={6} sm={6} md={2}>
           <VuiInput
             placeholder={t("signup.forms.email")}
             fullWidth
@@ -555,7 +555,7 @@ export const getFiltersInputs = ({ tableId, onSearchChange, subject, selectedRol
             name="email"
           />
         </Grid>
-        <Grid item sx={{ display: "flex", alignItems: "center" }} xs={6} sm={6} md={role === "ROOT" ? 2 : 2}>
+        <Grid item sx={{ display: "flex", alignItems: "center" }} xs={6} sm={6} md={2}>
           <VuiSelect
             t={false}
             onChange={onSearchChange}

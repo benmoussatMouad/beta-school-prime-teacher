@@ -29,7 +29,7 @@ import React from "react";
 
 function Student({ image, name, email }) {
   return (
-    <VuiBox display="flex" alignItems="center" px={1} py={0.5}>
+    <VuiBox display="flex" alignItems="center" px={1} py={1.5}>
       <VuiBox mr={2}>
         <VuiAvatar src={image} alt={name} size="sm" variant="rounded" />
       </VuiBox>

@@ -29,7 +29,7 @@ import React from "react";
 
 function Student({ image, name, email }) {
   return (
-    <VuiBox display="flex" alignItems="center" px={1} py={0.5}>
+    <VuiBox display="flex" alignItems="center" px={1} py={1.5}>
       <VuiBox mr={2}>
         <VuiAvatar src={image} alt={name} size="sm" variant="rounded" />
       </VuiBox>
@@ -47,7 +47,7 @@ function Student({ image, name, email }) {
 
 
 
-export const studentsTableData = (t, students, role, handleOpen) => {
+export const studentsTableData = (t, students, role, handleOpen, handleOpenActions) => {
   // Map status to corresponding color and text
   const getStatusBadge = (status) => {
     const statusMap = {
@@ -151,16 +151,14 @@ export const studentsTableData = (t, students, role, handleOpen) => {
         </VuiTypography>
       ),
       [t("students.table.status")]: getStatusBadge(student.status),
-      [t("students.table.action")]: (role === "ROOT" || role === "ADMIN") && student.status === "IN_PROGRESS" ? (
-        <VuiButton
-          variant="contained"
-          sx={{ padding: "0px", height: "30px" }}
-          color="info"
-          onClick={() => handleOpen(student.id)}
-        >
-          {t("demands.table.view")}
-        </VuiButton>
-      ) : "",
+      [t("students.table.action")]: role === "ROOT" ? <VuiButton
+        variant="contained"
+        sx={{ padding: "0px", height: "30px" }}
+        color="info"
+        onClick={() => handleOpenActions(student.id)}
+      >
+        {t("demands.table.view")}
+      </VuiButton> : ""
     })),
   };
 };
