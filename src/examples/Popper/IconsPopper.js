@@ -3,19 +3,24 @@ import Grid from "@mui/material/Grid";
 import rgba from "../../assets/theme/functions/rgba";
 import Avatar from "@mui/material/Avatar";
 
-import icon1 from "assets/images/icons/magazine_3829323.png";
-import icon2 from "assets/images/icons/online-class_6988471.png";
-import icon3 from "assets/images/icons/online-course_3344794.png";
-import icon4 from "assets/images/icons/online-course_3829284.png";
-import icon5 from "assets/images/icons/pie-charts_3829291.png";
-import icon6 from "assets/images/icons/teacher_8388500.png";
-import icon7 from "assets/images/icons/training-course_6988584.png";
-import icon8 from "assets/images/icons/tutor_5910072.png";
+import icon1 from "assets/images/icons/Analyze-Data-1--Streamline-Brooklyn.png";
+import icon2 from "assets/images/icons/Analyze-Data-4--Streamline-Brooklyn.png";
+import icon3 from "assets/images/icons/Analyze-Data-3--Streamline-Brooklyn.png";
+import icon4 from "assets/images/icons/Analyze-Data-6--Streamline-Brooklyn.png";
+import icon5 from "assets/images/icons/Audit--Streamline-Brooklyn.png";
+import icon6 from "assets/images/icons/Deadline--Streamline-Brooklyn.png";
+import icon7 from "assets/images/icons/Dna-2--Streamline-Brooklyn.png";
+import icon8 from "assets/images/icons/Lab-Experiment-4--Streamline-Brooklyn.png";
+import icon10 from "assets/images/icons/Microscope-1--Streamline-Brooklyn.png";
+import icon11 from "assets/images/icons/Microscope-3--Streamline-Brooklyn.png";
+import icon12 from "assets/images/icons/Online-Learning-2--Streamline-Brooklyn.png";
+import icon13 from "assets/images/icons/Team-Success-4--Streamline-Brooklyn.png";
+import icon14 from "assets/images/icons/Partnership--Streamline-Brooklyn.png";
 import colors from "../../assets/theme/base/colors";
 import borders from "../../assets/theme/base/borders";
 
 
-const icons = [icon1, icon2, icon3, icon4, icon5, icon6, icon7, icon8];
+const icons = [icon1, icon2, icon3, icon4, icon5, icon6, icon7, icon8, icon10, icon11, icon12, icon13, icon14,];
 
 const { black } = colors;
 const { borderRadius } = borders;
@@ -69,6 +74,7 @@ function PopperIcon(
               width: 60,
               height: 60,
               cursor: "pointer",
+              backgroundColor: "rgba(255, 255, 255, 0.5)",
               border: watch("icon")?.name === `icon${index + 1}.png`
                 ? "2px solid #4caf50"
                 : "2px solid transparent",

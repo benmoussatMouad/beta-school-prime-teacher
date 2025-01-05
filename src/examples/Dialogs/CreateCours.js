@@ -225,6 +225,9 @@ function CreateCoursDialog({ closeDialog, openDialog }) {
                   <VuiTypography component="label" variant="button" fontWeight="bold" color="white" sx={{ mb: 2 }}>
                     {t("dialog.course.icon")}
                   </VuiTypography>
+                  <VuiTypography component="caption" variant="caption" fontWeight="regular" color="white" sx={{ mb: 2 }}>
+                    {t("dialog.course.iconClickToSelectFile")}
+                  </VuiTypography>
                   <input
                     type="file"
                     style={{ display: "none" }}

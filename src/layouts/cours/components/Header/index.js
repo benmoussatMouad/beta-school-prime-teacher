@@ -109,8 +109,8 @@ function Header({ pageName, data, courseOwner }) {
           <Grid item xs={12} md={4}
                 sx={{ display: "flex", alignItems: "center", justifyContent: { xs: "center", md: "flex-start" } }}>
             {data.icon ? (
-              <VuiAvatar src={data?.icon?.url || GiOpenBook} alt="profile-image" variant="rounded" size="xl" shadow="sm"
-                         sx={{ mr: { xs: 0, md: 2 } }} />
+              <VuiAvatar  src={data?.icon?.url || GiOpenBook} alt="profile-image" variant="rounded" size="xl" shadow="sm"
+                         sx={{ mr: { xs: 0, md: 2 }, backgroundColor: "rgba(255, 255, 255, 0.95)" }} />
             ) : (
               <VuiBox>
                 <GiOpenBook size={50} color={"white"} />

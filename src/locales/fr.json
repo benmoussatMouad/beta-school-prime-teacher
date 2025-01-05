@@ -23,6 +23,7 @@
   "button": {
     "approve": "Approuver",
     "back": "Retour",
+    "block": "Bloqué",
     "buttonCooldown": "Intervalle de repos",
     "cancel": "Annuler",
     "close": "Fermer",
@@ -30,12 +31,11 @@
     "forgetButton01": "Réessayez dans",
     "forgetButton02": "Envoyer le lien de réinitialisation",
     "next": "Suivant",
+    "recover": "Récupérer",
     "reject": "Rejeter",
     "reset": "Réinitialiser le mot de passe",
     "signin": "Se connecter",
-    "submit": "Soumettre",
-    "block": "Bloqué",
-    "recover": "Récupérer"
+    "submit": "Soumettre"
   },
   "chapter": {
     "create": {
@@ -191,6 +191,7 @@
     "course": {
       "description": "Remplir les champs afin de créer un cours",
       "icon": "Téléchargez l'icône de votre cours",
+      "iconClickToSelectFile": "Cliquer sur l'icône pour sélectionner un fichier",
       "title": "Créer un cours "
     },
     "delete": {
@@ -412,10 +413,10 @@
     "class": "Classe",
     "defaultName": "Utilisateur",
     "demand": {
-      "description": "Voulez vous accepter la demande de cet enseignant?",
-      "student": "Voulez-vous accepter l'étudiant",
       "block": "Voulez-vous bloquer cet l'étudiant?",
-      "recover": "Voulez-vous récupérer cet l'étudiant?"
+      "description": "Voulez vous accepter la demande de cet enseignant?",
+      "recover": "Voulez-vous récupérer cet l'étudiant?",
+      "student": "Voulez-vous accepter l'étudiant"
     },
     "description": "Vous êtes sur le point de prendre une mesure pour {{name}}, qui est un(e) Professor {{role}}.",
     "email": "Email",
