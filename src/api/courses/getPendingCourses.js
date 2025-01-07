@@ -10,6 +10,8 @@ const buildQueryParams = (
     courseStatus,
     page,
     limit,
+    sortBy,
+    sortType,
   }) => {
   const params = {};
 
@@ -19,6 +21,8 @@ const buildQueryParams = (
   if (courseStatus) params.status = courseStatus;
   if (page !== undefined) params.page = page + 1; // API generally expects 1-based pages
   if (limit !== undefined) params.limit = limit;
+  if (sortBy) params.sortBy = sortBy; // Add sortBy
+  if (sortType) params.sortType = sortType; // Add sortType
 
   return params;
 };
@@ -45,8 +49,10 @@ export function useGetPendingCourses(
     courseStatus,
     page = 0,
     limit = 5,
+    sortBy, // New Parameter
+    sortType, // New Parameter
   }) {
-  const queryOptions = { title, teacherClass, subject, courseStatus, page, limit };
+  const queryOptions = { title, teacherClass, subject, courseStatus, page, limit,  sortBy, sortType };
 
   return useQuery(
     ["getPendingCourses", token, queryOptions], // Use queryOptions for dynamic query key

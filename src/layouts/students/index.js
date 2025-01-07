@@ -26,11 +26,12 @@ function Students() {
     status: "",
     studentsLevel: "",
     wilaya: "",
-    sortBy: "",
   });
 
   const [page, setPage] = useState(0);
   const [limit, setLimit] = useState(5);
+  const [sortBy, setSortBy] = useState(""); // Sort key
+  const [sortType, setSortType] = useState("desc");
 
   const { t } = useTranslation();
   const { user } = useAuth();
@@ -44,6 +45,8 @@ function Students() {
     ...filters, // Pass filters dynamically
     page,
     limit,
+    sortBy,    // Pass sorting column
+    sortType,  // Pass sorting direction
   });
 
   const { data: allStudent, isLoading: isLoadingAllStudent } = useGetAllStudents({
@@ -51,6 +54,8 @@ function Students() {
     ...filters, // Pass filters dynamically
     page,
     limit,
+    sortBy,    // Pass sorting column
+    sortType,  // Pass sorting direction
   });
 
 
@@ -94,14 +99,29 @@ function Students() {
     setSelectedStudentId(null);
   };
 
-  const { columns, rows } = studentsTableData(t, role === "ROOT" ? allStudent?.results : data?.results, role, handleOpen, handleOpenActions);
+  const {
+    columns,
+    rows,
+  } = studentsTableData(t, role === "ROOT" ? allStudent?.results : data?.results, role, handleOpen, handleOpenActions);
 
+  const handleSortChange = (key) => {
+    // Toggle sort direction if the column is already being sorted
+    if (sortBy === key) {
+      setSortType((prev) => (prev === "asc" ? "desc" : "asc"));
+    } else {
+      // Sort by a new column and reset direction to ascending
+      setSortBy(key);
+      setSortType("asc");
+    }
+  };
 
   return (
     <DashboardLayout user={user}>
       <DashboardNavbar pageName={"Les étudiants"} />
       {selectedStudentId && <AcceptStudent onClose={handleClose} open={openDialog} studentId={selectedStudentId} />}
-      {role === "ROOT" && selectedStudentId ? <StudentActionsDialog onClose={handleActionsClose} open={openActionsDialog} studentId={selectedStudentId} /> : ""}
+      {role === "ROOT" && selectedStudentId ?
+        <StudentActionsDialog onClose={handleActionsClose} open={openActionsDialog}
+                              studentId={selectedStudentId} /> : ""}
       <VuiBox py={3}>
         <VuiBox mb={3}>
           <Card>
@@ -142,6 +162,8 @@ function Students() {
                 status={filters.status}
                 teacherClass={filters.studentsLevel}
                 wilaya={filters.wilaya}
+                onSortChange={handleSortChange} // Add sorting handler
+                sortConfig={{ key: sortBy, direction: sortType }}
               />
             </VuiBox>
           </Card>

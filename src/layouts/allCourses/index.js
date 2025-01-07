@@ -31,7 +31,6 @@ import DashboardNavbar from "examples/Navbars/DashboardNavbar";
 import { useAuth } from "context/auth/authContext";
 import { useTranslation } from "react-i18next";
 import { coursesTableData } from "./data/coursesTableData";
-import VuiBadge from "../../components/VuiBadge";
 import Table from "examples/Tables/Table";
 import { useState } from "react";
 import { getAccessToken } from "../../utils";
@@ -45,6 +44,8 @@ function AllCourses() {
   const [teacherClass, setTeacherClass] = useState("");
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
+  const [sortBy, setSortBy] = useState(""); // Sort key
+  const [sortType, setSortType] = useState("desc");
 
   const token = getAccessToken();
 
@@ -54,7 +55,9 @@ function AllCourses() {
     data,
     isLoading,
   } = useGetAllCourses({
-      token, title, teacherClass, subject, role, courseStatus, page, limit:rowsPerPage,
+      token, title, teacherClass, subject, role, courseStatus, page, limit: rowsPerPage,
+      sortBy,
+      sortType,
     },
   );
 
@@ -104,6 +107,17 @@ function AllCourses() {
     setPage(0); // Reset page to 0 whenever rows per page is changed
   };
 
+  const handleSortChange = (key) => {
+    if (sortBy === key) {
+      // Toggle sort direction if the same column is clicked
+      setSortType((prev) => (prev === "asc" ? "desc" : "asc"));
+    } else {
+      // Set a new column to sort by
+      setSortBy(key);
+      setSortType("asc");
+    }
+  };
+
   return (
     <DashboardLayout user={user}>
       <DashboardNavbar pageName={"Mes Cours"} />
@@ -142,6 +156,8 @@ function AllCourses() {
               teacherClass={teacherClass}
               status={courseStatus}
               tableId={"teachersCourses"}
+              onSortChange={handleSortChange} // Pass sorting handler
+              sortConfig={{ key: sortBy, direction: sortType }}
             />
           </VuiBox>
         </Card>

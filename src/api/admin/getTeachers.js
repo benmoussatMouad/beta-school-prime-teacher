@@ -11,6 +11,8 @@ const buildQueryParams = (
     role = "",
     page = 0,
     limit = 5,
+    sortBy, // Add sort key
+    sortType, // Add sort direction
   }) => {
   const params = {};
 
@@ -21,6 +23,8 @@ const buildQueryParams = (
   if (role) params.role = role;
   if (page !== undefined) params.page = page + 1;
   if (limit !== undefined) params.limit = limit;
+  if (sortBy) params.sortBy = sortBy; // Add sortBy
+  if (sortType) params.sortType = sortType; // Add sortType
 
   return params;
 };
@@ -48,8 +52,10 @@ export function useGetTeachers(
     role = "",
     page = 1,
     limit = 5,
+    sortBy, // New Parameter
+    sortType, // New Parameter
   }) {
-  const queryOptions = { firstName, lastName, email, subject, role, page, limit };
+  const queryOptions = { firstName, lastName, email, subject, role, page, limit, sortBy, sortType };
 
   return useQuery(
     ["teachers", token, queryOptions], // Use queryOptions to generate a dynamic query key

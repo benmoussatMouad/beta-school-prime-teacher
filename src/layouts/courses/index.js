@@ -31,7 +31,6 @@ import DashboardNavbar from "examples/Navbars/DashboardNavbar";
 import { useAuth } from "context/auth/authContext";
 import { useTranslation } from "react-i18next";
 import { coursesTableData } from "./data/coursesTableData";
-import VuiBadge from "../../components/VuiBadge";
 import Table from "examples/Tables/Table";
 import { useGetCourses } from "../../api/courses";
 import { useState } from "react";
@@ -49,11 +48,17 @@ function Courses() {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const [openDialog, setOpenDialog] = useState(false);
+  const [sortBy, setSortBy] = useState(""); // Sort key
+  const [sortType, setSortType] = useState("desc");
 
   const token = getAccessToken();
 
   const { user } = useAuth();
-  const { data, isLoading } = useGetCourses({ token, title, teacherClass, subject, courseStatus, page, limit:rowsPerPage });
+  const { data, isLoading } = useGetCourses({
+    token, title, teacherClass, subject, courseStatus, page, limit: rowsPerPage,
+    sortBy,
+    sortType,
+  });
 
   const { t } = useTranslation();
 
@@ -106,6 +111,17 @@ function Courses() {
     setOpenDialog(false);
   };
 
+  const handleSortChange = (key) => {
+    if (sortBy === key) {
+      // Toggle sort direction if the same column is clicked
+      setSortType((prev) => (prev === "asc" ? "desc" : "asc"));
+    } else {
+      // Set a new column to sort by
+      setSortBy(key);
+      setSortType("asc");
+    }
+  };
+
   return (
     <DashboardLayout user={user}>
       <DashboardNavbar pageName={"Mes Cours"} />
@@ -116,7 +132,7 @@ function Courses() {
             <VuiTypography variant="h3" color="white" mb={1}>
               {t("cours.title")}
             </VuiTypography>
-            <VuiButton onClick={() => setOpenDialog(true)} color="primary" variant="gradient" size="medium" >
+            <VuiButton onClick={() => setOpenDialog(true)} color="primary" variant="gradient" size="medium">
               + {t("dashboard.coursesCard.addCourse")}
             </VuiButton>
           </VuiBox>
@@ -148,6 +164,8 @@ function Courses() {
               teacherClass={teacherClass}
               tableId={"courses"}
               status={courseStatus}
+              onSortChange={handleSortChange} // Pass sorting handler
+              sortConfig={{ key: sortBy, direction: sortType }}
             />
           </VuiBox>
         </Card>

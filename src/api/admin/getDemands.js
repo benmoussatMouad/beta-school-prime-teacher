@@ -11,6 +11,8 @@ const buildQueryParams = (
     role,
     page,
     limit,
+    sortBy, // Add sort key
+    sortType, // Add sort direction
   }) => {
   const params = { status: "IN_PROGRESS" }; // Default status
 
@@ -22,6 +24,8 @@ const buildQueryParams = (
   if (role) params.role = role;
   if (page !== undefined) params.page = page + 1;
   if (limit !== undefined) params.limit = limit;
+  if (sortBy) params.sortBy = sortBy; // Add sortBy
+  if (sortType) params.sortType = sortType; // Add sortType
 
   return params;
 };
@@ -49,8 +53,10 @@ export function useGetDemands(
     role = "",
     page = 0,
     limit = 5,
+    sortBy, // New Parameter
+    sortType, // New Parameter
   }) {
-  const queryOptions = { firstName, lastName, email, subject, role, page, limit };
+  const queryOptions = { firstName, lastName, email, subject, role, page, limit, sortBy, sortType };
 
   return useQuery(
     ["demands", token, queryOptions], // Use queryOptions for a dynamic key

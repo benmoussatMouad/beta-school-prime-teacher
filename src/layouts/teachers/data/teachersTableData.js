@@ -157,7 +157,7 @@ export const teacherTableData = (t, data, handleOpen, user) => {
 
   return {
     columns: [
-      { name: t("demands.table.fullName"), key: "fullName", align: "left", sortable: true },
+      { name: t("demands.table.fullName"), key: "fullName", align: "left", sortable: false },
       { name: t("demands.table.email"), key: "email", align: "left", sortable: true },
       { name: t("demands.table.institution"), key: "institution", align: "center", sortable: true }, // Not sortable
       { name: t("demands.table.yearsOfExperience"), key: "yearsOfExperience", align: "center", sortable: true },
