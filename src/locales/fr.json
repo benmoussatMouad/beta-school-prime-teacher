@@ -407,6 +407,7 @@
     "phone": "Votre téléphone",
     "school": "Votre école",
     "subject": "Votre sujet",
+    "wilaya": "Wilaya",
     "years": "Vos années d'expérience"
   },
   "popup": {
@@ -512,6 +513,7 @@
       "school": "École",
       "subject": "Sujet",
       "upload": "Télécharger un avatar",
+      "wilaya": "Wilaya",
       "years": "Années d'expérience"
     },
     "motto": "Une plateforme pour les enseignants",
@@ -526,6 +528,9 @@
       "school": "Votre école",
       "subject": "Votre sujet",
       "years": "Vos années d'expérience"
+    },
+    "required": {
+      "wilaya": "Wilaya est requis"
     },
     "signin": "Se Connecter",
     "stepper": {
@@ -659,7 +664,8 @@
       "REJECTED": "Rejeté"
     },
     "table": {
-      "title": "Les enseignants"
+      "title": "Les enseignants",
+      "wilaya": "Wilaya"
     }
   },
   "totalWatchTime": "Durée totale de visionnage",

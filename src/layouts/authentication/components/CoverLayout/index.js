@@ -31,7 +31,6 @@ import colors from "assets/theme/base/colors";
 
 // Vision UI Dashboard React theme functions
 import tripleLinearGradient from "assets/theme/functions/tripleLinearGradient";
-import logo from "../../../../assets/images/logos/logo-white.png";
 
 function CoverLayout({
   color,
@@ -142,7 +141,7 @@ function CoverLayout({
           {/*<VuiBox mb={2} textAlign="center" style={{width: "100%"}}>*/}
           {/*  <img src={logo} alt="Logo" style={{ maxWidth: "100%", height: "auto" }} />*/}
           {/*</VuiBox>*/}
-          <VuiBox pt={3} px={3} mx="auto !important" maxWidth={cardContent ? "400px" : "350px"}>
+          <VuiBox pt={3} px={0} mx="auto !important" maxWidth={cardContent ? "400px" : "350px"}>
             {!header ? (
               <>
                 <VuiBox mb="35px">
@@ -158,7 +157,7 @@ function CoverLayout({
                   <VuiTypography
                     textAlign={"center"}
                     mx="auto"
-                    sx={({ typography: { size }, functions: { pxToRem } }) => ({
+                    sx={({ typography: { size }, functions: {  } }) => ({
                       fontWeight: "regular",
                       fontSize: size.sm,
                     })}
@@ -173,7 +172,7 @@ function CoverLayout({
             )}
           </VuiBox>
           <VuiBox
-            px={3}
+            px={1}
             mb="50px"
             mx="auto"
             ml="auto !important"

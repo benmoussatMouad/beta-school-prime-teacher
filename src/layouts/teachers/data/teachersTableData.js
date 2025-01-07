@@ -26,6 +26,7 @@ import VuiAvatar from "components/VuiAvatar";
 import VuiBadge from "../../../components/VuiBadge";
 import React from "react";
 import VuiButton from "../../../components/VuiButton";
+import { useTranslation } from "react-i18next";
 
 function Teacher({ image, name }) {
   return (
@@ -42,10 +43,11 @@ function Teacher({ image, name }) {
   );
 }
 
-function Function({ content }) {
+function Function({ content, isWilaya }) {
+  const { t } = useTranslation();
   return (
     <VuiTypography variant="caption" fontWeight="medium" color="white">
-      {content}
+      {isWilaya ? content && t(`wilaya.${content}`) : content}
     </VuiTypography>
   );
 }
@@ -70,6 +72,7 @@ export const teacherTableData = (t, data, handleOpen, user) => {
   // Use a default empty array if data is undefined or not an array
   const safeData = Array.isArray(data) ? data : [];
 
+
   const rowsObject = safeData.map((item) => ({
     [t("demands.table.fullName")]: (
       <Teacher image={item?.profilePic?.url} name={`${item.firstName} ${item.lastName}`} />
@@ -89,6 +92,7 @@ export const teacherTableData = (t, data, handleOpen, user) => {
         {item.Teacher?.yearsOfExperience}
       </VuiTypography>
     ),
+    [t("teachers.table.wilaya")]: <Function isWilaya={true} content={item.Teacher?.wilaya} />, // Add Wilaya here
     [t("demands.table.status")]: (
       <VuiTypography
         variant="caption"
@@ -161,6 +165,7 @@ export const teacherTableData = (t, data, handleOpen, user) => {
       { name: t("demands.table.email"), key: "email", align: "left", sortable: true },
       { name: t("demands.table.institution"), key: "institution", align: "center", sortable: true }, // Not sortable
       { name: t("demands.table.yearsOfExperience"), key: "yearsOfExperience", align: "center", sortable: true },
+      { name: t("teachers.table.wilaya"), key: "wilaya", align: "center", sortable: true },
       { name: t("demands.table.status"), key: "status", align: "center", sortable: false }, // Not sortable
       { name: t("demands.table.subject"), key: "subject", align: "center", sortable: true }, // Not sortable
       { name: t("demands.table.role"), key: "role", align: "center", sortable: false },

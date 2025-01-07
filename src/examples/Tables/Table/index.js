@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Table as MuiTable, TableBody, TableContainer, TablePagination, TableRow } from "@mui/material";
 import VuiBox from "components/VuiBox";
 import colors from "assets/theme/base/colors";
