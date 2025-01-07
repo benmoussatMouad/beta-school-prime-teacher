@@ -27,6 +27,7 @@ import VuiBadge from "../../../components/VuiBadge";
 import React from "react";
 import VuiButton from "../../../components/VuiButton";
 import moment from "moment/moment";
+import { useTranslation } from "react-i18next";
 
 function Teacher({ image, name }) {
   return (
@@ -43,10 +44,11 @@ function Teacher({ image, name }) {
   );
 }
 
-function Function({ content }) {
+function Function({ content, isWilaya }) {
+  const { t } = useTranslation();
   return (
     <VuiTypography variant="caption" fontWeight="medium" color="white">
-      {content}
+      {isWilaya ? t(`wilaya.${content}`) : content}
     </VuiTypography>
   );
 }
@@ -74,6 +76,7 @@ export const demandsTableData = (t, data, handleOpen) => {
           {item.Teacher.yearsOfExperience}
         </VuiTypography>
       ),
+      [t("teachers.table.wilaya")]: <Function isWilaya={true} content={item.Teacher?.wilaya} />, // Add Wilaya here
       [t("demands.table.status")]: (
         <VuiTypography
           variant="caption"
@@ -126,10 +129,11 @@ export const demandsTableData = (t, data, handleOpen) => {
 
   return {
     columns: [
-      { name: t("demands.table.fullName"), key: "fullName", align: "left", sortable: true },
+      { name: t("demands.table.fullName"), key: "fullName", align: "left", sortable: false },
       { name: t("demands.table.email"), key: "email", align: "left", sortable: true },
       { name: t("demands.table.institution"), key: "institution", align: "center", sortable: true },
       { name: t("demands.table.yearsOfExperience"), key: "yearsOfExperience", align: "center", sortable: true },
+      { name: t("teachers.table.wilaya"), key: "wilaya", align: "center", sortable: true },
       { name: t("demands.table.status"), key: "status", align: "center", sortable: false },
       { name: t("demands.table.createdAt"), key: "createdAt", align: "center", sortable: true },
       { name: t("demands.table.action"), key: "action", align: "center", sortable: false },

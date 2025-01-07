@@ -17,7 +17,7 @@ import CircularProgress from "@mui/material/CircularProgress";
 import { useTranslation } from "react-i18next";
 import Translator from "../components/Translate";
 import VuiSelect from "components/VuiSelect";
-import { Subjects } from "utils";
+import { FiltersStudentWilaya, Subjects } from "utils";
 
 function SignUp() {
 
@@ -35,6 +35,7 @@ function SignUp() {
     email: "",
     phone: "",
     subject: Subjects[0],
+    wilaya: "ORAN", // Add wilaya field
     institution: "",
     yearsOfExperience: 0,
     profilePic: null,
@@ -52,7 +53,7 @@ function SignUp() {
         fieldsToValidate = ["firstName", "firstNameAr", "lastName", "email", "phone", "password"];
         break;
       case 1:
-        fieldsToValidate = ["subject", "institution", "yearsOfExperience"];
+        fieldsToValidate = ["subject", "wilaya", "institution", "yearsOfExperience"]; // Include wilaya here
         break;
       case 2:
         fieldsToValidate = ["profilePic"];
@@ -84,6 +85,7 @@ function SignUp() {
     if (formDataState.firstNameAr) {
       formData.append("firstNameAr", formDataState.firstNameAr);
     }
+    formData.append("wilaya", formDataState.wilaya); // Include wilaya
     formData.append("institution", formDataState.institution);
     formData.append("lastName", formDataState.lastName);
     if (formDataState.lastNameAr) {
@@ -318,6 +320,20 @@ function SignUp() {
             {errors.yearsOfExperience &&
               <VuiTypography
                 sx={{ color: "red", fontSize: "0.7rem" }}>{errors.yearsOfExperience.message}</VuiTypography>}
+            <VuiTypography sx={{ margin: "10px 0" }} component="label" variant="button" color="white"
+                           fontWeight="medium">
+              {t("signup.forms.wilaya")}
+            </VuiTypography>
+            <VuiSelect
+              {...register("wilaya", { required: t("forms.required.wilaya") })}
+              value={formDataState.wilaya} // Bind to state value
+              onChange={(e) => setFormData({ ...formDataState, wilaya: e.target.value })}
+              label={t("signup.forms.wilaya")}
+              options={FiltersStudentWilaya} // Reference the existing Wilaya list
+              typeSelect={"wilaya"}          // Define it as Wilaya type
+            />
+            {errors.wilaya &&
+              <VuiTypography sx={{ color: "red", fontSize: "0.7rem" }}>{errors.wilaya.message}</VuiTypography>}
           </VuiBox>
         );
       case 2:
@@ -366,7 +382,7 @@ function SignUp() {
         <VuiBox sx={{ width: "100%" }}>
           <Translator />
           <VuiStepper activeStep={activeStep} steps={steps} />
-          <VuiBox>{renderStepContent()}</VuiBox>
+          <VuiBox sx={{}}>{renderStepContent()}</VuiBox>
           <VuiBox display="flex" justifyContent="space-between" sx={{ marginTop: "2rem" }}>
             <VuiButton variant="contained" color="secondary" disabled={activeStep === 0} onClick={handleBack}>
               {t("button.back")}

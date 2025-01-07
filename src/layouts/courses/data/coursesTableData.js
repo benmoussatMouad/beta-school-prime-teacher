@@ -31,7 +31,7 @@ export const coursesTableData = (t, data) => {
       { name: t("courses.table.icon"), align: "center", key: "icon" },
       { name: t("courses.table.title"), align: "left", sortable: true, key: "title" },
       { name: t("courses.table.subject"), align: "left", sortable: true, key: "subject" },
-      { name: t("courses.table.level"), align: "center", sortable: true, key: "level" },
+      { name: t("courses.table.level"), align: "center", sortable: true, key: "class" },
       { name: t("courses.table.createdAt"), align: "center", sortable: true, key: "createdAt" },
       { name: t("demands.table.view"), align: "center", key: "view" },
     ],

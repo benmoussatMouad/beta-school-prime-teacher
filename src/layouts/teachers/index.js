@@ -39,8 +39,13 @@ function Teachers() {
   const [role, setRoles] = useState(FiltersRoles[0]);
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
+  const [sortBy, setSortBy] = useState(""); // Sort key
+  const [sortType, setSortType] = useState("desc");
 
-  const { data, isLoading } = useGetTeachers({ token, firstName, lastName, email, subject, role, page, limit:rowsPerPage });
+  const { data, isLoading } = useGetTeachers({
+    token, firstName, lastName, email, subject, role, page, limit: rowsPerPage, sortBy,
+    sortType,
+  });
   const [open, setOpen] = useState(false);
   const [selectedTeacher, setSelectedTeacher] = useState(null);
 
@@ -78,7 +83,7 @@ function Teachers() {
     } else {
       handleClose();
     }
-  }
+  };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -117,6 +122,16 @@ function Teachers() {
     setPage(0); // Reset page to 0 whenever rows per page is changed
   };
 
+  const handleSortChange = (key) => {
+    if (sortBy === key) {
+      // Toggle sort direction if the same column is clicked
+      setSortType((prev) => (prev === "asc" ? "desc" : "asc"));
+    } else {
+      // Set a new column to sort by
+      setSortBy(key);
+      setSortType("asc");
+    }
+  };
 
   return (
     <DashboardLayout user={user}>
@@ -155,6 +170,8 @@ function Teachers() {
               subject={subject}
               tableId={"teachers"}
               selectedRole={role}
+              onSortChange={handleSortChange} // Pass sorting handler
+              sortConfig={{ key: sortBy, direction: sortType }}
             />
 
           </VuiBox>
@@ -230,19 +247,19 @@ function Teachers() {
             </Box>
           </Box>
           <VuiTypography variant="body1" color="white">
-            {selectedTeacher.role === 'TEACHER'? t("popup.teachers.description.makeAdmin") : t("popup.teachers.description.unMakeAdmin") }
+            {selectedTeacher.role === "TEACHER" ? t("popup.teachers.description.makeAdmin") : t("popup.teachers.description.unMakeAdmin")}
           </VuiTypography>
         </DialogContent>
         <DialogActions sx={{ justifyContent: "space-between", padding: "16px" }}>
           <VuiButton
-            onClick={() => selectedTeacher.role === 'TEACHER' ?  MakeTeacherAdmin(false) : UnMakeTeacherAdmin(false)}
+            onClick={() => selectedTeacher.role === "TEACHER" ? MakeTeacherAdmin(false) : UnMakeTeacherAdmin(false)}
             color="secondary"
             sx={{ fontSize: "0.875rem", padding: "8px 16px" }}
           >
             {t("button.cancel")}
           </VuiButton>
           <VuiButton
-            onClick={() => selectedTeacher.role === 'TEACHER' ?  MakeTeacherAdmin(true) : UnMakeTeacherAdmin(true)}
+            onClick={() => selectedTeacher.role === "TEACHER" ? MakeTeacherAdmin(true) : UnMakeTeacherAdmin(true)}
             color="info"
             sx={{ fontSize: "0.875rem", padding: "8px 16px" }}
           >

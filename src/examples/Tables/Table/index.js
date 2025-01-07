@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Table as MuiTable, TableBody, TableContainer, TablePagination, TableRow } from "@mui/material";
 import VuiBox from "components/VuiBox";
 import colors from "assets/theme/base/colors";
@@ -26,6 +26,8 @@ function Table(
     tableId,
     wilaya,
     selectedRole,
+    onSortChange,
+    sortConfig
   }) {
   const { grey } = colors;
   const { size, fontWeightBold } = typography;
@@ -36,60 +38,11 @@ function Table(
 
   const role = user?.user?.role || null;
 
-  const [sortConfig, setSortConfig] = useState({ key: "", translatedKey: "", direction: "asc" });
+  const handleSort = (columnKey, sortable) => {
+    if (!sortable) return; // Skip sorting for non-sortable columns
 
-  const handleSort = (columnKey, translatedKey, sortable) => {
-    if (!sortable) return; // Skip sorting if the column is not sortable
-
-    let direction = "asc";
-    if (sortConfig.key === columnKey && sortConfig.direction === "asc") {
-      direction = "desc";
-    }
-    setSortConfig({ key: columnKey, translatedKey, direction });
+    onSortChange(columnKey); // Notify parent about the sort action
   };
-
-  const sortRows = (rows) => {
-    const { key, translatedKey, direction } = sortConfig;
-
-    if (!key) return rows;
-
-    return [...rows].sort((a, b) => {
-      const aValue = extractSortableValue(a, key, translatedKey);
-      const bValue = extractSortableValue(b, key, translatedKey);
-
-      if (aValue < bValue) {
-        return direction === "asc" ? -1 : 1;
-      }
-      if (aValue > bValue) {
-        return direction === "asc" ? 1 : -1;
-      }
-      return 0;
-    });
-  };
-
-  const extractSortableValue = (row, key, translatedKey) => {
-    // This function extracts the correct value from the row object for each column key
-    switch (key) {
-      case "fullName":
-        return `${row[translatedKey].props?.name}`;
-      case "institution":
-      case "title":
-      case "level":
-        return row[translatedKey].props.content;
-      case "email":
-        return row[translatedKey].props.content;
-      case "yearsOfExperience":
-        return row[translatedKey].props.children;
-      case "subject":
-        return row[translatedKey].props.content;
-      case "createdAt":
-        return new Date(row[translatedKey].props.children);
-      default:
-        return "";  // or a default value to ensure sort can always proceed
-    }
-  };
-
-  const sortedRows = sortRows(rows);
 
   return (
     <>
@@ -122,7 +75,7 @@ function Table(
                       opacity={0.7}
                       borderBottom={`${borderWidth[1]} solid ${grey[700]}`}
                       sx={{ cursor: "pointer" }}
-                      onClick={() => handleSort(key, name, sortable)}
+                      onClick={() => handleSort(key, sortable)} // Handle sorting on click
                     >
                       {name.toUpperCase()}{" "}
                       {sortable && sortConfig.key === key ? (sortConfig.direction === "asc" ? "▲" : "▼") : ""}
@@ -131,7 +84,7 @@ function Table(
                 </TableRow>}
               </VuiBox>
               <TableBody>
-                {sortedRows.map((row, index) => (
+                {rows.map((row, index) => (
                   <TableRow key={`row-${index}`}>
                     {columns.map(({ name, align }) => (
                       <VuiBox

@@ -113,13 +113,13 @@ export const studentsTableData = (t, students, role, handleOpen, handleOpenActio
 
   return {
     columns: [
-      { name: t("students.table.student"), align: "left" },
-      { name: t("students.table.phoneNumber"), align: "left" },
-      { name: t("students.table.address"), align: "left" },
-      { name: t("students.table.wilaya"), align: "center" },
-      { name: t("students.table.class"), align: "center" },
-      { name: t("students.table.status"), align: "center" },
-      { name: t("students.table.action"), align: "center" },
+      { name: t("students.table.student"), key: "student", sortable: false, align: "left" },
+      { name: t("students.table.phoneNumber"), key: "phoneNumber", sortable: false, align: "left" },
+      { name: t("students.table.address"), key: "address", sortable: false, align: "left" },
+      { name: t("students.table.wilaya"), key: "wilaya", sortable: true, align: "center" },
+      { name: t("students.table.class"), key: "class", sortable: true, align: "center" },
+      { name: t("students.table.status"), key: "status", sortable: true, align: "center" },
+      { name: t("students.table.action"), key: "action", sortable: false, align: "center" }, // No sorting for action column
     ],
 
     rows: students.map((student) => ({

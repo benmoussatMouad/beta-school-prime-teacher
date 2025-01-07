@@ -10,6 +10,8 @@ const buildQueryParams = (
     courseStatus,
     page,
     limit,
+    sortBy, // Add sort key
+    sortType, // Add sort direction
   }) => {
   let params = {};
 
@@ -20,6 +22,8 @@ const buildQueryParams = (
   if (courseStatus) params.status = courseStatus;
   if (page !== undefined) params.page = page + 1;
   if (limit !== undefined) params.limit = limit;
+  if (sortBy) params.sortBy = sortBy; // Add sortBy
+  if (sortType) params.sortType = sortType; // Add sortType
 
   return params;
 };
@@ -47,9 +51,11 @@ export function useGetAllCourses(
     courseStatus,
     page = 0,
     limit = 5,
+    sortBy, // New Parameter
+    sortType, // New Parameter
   }) {
   // Consolidate options for clarity and extendibility
-  const queryOptions = { role, title, teacherClass, subject, courseStatus, page, limit };
+  const queryOptions = { role, title, teacherClass, subject, courseStatus, page, limit, sortBy, sortType };
 
   return useQuery(
     ["getAllCourses", token, queryOptions],

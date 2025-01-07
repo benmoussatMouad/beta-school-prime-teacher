@@ -36,9 +36,14 @@ function Demands() {
   const [role, setRoles] = useState(FiltersRoles[0]);
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
+  const [sortBy, setSortBy] = useState(""); // Sort key
+  const [sortType, setSortType] = useState("desc");
 
-
-  const { data, isLoading } = useGetDemands({ token, firstName, lastName, email, subject, role, page, limit: rowsPerPage });
+  const { data, isLoading } = useGetDemands({
+    token, firstName, lastName, email, subject, role, page, limit: rowsPerPage,
+    sortBy,
+    sortType,
+  });
   const [open, setOpen] = useState(false);
   const [selectedTeacher, setSelectedTeacher] = useState(null);
 
@@ -105,6 +110,16 @@ function Demands() {
     setRowsPerPage(e.target.value);  // Update the rows state
   };
 
+  const handleSortChange = (key) => {
+    if (sortBy === key) {
+      // Toggle sort direction if the same column is clicked
+      setSortType((prev) => (prev === "asc" ? "desc" : "asc"));
+    } else {
+      // Set a new column to sort by
+      setSortBy(key);
+      setSortType("asc");
+    }
+  };
 
   return (
     <DashboardLayout user={user}>
@@ -144,6 +159,8 @@ function Demands() {
               subject={subject}
               tableId={"teachers"}
               selectedRole={role}
+              onSortChange={handleSortChange} // Pass sorting handler
+              sortConfig={{ key: sortBy, direction: sortType }}
             />
 
           </VuiBox>
@@ -203,18 +220,18 @@ function Demands() {
               <VuiTypography mt={"10px"} variant="subtitle2" color="white">
                 <b>{t("forms.emailVerified")}</b>:
                 <VuiBadge
-                variant="standard"
-                badgeContent={t(`profile.card.${selectedTeacher.isEmailVerified ? "Verified" : "unVerified"}`)}
-                color="success"
-                size="xs"
-                container
-                sx={({ palette: { white, success, warning }, borders: { borderRadius, borderWidth } }) => ({
-                  background: selectedTeacher.isEmailVerified ? success.main : warning.main,
-                  border: `${borderWidth[1]} solid ${selectedTeacher.isEmailVerified ? success.main : warning.main}`,
-                  borderRadius: borderRadius.md,
-                  color: white.main,
-                })}
-              />
+                  variant="standard"
+                  badgeContent={t(`profile.card.${selectedTeacher.isEmailVerified ? "Verified" : "unVerified"}`)}
+                  color="success"
+                  size="xs"
+                  container
+                  sx={({ palette: { white, success, warning }, borders: { borderRadius, borderWidth } }) => ({
+                    background: selectedTeacher.isEmailVerified ? success.main : warning.main,
+                    border: `${borderWidth[1]} solid ${selectedTeacher.isEmailVerified ? success.main : warning.main}`,
+                    borderRadius: borderRadius.md,
+                    color: white.main,
+                  })}
+                />
               </VuiTypography>
             </Box>
           </Box>

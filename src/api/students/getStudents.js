@@ -10,9 +10,10 @@ const buildQueryParams = (
     status,
     studentsLevel,
     wilaya,
-    sortBy,
     page,
     limit,
+    sortBy, // New Parameter
+    sortType, // New Parameter
   }) => {
   const params = new URLSearchParams();
 
@@ -22,9 +23,10 @@ const buildQueryParams = (
   if (status) params.append("status", status);
   if (studentsLevel) params.append("class", studentsLevel);
   if (wilaya) params.append("wilaya", wilaya);
-  if (sortBy) params.append("sortBy", sortBy);
   if (page !== undefined) params.append("page", page + 1);
   if (limit !== undefined) params.append("limit", limit);
+  if (sortBy) params.append("sortBy", sortBy); // Add sortBy
+  if (sortType) params.append("sortType", sortType); // Add sortType
 
   return params.toString();
 };
@@ -52,9 +54,10 @@ export function useGetAllStudents(
     status,
     studentsLevel,
     wilaya,
-    sortBy,
     page = 0,
     limit = 10,
+    sortBy, // New Parameter
+    sortType, // New Parameter
   }) {
   // Consolidate options for query
   const queryOptions = {
@@ -64,9 +67,10 @@ export function useGetAllStudents(
     status,
     studentsLevel,
     wilaya,
-    sortBy,
     page,
     limit,
+    sortBy, // New Parameter
+    sortType, // New Parameter
   };
 
   return useQuery(

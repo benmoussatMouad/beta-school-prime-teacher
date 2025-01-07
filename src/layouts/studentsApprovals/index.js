@@ -7,7 +7,6 @@ import Table from "examples/Tables/Table";
 import { useAuth } from "context/auth/authContext";
 import { useTranslation } from "react-i18next";
 import { studentsTableData } from "./data/studentsTableData";
-import VuiBadge from "../../components/VuiBadge";
 import { useGetAllStudents } from "../../api/students/getStudents";
 import { useState } from "react";
 import { getAccessToken } from "../../utils";
@@ -23,8 +22,10 @@ function StudentsApprovals() {
     email: "",
     studentsLevel: "",
     wilaya: "",
-    sortBy: "",
   });
+
+  const [sortBy, setSortBy] = useState(""); // Sort key
+  const [sortType, setSortType] = useState("desc");
 
   const [page, setPage] = useState(0);
   const [limit, setLimit] = useState(5);
@@ -42,6 +43,8 @@ function StudentsApprovals() {
     status: "IN_PROGRESS",
     page,
     limit,
+    sortBy,    // Pass sorting column
+    sortType,
   });
 
 
@@ -79,6 +82,16 @@ function StudentsApprovals() {
 
   const { columns, rows } = studentsTableData(t, data?.results, role, handleOpen);
 
+  const handleSortChange = (key) => {
+    // Toggle sort direction if the column is already being sorted
+    if (sortBy === key) {
+      setSortType((prev) => (prev === "asc" ? "desc" : "asc"));
+    } else {
+      // Sort by a new column and reset direction to ascending
+      setSortBy(key);
+      setSortType("asc");
+    }
+  };
 
   return (
     <DashboardLayout user={user}>
@@ -124,6 +137,8 @@ function StudentsApprovals() {
                 status={filters.status}
                 teacherClass={filters.studentsLevel}
                 wilaya={filters.wilaya}
+                onSortChange={handleSortChange} // Add sorting handler
+                sortConfig={{ key: sortBy, direction: sortType }}
               />
             </VuiBox>
           </Card>
