@@ -14,12 +14,10 @@ import colors from "../../assets/theme/base/colors";
 import borders from "../../assets/theme/base/borders";
 import boxShadows from "../../assets/theme/base/boxShadows";
 import { useState } from "react";
-import { useCreateCourse } from "../../api/courses";
+import { useCreateCourse, useGetCourseIcons } from "../../api/courses";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import PopperIcon from "../Popper/IconsPopper";
-import pxToRem from "../../assets/theme/functions/pxToRem";
-
 
 const { black, gradients } = colors;
 const { card } = gradients;
@@ -32,8 +30,11 @@ function CreateCoursDialog({ closeDialog, openDialog }) {
   const [popperAnchor, setPopperAnchor] = useState(null); // To manage Popper visibility
 
   const { mutate, isLoading } = useCreateCourse();
+  const { data } = useGetCourseIcons()
 
   const { t } = useTranslation();
+
+  const icons = data?.icons || []
 
   const {
     register,
@@ -67,19 +68,11 @@ function CreateCoursDialog({ closeDialog, openDialog }) {
     }
   };
 
-  // Converts a predefined icon URL into a File
-  const urlToFile = async (url, filename) => {
-    const response = await fetch(url);
-    const blob = await response.blob();
-    return new File([blob], filename, { type: blob.type });
-  };
 
   // Handle predefined icon selection
-  const handlePredefinedIconClick = (iconUrl, index) => {
-    urlToFile(iconUrl, `icon${index + 1}.png`).then((file) => {
-      setValue("icon", file, { shouldValidate: true }); // Set the selected file in the form
-      setIconPreview(URL.createObjectURL(file)); // Update preview
-    });
+  const handlePredefinedIconClick = (iconUrl, iconId) => {
+    setValue("icon", { url: iconUrl, id: iconId });
+    setIconPreview(iconUrl);
   };
 
 
@@ -118,7 +111,10 @@ function CreateCoursDialog({ closeDialog, openDialog }) {
     // Ensure the icon is a file
     if (data.icon instanceof File) {
       formData.append("icon", data.icon);
+    } else if (data.icon?.url && data.icon?.id) {
+      formData.append("iconId", data.icon.id);
     }
+
 
 
     mutate(formData, {
@@ -129,7 +125,7 @@ function CreateCoursDialog({ closeDialog, openDialog }) {
     });
   };
 
-// Open Popover when hovering over the trigger
+  // Open Popover when hovering over the trigger
   const handlePopperOpen = (event) => {
     setPopperAnchor(event.currentTarget);
   };
@@ -194,16 +190,17 @@ function CreateCoursDialog({ closeDialog, openDialog }) {
         },
         "&::-webkit-scrollbar-thumb:hover": {
           backgroundColor: "rgba(31,44,132,0.95)",
-        },}}>
+        },
+      }}>
         {isLoading ? <Box sx={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            height: "300px",
-            minWidth: "250px",
-          }}>
-            <CircularProgress color={"info"} />
-          </Box> :
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          height: "300px",
+          minWidth: "250px",
+        }}>
+          <CircularProgress color={"info"} />
+        </Box> :
           <VuiBox as="form" onSubmit={handleSubmit(onSubmit)} sx={{ px: 2 }}>
             <Grid container spacing={3}>
               {/* Icon Upload */}
@@ -243,6 +240,7 @@ function CreateCoursDialog({ closeDialog, openDialog }) {
                         cursor: "pointer",
                         border: `2px solid ${black.main}`,
                         boxShadow: "0 4px 8px rgba(0,0,0,0.2)",
+                        backgroundColor: "rgba(255, 255, 255, 0.5)",
                       }}
                       onClick={() => document.querySelector("input[type='file']").click()}
                     />
@@ -274,6 +272,7 @@ function CreateCoursDialog({ closeDialog, openDialog }) {
                     popperAnchor={popperAnchor}
                     isPopperOpen={isPopperOpen}
                     handlePopperClose={handlePopperClose}
+                    icons={icons}
                   />
                 </VuiBox>
 
@@ -283,7 +282,7 @@ function CreateCoursDialog({ closeDialog, openDialog }) {
               <Grid item xs={12}>
                 <VuiBox>
                   <VuiTypography component="label" variant="button" fontWeight="medium" color="white"
-                                 sx={{ mb: 1, display: "block" }}>
+                    sx={{ mb: 1, display: "block" }}>
                     {t("dialog.forms.title")} <span style={{ color: "red" }}>*</span>
                   </VuiTypography>
                   <VuiInput
@@ -302,7 +301,7 @@ function CreateCoursDialog({ closeDialog, openDialog }) {
               <Grid item xs={12}>
                 <VuiBox>
                   <VuiTypography component="label" variant="button" fontWeight="medium" color="white"
-                                 sx={{ mb: 1, display: "block" }}>
+                    sx={{ mb: 1, display: "block" }}>
                     {t("dialog.forms.description")} <span style={{ color: "red" }}>*</span>
                   </VuiTypography>
                   <VuiInput
@@ -327,7 +326,7 @@ function CreateCoursDialog({ closeDialog, openDialog }) {
               <Grid item xs={12} sm={6}>
                 <VuiBox>
                   <VuiTypography component="label" variant="button" fontWeight="medium" color="white"
-                                 sx={{ mb: 1, display: "block" }}>
+                    sx={{ mb: 1, display: "block" }}>
                     {t("dialog.forms.price")} <span style={{ color: "red" }}>*</span>
                   </VuiTypography>
                   <VuiInput
@@ -360,7 +359,7 @@ function CreateCoursDialog({ closeDialog, openDialog }) {
               <Grid item xs={12} sm={6}>
                 <VuiBox>
                   <VuiTypography component="label" variant="button" fontWeight="medium" color="white"
-                                 sx={{ mb: 1, display: "block" }}>
+                    sx={{ mb: 1, display: "block" }}>
                     {t("dialog.forms.language")}
                   </VuiTypography>
                   <VuiInput
@@ -380,7 +379,7 @@ function CreateCoursDialog({ closeDialog, openDialog }) {
               <Grid item xs={12} sm={6}>
                 <VuiBox>
                   <VuiTypography component="label" variant="button" fontWeight="medium" color="white"
-                                 sx={{ mb: 1, display: "block" }}>
+                    sx={{ mb: 1, display: "block" }}>
                     {t("dialog.forms.educationalBranches")} <span style={{ color: "red" }}>*</span>
                   </VuiTypography>
                   <VuiSelect
@@ -414,7 +413,7 @@ function CreateCoursDialog({ closeDialog, openDialog }) {
               <Grid item xs={12} sm={6}>
                 <VuiBox>
                   <VuiTypography component="label" variant="button" fontWeight="medium" color="white"
-                                 sx={{ mb: 1, display: "block" }}>
+                    sx={{ mb: 1, display: "block" }}>
                     {t("dialog.forms.teacherClasses")} <span style={{ color: "red" }}>*</span>
                   </VuiTypography>
                   <VuiSelect
@@ -450,7 +449,7 @@ function CreateCoursDialog({ closeDialog, openDialog }) {
                   <Grid item xs={12}>
                     <VuiBox>
                       <VuiTypography component="label" variant="button" fontWeight="medium" color="white"
-                                     sx={{ mb: 1 }}>
+                        sx={{ mb: 1 }}>
                         {t("dialog.forms.discount")}
                       </VuiTypography>
                       <VuiBox display="flex" alignItems="center" sx={{ mb: 1 }}>
