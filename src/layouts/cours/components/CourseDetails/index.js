@@ -17,10 +17,14 @@ import { GiOpenBook } from "react-icons/gi";
 import { useUpdateCourse } from "../../../../api/courses/updateCourse";
 import Grid from "@mui/material/Grid";
 import PopperIcon from "../../../../examples/Popper/IconsPopper";
+import { useGetCourseIcons } from "../../../../api/courses";
 
 function UpdateCourse({ isLoading, data: courseData }) {
   const { mutate, isLoading: updateLoading } = useUpdateCourse();
   const [popperAnchor, setPopperAnchor] = useState(null); // To manage Popper visibility
+  const { data } = useGetCourseIcons()
+
+  const icons = data?.icons || []
 
   const { t } = useTranslation();
   const {
@@ -79,19 +83,10 @@ function UpdateCourse({ isLoading, data: courseData }) {
     }
   };
 
-  // Converts a predefined icon URL into a File
-  const urlToFile = async (url, filename) => {
-    const response = await fetch(url);
-    const blob = await response.blob();
-    return new File([blob], filename, { type: blob.type });
-  };
-
   // Handle predefined icon selection
-  const handlePredefinedIconClick = (iconUrl, index) => {
-    urlToFile(iconUrl, `icon${index + 1}.png`).then((file) => {
-      setValue("icon", file, { shouldValidate: true }); // Set the selected file in the form
-      setIconPreview(URL.createObjectURL(file)); // Update preview
-    });
+  const handlePredefinedIconClick = (iconUrl, iconId) => {
+    setValue("icon", { url: iconUrl, id: iconId });
+    setIconPreview(iconUrl);
   };
 
   const onSubmit = async (data) => {
@@ -128,7 +123,10 @@ function UpdateCourse({ isLoading, data: courseData }) {
 
     if (data.icon instanceof File) {
       formData.append("icon", data.icon);
+    } else if (data.icon?.url && data.icon?.id) {
+      formData.append("iconId", data.icon.id);
     }
+
 
     mutate({
       formData: formData,
@@ -202,6 +200,7 @@ function UpdateCourse({ isLoading, data: courseData }) {
             popperAnchor={popperAnchor}
             isPopperOpen={isPopperOpen}
             handlePopperClose={handlePopperClose}
+            icons={icons}
           />
         </VuiBox>
 
