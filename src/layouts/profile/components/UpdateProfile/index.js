@@ -20,8 +20,6 @@ const UpdateProfile = () => {
   const { t } = useTranslation();
   const { user } = useAuth();
 
-  console.log(user);
-
   const [isloading, setIsLoading] = useState(false);
 
   const [formState, setFormState] = useState({
