@@ -28,7 +28,7 @@ function Students() {
     wilaya: "",
   });
 
-  const [page, setPage] = useState(0);
+  const [page, setPage] = useState(0); // Start with page 1
   const [limit, setLimit] = useState(5);
   const [sortBy, setSortBy] = useState(""); // Sort key
   const [sortType, setSortType] = useState("desc");
@@ -70,13 +70,13 @@ function Students() {
 
   // Function to handle page change for pagination
   const handlePageChange = (event, newPage) => {
-    setPage(newPage); // New page number
+    setPage(newPage); // Add 1 to convert from 0-based to 1-based
   };
 
   // Function to handle limit (rows per page) change
-  const handleRowsPerPage = (e) => {
-    setLimit(parseInt(e.target.value, 10)); // Update rows per page
-    setPage(0); // Reset to the first page
+  const handleRowsPerPage = (event) => {
+    setLimit(parseInt(event.target.value, 10));
+    setPage(0); // Reset to first page when changing limit
   };
 
   const handleOpen = (student) => {
@@ -98,6 +98,9 @@ function Students() {
     setActionsOpen(false);
     setSelectedStudentId(null);
   };
+
+  console.log(allStudent);
+  
 
   const {
     columns,
@@ -121,7 +124,7 @@ function Students() {
       {selectedStudentId && <AcceptStudent onClose={handleClose} open={openDialog} studentId={selectedStudentId} />}
       {role === "ROOT" && selectedStudentId ?
         <StudentActionsDialog onClose={handleActionsClose} open={openActionsDialog}
-                              studentId={selectedStudentId} /> : ""}
+          studentId={selectedStudentId} /> : ""}
       <VuiBox py={3}>
         <VuiBox mb={3}>
           <Card>
@@ -152,8 +155,8 @@ function Students() {
                 columns={columns}
                 rows={rows}
                 onSearchChange={handleChange}
-                page={page}
-                totalCount={data?.totalCount || 0}
+                page={page} // Convert back to 0-based for MUI Table
+                totalCount={role === "ROOT" ? allStudent?.totalCount : data?.totalCount} // Use correct total count based on role
                 rowsPerPage={limit}
                 onPageChange={handlePageChange}
                 onRowsPerPageChange={handleRowsPerPage}
@@ -162,7 +165,7 @@ function Students() {
                 status={filters.status}
                 teacherClass={filters.studentsLevel}
                 wilaya={filters.wilaya}
-                onSortChange={handleSortChange} // Add sorting handler
+                onSortChange={handleSortChange}
                 sortConfig={{ key: sortBy, direction: sortType }}
               />
             </VuiBox>

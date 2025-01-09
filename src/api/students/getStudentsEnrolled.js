@@ -55,7 +55,7 @@ export function useGetAllEnrolledStudents(
     studentsLevel,
     wilaya,
     page = 0,
-    limit = 10,
+    limit = 5,
     sortBy, // New Parameter
     sortType, // New Parameter
   }) {

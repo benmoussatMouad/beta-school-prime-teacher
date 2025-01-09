@@ -10,8 +10,8 @@ const buildQueryParams = (
     status,
     studentsLevel,
     wilaya,
-    page,
-    limit,
+    page = 0,
+    limit = 5,
     sortBy, // New Parameter
     sortType, // New Parameter
   }) => {
@@ -55,7 +55,7 @@ export function useGetAllStudents(
     studentsLevel,
     wilaya,
     page = 0,
-    limit = 10,
+    limit = 5,
     sortBy, // New Parameter
     sortType, // New Parameter
   }) {
