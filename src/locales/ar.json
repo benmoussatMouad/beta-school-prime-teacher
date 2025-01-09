@@ -761,5 +761,11 @@
     "TIZI_OUZOU": "تيزي وزو",
     "TLEMCEN": "تلمسان",
     "TOUGGOURT": "تقرت"
+  },
+  "commission":{
+    "label":"التكليف",
+    "update": "تحديث",
+    "current":"التكليف الحالي",
+    "updated":"تم تحديث التكليف بنجاح"
   }
 }

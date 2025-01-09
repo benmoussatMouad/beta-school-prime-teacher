@@ -1,41 +1,44 @@
-/*!
-
-=========================================================
-* Vision UI Free React - v1.0.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/vision-ui-free-react
-* Copyright 2021 Creative Tim (https://www.creative-tim.com/)
-* Licensed under MIT (https://github.com/creativetimofficial/vision-ui-free-react/blob/master LICENSE.md)
-
-* Design and Coded by Simmmple & Creative Tim
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-*/
-
-import { useState } from "react";
-
-// @mui material components
+import { useState, useEffect } from "react";
 import Card from "@mui/material/Card";
-
-// Vision UI Dashboard React components
 import VuiBox from "components/VuiBox";
 import VuiTypography from "components/VuiTypography";
-import VuiSwitch from "components/VuiSwitch";
+import VuiInput from "components/VuiInput";
+import VuiButton from "components/VuiButton";
 import { useTranslation } from "react-i18next";
+import { useGetCommission } from "api/admin/getCommission";
+import { getAccessToken } from "utils";
+import { useUpdateCommission } from "api/admin/updateCommission";
 
 function PlatformSettings() {
-  const [followsMe, setFollowsMe] = useState(true);
-  const [answersPost, setAnswersPost] = useState(false);
-  const [mentionsMe, setMentionsMe] = useState(true);
-  const [newLaunches, setNewLaunches] = useState(false);
-  const [productUpdate, setProductUpdate] = useState(true);
-  const [newsletter, setNewsletter] = useState(true);
-  const [mails, setMails] = useState(false);
-  const {t} = useTranslation();
+  const [inputCommission, setInputCommission] = useState("");
+  const { t } = useTranslation();
+  const token = getAccessToken();
+
+  const { data: commissionData, isLoading } = useGetCommission(token);
+  const { mutate: updateCommission } = useUpdateCommission();
+
+  useEffect(() => {
+    if (commissionData?.commission) {
+      setInputCommission((commissionData.commission * 100).toString());
+    }
+  }, [commissionData]);
+
+  const handleCommissionChange = (e) => {
+    const value = e.target.value;
+    if (value === "" || (parseFloat(value) >= 0 && parseFloat(value) <= 100)) {
+      setInputCommission(value);
+    }
+  };
+
+  const handleUpdateCommission = () => {
+    const numValue = parseFloat(inputCommission);
+    if (!isNaN(numValue) && numValue >= 0 && numValue <= 100) {
+      // Convert percentage to decimal (e.g. 15% -> 0.15) before sending to API
+      const decimalValue = numValue / 100;
+      updateCommission(decimalValue);
+    }
+  };
+
   return (
     <Card sx={{ minHeight: "490px", height: "100%" }}>
       <VuiBox mb="26px">
@@ -43,112 +46,47 @@ function PlatformSettings() {
           {t('profile.setting.title')}
         </VuiTypography>
       </VuiBox>
+
       <VuiBox lineHeight={1.25}>
-        <VuiTypography
-          variant="xxs"
-          fontWeight="medium"
-          mb="20px"
-          color="text"
-          textTransform="uppercase"
-        >
-          {t("profile.setting.account")}
-        </VuiTypography>
-        <VuiBox display="flex" mb="14px">
-          <VuiBox mt={0.25}>
-            <VuiSwitch color="info" checked={followsMe} onChange={() => setFollowsMe(!followsMe)} />
-          </VuiBox>
-          <VuiBox width="80%" ml={2}>
-            <VuiTypography variant="button" fontWeight="regular" color="text">
-              {t("profile.setting.accountEmailMe")}
-            </VuiTypography>
-          </VuiBox>
-        </VuiBox>
-        <VuiBox display="flex" mb="14px">
-          <VuiBox mt={0.25}>
-            <VuiSwitch
-              color="info"
-              checked={answersPost}
-              onChange={() => setAnswersPost(!answersPost)}
+        <VuiBox display="flex" mb="20px" flexDirection="column">
+          <VuiTypography variant="button" fontWeight="medium" color="text" mb={1}>
+            {t('commission.label')}
+          </VuiTypography>
+
+          <VuiBox display="flex" gap={2}>
+            <VuiInput
+              type="number"
+              value={inputCommission}
+              onChange={handleCommissionChange}
+              disabled={isLoading}
+              sx={{
+                background: "#1B1F3D",
+                color: "#fff",
+                border: "1px solid #56577A",
+                borderRadius: "8px"
+              }}
+              inputProps={{
+                min: 0,
+                max: 100,
+                step: "0.01"
+              }}
+              placeholder={t('commission.placeholder')}
             />
-          </VuiBox>
-          <VuiBox width="80%" ml={2}>
-            <VuiTypography variant="button" fontWeight="regular" color="text">
-              {t('profile.setting.accountEmailMeComment')}
-            </VuiTypography>
-          </VuiBox>
-        </VuiBox>
-        <VuiBox display="flex" mb="14px">
-          <VuiBox mt={0.25}>
-            <VuiSwitch
-              sx={{ background: "#1B1F3D", color: "#fff" }}
+
+            <VuiButton
+              variant="contained"
               color="info"
-              checked={mentionsMe}
-              onChange={() => setMentionsMe(!mentionsMe)}
-            />
+              onClick={handleUpdateCommission}
+              disabled={isLoading || inputCommission === "" || inputCommission === (commissionData?.commission * 100).toString()}
+            >
+              {t('commission.update')}
+            </VuiButton>
           </VuiBox>
-          <VuiBox width="80%" ml={2}>
-            <VuiTypography variant="button" fontWeight="regular" color="text">
-              {t('profile.setting.accountEmailMeMention')}
-            </VuiTypography>
-          </VuiBox>
+
+          <VuiTypography variant="caption" color="text" mt={1}>
+            {t('commission.current')}: {isLoading ? '...' : (commissionData?.commission * 100)}%
+          </VuiTypography>
         </VuiBox>
-        {/*<VuiBox mb="6px">*/}
-        {/*  <VuiTypography variant="xxs" fontWeight="medium" color="text" textTransform="uppercase">*/}
-        {/*    application*/}
-        {/*  </VuiTypography>*/}
-        {/*</VuiBox>*/}
-        {/*<VuiBox display="flex" mb="14px">*/}
-        {/*  <VuiBox mt={0.25}>*/}
-        {/*    <VuiSwitch*/}
-        {/*      color="info"*/}
-        {/*      checked={newLaunches}*/}
-        {/*      onChange={() => setNewLaunches(!newLaunches)}*/}
-        {/*    />*/}
-        {/*  </VuiBox>*/}
-        {/*  <VuiBox width="80%" ml={2}>*/}
-        {/*    <VuiTypography variant="button" fontWeight="regular" color="text">*/}
-        {/*      New launches and projects*/}
-        {/*    </VuiTypography>*/}
-        {/*  </VuiBox>*/}
-        {/*</VuiBox>*/}
-        {/*<VuiBox display="flex" mb="14px">*/}
-        {/*  <VuiBox mt={0.25}>*/}
-        {/*    <VuiSwitch*/}
-        {/*      color="info"*/}
-        {/*      checked={productUpdate}*/}
-        {/*      onChange={() => setProductUpdate(!productUpdate)}*/}
-        {/*    />*/}
-        {/*  </VuiBox>*/}
-        {/*  <VuiBox width="80%" ml={2}>*/}
-        {/*    <VuiTypography variant="button" fontWeight="regular" color="text">*/}
-        {/*      Monthly product updates*/}
-        {/*    </VuiTypography>*/}
-        {/*  </VuiBox>*/}
-        {/*</VuiBox>*/}
-        {/*<VuiBox display="flex" mb="14px">*/}
-        {/*  <VuiBox mt={0.25}>*/}
-        {/*    <VuiSwitch*/}
-        {/*      color="info"*/}
-        {/*      checked={newsletter}*/}
-        {/*      onChange={() => setNewsletter(!newsletter)}*/}
-        {/*    />*/}
-        {/*  </VuiBox>*/}
-        {/*  <VuiBox width="80%" ml={2}>*/}
-        {/*    <VuiTypography variant="button" fontWeight="regular" color="text">*/}
-        {/*      Subscribe to newsletter*/}
-        {/*    </VuiTypography>*/}
-        {/*  </VuiBox>*/}
-        {/*</VuiBox>*/}
-        {/*<VuiBox display="flex">*/}
-        {/*  <VuiBox mt={0.25}>*/}
-        {/*    <VuiSwitch color="info" checked={mails} onChange={() => setMails(!mails)} />*/}
-        {/*  </VuiBox>*/}
-        {/*  <VuiBox width="80%" ml={2}>*/}
-        {/*    <VuiTypography variant="button" fontWeight="regular" color="text">*/}
-        {/*      Receive mails weekly*/}
-        {/*    </VuiTypography>*/}
-        {/*  </VuiBox>*/}
-        {/*</VuiBox>*/}
       </VuiBox>
     </Card>
   );

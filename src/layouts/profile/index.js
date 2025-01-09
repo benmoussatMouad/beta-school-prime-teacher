@@ -35,8 +35,7 @@ import UpdateInformations from "./components/UpdateProfile";
 import { useAuth } from "context/auth/authContext";
 import { useTranslation } from "react-i18next";
 import VuiButton from "../../components/VuiButton";
-import VuiBadge from "../../components/VuiBadge";
-import { Box, Dialog, DialogActions, DialogContent, DialogTitle, Typography } from "@mui/material";
+import { Dialog, DialogActions, DialogContent, DialogTitle, Typography } from "@mui/material";
 import linearGradient from "../../assets/theme/functions/linearGradient";
 import rgba from "../../assets/theme/functions/rgba";
 import React, { useRef, useState } from "react";
@@ -44,11 +43,6 @@ import colors from "../../assets/theme/base/colors";
 import borders from "../../assets/theme/base/borders";
 import boxShadows from "../../assets/theme/base/boxShadows";
 import { useDeleteTeacher } from "../../api/teacher/deleteTeacher";
-import ChapterCard from "../../examples/Cards/ChapterCards/DefaultChapterCard";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, Pagination } from "swiper/modules";
-import { courseData } from "../../utils";
-import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import CarInformations from "./components/CarInformations";
 
 
@@ -62,7 +56,7 @@ function Overview() {
 
   const swiperRef = useRef(null); // Create a ref for Swiper
   const { t } = useTranslation();
-  const context = useAuth();
+  const { user } = useAuth();
   const [openDialog, setOpenDialog] = useState(false); // Dialog state for confirmation
   const { mutate } = useDeleteTeacher();
 
@@ -73,9 +67,11 @@ function Overview() {
     setOpenDialog(false);
   };
 
+  const role = user?.user?.role || '';
+
 
   return (
-    <DashboardLayout user={context.user}>
+    <DashboardLayout user={user}>
       <Header pageName={"Profile"} />
       <VuiBox mt={5} mb={3}>
         <Grid
@@ -115,14 +111,14 @@ function Overview() {
           >
             <ProfileInfoCard
               title={t("profile.card.title")}
-              description={context.user?.teacher?.description || t('profile.myDescirption')}
+              description={user?.teacher?.description || t('profile.myDescirption')}
               info={{
-                [t("forms.fullName")]: `${context.user.user?.firstName}  ${context.user.user?.lastName}`,
-                [t("forms.email")]: context.user.user?.email,
-                [t("forms.institution")]: context.user?.teacher?.institution,
-                [t("forms.subject")]: t(`subjects.${context.user?.teacher?.subject}`),
-                [t("forms.yearsOfExperience")]: context.user?.teacher?.yearsOfExperience,
-                [t("forms.isEmailVerified")]: context.user.user?.isEmailVerified ? t("profile.card.Verified") : t("profile.card.unVerified"),
+                [t("forms.fullName")]: `${user.user?.firstName}  ${user.user?.lastName}`,
+                [t("forms.email")]: user.user?.email,
+                [t("forms.institution")]: user?.teacher?.institution,
+                [t("forms.subject")]: t(`subjects.${user?.teacher?.subject}`),
+                [t("forms.yearsOfExperience")]: user?.teacher?.yearsOfExperience,
+                [t("forms.isEmailVerified")]: user.user?.isEmailVerified ? t("profile.card.Verified") : t("profile.card.unVerified"),
               }}
             />
           </Grid>
@@ -143,98 +139,16 @@ function Overview() {
         </Grid>
       </VuiBox>
       <Grid container spacing={3} mb="30px">
-        <Grid item xs={12} xl={3} md={6} height="100%">
+        {role === "ROOT" ? <Grid item xs={12} xl={3} md={3} >
           <PlatformSettings />
-        </Grid>
-        <Grid item xs={12} xl={9} md={6}>
-          <CarInformations/>
-
-        {/*  <Card>*/}
-        {/*    <VuiBox display="flex" flexDirection="column" height="100%">*/}
-        {/*      <VuiBox display="flex" flexDirection="column" mb="24px">*/}
-        {/*        <VuiBox>*/}
-        {/*          <VuiTypography color="white" variant="lg" fontWeight="bold" mb="6px">*/}
-        {/*            {t("profile.project.title")}*/}
-        {/*          </VuiTypography>*/}
-        {/*          <VuiBadge badgeContent="A concevoir" color="warning" variant="gradient" size="lg" />*/}
-        {/*        </VuiBox>*/}
-        {/*        <VuiTypography color="text" variant="button" fontWeight="regular">*/}
-        {/*          {t("profile.project.descirption")}*/}
-        {/*        </VuiTypography>*/}
-        {/*      </VuiBox>*/}
-        {/*      <Box sx={{ width: "100%", position: "relative" }}>*/}
-        {/*        <Swiper*/}
-        {/*          ref={swiperRef} // Pass the ref to Swiper*/}
-        {/*          modules={[Navigation, Pagination]}*/}
-        {/*          spaceBetween={20}*/}
-        {/*          slidesPerView={1}*/}
-        {/*          navigation={false} // Disable default navigation buttons*/}
-        {/*          loop={true} // Enable looping*/}
-        {/*          breakpoints={{*/}
-        {/*            600: {*/}
-        {/*              slidesPerView: 1, // One slide per view on small screens*/}
-        {/*            },*/}
-        {/*            1024: {*/}
-        {/*              slidesPerView: 2, // Two slides per view on medium screens*/}
-        {/*            },*/}
-        {/*            1440: {*/}
-        {/*              slidesPerView: 3, // Three slides per view on larger screens*/}
-        {/*            },*/}
-        {/*          }}*/}
-        {/*        >*/}
-        {/*          {courseData.map((course) => (*/}
-        {/*            <SwiperSlide style={{ maxWidth: "350px" }} key={course.id}>*/}
-        {/*              <ChapterCard*/}
-        {/*                id={course.id}*/}
-        {/*                image={course.image}*/}
-        {/*                label={course.label}*/}
-        {/*                title={course.title}*/}
-        {/*                description={course.description}*/}
-        {/*                action={{*/}
-        {/*                  color: "white",*/}
-        {/*                  label: t("chapters.ressources"),*/}
-        {/*                }}*/}
-        {/*                duration={course.duration}*/}
-        {/*                ressources={course.ressources}*/}
-        {/*              />*/}
-        {/*            </SwiperSlide>*/}
-        {/*          ))}*/}
-        {/*        </Swiper>*/}
-
-        {/*        /!* Custom Navigation Buttons *!/*/}
-        {/*        <VuiButton*/}
-        {/*          variant={"outlined"}*/}
-        {/*          onClick={() => swiperRef.current.swiper.slidePrev()}*/}
-        {/*          sx={{*/}
-        {/*            position: "absolute",*/}
-        {/*            left: "20px",*/}
-        {/*            top: "45%",*/}
-        {/*            zIndex: 10,*/}
-        {/*          }}*/}
-        {/*        >*/}
-        {/*          <FaChevronLeft />*/}
-        {/*        </VuiButton>*/}
-        {/*        <VuiButton*/}
-        {/*          variant={"outlined"}*/}
-        {/*          onClick={() => swiperRef.current.swiper.slideNext()}*/}
-        {/*          sx={{*/}
-        {/*            position: "absolute",*/}
-        {/*            right: "20px",*/}
-        {/*            top: "45%",*/}
-        {/*            zIndex: 10,*/}
-        {/*          }}*/}
-        {/*        >*/}
-        {/*          <FaChevronRight />*/}
-        {/*        </VuiButton>*/}
-        {/*      </Box>*/}
-        {/*    </VuiBox>*/}
-        {/*  </Card>*/}
-
+        </Grid> : ""}
+        <Grid item xs={12} xl={role === "ROOT" ? 9 : 12} md={role === "ROOT" ? 9 : 12}  >
+          <CarInformations />
         </Grid>
       </Grid>
 
       <Dialog
-        sx={({}) => ({
+        sx={({ }) => ({
           "& .MuiDialog-paper": {
             display: "flex",
             flexDirection: "column",
@@ -269,7 +183,7 @@ function Overview() {
 
       <Card>
         <VuiBox display="flex" sx={{ width: "100%", justifyContent: "space-between", alignItems: "center" }}
-                flexDirection="row" height="100%">
+          flexDirection="row" height="100%">
           <VuiBox display="flex" flexDirection="column" mb="24px">
             <VuiTypography color="white" variant="lg" fontWeight="bold" mb="6px">
               {t("profile.accountDeletion.title")}
@@ -280,7 +194,7 @@ function Overview() {
           </VuiBox>
           <VuiBox xs={{ justifyContent: "center", alignSelf: "end" }}>
             <VuiButton onClick={() => setOpenDialog(true)} color={"error"} size={"large"}
-                       variant={"gradient"}>{t("profile.accountDeletion.deleteButton")}
+              variant={"gradient"}>{t("profile.accountDeletion.deleteButton")}
             </VuiButton>
           </VuiBox>
         </VuiBox>

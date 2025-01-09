@@ -753,5 +753,11 @@
     "TIZI_OUZOU": "Tizi Ouzou",
     "TLEMCEN": "Tlemcen",
     "TOUGGOURT": "Touggourt"
+  },
+  "commission": {
+    "label": "Commission",
+    "update": "Mettre à jour",
+    "current": "Commission actuelle",
+    "updated": "Commission mise à jour avec succès"
   }
 }
