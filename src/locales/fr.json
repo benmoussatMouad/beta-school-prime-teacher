@@ -510,7 +510,7 @@
     "courses": "Mes Cours",
     "dashboard": "Tableau de bord",
     "debts": "Dettes des enseignants",
-    "payments": "Payements",
+    "payments": "Versement de l'école",
     "demands": "Demandes d'adhésion",
     "pendingCourses": "Les Cours en attente",
     "profile": "Profil",
@@ -689,7 +689,7 @@
       "title": "Les enseignants",
       "wilaya": "Wilaya"
     },
-    "payments": "Paiements",
+    "payments": "Versement de l'école",
     "debts": "Dettes des enseignants"
   },
   "totalWatchTime": "Durée totale de visionnage",
