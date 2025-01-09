@@ -51,7 +51,7 @@ export function useGetPaidTeachers({
     subject,
     status,
     role,
-    page = 1,
+    page = 0,
     limit = 10,
     sortBy,
     sortType,

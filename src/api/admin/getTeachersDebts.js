@@ -51,7 +51,7 @@ export function useGetTeachersDebts({
     subject,
     status,
     role,
-    page = 1,
+    page = 0,
     limit = 10,
     sortBy,
     sortType,

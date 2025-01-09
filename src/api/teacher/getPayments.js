@@ -2,14 +2,14 @@ import { useQuery } from "react-query";
 import { apiClient } from "../apiClient";
 
 const buildQueryParams = ({
-    page = 1,
+    page = 0,
     limit = 10,
     sortBy,
     sortType
 }) => {
     const params = {};
 
-    if (page) params.page = page;
+    if (page) params.page = page + 1;
     if (limit) params.limit = limit;
     if (sortBy) params.sortBy = sortBy;
     if (sortType) params.sortType = sortType;
