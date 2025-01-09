@@ -98,8 +98,6 @@ function Students() {
     setActionsOpen(false);
     setSelectedStudentId(null);
   };
-
-  console.log(allStudent);
   
 
   const {
