@@ -7,6 +7,14 @@
   "UNDER_CREATION": "Le cours est en mode création",
   "UNKNOWN_STATUS": "Le cours a un statut inconnu",
   "adminNote": "Note d'admin",
+  "payments": {
+    "table": {
+      "id": "ID",
+      "amount": "Montant",
+      "status": "Statut",
+      "paidAt": "Date de paiement"
+    }
+  },
   "allCourses": {
     "title": "Tous les cours"
   },
@@ -35,7 +43,8 @@
     "reject": "Rejeter",
     "reset": "Réinitialiser le mot de passe",
     "signin": "Se connecter",
-    "submit": "Soumettre"
+    "submit": "Soumettre",
+    "processing": "En cours"
   },
   "chapter": {
     "create": {
@@ -173,7 +182,11 @@
       "subject": "Sujet ",
       "title": "Demandes d'adhésion",
       "view": "Voir",
-      "yearsOfExperience": "Années d'expérience"
+      "yearsOfExperience": "Années d'expérience",
+      "phone": "Téléphone",
+      "debt": "Dettes",
+      "pay": "Payer",
+      "total": "Total"
     }
   },
   "dialog": {
@@ -435,7 +448,12 @@
       }
     },
     "title": "Action pour {{name}}",
-    "wilaya": "Wilaya"
+    "wilaya": "Wilaya",
+    "payment": {
+      "title": "Payement",
+      "confirmation": "Voulez-vous vraiment confirmez le payement ?"
+    },
+    "debt": "Dettes"
   },
   "profile": {
     "accountDeletion": {
@@ -491,6 +509,8 @@
     "cours": "Cours",
     "courses": "Mes Cours",
     "dashboard": "Tableau de bord",
+    "debts": "Dettes des enseignants",
+    "payments": "Payements",
     "demands": "Demandes d'adhésion",
     "pendingCourses": "Les Cours en attente",
     "profile": "Profil",
@@ -565,7 +585,9 @@
     "REJECTED": "Rejeté",
     "STATUS": "Status",
     "TO_REVIEW": "À revoir",
-    "UNDER_CREATION": "En cours de création"
+    "UNDER_CREATION": "En cours de création",
+    "PAID": "Payé",
+    "FAILED": "Echoué"
   },
   "students": {
     "loading": "Chargement des étudiants...",
@@ -666,7 +688,9 @@
     "table": {
       "title": "Les enseignants",
       "wilaya": "Wilaya"
-    }
+    },
+    "payments": "Paiements",
+    "debts": "Dettes des enseignants"
   },
   "totalWatchTime": "Durée totale de visionnage",
   "typeHere": "Tapez ici",

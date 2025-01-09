@@ -53,6 +53,8 @@ import { GiBookshelf, GiMaterialsScience } from "react-icons/gi";
 import { PiStudentFill } from "react-icons/pi";
 import { LiaChalkboardTeacherSolid } from "react-icons/lia";
 import { BiSupport } from "react-icons/bi";
+import { FaHandHoldingDollar } from "react-icons/fa6";
+import { HiCurrencyDollar } from "react-icons/hi2";
 import ResetPassword from "layouts/authentication/reset-password";
 import ForgetPassword from "layouts/authentication/forget-password";
 import Demands from "./layouts/demands";
@@ -62,6 +64,8 @@ import CoursDetails from "./layouts/cours";
 import AllCourses from "./layouts/allCourses";
 import PendingCourses from "./layouts/pendingCourses";
 import StudentsApprovals from "./layouts/studentsApprovals";
+import TeachersDebts from "./layouts/teachersDebts";
+import TeacherPayments from "layouts/teacherPayments";
 
 
 const routes = [
@@ -104,6 +108,17 @@ const routes = [
     route: "/allCourses",
     icon: <GiBookshelf size="15px" color="inherit" />,
     component: AllCourses,
+    noCollapse: true,
+    isProtected: true,
+    isRoot: true,
+  },
+  {
+    type: "collapse",
+    name: "Enseignants dettes",
+    key: "debts",
+    route: "/debts",
+    icon: <FaHandHoldingDollar size="15px" color="inherit" />,
+    component: TeachersDebts,
     noCollapse: true,
     isProtected: true,
     isRoot: true,
@@ -157,6 +172,16 @@ const routes = [
     route: "/students",
     icon: <PiStudentFill size="15px" color="inherit" />,
     component: Students,
+    noCollapse: true,
+    isProtected: true,
+  },
+  {
+    type: "collapse",
+    name: "les payments des enseignants",
+    key: "payments",
+    route: "/payments",
+    icon: <HiCurrencyDollar size="20px" color="inherit" />,
+    component: TeacherPayments,
     noCollapse: true,
     isProtected: true,
   },

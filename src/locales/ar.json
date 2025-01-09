@@ -7,6 +7,14 @@
   "UNDER_CREATION": "الدورة في وضع الإنشاء",
   "UNKNOWN_STATUS": "الدورة الحالة غير معروفة",
   "adminNote": "ملاحظة من المسؤول",
+  "payments": {
+    "table": {
+      "id": "معرّف",
+      "amount": "المبلغ",
+      "status": "الحالة",
+      "paidAt": "تاريخ الدفع"
+    }
+  },
   "allCourses": {
     "title": "كل الدورات"
   },
@@ -35,7 +43,8 @@
     "reject": "رفض",
     "reset": "إعادة تعيين كلمة المرور",
     "signin": "تسجيل الدخول",
-    "submit": "إرسال"
+    "submit": "إرسال",
+    "processing": "جاري المعالجة"
   },
   "chapter": {
     "create": {
@@ -174,7 +183,11 @@
       "subject": "المادة",
       "title": "طلبات الانضمام",
       "view": "انظر",
-      "yearsOfExperience": "سنوات من الخبرة"
+      "yearsOfExperience": "سنوات من الخبرة",
+      "phone": "رقم الهاتف",
+      "debt": "الدين",
+      "pay": "الدفع",
+      "total": "المجموع"
     }
   },
   "dialog": {
@@ -436,7 +449,12 @@
       }
     },
     "title": "إجراء لـ {{name}}",
-    "wilaya": "ولاية"
+    "wilaya": "ولاية",
+    "payment": {
+      "title": "تحديث حالة الدفع",
+      "confirmation": "هل تريد تحديث حالة الدفع ؟"
+    },
+    "debt": "الدين"
   },
   "profile": {
     "accountDeletion": {
@@ -492,6 +510,8 @@
     "cours": "الدورة",
     "courses": "الدورات",
     "dashboard": "لوحة التحكم",
+    "debts": "ديون المعلمين",
+    "payments": " الدفعات",
     "demands": "طلبات الانضمام",
     "pendingCourses": "الدورات قيد الانتظار",
     "profile": "الملف الشخصي",
@@ -566,7 +586,9 @@
     "REJECTED": "مرفوض",
     "STATUS": "الحالة",
     "TO_REVIEW": "للمراجعة",
-    "UNDER_CREATION": "قيد الإنشاء"
+    "UNDER_CREATION": "قيد الإنشاء",
+    "PAID": "مدفوع",
+    "FAILED": "فشلت"
   },
   "students": {
     "block": {
@@ -674,7 +696,9 @@
     "table": {
       "title": "المدرسين",
       "wilaya": "ولاية"
-    }
+    },
+    "payments": " الدفعات",
+    "debts":"ديون المعلمين"
   },
   "totalWatchTime": "إجمالي وقت المشاهدة",
   "typeHere": "اكتب هنا",
