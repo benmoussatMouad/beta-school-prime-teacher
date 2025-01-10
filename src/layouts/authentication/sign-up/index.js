@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form"; // Import React Hook Form
 import CoverLayout from "layouts/authentication/components/CoverLayout";
 import bgSignIn from "assets/images/signUpImage.png";
@@ -24,23 +24,45 @@ function SignUp() {
   const { t } = useTranslation();
   const steps = [t("signup.stepper.personal"), t("signup.stepper.personalPro"), t("signup.stepper.upload")];
 
-  const [activeStep, setActiveStep] = useState(0);
+  const [activeStep, setActiveStep] = useState(() => {
+    const savedStep = localStorage.getItem('signupActiveStep');
+    return savedStep ? parseInt(savedStep) : 0;
+  });
+
   const [avatarPreview, setAvatarPreview] = useState(null); // State to store the avatar preview
   const [showPassword, setShowPassword] = useState(false); // Toggle for password visibility
-  const [formDataState, setFormData] = useState({
-    firstName: "",
-    lastName: "",
-    firstNameAr: "",
-    lastNameAr: "",
-    email: "",
-    phone: "",
-    subject: Subjects[0],
-    wilaya: "ORAN", // Add wilaya field
-    institution: "",
-    yearsOfExperience: 0,
-    profilePic: null,
-    password: "",
+  const [formDataState, setFormData] = useState(() => {
+    const savedData = localStorage.getItem('signupFormData');
+    return savedData ? JSON.parse(savedData) : {
+      firstName: "",
+      lastName: "",
+      firstNameAr: "",
+      lastNameAr: "",
+      email: "",
+      phone: "",
+      subject: Subjects[0],
+      wilaya: "ORAN",
+      institution: "",
+      yearsOfExperience: 0,
+      profilePic: null,
+      password: "",
+    };
   });
+
+  // Save form data to localStorage whenever it changes
+  useEffect(() => {
+    const dataToSave = { ...formDataState };
+    // Don't save the File object
+    if (dataToSave.profilePic instanceof File) {
+      delete dataToSave.profilePic;
+    }
+    localStorage.setItem('signupFormData', JSON.stringify(dataToSave));
+  }, [formDataState]);
+
+  // Save active step to localStorage whenever it changes
+  useEffect(() => {
+    localStorage.setItem('signupActiveStep', activeStep.toString());
+  }, [activeStep]);
 
   const { mutate, isLoading } = useSignUp();
 
@@ -100,8 +122,10 @@ function SignUp() {
       formData.append("profilePic", formDataState.profilePic); // Make sure `profilePic` is a File
     }
 
-    await mutate(formData);
-
+    mutate(formData);
+    // Clear both form data and active step after successful submission
+    localStorage.removeItem('signupFormData');
+    localStorage.removeItem('signupActiveStep');
   };
 
   const handleAvatarChange = (e) => {
@@ -129,7 +153,7 @@ function SignUp() {
             }}>
               <VuiBox px={1}>
                 <VuiTypography sx={{ margin: "10px 0" }} component="label" variant="button" color="white"
-                               fontWeight="medium">
+                  fontWeight="medium">
                   {t("signup.forms.firstName")}
                 </VuiTypography>
                 <VuiInput
@@ -144,7 +168,7 @@ function SignUp() {
               </VuiBox>
               <VuiBox px={1}>
                 <VuiTypography sx={{ margin: "10px 0" }} component="label" variant="button" color="white"
-                               fontWeight="medium">
+                  fontWeight="medium">
                   {t("signup.forms.firstNameAr")}
                 </VuiTypography>
                 <VuiInput
@@ -163,7 +187,7 @@ function SignUp() {
             }}>
               <VuiBox px={1}>
                 <VuiTypography sx={{ margin: "10px 0" }} component="label" variant="button" color="white"
-                               fontWeight="medium">
+                  fontWeight="medium">
                   {t("signup.forms.lastName")}
                 </VuiTypography>
                 <VuiInput
@@ -179,7 +203,7 @@ function SignUp() {
               </VuiBox>
               <VuiBox px={1}>
                 <VuiTypography sx={{ margin: "10px 0" }} component="label" variant="button" color="white"
-                               fontWeight="medium">
+                  fontWeight="medium">
                   {t("signup.forms.lastNameAr")}
                 </VuiTypography>
                 <VuiInput
@@ -195,7 +219,7 @@ function SignUp() {
               {/*Email field*/}
               <VuiBox px={1}>
                 <VuiTypography px={1} sx={{ margin: "10px 0" }} component="label" variant="button" color="white"
-                               fontWeight="medium">
+                  fontWeight="medium">
                   {t("signup.forms.email")}
                 </VuiTypography>
                 <VuiInput
@@ -218,7 +242,7 @@ function SignUp() {
               {/*Phone field*/}
               <VuiBox px={1}>
                 <VuiTypography px={1} sx={{ margin: "10px 0" }} component="label" variant="button" color="white"
-                               fontWeight="medium">
+                  fontWeight="medium">
                   {t("signup.forms.phone")}
                 </VuiTypography>
                 <VuiInput
@@ -241,7 +265,7 @@ function SignUp() {
             {/*Password field*/}
             <VuiBox px={1}>
               <VuiTypography sx={{ margin: "10px 0" }} component="label" variant="button" color="white"
-                             fontWeight="medium">
+                fontWeight="medium">
                 {t("signup.forms.password")}
               </VuiTypography>
               <VuiInput
@@ -269,7 +293,7 @@ function SignUp() {
         return (
           <VuiBox sx={{ display: "flex", flexDirection: "column", justifyContent: "center" }}>
             <VuiTypography sx={{ margin: "10px 0" }} component="label" variant="button" color="white"
-                           fontWeight="medium">
+              fontWeight="medium">
               {t("signup.forms.subject")}
             </VuiTypography>
             <VuiSelect
@@ -284,7 +308,7 @@ function SignUp() {
               <VuiTypography sx={{ color: "red", fontSize: "0.7rem" }}>{errors.subject.message}</VuiTypography>}
 
             <VuiTypography sx={{ margin: "10px 0" }} component="label" variant="button" color="white"
-                           fontWeight="medium">
+              fontWeight="medium">
               {t("signup.forms.school")}
             </VuiTypography>
             <VuiInput
@@ -297,7 +321,7 @@ function SignUp() {
             {errors.institution &&
               <VuiTypography sx={{ color: "red", fontSize: "0.7rem" }}>{errors.institution.message}</VuiTypography>}
             <VuiTypography sx={{ margin: "10px 0" }} component="label" variant="button" color="white"
-                           fontWeight="medium">
+              fontWeight="medium">
               {t("signup.forms.years")}
             </VuiTypography>
             <VuiInput
@@ -321,7 +345,7 @@ function SignUp() {
               <VuiTypography
                 sx={{ color: "red", fontSize: "0.7rem" }}>{errors.yearsOfExperience.message}</VuiTypography>}
             <VuiTypography sx={{ margin: "10px 0" }} component="label" variant="button" color="white"
-                           fontWeight="medium">
+              fontWeight="medium">
               {t("signup.forms.wilaya")}
             </VuiTypography>
             <VuiSelect
@@ -345,7 +369,7 @@ function SignUp() {
             alignItems: "center",
           }}>
             <VuiTypography sx={{ margin: "10px 0" }} component="label" variant="button" color="white"
-                           fontWeight="medium">
+              fontWeight="medium">
               {t("signup.forms.upload")}
             </VuiTypography>
             <input
@@ -354,7 +378,7 @@ function SignUp() {
               style={{ display: "none" }}
             />
             <Avatar src={avatarPreview} sx={{ width: 100, height: 100, cursor: "pointer" }}
-                    onClick={() => document.querySelector("input[type=\"file\"]").click()} />
+              onClick={() => document.querySelector("input[type=\"file\"]").click()} />
             {errors.profilePic &&
               <VuiTypography sx={{ color: "red", fontSize: "0.7rem" }}>{errors.profilePic.message}</VuiTypography>}
           </VuiBox>
