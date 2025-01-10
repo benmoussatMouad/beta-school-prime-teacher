@@ -74,9 +74,6 @@ function Sales() {
     setPage(0);
   };
 
-  console.log(data);
-
-
   const { columns, rows } = user.user.role !== "ROOT"
     ? teacherSalesTableData(t, data?.transactions || [], data?.commission)
     : salesRootTableData(t, data?.transactions || [], data?.commission);
