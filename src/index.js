@@ -28,6 +28,8 @@ import VisionUISnackBar from "./components/VuiSnackBar";
 import { AuthProvider } from "./context/auth/authContext";
 import { I18nextProvider } from "react-i18next";
 import i18n from "./i18n";
+import { LocalizationProvider } from '@mui/x-date-pickers';
+import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment'
 
 const rootElement = document.getElementById("root");
 const root = createRoot(rootElement);
@@ -40,7 +42,9 @@ root.render(
         <AuthProvider>
           <VisionUISnackBar/>
           <I18nextProvider i18n={i18n}>
-            <App />
+          <LocalizationProvider dateAdapter={AdapterMoment}>
+     <App/>
+    </LocalizationProvider>
           </I18nextProvider>
         </AuthProvider>
       </ReactQueryProvider>

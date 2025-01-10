@@ -517,7 +517,27 @@
     "students": "Étudiants",
     "studentsDemands": "Demandes des nouveaux élèves",
     "support": "Support",
-    "teachers": "Les Enseignants"
+    "teachers": "Les Enseignants",
+    "sales": "Les Ventes"
+  },
+
+  "sales": {
+    "title": "Ventes",
+    "table": {
+      "id": "ID Transaction",
+      "course": "Cours",
+      "teacher": "Enseignant",
+      "student": "Étudiant",
+      "amount": "Montant",
+      "amountAfterCommission": "Montant après commission",
+      "status": "Statut",
+      "date": "Date"
+    },
+    "startDate": "Date de début",
+    "endDate": "Date de fin",
+    "status": "Statut",
+    "totalAmount": "Montant Total",
+    "totalNetAmount": "Montant Net Total"
   },
   "signup": {
     "already": "Vous avez déjà un compte ?",

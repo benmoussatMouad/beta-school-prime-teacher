@@ -6,6 +6,8 @@ import VuiInput from "../components/VuiInput";
 import VuiSelect from "../components/VuiSelect";
 import React from "react";
 import moment from "moment";
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import VuiDatePicker from "components/VuiDatePicker";
 
 export function getEnvSafely(envKey, defaultValue) {
   const value = process.env[envKey];
@@ -577,6 +579,35 @@ export const getFiltersInputs = ({ tableId, onSearchChange, subject, selectedRol
           />
         </Grid>
       </Grid>;
+    case "sales":
+      return (
+        <Grid container spacing={2}>
+          <Grid item xs={12} md={role === "ROOT" ? 4 : 6}>
+            <VuiDatePicker
+              label={t("sales.startDate")}
+              onChange={(date) => onSearchChange({ target: { name: 'startDate', value: date } })}
+              fullWidth
+            />
+          </Grid>
+          <Grid item xs={12} md={role === "ROOT" ? 4 : 6}>
+            <VuiDatePicker
+              label={t("sales.endDate")}
+              onChange={(date) => onSearchChange({ target: { name: 'endDate', value: date } })}
+              fullWidth
+            />
+          </Grid>
+          {role === "ROOT" ? <Grid item xs={12} md={4}>
+            <VuiSelect
+              onChange={onSearchChange}
+              label={t("sales.status")}
+              options={["PAID", "PENDING", "FAILED"]}
+              value={status || "PAID"}
+              name="status"
+              typeSelect="status"
+            />
+          </Grid> : ""}
+        </Grid>
+      );
   }
 };
 

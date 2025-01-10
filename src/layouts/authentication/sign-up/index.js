@@ -92,6 +92,7 @@ function SignUp() {
       setActiveStep((prev) => prev + 1);
     }
   };
+  
 
   const handleBack = () => {
     if (activeStep > 0) setActiveStep((prev) => prev - 1);
