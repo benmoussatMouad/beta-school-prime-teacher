@@ -518,7 +518,8 @@
     "students": "التلاميذ",
     "studentsDemands": "طلابات التلاميذ",
     "support": "الدعم",
-    "teachers": "المعلمون"
+    "teachers": "المعلمون",
+    "sales": "المبيعات"
   },
   "signup": {
     "already": "هل لديك حساب؟",
@@ -574,6 +575,24 @@
     "updateProfile": "تم تحديث الملف الشخصي بنجاح!",
     "uploadVideo": "تم رفع الفيديو بنجاح",
     "verifyEmail": "تم التحقق من بريدك الإلكتروني بنجاح!"
+  },
+  "sales": {
+    "title": "المبيعات",
+    "table": {
+      "id": "رقم المعاملة",
+      "course": "الدورة",
+      "teacher": "المدرس",
+      "student": "الطالب",
+      "amount": "المبلغ",
+      "amountAfterCommission": "المبلغ بعد العمولة",
+      "status": "الحالة",
+      "date": "التاريخ"
+    },
+    "startDate": "تاريخ البداية",
+    "endDate": "تاريخ النهاية",
+    "status": "الحالة",
+    "totalAmount": "المبلغ الإجمالي",
+    "totalNetAmount": "المبلغ الصافي الإجمالي"
   },
   "status": {
     "ACCEPTED": "مقبول",
@@ -698,7 +717,7 @@
       "wilaya": "ولاية"
     },
     "payments": " المدفوعات المدرسة",
-    "debts":"ديون المعلمين"
+    "debts": "ديون المعلمين"
   },
   "totalWatchTime": "إجمالي وقت المشاهدة",
   "typeHere": "اكتب هنا",
@@ -762,10 +781,10 @@
     "TLEMCEN": "تلمسان",
     "TOUGGOURT": "تقرت"
   },
-  "commission":{
-    "label":"التكليف",
+  "commission": {
+    "label": "التكليف",
     "update": "تحديث",
-    "current":"التكليف الحالي",
-    "updated":"تم تحديث التكليف بنجاح"
+    "current": "التكليف الحالي",
+    "updated": "تم تحديث التكليف بنجاح"
   }
 }
