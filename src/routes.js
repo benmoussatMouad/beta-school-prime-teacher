@@ -55,6 +55,7 @@ import { LiaChalkboardTeacherSolid } from "react-icons/lia";
 import { BiSupport } from "react-icons/bi";
 import { FaHandHoldingDollar } from "react-icons/fa6";
 import { HiCurrencyDollar } from "react-icons/hi2";
+import { FcSalesPerformance } from "react-icons/fc";
 import ResetPassword from "layouts/authentication/reset-password";
 import ForgetPassword from "layouts/authentication/forget-password";
 import Demands from "./layouts/demands";
@@ -66,6 +67,7 @@ import PendingCourses from "./layouts/pendingCourses";
 import StudentsApprovals from "./layouts/studentsApprovals";
 import TeachersDebts from "./layouts/teachersDebts";
 import TeacherPayments from "layouts/teacherPayments";
+import Sales from "layouts/sales";
 
 
 const routes = [
@@ -182,6 +184,16 @@ const routes = [
     route: "/payments",
     icon: <HiCurrencyDollar size="20px" color="inherit" />,
     component: TeacherPayments,
+    noCollapse: true,
+    isProtected: true,
+  },
+  {
+    type: "collapse",
+    name: "les payments des enseignants",
+    key: "sales",
+    route: "/sales",
+    icon: <FcSalesPerformance size="20px" color="inherit" />,
+    component: Sales,
     noCollapse: true,
     isProtected: true,
   },
