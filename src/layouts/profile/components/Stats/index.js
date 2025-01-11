@@ -129,7 +129,7 @@ const Stats = () => {
             <Grid item xs={12} md={6}>
               <StatCard
                 title={t('profile.data.lifetimeEarnings')}
-                value={formatCurrency(data?.totalProfit || data?.allTimeProfit)}
+                value={formatCurrency(data?.totalProfit || data?.allTimeProfit || 0)}
                 icon={FaMoneyBillAlt}
               />
             </Grid>
@@ -145,7 +145,7 @@ const Stats = () => {
             <Grid item xs={12} md={6}>
               <StatCard
                 title={t('profile.data.soldCoursesLastMonth')}
-                value={data?.coursesSoldLastMonth || data?.totalCoursesSoldLastMonth}
+                value={data?.coursesSoldLastMonth || data?.totalCoursesSoldLastMonth || 0}
                 icon={GrTransaction}
               />
             </Grid>
