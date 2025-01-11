@@ -37,16 +37,7 @@ import CreateChapter from "../../examples/Dialogs/CreateChapter";
 import UpdateChapter from "../../examples/Dialogs/UpdateChapter";
 import ViewChapter from "../../examples/Dialogs/ViewChapter";
 import VuiProgress from "../../components/VuiProgress";
-import List from "@mui/material/List";
 import VuiBadge from "../../components/VuiBadge";
-import VuiAvatar from "../../components/VuiAvatar";
-import i18n from "../../i18n";
-import ProfilesList from "../../examples/Lists/ProfilesList";
-import avatar from "../../assets/theme/components/avatar";
-import NotificationItem from "../../examples/Items/NotificationItem";
-import Popper from "@mui/material/Popper/BasePopper";
-import MiniStatisticsCard from "../../examples/Cards/StatisticsCards/MiniStatisticsCard";
-import { IoCard, IoNotifications } from "react-icons/io5";
 import RevertCourse from "./components/RevertCourse";
 
 
@@ -68,30 +59,9 @@ function CoursDetails() {
   const { data, isLoading } = useGetCourse(coursId);
   const course = data?.course;
   const { mutate: updateToReview } = useUpdateToReview();
-  // Separate states for handling each Popover
-  const [anchorEl1, setAnchorEl1] = useState(null);
-  const [anchorEl2, setAnchorEl2] = useState(null);
-
-  const handlePopoverOpen1 = (event) => {
-    setAnchorEl1(event.currentTarget);
-  };
-
-  const handlePopoverClose1 = () => {
-    setAnchorEl1(null);
-  };
-
-  const handlePopoverOpen2 = (event) => {
-    setAnchorEl2(event.currentTarget);
-  };
-
-  const handlePopoverClose2 = () => {
-    setAnchorEl2(null);
-  };
-  const open1 = Boolean(anchorEl1);
-  const open2 = Boolean(anchorEl2);
 
   const changeStatusToReview = async () => {
-    await updateToReview(course.id);
+    updateToReview(course.id);
   };
 
   if (isLoading) {
@@ -161,7 +131,7 @@ function CoursDetails() {
       <Header data={course} courseOwner={data.teacher.user} myOwnCourse={myOwnCourse} isLoading={isLoading} pageName={course?.title} />
       <CreateChapter closeDialog={closeDialog} openDialog={openCreateDialog} courseId={course.id} />
       <UpdateChapter closeDialog={closeDialog} openDialog={openUpdateDialog.open}
-                     chapterId={openUpdateDialog.coursId} />
+        chapterId={openUpdateDialog.coursId} />
       <ViewChapter
         openDialog={openViewDialog.open}
         closeDialog={closeDialog}
@@ -222,17 +192,17 @@ function CoursDetails() {
                 </VuiTypography>
                 <VuiBox borderRadius={"lg"} sx={{ p: 3, mb: 1, border: "1px solid #234576" }}>
                   <VuiTypography color={"white"} variant="body2"
-                                 sx={{ textAlign: "justify", mt: 1, lineHeight: 1.1 }}>
+                    sx={{ textAlign: "justify", mt: 1, lineHeight: 1.1 }}>
                     {course.description}
                   </VuiTypography>
                 </VuiBox>
                 <VuiBadge badgeContent={`${t("currentEnrollment")}: ${course.currentEnrollment || "0"}`}
-                          color={"primary"} container variant="contained" size={"md"}
-                          sx={{ textAlign: "justify", mt: 1 }} />
-                <br/>
+                  color={"primary"} container variant="contained" size={"md"}
+                  sx={{ textAlign: "justify", mt: 1 }} />
+                <br />
                 <VuiBadge badgeContent={`${t("totalWatchTime")}: ${formatSeconds(course.totalWatchTime, t)}`}
-                          color={"info"} container variant="contained" size={"md"}
-                          sx={{ textAlign: "justify", mt: 1 }} />
+                  color={"info"} container variant="contained" size={"md"}
+                  sx={{ textAlign: "justify", mt: 1 }} />
               </Grid>
               <Grid item xs={12} lg={4} sx={{ py: 1 }}>
                 <VuiTypography color={"white"}>
@@ -249,10 +219,18 @@ function CoursDetails() {
                   </VuiBox>
                   <VuiBox sx={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
                     <VuiTypography color={"white"} variant="body2" component="h2">
+                      {t("course.details.discountedPrice")} {`(${course.discount}%)`}
+                    </VuiTypography>
+                    <VuiTypography color={"white"} variant="caption" component="h2">
+                      {Math.round(course.price * (1 - course.discount / 100))} DZD
+                    </VuiTypography>
+                  </VuiBox>
+                  <VuiBox sx={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                    <VuiTypography color={"white"} variant="body2" component="h2">
                       {t("course.details.schoolGains")}
                     </VuiTypography>
                     <VuiTypography color={"white"} variant="caption" component="h2">
-                      {Math.round(course.price * 0.4)} DZD
+                      {Math.round(course.price * (1 - course.discount / 100) * 0.4)} DZD
                     </VuiTypography>
                   </VuiBox>
                   <VuiBox sx={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
@@ -260,10 +238,11 @@ function CoursDetails() {
                       {t("course.details.teacherGains")}
                     </VuiTypography>
                     <VuiTypography color={"white"} variant="caption" component="h2">
-                      {Math.round(course.price * 0.6)} DZD
+                      {Math.round(course.price * (1 - course.discount / 100) * 0.6)} DZD
                     </VuiTypography>
                   </VuiBox>
                 </VuiBox>
+
                 <VuiTypography color={"white"}>
                   {t("dialog.forms.educationalBranches")}
                 </VuiTypography>
@@ -273,7 +252,7 @@ function CoursDetails() {
                     fontSize: { xs: "0.8rem", md: "1rem" },
                     textAlign: { xs: "center", md: "left" },
                   }} size={"xs"} variant={"contained"} style={{ color: "white", fontSize: "0.9rem" }}
-                            key={index} badgeContent={t(`educationalBranches.${el}`)} />
+                    key={index} badgeContent={t(`educationalBranches.${el}`)} />
                 ))}
                 <VuiTypography color={"white"}>
                   {t("dialog.forms.teacherClasses")}
@@ -284,7 +263,7 @@ function CoursDetails() {
                     fontSize: { xs: "0.8rem", md: "1rem" },
                     textAlign: { xs: "center", md: "left" },
                   }} size={"xs"} style={{ color: "white", fontSize: "0.9rem" }}
-                            key={index} variant={"contained"} badgeContent={t(`teacherClass.${el}`)} />
+                    key={index} variant={"contained"} badgeContent={t(`teacherClass.${el}`)} />
                 ))}
               </Grid>
             </Grid>
@@ -330,7 +309,7 @@ function CoursDetails() {
                 >
                   {!course?.chapters.length ?
                     <VuiBox display="flex" justifyContent="center" sx={{ height: "300px" }} alignItems="flex-start"
-                            py={3}>
+                      py={3}>
                       <VuiTypography color={"white"}>
                         {t("demands.table.nodata")}
                       </VuiTypography>
@@ -426,7 +405,7 @@ function CoursDetails() {
                   course.status === "ACCEPTED" ? "success" :
                     "primary"} borderRadius="lg" sx={{ p: 3, mb: 1 }}>
             <Grid container alignItems="center" justifyContent="space-between"
-                  sx={{ gap: { xs: "16px", sm: "12px", md: "8px" }, color: "white", textAlign: "center" }}>
+              sx={{ gap: { xs: "16px", sm: "12px", md: "8px" }, color: "white", textAlign: "center" }}>
               <VuiTypography variant="h6" sx={{ fontWeight: "bold", width: "100%" }} color="white">
                 {renderNote()}
               </VuiTypography>
@@ -443,7 +422,7 @@ function CoursDetails() {
                     course.status === "ACCEPTED" ? "success" :
                       "primary"} borderRadius="lg" sx={{ p: 3, mb: 1 }}>
               <Grid container alignItems="center" justifyContent="space-between"
-                    sx={{ gap: { xs: "16px", sm: "12px", md: "8px" }, color: "white", textAlign: "center" }}>
+                sx={{ gap: { xs: "16px", sm: "12px", md: "8px" }, color: "white", textAlign: "center" }}>
                 <VuiTypography variant="h6" sx={{ fontWeight: "bold", width: "100%" }} color="white">
                   {renderNote()}
                 </VuiTypography>
@@ -454,7 +433,7 @@ function CoursDetails() {
         }
       </Grid>
       {
-        user.role === "ROOT" && (course.status === 'ACCEPTED' || course.status === 'REJECT')  ? <RevertCourse coursId={coursId} /> : ""
+        user.role === "ROOT" && (course.status === 'ACCEPTED' || course.status === 'REJECT') ? <RevertCourse coursId={coursId} /> : ""
       }
       {
         user.role === "ROOT" || myOwnCourse ? <DeleteCourse coursId={coursId} /> : ""

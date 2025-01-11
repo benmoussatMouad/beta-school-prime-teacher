@@ -90,7 +90,8 @@
       "priceDetails": "Informations de tarif",
       "schoolGains": "Gains de l'ecole (40%)",
       "teacherGains": "Vos Gains (60%)",
-      "totalPrice": "Prix total"
+      "totalPrice": "Prix total",
+      "discountedPrice": "Prix réduit "
     },
     "filter": {
       "level": "Niveau",
