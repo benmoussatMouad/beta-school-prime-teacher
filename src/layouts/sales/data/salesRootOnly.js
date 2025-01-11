@@ -56,69 +56,86 @@ function Function({ content, isWilaya }) {
 export const salesRootTableData = (t, data, commission) => {
   const safeData = Array.isArray(data) ? data : [];
 
-  const rowsObject = safeData.map((item) => ({
-    [t("sales.table.id")]: (
-      <VuiTypography variant="caption" color="white" fontWeight="medium">
-        {item.id}
-      </VuiTypography>
-    ),
-    [t("sales.table.course")]: (
-      <VuiTypography variant="caption" color="white" fontWeight="medium">
-        {item.course.title}
-      </VuiTypography>
-    ),
-    [t("sales.table.teacher")]: (
-      <Teacher
-        image={item.course.teacher.user.profilePic?.url}
-        name={`${item.course.teacher.user.firstName} ${item.course.teacher.user.lastName}`}
-      />
-    ),
-    [t("sales.table.student")]: (
-      <VuiTypography variant="caption" color="white" fontWeight="medium">
-        {`${item.student.user.firstName} ${item.student.user.lastName}`}
-      </VuiTypography>
-    ),
-    [t("sales.table.amount")]: (
-      <VuiTypography sx={{ margin: 1.5 }} variant="caption" color="white" fontWeight="medium" display="flex" justifyContent="center">
-        <VuiBadge
-          variant="standard"
-          badgeContent={`${item.amount} DA`}
-          size="xs"
-          container
-          sx={({ palette: { white, success }, borders: { borderRadius, borderWidth } }) => ({
-            background: success.main,
-            border: `${borderWidth[1]} solid ${success.main}`,
-            borderRadius: borderRadius.md,
-            color: white.main,
-          })}
+  const rowsObject = safeData.map((item) => {
+    let statusColor;
+    switch (item.status) {
+      case "PENDING":
+        statusColor = "warning";
+        break;
+      case "PAID":
+        statusColor = "success";
+        break;
+      case "FAILED":
+        statusColor = "error";
+        break;
+      default:
+        statusColor = "info";
+    }
+
+    return {
+      [t("sales.table.id")]: (
+        <VuiTypography variant="caption" color="white" fontWeight="medium">
+          {item.id}
+        </VuiTypography>
+      ),
+      [t("sales.table.course")]: (
+        <VuiTypography variant="caption" color="white" fontWeight="medium">
+          {item.course.title}
+        </VuiTypography>
+      ),
+      [t("sales.table.teacher")]: (
+        <Teacher
+          image={item.course.teacher.user.profilePic?.url}
+          name={`${item.course.teacher.user.firstName} ${item.course.teacher.user.lastName}`}
         />
-      </VuiTypography>
-    ),
-    [t("sales.table.amountAfterCommission")]: (
-      <VuiTypography variant="caption" color="white" fontWeight="medium" display="flex" justifyContent="center">
-        {`${item.netAmount} DA`}
-      </VuiTypography>
-    ),
-    [t("sales.table.status")]: (
-      <VuiTypography variant="caption" color="white" fontWeight="medium" display="flex" justifyContent="center">
-        <VuiBadge
-          variant="standard"
-          badgeContent={t(`status.${item.status}`)}
-          size="xs"
-          container
-          sx={({ palette: { white, success } }) => ({
-            background: success.main,
-            color: white.main,
-          })}
-        />
-      </VuiTypography>
-    ),
-    [t("sales.table.date")]: (
-      <VuiTypography variant="caption" color="white" fontWeight="medium">
-        {moment(item.createdAt).format("DD/MM/YYYY HH:mm")}
-      </VuiTypography>
-    ),
-  }));
+      ),
+      [t("sales.table.student")]: (
+        <VuiTypography variant="caption" color="white" fontWeight="medium">
+          {`${item.student.user.firstName} ${item.student.user.lastName}`}
+        </VuiTypography>
+      ),
+      [t("sales.table.amount")]: (
+        <VuiTypography sx={{ margin: 1.5 }} variant="caption" color="white" fontWeight="medium" display="flex" justifyContent="center">
+          <VuiBadge
+            variant="standard"
+            badgeContent={`${item.amount} DA`}
+            size="xs"
+            container
+            sx={({ palette: { white, success }, borders: { borderRadius, borderWidth } }) => ({
+              background: success.main,
+              border: `${borderWidth[1]} solid ${success.main}`,
+              borderRadius: borderRadius.md,
+              color: white.main,
+            })}
+          />
+        </VuiTypography>
+      ),
+      [t("sales.table.amountAfterCommission")]: (
+        <VuiTypography variant="caption" color="white" fontWeight="medium" display="flex" justifyContent="center">
+          {`${item.netAmount} DA`}
+        </VuiTypography>
+      ),
+      [t("sales.table.status")]: (
+        <VuiTypography variant="caption" color="white" fontWeight="medium" display="flex" justifyContent="center">
+          <VuiBadge
+            variant="standard"
+            badgeContent={t(`status.${item.status}`)}
+            size="xs"
+            container
+            sx={({ palette: { white, [statusColor]: statusColorValue } }) => ({
+              background: statusColorValue.main,
+              color: white.main,
+            })}
+          />
+        </VuiTypography>
+      ),
+      [t("sales.table.date")]: (
+        <VuiTypography variant="caption" color="white" fontWeight="medium">
+          {moment(item.createdAt).format("DD/MM/YYYY HH:mm")}
+        </VuiTypography>
+      ),
+    };
+  });
 
   return {
     columns: [
