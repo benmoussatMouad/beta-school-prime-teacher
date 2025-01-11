@@ -40,44 +40,55 @@ import { useTranslation } from "react-i18next";
 import { PiStudent } from "react-icons/pi";
 import { MdOutlineOndemandVideo } from "react-icons/md";
 import { IoMdEye } from "react-icons/io";
+import { getAccessToken } from "utils";
+import { useStats } from "api/teacher/getStats";
 
 
 function Dashboard() {
 
   const { user } = useAuth();
   const { t } = useTranslation();
+
+
+  const token = getAccessToken()
+  const { data, isLoading } = useStats(token);
+
+
   return (
     <DashboardLayout user={user}>
       <DashboardNavbar pageName={"Tableau de bord"} />
       <VuiBox py={3}>
         <VuiBox mb={3}>
           <Grid container spacing="18px">
-            <Grid item xs={12} md={6} lg={6} xl={6}>
+            <Grid item xs={12} md={6} xl={6}>
               <WelcomeMark user={user} />
             </Grid>
-            <Grid item xs={12} md={6} lg={3} xl={3}>
+            <Grid item xs={12} md={6} xl={6}>
               <VuiBox mb={0}>
                 <Grid direction={"column"}>
                   <Grid item xs={12} md={6} xl={3}>
                     <VuiBox my={2}><MiniStatisticsCard
+                      isLoading={isLoading}
                       title={{ text: t("dashboard.todayUsers") }}
-                      count="15"
+                      count={data?.totalViewsToday}
                       // percentage={{ color: "success", text: "+3%" }}
                       icon={{ color: "info", component: <PiStudent size="22px" color="white" /> }}
                     /></VuiBox>
                   </Grid>
                   <Grid item xs={12} md={6} xl={3}>
                     <VuiBox my={2}><MiniStatisticsCard
+                      isLoading={isLoading}
                       title={{ text: t("dashboard.newViewers") }}
-                      count="+5"
+                      count={data?.totalViewsMonth}
                       // percentage={{ color: "error", text: "-2%" }}
                       icon={{ color: "info", component: <IoMdEye size="22px" color="white" /> }}
                     /></VuiBox>
                   </Grid>
                   <Grid item xs={12} md={6} xl={3}>
                     <VuiBox my={2}><MiniStatisticsCard
+                      isLoading={isLoading}
                       title={{ text: t("dashboard.numberOfCourses") }}
-                      count="7"
+                      count={data?.totalCourses || 0}
                       // percentage={{ color: "success", text: "+5%" }}
                       icon={{ color: "info", component: <MdOutlineOndemandVideo size="20px" color="white" /> }}
                     /></VuiBox>

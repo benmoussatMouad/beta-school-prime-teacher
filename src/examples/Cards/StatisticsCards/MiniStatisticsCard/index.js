@@ -25,21 +25,24 @@ import Icon from "@mui/material/Icon";
 import VuiBox from "components/VuiBox";
 import VuiTypography from "components/VuiTypography";
 import colors from "assets/theme/base/colors";
+import { CircularProgress } from "@mui/material";
 
-function MiniStatisticsCard({
-                              bgColor = "white",
-                              title = {
-                                fontWeight: "medium",
-                                text: "",
-                              },
-                              count,
-                              percentage = {
-                                color: "success",
-                                text: "",
-                              },
-                              icon,
-                              direction = "right",
-                            }) {
+function MiniStatisticsCard(
+  {
+    bgColor = "white",
+    title = {
+      fontWeight: "medium",
+      text: "",
+    },
+    count,
+    percentage = {
+      color: "success",
+      text: "",
+    },
+    icon,
+    direction = "right",
+    isLoading
+  }) {
 
   const { info } = colors;
 
@@ -76,12 +79,14 @@ function MiniStatisticsCard({
                 >
                   {title.text}
                 </VuiTypography>
-                <VuiTypography variant="subtitle1" fontWeight="bold" color="white">
+                {isLoading ? <VuiBox sx={{ display: "flex", alignItems: "flex-start", justifyContent: "flex-start" }}>
+                  <CircularProgress color="info" size={25} />
+                </VuiBox> : <VuiTypography variant="subtitle1" fontWeight="bold" color="white">
                   {count}{" "}
                   <VuiTypography variant="button" color={percentage.color} fontWeight="bold">
                     {percentage.text}
                   </VuiTypography>
-                </VuiTypography>
+                </VuiTypography>}
               </VuiBox>
             </Grid>
             {direction === "right" ? (

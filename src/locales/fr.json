@@ -470,8 +470,8 @@
     "data": {
       "days": "Jour(s)",
       "lifetimeEarnings": "Tous les gains",
-      "schoolGains": "Gains de l'ecole",
-      "sinceLastMonth": "Depuis le mois dernier",
+      "schoolGains": "Gains",
+      "sinceLastPayment": "Depuis le dernier paiement",
       "soldCourses": "Cours vendus",
       "soldCoursesLastMonth": "Cours vendus le mois dernier",
       "toBePaid": "À rendre ce mois-ci"

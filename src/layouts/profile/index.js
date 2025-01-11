@@ -43,7 +43,7 @@ import colors from "../../assets/theme/base/colors";
 import borders from "../../assets/theme/base/borders";
 import boxShadows from "../../assets/theme/base/boxShadows";
 import { useDeleteTeacher } from "../../api/teacher/deleteTeacher";
-import CarInformations from "./components/CarInformations";
+import Stats from "./components/Stats";
 
 
 const { black, gradients } = colors;
@@ -143,7 +143,7 @@ function Overview() {
           <PlatformSettings />
         </Grid> : ""}
         <Grid item xs={12} xl={role === "ROOT" ? 9 : 12} md={role === "ROOT" ? 9 : 12}  >
-          <CarInformations />
+          <Stats />
         </Grid>
       </Grid>
 

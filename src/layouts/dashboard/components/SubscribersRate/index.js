@@ -5,9 +5,8 @@ import VuiBox from 'components/VuiBox';
 import VuiTypography from 'components/VuiTypography';
 import { useTranslation } from "react-i18next";
 
-
 const SubscribersRate = () => {
-	const {t} = useTranslation();
+	const { t } = useTranslation();
 	const [value, setValue] = React.useState(30);
 
 	const handleSliderChange = (event, newValue) => {

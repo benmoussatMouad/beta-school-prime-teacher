@@ -471,8 +471,8 @@
     "data": {
       "days": "يوم",
       "lifetimeEarnings": "كل الأرباج حتى الان",
-      "schoolGains": "أرباح المدرسة",
-      "sinceLastMonth": "منذ الشهر الماضي",
+      "schoolGains": "أرباح ",
+      "sinceLastPayment": "منذ آخر دفعة",
       "soldCourses": "دورات بيعت",
       "soldCoursesLastMonth": "دورات بيعت في الشهر الماضي",
       "toBePaid": "المستحق هذا الشهر"
