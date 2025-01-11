@@ -219,7 +219,7 @@ function CoursDetails() {
                   </VuiBox>
                   <VuiBox sx={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
                     <VuiTypography color={"white"} variant="body2" component="h2">
-                      {t("course.details.discountedPrice")} {`(${course.discount}%)`}
+                      {t("course.details.discountedPrice")} {`(${course.discount || 0}%)`}
                     </VuiTypography>
                     <VuiTypography color={"white"} variant="caption" component="h2">
                       {Math.round(course.price * (1 - course.discount / 100))} DZD
