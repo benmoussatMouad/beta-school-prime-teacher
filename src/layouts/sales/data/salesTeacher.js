@@ -65,7 +65,7 @@ export const teacherSalesTableData = (t, data, commission) => {
     ),
     [t("sales.table.amountAfterCommission")]: (
       <VuiTypography variant="caption" color="white" fontWeight="medium" display="flex" justifyContent="center">
-        {`${item.netAmount * commission} DA`}
+        {`${item.netAmount} DA`}
       </VuiTypography>
     ),
     [t("sales.table.status")]: (

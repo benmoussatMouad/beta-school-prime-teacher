@@ -90,7 +90,8 @@
       "priceDetails": "معلومات التسعير",
       "schoolGains": "عائدات المدرسة (40٪)",
       "teacherGains": "أرباحك (60%)",
-      "totalPrice": "السعر الإجمالي"
+      "totalPrice": "السعر الإجمالي",
+      "discountedPrice":"سعر مخفض"
     },
     "filter": {
       "level": "المستوى",
