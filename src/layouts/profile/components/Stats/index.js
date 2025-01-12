@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, Stack, Grid, Box } from '@mui/material';
+import { Card, Stack, Grid, Box, CircularProgress } from '@mui/material';
 import VuiBox from 'components/VuiBox';
 import VuiTypography from 'components/VuiTypography';
 import VuiBadge from "components/VuiBadge";
@@ -12,7 +12,7 @@ import { IoIosSchool } from "react-icons/io";
 import { useStats } from 'api/teacher/getStats';
 import { getAccessToken } from 'utils';
 
-const StatCard = ({ title, value, icon: Icon, subtitle, customStyles = {} }) => {
+const StatCard = ({ title, value, icon: Icon, subtitle, isLoading, customStyles = {} }) => {
   const { gradients, info } = colors;
   const { cardContent } = gradients;
 
@@ -35,9 +35,11 @@ const StatCard = ({ title, value, icon: Icon, subtitle, customStyles = {} }) => 
         <VuiTypography color="text" variant="caption" fontWeight="medium" mb="8px">
           {title}
         </VuiTypography>
-        <VuiTypography color="white" variant="h4" fontWeight="bold" mb={subtitle ? "8px" : "0"}>
+        {isLoading ? <VuiBox sx={{ display: "flex", alignItems: "flex-start", justifyContent: "flex-start" }}>
+          <CircularProgress color="info" size={25} />
+        </VuiBox> : <VuiTypography color="white" variant="h4" fontWeight="bold" mb={subtitle ? "8px" : "0"}>
           {value}
-        </VuiTypography>
+        </VuiTypography>}
         {subtitle && (
           <VuiTypography color="text" variant="caption">
             {subtitle}
@@ -70,7 +72,7 @@ const Stats = () => {
   const { t } = useTranslation();
 
   const token = getAccessToken();
-  const { data } = useStats(token);
+  const { data, isLoading } = useStats(token);
 
   const formatCurrency = (value) => {
     return new Intl.NumberFormat('fr-DZ', {
@@ -101,21 +103,21 @@ const Stats = () => {
         </Box>
 
         <VuiBox width="100%" display="flex" justifyContent="center">
-          <Grid 
-            container 
-            spacing={1} 
+          <Grid
+            container
+            spacing={1}
             sx={{
               maxWidth: '1200px',
               margin: '0 auto'
             }}>
             <Grid item xs={12}>
               <StatCard
+                isLoading={isLoading}
                 title={t('profile.data.toBePaid')}
                 value={formatCurrency(data?.totalTeacherDebt)}
                 icon={FaMoneyBillAlt}
-                subtitle={`${t('profile.data.sinceLastPayment')}: ${
-                  data?.lastPayment || 0
-                } ${t('profile.data.days')}`}
+                subtitle={`${t('profile.data.sinceLastPayment')}: ${data?.lastPayment || 0
+                  } ${t('profile.data.days')}`}
                 customStyles={{
                   background: linearGradient(
                     info.main,
@@ -128,6 +130,7 @@ const Stats = () => {
 
             <Grid item xs={12} md={6}>
               <StatCard
+                isLoading={isLoading}
                 title={t('profile.data.lifetimeEarnings')}
                 value={formatCurrency(data?.totalProfit || data?.allTimeProfit || 0)}
                 icon={FaMoneyBillAlt}
@@ -136,6 +139,7 @@ const Stats = () => {
 
             <Grid item xs={12} md={6}>
               <StatCard
+                isLoading={isLoading}
                 title={t('profile.data.soldCourses')}
                 value={data?.totalCoursesSold}
                 icon={GrTransaction}
@@ -144,6 +148,7 @@ const Stats = () => {
 
             <Grid item xs={12} md={6}>
               <StatCard
+                isLoading={isLoading}
                 title={t('profile.data.soldCoursesLastMonth')}
                 value={data?.coursesSoldLastMonth || data?.totalCoursesSoldLastMonth || 0}
                 icon={GrTransaction}
@@ -152,6 +157,7 @@ const Stats = () => {
 
             <Grid item xs={12} md={6}>
               <StatCard
+                isLoading={isLoading}
                 title={t('profile.data.schoolGains')}
                 value={`${(data?.gainPercentage || 0).toFixed(2)}%`}
                 icon={IoIosSchool}

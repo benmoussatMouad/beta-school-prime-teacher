@@ -17,12 +17,12 @@ const { card } = gradients;
 const { borderWidth, borderRadius } = borders;
 const { xxl } = boxShadows;
 
-function PaymentDialog({ open, onClose, teacher }) {
+function PaymentDialog({ open, onClose, debt }) {
     const { t } = useTranslation();
-    const { mutate: confirmPayment, isLoading } = useConfirmPayment();
+    const { mutate: confirmPayment, isLoading } = useConfirmPayment(debt?.id);
 
     const onConfirmPayment = () => {
-        confirmPayment(teacher.id, {
+        confirmPayment({ teacherId: debt.teacherId, debtId: debt.id }, {
             onSuccess: () => {
                 onClose();
             },
@@ -52,14 +52,14 @@ function PaymentDialog({ open, onClose, teacher }) {
             })}
         >
             <DialogTitle color="#ffffff" sx={{ fontSize: "1.5rem", fontWeight: "bold" }}>
-                {t("popup.payment.title", { name: teacher?.user?.firstName || t("popup.defaultName") })}
+                {t("popup.payment.title", { name: debt?.teacher?.user?.firstName || debt?.teacherName  || t("popup.defaultName") })}
             </DialogTitle>
 
             <DialogContent>
                 <Box display="flex" alignItems="center" mb={3}>
                     <Avatar
-                        src={teacher?.user?.profilePic?.url || ""}
-                        alt={teacher?.user?.firstName || "User"}
+                        src={debt?.teacher?.user?.profilePic?.url || debt?.profilePic || ""}
+                        alt={debt?.teacher?.user?.firstName || debt?.teacherName || "User"}
                         sx={{
                             width: 150,
                             height: 150,
@@ -69,30 +69,30 @@ function PaymentDialog({ open, onClose, teacher }) {
                     />
                     <Box>
                         <VuiTypography variant="subtitle2" color="white">
-                            <b>{t("popup.fullName")}</b>: {teacher?.user?.firstName} {teacher?.user?.lastName}
+                            <b>{t("popup.fullName")}</b>: {debt?.teacherName} {debt?.teacher?.user?.firstName} {debt?.teacher?.user?.lastName}
                         </VuiTypography>
                         <VuiTypography mt={"10px"} variant="subtitle2" color="white">
-                            <b>{t("popup.subject")}</b>: {t(`subjects.${teacher?.subject}`)}
+                            <b>{t("popup.subject")}</b>: {t(`subjects.${debt?.teacher?.subject || debt?.subject}`)}
                         </VuiTypography>
                         <VuiTypography mt={"10px"} variant="subtitle2" color="white">
-                            <b>{t("popup.wilaya")}</b>: {t(`wilaya.${teacher?.wilaya}`)}
+                            <b>{t("popup.wilaya")}</b>: {t(`wilaya.${debt?.teacher?.wilaya || debt?.wilaya}`)}
                         </VuiTypography>
                         <VuiTypography mt={"10px"} variant="subtitle2" color="white">
-                            <b>{t("popup.email")}</b>: {teacher?.user?.email}
+                            <b>{t("popup.email")}</b>: {debt?.teacher?.user?.email || debt?.email}
                         </VuiTypography>
                         <VuiTypography mt={"10px"} variant="subtitle2" color="white">
-                            <b>{t("popup.phone")}</b>: {teacher?.user?.phone}
+                            <b>{t("popup.phone")}</b>: {debt?.teacher?.user?.phone || debt?.phone}
                         </VuiTypography>
                         <VuiTypography mt={"10px"} variant="subtitle2" color="white">
                             <b>{t("popup.debt")}</b>:{" "}
                             <VuiBadge
                                 variant="standard"
-                                badgeContent={`${teacher?.debt} DA`}
+                                badgeContent={`${debt?.amount} DA`}
                                 size="xs"
                                 container
                                 sx={({ palette: { white, success, error }, borders: { borderRadius, borderWidth } }) => ({
-                                    background: teacher?.debt > 0 ? error.main : success.main,
-                                    border: `${borderWidth[1]} solid ${teacher?.debt > 0 ? error.main : success.main}`,
+                                    background: debt?.status === 'PENDING' ? error.main : success.main,
+                                    border: `${borderWidth[1]} solid ${debt?.status === 'PENDING' ? error.main : success.main}`,
                                     borderRadius: borderRadius.md,
                                     color: white.main,
                                     display: "inline-block",
@@ -101,7 +101,10 @@ function PaymentDialog({ open, onClose, teacher }) {
                             />
                         </VuiTypography>
                         <VuiTypography mt={"10px"} variant="subtitle2" color="white">
-                            <b>{t("forms.dateOfJoining")}</b>: {moment(teacher?.user?.createdAt).format("DD/MM/YYYY")}
+                            <b>{t("popup.debtDescription")}</b>: {debt?.description}
+                        </VuiTypography>
+                        <VuiTypography mt={"10px"} variant="subtitle2" color="white">
+                            <b>{t("popup.debtCreatedAt")}</b>: {moment(debt?.createdAt).format("DD/MM/YYYY")}
                         </VuiTypography>
                     </Box>
                 </Box>

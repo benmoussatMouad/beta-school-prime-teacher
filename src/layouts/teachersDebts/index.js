@@ -144,7 +144,7 @@ function TeachersDebts() {
           </VuiBox>
         </Card>
       </VuiBox>
-      {selectedTeacher && <PaymentDialog open={open} onClose={handleClose} teacher={selectedTeacher} />}
+      {selectedTeacher && <PaymentDialog open={open} onClose={handleClose} debt={selectedTeacher} />}
     </DashboardLayout>
   );
 }

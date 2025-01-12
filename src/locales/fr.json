@@ -454,7 +454,9 @@
       "title": "Payement",
       "confirmation": "Voulez-vous vraiment confirmez le payement ?"
     },
-    "debt": "Dettes"
+    "debt": "Dettes",
+    "debtDescription": "Description de la dette",
+    "debtCreatedAt": "Date de creation"
   },
   "profile": {
     "accountDeletion": {
@@ -519,9 +521,9 @@
     "studentsDemands": "Demandes des nouveaux élèves",
     "support": "Support",
     "teachers": "Les Enseignants",
-    "sales": "Les Ventes"
+    "sales": "Les Ventes",
+    "debt": "Dettes"
   },
-
   "sales": {
     "title": "Ventes",
     "table": {
@@ -780,5 +782,24 @@
     "update": "Mettre à jour",
     "current": "Commission actuelle",
     "updated": "Commission mise à jour avec succès"
+  },
+  "debts": {
+    "detail": {
+      "title": "Détails de la Dette",
+      "teacherInfo": "Informations de l'Enseignant",
+      "debtInfo": "Informations de la Dette",
+      "transactions": "Transactions",
+      "amount": "Montant",
+      "status": "Statut",
+      "createdAt": "Date de Création",
+      "course": "Cours",
+      "student": "Étudiant",
+      "paymentMethod": "Méthode de Paiement",
+      "paidAt": "Date de Paiement",
+      "payNow": "Payer Maintenant",
+      "totalAmount": "Montant Total",
+      "netAmount": "Montant Net",
+      "commission": "Commission "
+    }
   }
 }
