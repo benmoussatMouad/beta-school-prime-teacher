@@ -56,6 +56,7 @@ import { BiSupport } from "react-icons/bi";
 import { FaHandHoldingDollar } from "react-icons/fa6";
 import { HiCurrencyDollar } from "react-icons/hi2";
 import { FcSalesPerformance } from "react-icons/fc";
+import { GiTakeMyMoney } from "react-icons/gi";
 import ResetPassword from "layouts/authentication/reset-password";
 import ForgetPassword from "layouts/authentication/forget-password";
 import Demands from "./layouts/demands";
@@ -69,7 +70,7 @@ import TeachersDebts from "./layouts/teachersDebts";
 import TeacherPayments from "layouts/teacherPayments";
 import Sales from "layouts/sales";
 import DebtDetail from "layouts/viewDebtDetail";
-
+import StudentPayments from "layouts/studentPayments";
 
 const routes = [
   {
@@ -158,6 +159,17 @@ const routes = [
     noCollapse: true,
     isProtected: true,
     isAdmin: true,
+  },
+  {
+    type: "collapse",
+    name: "Transactions",
+    key: "transaction",
+    route: "/transaction",
+    icon: <GiTakeMyMoney size="15px" color="inherit" />,
+    component: StudentPayments,
+    noCollapse: true,
+    isProtected: true,
+    isRoot: true,
   },
   {
     type: "collapse",

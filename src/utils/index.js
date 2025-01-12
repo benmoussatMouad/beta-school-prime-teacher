@@ -608,6 +608,57 @@ export const getFiltersInputs = ({ tableId, onSearchChange, subject, selectedRol
           </Grid> : ""}
         </Grid>
       );
+    case "studentsTransaction":
+      return <Grid container spacing={2}>
+        <Grid item xs={12} sm={6} md={2.4}>
+          <VuiInput
+            placeholder={t("signup.forms.firstName")}
+            fullWidth
+            onChange={onSearchChange}
+            sx={{ my: 1 }}
+            name="firstName"
+          />
+        </Grid>
+        <Grid item xs={6} md={2.4}>
+          <VuiInput
+            placeholder={t("signup.forms.lastName")}
+            fullWidth
+            onChange={onSearchChange}
+            sx={{ my: 1 }}
+            name="lastName"
+          />
+        </Grid>
+        <Grid item xs={6} md={2.4}>
+          <VuiInput
+            placeholder={t("signup.forms.email")}
+            fullWidth
+            onChange={onSearchChange}
+            sx={{ my: 1 }}
+            name="email"
+          />
+        </Grid>
+        <Grid item sx={{ display: "flex", alignItems: "center" }} xs={6} md={2.4}>
+          <VuiSelect
+            typeSelect={"subjects"}
+            onChange={onSearchChange}
+            label={t("signup.forms.subject")}
+            options={FiltersSubjects}
+            value={subject || FiltersSubjects[0]}
+            name={"subject"}
+            sx={{ my: 1 }}
+          />
+        </Grid>
+        <Grid item sx={{ display: "flex", alignItems: "center" }} xs={6} md={2.4}>
+          <VuiSelect
+            onChange={onSearchChange}
+            label={t("course.filter.wilaya")}
+            options={FiltersStudentWilaya}
+            value={wilaya || FiltersStudentWilaya[0]}
+            name="wilaya"
+            typeSelect="wilaya"
+          />
+        </Grid>
+      </Grid>;
   }
 };
 

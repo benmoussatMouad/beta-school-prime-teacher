@@ -456,7 +456,14 @@
     },
     "debt": "Dettes",
     "debtDescription": "Description de la dette",
-    "debtCreatedAt": "Date de creation"
+    "debtCreatedAt": "Date de creation",
+    "student": "Étudiant",
+    "course": "Cours",
+    "teacher": "Professeur",
+    "amount": "Montant",
+    "discount": "Réduction",
+    "netAmount": "Montant Net",
+    "createdAt": "Date de création"
   },
   "profile": {
     "accountDeletion": {
@@ -522,7 +529,8 @@
     "support": "Support",
     "teachers": "Les Enseignants",
     "sales": "Les Ventes",
-    "debt": "Dettes"
+    "debt": "Dettes",
+    "transaction": "Transactions en attente"
   },
   "sales": {
     "title": "Ventes",
@@ -801,5 +809,17 @@
       "netAmount": "Montant Net",
       "commission": "Commission "
     }
+  },
+  "transactions": {
+    "student": "Étudiant",
+    "course": "Cours",
+    "teacher": "Professeur",
+    "amount": "Montant",
+    "discount": "Réduction",
+    "netAmount": "Montant Net",
+    "date": "Date",
+    "actions": "Actions",
+    "confirm": "Confirmer",
+    "pendingCash": "Paiements en espèces en attente"
   }
 }

@@ -457,7 +457,14 @@
     },
     "debt": "الدين",
     "debtDescription": "وصف الدين",
-    "debtCreatedAt": " تاريخ إنشاء الدين"
+    "debtCreatedAt": " تاريخ إنشاء الدين",
+    "student": "الطالب",
+    "course": "الدورة",
+    "teacher": "الأستاذ",
+    "amount": "المبلغ",
+    "discount": "التخفيض",
+    "netAmount": "المبلغ الصافي",
+    "createdAt": "تاريخ الإنشاء"
   },
   "profile": {
     "accountDeletion": {
@@ -523,7 +530,8 @@
     "support": "الدعم",
     "teachers": "المعلمون",
     "sales": "المبيعات",
-    "debt": "الدين"
+    "debt": "الدين",
+    "transaction": "المعاملات المعلقة "
   },
   "signup": {
     "already": "هل لديك حساب؟",
@@ -809,5 +817,17 @@
       "netAmount": "المبلغ الصافي",
       "commission": "العمولة"
     }
+  },
+  "transactions": {
+    "student": "الطالب",
+    "course": "الدورة",
+    "teacher": "الأستاذ",
+    "amount": "المبلغ",
+    "discount": "التخفيض",
+    "netAmount": "المبلغ الصافي",
+    "date": "التاريخ",
+    "actions": "الإجراءات",
+    "confirm": "تأكيد",
+    "pendingCash": "المدفوعات النقدية المعلقة"
   }
 }
