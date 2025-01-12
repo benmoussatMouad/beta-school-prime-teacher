@@ -807,7 +807,8 @@
       "payNow": "Payer Maintenant",
       "totalAmount": "Montant Total",
       "netAmount": "Montant Net",
-      "commission": "Commission "
+      "commission": "Commission ",
+      "discount": "Réduction"
     }
   },
   "transactions": {

@@ -159,14 +159,24 @@ function DebtDetail() {
                           <React.Fragment key={transaction.id}>
                             <VuiBox p={2} borderRadius="lg" bgColor="dark">
                               <Grid container spacing={2} alignItems="center">
-                                <Grid item xs={12} md={3}>
+                                <Grid item xs={12} md={2}>
                                   <VuiTypography variant="h6" color="white">
                                     {transaction.course.title}
                                   </VuiTypography>
                                 </Grid>
-                                <Grid item xs={12} md={2}>
+                                <Grid item xs={12} md={1}>
                                   <VuiTypography variant="button" color="text">
                                     {`${transaction.student.user.firstName} ${transaction.student.user.lastName}`}
+                                  </VuiTypography>
+                                </Grid>
+                                <Grid item xs={12} md={1}>
+                                  <VuiTypography variant="button" color="text">
+                                    {`${transaction.student.user.phone}`}
+                                  </VuiTypography>
+                                </Grid>
+                                <Grid item xs={12} md={1}>
+                                  <VuiTypography variant="button" color="text">
+                                    {`${transaction.student.user.email}`}
                                   </VuiTypography>
                                 </Grid>
                                 <Grid item xs={12} md={3}>
@@ -177,6 +187,14 @@ function DebtDetail() {
                                       </VuiTypography>
                                       <VuiTypography variant="button" color="white" fontWeight="medium">
                                         {transaction.amount} DA
+                                      </VuiTypography>
+                                    </VuiBox>
+                                    <VuiBox display="flex" justifyContent="space-between" mb={1}>
+                                      <VuiTypography variant="button" color="text" fontWeight="regular">
+                                        {t("debts.detail.discount")}:
+                                      </VuiTypography>
+                                      <VuiTypography variant="button" color="error" fontWeight="medium">
+                                        -{transaction.discount}%
                                       </VuiTypography>
                                     </VuiBox>
                                     <VuiBox display="flex" justifyContent="space-between" mb={1}>

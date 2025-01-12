@@ -815,7 +815,8 @@
       "payNow": "دفع الآن",
       "totalAmount": "المبلغ الإجمالي",
       "netAmount": "المبلغ الصافي",
-      "commission": "العمولة"
+      "commission": "العمولة",
+      "discount": "التخفيض"
     }
   },
   "transactions": {
