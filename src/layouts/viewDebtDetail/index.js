@@ -124,7 +124,7 @@ function DebtDetail() {
 
                   {/* Debt Info Card */}
                   <Grid item xs={12} md={6}>
-                    <Card>
+                    <Card sx={{ height: "100%" }} >
                       <VuiBox p={2}>
                         <VuiBox display="flex" alignItems="center" mb={2}>
                           <MdOutlinePayment size={24} color="#fff" />
@@ -205,7 +205,7 @@ function DebtDetail() {
                                 </Grid>
                                 <Grid item xs={12} md={2}>
                                   <VuiTypography variant="button" color="text">
-                                    {moment(transaction.paidAt).format("DD/MM/YYYY")}
+                                    {moment(transaction.paidAt).format("DD/MM/YYYY HH:mm")}
                                   </VuiTypography>
                                 </Grid>
                               </Grid>
