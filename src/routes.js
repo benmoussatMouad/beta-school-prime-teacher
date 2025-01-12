@@ -68,6 +68,7 @@ import StudentsApprovals from "./layouts/studentsApprovals";
 import TeachersDebts from "./layouts/teachersDebts";
 import TeacherPayments from "layouts/teacherPayments";
 import Sales from "layouts/sales";
+import DebtDetail from "layouts/viewDebtDetail";
 
 
 const routes = [
@@ -121,6 +122,16 @@ const routes = [
     route: "/debts",
     icon: <FaHandHoldingDollar size="15px" color="inherit" />,
     component: TeachersDebts,
+    noCollapse: true,
+    isProtected: true,
+    isRoot: true,
+  },
+  {
+    type: "route",
+    name: "Enseignants dettes",
+    key: "debt",
+    route: "/debt/:debtId",
+    component: DebtDetail,
     noCollapse: true,
     isProtected: true,
     isRoot: true,

@@ -91,7 +91,7 @@
       "schoolGains": "عائدات المدرسة (40٪)",
       "teacherGains": "أرباحك (60%)",
       "totalPrice": "السعر الإجمالي",
-      "discountedPrice":"سعر مخفض"
+      "discountedPrice": "سعر مخفض"
     },
     "filter": {
       "level": "المستوى",
@@ -455,7 +455,9 @@
       "title": "تحديث حالة الدفع",
       "confirmation": "هل تريد تحديث حالة الدفع ؟"
     },
-    "debt": "الدين"
+    "debt": "الدين",
+    "debtDescription": "وصف الدين",
+    "debtCreatedAt": " تاريخ إنشاء الدين"
   },
   "profile": {
     "accountDeletion": {
@@ -520,7 +522,8 @@
     "studentsDemands": "طلابات التلاميذ",
     "support": "الدعم",
     "teachers": "المعلمون",
-    "sales": "المبيعات"
+    "sales": "المبيعات",
+    "debt": "الدين"
   },
   "signup": {
     "already": "هل لديك حساب؟",
@@ -787,5 +790,24 @@
     "update": "تحديث",
     "current": "التكليف الحالي",
     "updated": "تم تحديث التكليف بنجاح"
+  },
+  "debts": {
+    "detail": {
+      "title": "تفاصيل الدين",
+      "teacherInfo": "معلومات الأستاذ",
+      "debtInfo": "معلومات الدين",
+      "transactions": "المعاملات",
+      "amount": "المبلغ",
+      "status": "الحالة",
+      "createdAt": "تاريخ الإنشاء",
+      "course": "الدورة",
+      "student": "الطالب",
+      "paymentMethod": "طريقة الدفع",
+      "paidAt": "تاريخ الدفع",
+      "payNow": "دفع الآن",
+      "totalAmount": "المبلغ الإجمالي",
+      "netAmount": "المبلغ الصافي",
+      "commission": "العمولة"
+    }
   }
 }
