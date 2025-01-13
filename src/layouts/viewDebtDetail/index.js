@@ -157,74 +157,129 @@ function DebtDetail() {
 
                         {data.transactions.map((transaction, index) => (
                           <React.Fragment key={transaction.id}>
-                            <VuiBox p={2} borderRadius="lg" bgColor="dark">
-                              <Grid container spacing={2} alignItems="center">
+                            <VuiBox
+                              p={3}
+                              mb={2}
+                              borderRadius="xl"
+                              bgColor="dark"
+                              sx={{
+                                transition: "all 0.3s",
+                                "&:hover": {
+                                  transform: "translateY(-2px)",
+                                  boxShadow: "0 8px 24px rgba(0,0,0,0.15)"
+                                }
+                              }}
+                            >
+                              <Grid container spacing={3} alignItems="center">
                                 <Grid item xs={12} md={2}>
-                                  <VuiTypography variant="h6" color="white">
+                                  <VuiTypography variant="h6" color="white" fontWeight="bold">
                                     {transaction.course.title}
                                   </VuiTypography>
-                                </Grid>
-                                <Grid item xs={12} md={1}>
-                                  <VuiTypography variant="button" color="text">
-                                    {`${transaction.student.user.firstName} ${transaction.student.user.lastName}`}
+                                  <VuiTypography variant="caption" color="text">
+                                    {t("debts.detail.courseTitle")}
                                   </VuiTypography>
                                 </Grid>
-                                <Grid item xs={12} md={1}>
-                                  <VuiTypography variant="button" color="text">
-                                    {`${transaction.student.user.phone}`}
-                                  </VuiTypography>
-                                </Grid>
+
                                 <Grid item xs={12} md={2}>
-                                  <VuiTypography variant="button" color="text">
-                                    {`${transaction.student.user.email}`}
-                                  </VuiTypography>
+                                  <VuiBox>
+                                    <VuiTypography variant="button" color="text" fontWeight="medium">
+                                      {`${transaction.student.user.firstName} ${transaction.student.user.lastName}`}
+                                    </VuiTypography>
+                                    <VuiTypography variant="caption" color="text" display="block">
+                                      {transaction.student.user.phone}
+                                    </VuiTypography>
+                                    <VuiTypography variant="caption" color="text">
+                                      {transaction.student.user.email}
+                                    </VuiTypography>
+                                  </VuiBox>
                                 </Grid>
-                                <Grid item xs={12} md={3}>
-                                  <VuiBox bgColor="dark" borderRadius="lg" p={1}>
+
+                                <Grid item xs={12} md={4}>
+                                  <VuiBox
+                                    bgColor="dark"
+                                    borderRadius="lg"
+                                    p={2}
+                                    sx={{
+                                      background: "linear-gradient(145deg, rgba(26,31,51,1) 0%, rgba(31,35,53,1) 100%)"
+                                    }}
+                                  >
                                     <VuiBox display="flex" justifyContent="space-between" mb={1}>
                                       <VuiTypography variant="button" color="text" fontWeight="regular">
                                         {t("debts.detail.totalAmount")}:
                                       </VuiTypography>
-                                      <VuiTypography variant="button" color="white" fontWeight="medium">
+                                      <VuiTypography variant="button" color="white" fontWeight="bold">
                                         {transaction.amount} DA
                                       </VuiTypography>
                                     </VuiBox>
+
                                     <VuiBox display="flex" justifyContent="space-between" mb={1}>
                                       <VuiTypography variant="button" color="text" fontWeight="regular">
                                         {t("debts.detail.discount")}:
                                       </VuiTypography>
-                                      <VuiTypography variant="button" color="error" fontWeight="medium">
+                                      <VuiTypography variant="button" color="error" fontWeight="bold">
                                         -{transaction.discount}%
                                       </VuiTypography>
                                     </VuiBox>
+
                                     <VuiBox display="flex" justifyContent="space-between" mb={1}>
                                       <VuiTypography variant="button" color="text" fontWeight="regular">
                                         {t("debts.detail.netAmount")}:
                                       </VuiTypography>
-                                      <VuiTypography variant="button" color="success" fontWeight="medium">
+                                      <VuiTypography variant="button" color="success" fontWeight="bold">
                                         {transaction.netAmount} DA
                                       </VuiTypography>
                                     </VuiBox>
+
                                     <Divider sx={{ my: 1, backgroundColor: "rgba(255,255,255,0.1)" }} />
+
                                     <VuiBox display="flex" justifyContent="space-between">
                                       <VuiTypography variant="button" color="text" fontWeight="regular">
                                         {t("debts.detail.commission")}:
                                       </VuiTypography>
-                                      <VuiTypography variant="button" color="warning" fontWeight="medium">
+                                      <VuiTypography variant="button" color="warning" fontWeight="bold">
                                         {transaction.amount - transaction.netAmount} DA
                                       </VuiTypography>
                                     </VuiBox>
                                   </VuiBox>
                                 </Grid>
-                                <Grid item xs={12} md={1}>
-                                  <VuiTypography variant="button" color="text">
-                                    {transaction.paymentMethod}
-                                  </VuiTypography>
-                                </Grid>
+
                                 <Grid item xs={12} md={2}>
-                                  <VuiTypography variant="button" color="text">
-                                    {moment(transaction.paidAt).format("DD/MM/YYYY HH:mm")}
-                                  </VuiTypography>
+                                  <VuiBox>
+                                    <VuiBox
+                                      display="inline-flex"
+                                      px={2}
+                                      py={0.5}
+                                      mb={1}
+                                      borderRadius="xl"
+                                      bgColor="info"
+                                    >
+                                      <VuiTypography variant="caption" color="white" fontWeight="medium">
+                                        {transaction.paymentMethod}
+                                      </VuiTypography>
+                                    </VuiBox>
+                                    <VuiTypography variant="caption" color="text" display="block">
+                                      {moment(transaction.paidAt).format("DD/MM/YYYY")}
+                                    </VuiTypography>
+                                    <VuiTypography variant="caption" color="text">
+                                      {moment(transaction.paidAt).format("HH:mm")}
+                                    </VuiTypography>
+                                  </VuiBox>
+                                </Grid>
+
+                                <Grid item xs={12} md={2}>
+                                  <VuiBox display="flex" justifyContent="flex-end">
+                                    <VuiBox
+                                      display="inline-flex"
+                                      px={2}
+                                      py={0.5}
+                                      borderRadius="xl"
+                                      bgColor={transaction.status === "PAID" ? "success" : "warning"}
+                                    >
+                                      <VuiTypography variant="caption" color="white" fontWeight="medium">
+                                        {transaction.status}
+                                      </VuiTypography>
+                                    </VuiBox>
+                                  </VuiBox>
                                 </Grid>
                               </Grid>
                             </VuiBox>

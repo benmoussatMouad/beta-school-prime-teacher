@@ -816,7 +816,8 @@
       "totalAmount": "المبلغ الإجمالي",
       "netAmount": "المبلغ الصافي",
       "commission": "العمولة",
-      "discount": "التخفيض"
+      "discount": "التخفيض",
+      "courseTitle":"عنوان الدورة"
     }
   },
   "transactions": {

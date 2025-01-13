@@ -91,7 +91,7 @@ function SignIn() {
                 required: t("forms.required.password"),
                 minLength: { value: 6, message: t("forms.passwordLength") },
               })}
-              placeholder={t("signup.placeholder.email")}
+              placeholder={t("signup.placeholder.password")}
               type={showPassword ? "text" : "password"}
               error={!!errors.password}
               endAdornment={

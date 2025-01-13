@@ -808,7 +808,8 @@
       "totalAmount": "Montant Total",
       "netAmount": "Montant Net",
       "commission": "Commission ",
-      "discount": "Réduction"
+      "discount": "Réduction",
+      "courseTitle":"Titre du Cours"
     }
   },
   "transactions": {
