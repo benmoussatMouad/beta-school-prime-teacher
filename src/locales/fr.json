@@ -452,7 +452,8 @@
     "wilaya": "Wilaya",
     "payment": {
       "title": "Payement",
-      "confirmation": "Voulez-vous vraiment confirmez le payement ?"
+      "confirmation": "Voulez-vous vraiment confirmez le payement ?",
+      "cancel": "Êtes-vous sûr de vouloir annuler la transaction ?"
     },
     "debt": "Dettes",
     "debtDescription": "Description de la dette",
@@ -463,7 +464,12 @@
     "amount": "Montant",
     "discount": "Réduction",
     "netAmount": "Montant Net",
-    "createdAt": "Date de création"
+    "createdAt": "Date de création",
+    "cancel": {
+      "title": "Annuler le paiement",
+      "confirm": "Confirmer",
+      "cancel": "Annuler"
+    }
   },
   "profile": {
     "accountDeletion": {
@@ -809,7 +815,7 @@
       "netAmount": "Montant Net",
       "commission": "Commission ",
       "discount": "Réduction",
-      "courseTitle":"Titre du Cours"
+      "courseTitle": "Titre du Cours"
     }
   },
   "transactions": {
@@ -822,6 +828,7 @@
     "date": "Date",
     "actions": "Actions",
     "confirm": "Confirmer",
-    "pendingCash": "Paiements en espèces en attente"
+    "pendingCash": "Paiements en espèces en attente",
+    "cancel": "Annuler"
   }
 }

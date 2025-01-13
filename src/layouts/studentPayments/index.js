@@ -11,9 +11,11 @@ import { useGetPendingCashTransactions } from "../../api/admin/getStudentPayment
 import { getAccessToken } from "../../utils";
 import { useAuth } from "context/auth/authContext";
 import PaymentStudentDialog from "examples/Dialogs/ConfirmStudentPayment";
+import CancelTransactionDialog from "examples/Dialogs/CancelTransaction";
 
 function StudentPayments() {
-  const [open, setOpen] = useState(false);
+  const [openConfirm, setOpenConfirm] = useState(false);
+  const [openCancel, setOpenCancel] = useState(false);
   const [transaction, setTransaction] = useState(null);
   const { user } = useAuth();
   const token = getAccessToken();
@@ -26,15 +28,10 @@ function StudentPayments() {
   const [email, setEmail] = useState("");
   const [subject, setSubject] = useState("");
   const [wilaya, setWilaya] = useState("");
-  const [filters, setFilters] = useState({
-    firstName: "",
-    lastName: "",
-    subject: ""
-  });
 
   const { t } = useTranslation();
 
-  const { data, isLoading, refetch } = useGetPendingCashTransactions({
+  const { data, isLoading } = useGetPendingCashTransactions({
     token,
     page,
     limit,
@@ -81,7 +78,7 @@ function StudentPayments() {
 
   const handleOpen = async (transaction) => {
     setTransaction(transaction)
-    setOpen(true);
+    setOpenConfirm(true);
   };
 
   const handleSortChange = (key) => {
@@ -94,11 +91,17 @@ function StudentPayments() {
   };
 
   const handleClose = () => {
-    setOpen(false);
+    setOpenConfirm(false);
+    setOpenCancel(false);
   };
 
+  const handleCancel = (transaction) => {
+    setTransaction(transaction)
+    setOpenCancel(true);
+  }
 
-  const { columns, rows } = transactionsTableData(t, data?.transactions, handleOpen);
+
+  const { columns, rows } = transactionsTableData(t, data?.transactions, handleOpen, handleCancel);
 
   return (
     <DashboardLayout user={user}>
@@ -130,7 +133,8 @@ function StudentPayments() {
           </VuiBox>
         </Card>
       </VuiBox>
-      <PaymentStudentDialog open={open} onClose={handleClose} transaction={transaction} />
+      <PaymentStudentDialog open={openConfirm} onClose={handleClose} transaction={transaction} />
+      <CancelTransactionDialog open={openCancel} onClose={handleClose} transaction={transaction} />
     </DashboardLayout>
   );
 }

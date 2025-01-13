@@ -30,7 +30,7 @@ function Function({ content }) {
   );
 }
 
-export const transactionsTableData = (t, data, handleConfirm) => {
+export const transactionsTableData = (t, data, handleConfirm, handleCancel) => {
   const safeData = Array.isArray(data) ? data : [];
 
 
@@ -67,9 +67,14 @@ export const transactionsTableData = (t, data, handleConfirm) => {
       </VuiTypography>
     ),
     [t("transactions.actions")]: (
-      <VuiButton variant="contained" color="info" onClick={() => handleConfirm(transaction)}>
-        {t("transactions.confirm")}
-      </VuiButton>
+      <VuiBox display="flex" justifyContent="center" gap={1} >
+        <VuiButton variant="contained" color="info" onClick={() => handleConfirm(transaction)}>
+          {t("transactions.confirm")}
+        </VuiButton>
+        <VuiButton variant="contained" color="error" onClick={() => handleCancel(transaction)}>
+          {t("transactions.cancel")}
+        </VuiButton>
+      </VuiBox>
     ),
   }));
 

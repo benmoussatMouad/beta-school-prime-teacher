@@ -453,7 +453,8 @@
     "wilaya": "ولاية",
     "payment": {
       "title": "تحديث حالة الدفع",
-      "confirmation": "هل تريد تحديث حالة الدفع ؟"
+      "confirmation": "هل تريد تحديث حالة الدفع ؟",
+      "cancel": " هل أنت متأكد من إلغاء المعاملة؟ "
     },
     "debt": "الدين",
     "debtDescription": "وصف الدين",
@@ -464,7 +465,12 @@
     "amount": "المبلغ",
     "discount": "التخفيض",
     "netAmount": "المبلغ الصافي",
-    "createdAt": "تاريخ الإنشاء"
+    "createdAt": "تاريخ الإنشاء",
+    "cancel": {
+      "title": " الغاء الطلب ",
+      "confirm": "تاكيد",
+      "button": "الغاء"
+    }
   },
   "profile": {
     "accountDeletion": {
@@ -817,7 +823,7 @@
       "netAmount": "المبلغ الصافي",
       "commission": "العمولة",
       "discount": "التخفيض",
-      "courseTitle":"عنوان الدورة"
+      "courseTitle": "عنوان الدورة"
     }
   },
   "transactions": {
@@ -830,6 +836,7 @@
     "date": "التاريخ",
     "actions": "الإجراءات",
     "confirm": "تأكيد",
-    "pendingCash": "المدفوعات النقدية المعلقة"
+    "pendingCash": "المدفوعات النقدية المعلقة",
+    "cancel": "إلغاء"
   }
 }
