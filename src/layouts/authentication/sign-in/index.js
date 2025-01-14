@@ -18,7 +18,7 @@ import Translator from "../components/Translate";
 
 
 function SignIn() {
-  const [rememberMe, setRememberMe] = useState(true);
+  const [rememberMe, setRememberMe] = useState(false);
   const [showPassword, setShowPassword] = useState(false); // Toggle for password visibility
 
   const { mutate, isLoading } = useLogin();
@@ -39,7 +39,7 @@ function SignIn() {
 
   // Handle form submission
   const onSubmit = async (data) => {
-    await mutate(data);
+    mutate({ ...data, rememberMe });
   };
 
 
