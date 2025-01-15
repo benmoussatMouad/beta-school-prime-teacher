@@ -333,7 +333,7 @@
       "question": "Comment les étudiants peuvent-ils accéder à mes cours ?"
     },
     "6": {
-      "answer": "Les paiements sont effectués directement sur votre compte bancaire enregistré ou via une méthode de paiement que vous avez configurée dans votre profil.",
+      "answer": "vous serez payé par l'école et vous devrez tenir compte de la commission qui sera soustraite",
       "question": "Comment puis-je recevoir des paiements pour mes cours ?"
     },
     "7": {
@@ -345,7 +345,7 @@
       "question": "Existe-t-il une limite au nombre de cours que je peux télécharger ?"
     },
     "9": {
-      "answer": "Vous pouvez contacter notre équipe de support via le formulaire de contact ou par email à support@example.com.",
+      "answer": "Vous pouvez contacter notre équipe de support via le formulaire de contact ou par email à contact@betaschoolprime.com",
       "question": "Comment puis-je obtenir de l'aide si j'ai des questions techniques ?"
     }
   },
@@ -381,7 +381,8 @@
       "password": "Le mot de passe est requis.",
       "phone": "Le numéro est incorrecte",
       "school": "L'école est requise.",
-      "subject": "Le sujet est requis"
+      "subject": "Le sujet est requis",
+      "fullName": "Nom complet est requis"
     },
     "school": "École",
     "subject": "Sujet",
@@ -609,7 +610,8 @@
     "signup": "Utilisateur enregistré avec succès !",
     "updateProfile": "Profil mis à jour avec succès !",
     "uploadVideo": "La vidéo a été téléchargée avec succès ",
-    "verifyEmail": "Votre e-mail a été vérifié avec succès !"
+    "verifyEmail": "Votre e-mail a été vérifié avec succès !",
+    "supportSubmitted": "Votre support a été soumis avec succès !"
   },
   "status": {
     "ACCEPTED": "Accepté",

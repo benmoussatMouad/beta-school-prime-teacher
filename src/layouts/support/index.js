@@ -8,22 +8,46 @@ import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
 import { useTranslation } from "react-i18next";
 import { useAuth } from "../../context/auth/authContext";
 import VuiInput from "../../components/VuiInput";
-import { Facebook, LinkedIn, Twitter } from "@mui/icons-material";
+import { Facebook, Instagram, LinkedIn, Twitter } from "@mui/icons-material";
 import Accordion from "@mui/material/Accordion";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import { Box } from "@mui/material";
 import DashboardNavbar from "../../examples/Navbars/DashboardNavbar";
+import { useSubmitSupport } from "api/teacher/submitSupport";
 
 function Support() {
+  const language = localStorage.getItem("language");
   const { user } = useAuth();
   const { t } = useTranslation();
+
+  const [errors, setErrors] = useState({});
+  const { mutate, isLoading } = useSubmitSupport();
+
   const [formData, setFormData] = useState({
-    name: "",
     email: "",
+    fullName: "",
     message: "",
+    subject: ""
   });
+
+  const validateForm = () => {
+    const newErrors = {};
+    const MAX_MESSAGE_LENGTH = 1500;
+
+    if (!formData.email) newErrors.email = t('forms.required.email');
+    if (!formData.fullName) newErrors.fullName = t('forms.required.fullName');
+    if (!formData.subject) newErrors.subject = t('forms.required.subject');
+    if (!formData.message) {
+      newErrors.message = t('forms.required.message');
+    } else if (formData.message.length > MAX_MESSAGE_LENGTH) {
+      newErrors.message = t('forms.validation.messageTooLong', { max: MAX_MESSAGE_LENGTH });
+    }
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -34,11 +58,12 @@ function Support() {
   };
 
   const handleSubmit = () => {
-    // TODO: Add your form submission logic here
-    alert("Your inquiry has been submitted!");
+    if (validateForm()) {
+      mutate(formData);
+    }
   };
 
-  const contactNumbers = ["+1 123 456 7890", "+1 987 654 3210"];
+  const contactNumbers = ["+213 791 94 16 12"];
 
   const faqs = [
     {
@@ -91,6 +116,20 @@ function Support() {
     },
   ];
 
+  const formatPhoneNumber = (num) => {
+    // Remove any non-digit characters
+    const cleaned = num.replace(/\D/g, '');
+
+    // Group the numbers (2-2-2-2-3)
+    const matched = cleaned.match(/^(\d{2})(\d{2})(\d{2})(\d{2})(\d{3})$/);
+
+    if (matched) {
+      return `${matched[1]} ${matched[2]} ${matched[3]} ${matched[4]} ${matched[5]}`;
+    }
+
+    return num;
+  };
+
   return (
     <DashboardLayout user={user}>
       <DashboardNavbar pageName={"Tableau de bord"} />
@@ -110,9 +149,23 @@ function Support() {
                     {t("support.contactNumbers.phone")}
                   </VuiTypography>
                   {contactNumbers.map((number, index) => (
-                    <VuiTypography color="text" variant="button" fontWeight="regular" key={index} mb="4px">
-                      {number}
-                    </VuiTypography>
+                    <div
+                      key={index}
+                      style={{
+                        textAlign: language === 'ar' ? "right" : "left",
+                        direction: language === 'ar' ? 'rtl' : 'ltr',
+                        fontSize: '1rem',
+                        color: "white",
+                        width: '100%',
+                      }}
+                    >
+                      <span style={{
+                        unicodeBidi: 'plaintext',
+                        whiteSpace: 'nowrap'
+                      }}>
+                        {formatPhoneNumber(number)}
+                      </span>
+                    </div>
                   ))}
                 </Grid>
 
@@ -121,7 +174,7 @@ function Support() {
                   <VuiTypography color="white" variant="md" fontWeight="bold" mb="8px">
                     {t("support.contactNumbers.email")}
                   </VuiTypography>
-                  {["support@example.com", "info@example.com"].map((email, index) => (
+                  {["contact@betaschoolprime.com"].map((email, index) => (
                     <VuiTypography
                       color="text"
                       variant="button"
@@ -141,10 +194,10 @@ function Support() {
                     {t("support.contactNumbers.address")}
                   </VuiTypography>
                   <VuiTypography color="text" variant="button" fontWeight="regular" mb="4px">
-                    123 Main Street, Suite 101
+                    PC6M+58G, Bir El Djir, Algeria
                   </VuiTypography>
                   <VuiTypography color="text" variant="button" fontWeight="regular">
-                    New York, NY 10001
+                    ORAN, 31000
                   </VuiTypography>
                 </Grid>
 
@@ -155,9 +208,8 @@ function Support() {
                   </VuiTypography>
                   <VuiBox display="flex" gap="16px" sx={{ display: "flex", flexDirection: "row" }} flexWrap="wrap">
                     {[
-                      { platform: <Facebook fontSize={"large"} />, link: "https://facebook.com" },
-                      { platform: <Twitter fontSize={"large"} />, link: "https://twitter.com" },
-                      { platform: <LinkedIn fontSize={"large"} />, link: "https://linkedin.com" },
+                      { platform: <Facebook fontSize={"large"} />, link: "https://www.facebook.com/p/Beta-Prime-School-61558133451547" },
+                      { platform: <Instagram fontSize={"large"} />, link: "https://www.instagram.com/betaprimeschool/" },
                     ].map((social, index) => (
                       <a
                         href={social.link}
@@ -199,17 +251,33 @@ function Support() {
                 <Grid item xs={12} sm={6}>
                   <VuiInput
                     placeholder={t("forms.fullName")}
-                    name="name"
-                    value={formData.name}
+                    name="fullName"
+                    value={formData.fullName}
                     onChange={handleInputChange}
+                    error={!!errors.fullName}
+                    helperText={errors.fullName}
                   />
                 </Grid>
                 <Grid item xs={12} sm={6}>
                   <VuiInput
+                    name="email"
                     placeholder={t("signup.placeholder.email")}
                     type="email"
                     value={formData.email}
                     onChange={handleInputChange}
+                    error={!!errors.email}
+                    helperText={errors.email}
+
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <VuiInput
+                    placeholder={t("forms.subject")}
+                    name="subject"
+                    value={formData.subject}
+                    onChange={handleInputChange}
+                    error={!!errors.subject}
+                    helperText={errors.subject}
                   />
                 </Grid>
                 <Grid item xs={12}>
@@ -221,12 +289,18 @@ function Support() {
                     rows={4}
                     value={formData.message}
                     onChange={handleInputChange}
+                    error={!!errors.message}
+                    helperText={errors.message}
                   />
+                  <VuiTypography variant="caption" color="text">
+                    {formData.message.length}/1500
+                  </VuiTypography>
                 </Grid>
               </Grid>
               <VuiBox mt={2} display="flex" justifyContent="flex-end">
-                <VuiButton variant="contained" color="info" onClick={handleSubmit}>
-                  {t("button.submit")}
+                <VuiButton disabled={isLoading}
+                  variant="contained" color="info" onClick={handleSubmit}>
+                  {isLoading ? t("button.processing") : t("button.submit")}
                 </VuiButton>
               </VuiBox>
             </VuiBox>
