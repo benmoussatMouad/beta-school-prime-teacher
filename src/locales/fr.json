@@ -537,7 +537,8 @@
     "teachers": "Les Enseignants",
     "sales": "Les Ventes",
     "debt": "Dettes",
-    "transaction": "Transactions en attente"
+    "transaction": "Transactions en attente",
+    "allpayments": "Transactions de l'école"
   },
   "sales": {
     "title": "Ventes",
@@ -818,7 +819,8 @@
       "commission": "Commission ",
       "discount": "Réduction",
       "courseTitle": "Titre du Cours"
-    }
+    },
+    "notfound": { "title": " Aucune Dette Trouvée " }
   },
   "transactions": {
     "student": "Étudiant",
