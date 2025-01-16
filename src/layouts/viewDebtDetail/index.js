@@ -16,6 +16,8 @@ import PaymentDialog from "examples/Dialogs/ConfirmPayment";
 import { MdOutlinePayment } from "react-icons/md";
 import { BsPersonFill } from "react-icons/bs";
 import { MdOutlineReceiptLong } from "react-icons/md";
+import NotFound from "examples/NotFound/NotFound";
+import VuiLoading from "components/VuiLoading";
 
 function DebtDetail() {
   const [open, setOpen] = useState(false);
@@ -29,6 +31,15 @@ function DebtDetail() {
     token,
     debtId
   });
+
+  if (isLoading) {
+    return <VuiLoading />;
+  }
+
+
+  if (!data) {
+    return <NotFound isDebt={true} user={user} />;
+  }
 
   const handleOpen = () => {
     const paymentData = {

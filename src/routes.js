@@ -173,6 +173,17 @@ const routes = [
   },
   {
     type: "collapse",
+    name: "les payments des enseignants",
+    key: "allpayments",
+    route: "/allpayments",
+    icon: <HiCurrencyDollar size="20px" color="inherit" />,
+    component: TeacherPayments,
+    noCollapse: true,
+    isProtected: true,
+    isRoot: true,
+  },
+  {
+    type: "collapse",
     name: "Les cours",
     key: "courses",
     route: "/courses",
@@ -209,6 +220,7 @@ const routes = [
     component: TeacherPayments,
     noCollapse: true,
     isProtected: true,
+    isNotRoot: true,
   },
   {
     type: "collapse",

@@ -26,6 +26,7 @@ import VuiAvatar from "components/VuiAvatar";
 import VuiBadge from "../../../components/VuiBadge";
 import React from "react";
 import { useTranslation } from "react-i18next";
+import VuiButton from "components/VuiButton";
 
 function Teacher({ image, name }) {
   return (
@@ -95,6 +96,16 @@ export const teacherPaidTableData = (t, data) => {
         {item?.paymentStats?.totalAmount} DA
       </VuiTypography>
     ),
+    [t("demands.table.action")]: item?.TeacherDebt?.length > 0 && item.TeacherDebt[0]?.id && (
+      <VuiButton
+        variant="contained"
+        sx={{ padding: "0px", height: "30px" }}
+        color="info"
+        href={`/debt/${item?.TeacherDebt?.[0]?.id}`}
+      >
+        {t("demands.table.view")}
+      </VuiButton>
+    )
   }));
 
 
@@ -109,6 +120,7 @@ export const teacherPaidTableData = (t, data) => {
       { name: t("demands.table.subject"), key: "subject", align: "center", sortable: true },
       { name: t("demands.table.debt"), key: "debt", align: "center", sortable: false },
       { name: t("demands.table.total"), key: "amount", align: "center", sortable: true },
+      { name: t("demands.table.action"), key: "amount", align: "center", sortable: true },
     ],
     rows: rowsObject || [],
   };

@@ -5,7 +5,7 @@ import VuiButton from "../../components/VuiButton";
 import React from "react";
 import { useTranslation } from "react-i18next";
 
-function NotFound({ user }) {
+function NotFound({ user, isDebt }) {
 
   const { t } = useTranslation();
 
@@ -26,7 +26,7 @@ function NotFound({ user }) {
           mb={2}
           sx={{ textAlign: "center" }}
         >
-          {t("course.notfound.title")}
+          {t(isDebt ? "debts.notfound.title" : "course.notfound.title")}
         </VuiTypography>
         <VuiButton
           variant="gradient"
