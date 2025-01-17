@@ -85,28 +85,32 @@ function CoverLayout({
           justifyContent="center"
           alignItems="center"
           flexDirection="column"
+        ><VuiTypography
+          textAlign={"center"}
+          variant="subtitle1"
+          fontWeight="medium"
+          color="white"
+          mb="10px"
+          sx={{
+            mb: 1,
+            letterSpacing: "8px",
+            textShadow: "2px 2px 8px rgba(0, 0, 0, 0.8)", // Dark shadow to separate text from background
+          }}
         >
-          <VuiTypography
-            textAlign={"center"}
-            variant="subtitle1"
-            fontWeight="medium"
-            color="white"
-            mb="10px"
-            sx={{ mb: 1, letterSpacing: "8px" }}
-          >
-            {premotto}
-          </VuiTypography>
+          {premotto}
+        </VuiTypography>
           <VuiTypography
             textAlign={"center"}
             variant="h2"
             fontWeight="bold"
-            color="logo"
+            color="white"
             mb="10px"
-            textGradient
+            sx={{
+              textShadow: "2px 2px 12px rgba(0, 0, 0, 0.8)", // Larger shadow for emphasis
+            }}
           >
             {motto}
-          </VuiTypography>
-        </VuiBox>
+          </VuiTypography></VuiBox>
       </VuiBox>
       <VuiBox
         sx={{

@@ -7,7 +7,7 @@ import VuiInput from "components/VuiInput";
 import VuiButton from "components/VuiButton";
 import VuiSwitch from "components/VuiSwitch";
 import CoverLayout from "layouts/authentication/components/CoverLayout";
-import bgSignIn from "assets/images/signInImage.png";
+import bgSignIn from "assets/images/logo-on-bg.jpg";
 import IconButton from "@mui/material/IconButton";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import Visibility from "@mui/icons-material/Visibility";
@@ -48,7 +48,7 @@ function SignIn() {
       title={t("login.welcome")}
       color="white"
       description={t("login.description")}
-      premotto="PRIME BETA SCHOOL"
+      premotto="BETA PRIME SCHOOL"
       motto={t("signup.motto")}
       image={bgSignIn}
     >
