@@ -58,18 +58,24 @@ function CreateChapter({ closeDialog, openDialog, courseId }) {
   const watchAttachments = watch("attachments");
 
   const handleFileChange = (e, fieldName) => {
-    const files = fieldName === "attachments" ? Array.from(e.target.files) : e.target.files[0];
+    const maxSizeInBytes = 1024 * 1024 * 1024; // 5MB file size limit
+    let files = fieldName === "attachments" ? Array.from(e.target.files) : e.target.files[0];
+
     if (files) {
+      if (fieldName === "video" && files.size > maxSizeInBytes) {
+        // If file size exceeds the limit, show an error
+        return showSnackBar(dispatch, t("dialog.error.fileTooLarge", { size: "1GB" }), "error");
+      }
+
       setValue(fieldName, files, { shouldValidate: true });
 
       if (fieldName === "video") {
-        setVideoPreview(URL.createObjectURL(files));
+        setVideoPreview(URL.createObjectURL(files)); // Set video preview URL
       }
     } else {
       setValue(fieldName, null); // Handle case when no file is selected
     }
   };
-
 
   // const onSubmit = (data) => {
   //   if (!data.video) {
@@ -174,7 +180,7 @@ function CreateChapter({ closeDialog, openDialog, courseId }) {
       abortControllerRef.current = null; // Reset the controller
     }
     setIsLoading(false); // Reset the loading state
-    setUploadProgress(0)
+    setUploadProgress(0);
 
     closeDialog(); // Call the parent prop to close the dialog
   };
@@ -230,8 +236,9 @@ function CreateChapter({ closeDialog, openDialog, courseId }) {
                   <CircularProgress thickness={5} variant="determinate" size={80} color="info" value={uploadProgress} />
                   <br />
                   {uploadProgress === 100 ? <VuiTypography color={"white"} fontWeight={"bold"} mt={2}
-                                                           variant={"h5"}>{t('dialog.loading.end')}</VuiTypography> :<VuiTypography color={"white"} fontWeight={"bold"} mt={2}
-                                                           variant={"h5"}>{uploadProgress}%</VuiTypography>}
+                                                           variant={"h5"}>{t("dialog.loading.end")}</VuiTypography> :
+                    <VuiTypography color={"white"} fontWeight={"bold"} mt={2}
+                                   variant={"h5"}>{uploadProgress}%</VuiTypography>}
 
                 </VuiBox>
               ) :
