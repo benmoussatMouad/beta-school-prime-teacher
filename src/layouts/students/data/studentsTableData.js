@@ -160,5 +160,5 @@ export const studentsTableData = (t, students, role, handleOpen, handleOpenActio
         {t("demands.table.view")}
       </VuiButton> : ""
     })),
-  };
+  }
 };

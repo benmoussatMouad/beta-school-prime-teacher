@@ -78,9 +78,11 @@ const Stats = () => {
     return new Intl.NumberFormat('fr-DZ', {
       style: 'currency',
       currency: 'DZD',
-      maximumFractionDigits: 0
-    }).format(value || 0);
+      maximumFractionDigits: 0,
+      signDisplay: 'never' // This removes the negative sign
+    }).format(Math.abs(value) || 0); // This ensures positive value is formatted
   };
+
 
   return (
     <Card>

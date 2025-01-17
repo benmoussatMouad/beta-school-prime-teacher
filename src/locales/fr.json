@@ -44,7 +44,8 @@
     "reset": "Réinitialiser le mot de passe",
     "signin": "Se connecter",
     "submit": "Soumettre",
-    "processing": "En cours"
+    "processing": "En cours",
+    "delete": "Supprimer"
   },
   "chapter": {
     "create": {
@@ -652,7 +653,11 @@
       "student": "Étudiant",
       "wilaya": "Wilaya"
     },
-    "title": "Étudiants"
+    "title": "Étudiants",
+    "delete": {
+      "success": "Etudiant supprimé avec succès",
+      "error": "Une erreur s'est produite!"
+    }
   },
   "subjects": {
     "ARABIC": "Arabe",
