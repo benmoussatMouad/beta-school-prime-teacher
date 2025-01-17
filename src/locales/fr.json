@@ -36,7 +36,8 @@
     "reject": "Rejeter",
     "reset": "Réinitialiser le mot de passe",
     "signin": "Se connecter",
-    "submit": "Soumettre"
+    "submit": "Soumettre",
+    "delete": "Supprimer"
   },
   "chapter": {
     "create": {
@@ -690,7 +691,11 @@
       "student": "Étudiant",
       "wilaya": "Wilaya"
     },
-    "title": "Étudiants"
+    "title": "Étudiants",
+    "delete": {
+      "success": "Etudiant supprimé avec succès",
+      "error": "Une erreur s'est produite!"
+    }
   },
   "subjects": {
     "ARABIC": "Arabe",

@@ -10,11 +10,10 @@ import { useTranslation } from "react-i18next";
 import colors from "../../assets/theme/base/colors";
 import borders from "../../assets/theme/base/borders";
 import boxShadows from "../../assets/theme/base/boxShadows";
-import { useAcceptStudent } from "../../api/students/acceptStudent";
-import { useRejectStudent } from "../../api/students/rejectStudent";
 import { useBlockStudent } from "../../api/students/blockStudent";
 import { useRecoverStudent } from "../../api/students/recoverStudent";
 import moment from "moment/moment";
+import { useDeleteStudent } from "../../api/admin/deleteStudents";
 
 const { black, gradients } = colors;
 const { card } = gradients;
@@ -28,6 +27,7 @@ function StudentActionsDialog({ open, onClose, studentId }) {
 
   const { mutate: blockStudent } = useBlockStudent();
   const { mutate: recoverStudent } = useRecoverStudent();
+  const { mutate: mutateDeleteStudent } = useDeleteStudent();
 
 
   const onBlock = () => {
@@ -40,6 +40,14 @@ function StudentActionsDialog({ open, onClose, studentId }) {
 
   const onRecover = () => {
     recoverStudent(studentId, {
+      onSuccess: () => {
+        onClose();
+      },
+    });
+  };
+
+  const onDelete = () => {
+    mutateDeleteStudent(studentId, {
       onSuccess: () => {
         onClose();
       },
@@ -156,7 +164,14 @@ function StudentActionsDialog({ open, onClose, studentId }) {
               {t("button.recover")}
             </VuiButton>
           )}
-
+          <VuiButton
+            onClick={onDelete}
+            color="error"
+            sx={{ fontSize: "0.875rem", padding: "8px 16px", ml: 1 }}
+            disabled={isLoading}
+          >
+            {t("button.delete")}
+          </VuiButton>
         </Box> : ""}
       </DialogActions>
     </Dialog>
