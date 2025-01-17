@@ -35,7 +35,8 @@ import VuiTypography from "components/VuiTypography";
 // Vision UI Dashboard React example components
 import SidenavCollapse from "examples/Sidenav/SidenavCollapse";
 
-import logo from "assets/images/beta-logo.svg";
+import logo from "assets/images/logos/logo-v2-gradient.svg";
+import logoLong from "assets/images/logos/logo-large.png";
 
 // Custom styles for the Sidenav
 import SidenavRoot from "examples/Sidenav/SidenavRoot";
@@ -47,6 +48,7 @@ import { useTranslation } from "react-i18next";
 import VuiButton from "../../components/VuiButton";
 import { getRefreshToken } from "../../utils";
 import { useLogout } from "../../api";
+import VuiBadge from "../../components/VuiBadge";
 
 // Vision UI Dashboard React icons
 
@@ -208,7 +210,19 @@ function Sidenav({ color, brandName, routes, user, ...rest }) {
                 })
             }
           >
-            <img src={logo} style={{ width: "150px" }} alt={"beta-logo"} />
+            <VuiBox
+
+              style={{ display: "flex", flexDirection: "column", alignItems: "center" }}
+            >
+              <img src={logo} style={{ width: "64px" }} alt={"beta-logo"} />
+              <img src={logoLong} style={{ width: "180px" }} alt={"beta-logo"} />
+              <VuiBadge
+                sx={{position: "relative", top: "-40px", right: "70px", fontSize: "15px !important"}}
+                badgeContent={"online"}  color="info"/>
+              <VuiTypography variant="h6" color="white" fontWeight="bold" textTransform="uppercase">
+                {t("platformForTeachers")}
+              </VuiTypography>
+            </VuiBox>
           </VuiBox>
         </VuiBox>
       </VuiBox>
