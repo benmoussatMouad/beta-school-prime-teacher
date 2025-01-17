@@ -15,9 +15,6 @@ import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import AttachFileIcon from "@mui/icons-material/AttachFile";
 import VideoPlayer from "../VideoPlayer/VideoPlayer";
 import { useCreateChapter } from "../../api/chapters/createChapter";
-import { apiClient } from "../../api";
-import VuiLoading from "../../components/VuiLoading";
-import VuiSnackBar from "../../components/VuiSnackBar";
 import { showSnackBar, useVisionUIController } from "../../context";
 
 const { black, gradients } = colors;
@@ -76,62 +73,6 @@ function CreateChapter({ closeDialog, openDialog, courseId }) {
       setValue(fieldName, null); // Handle case when no file is selected
     }
   };
-
-  // const onSubmit = (data) => {
-  //   if (!data.video) {
-  //     return; // Ensure there's a video file
-  //   }
-  //
-  //   setIsLoading(true); // Show loading spinner or progress bar
-  //
-  //   // Payload creation
-  //   const formData = new FormData();
-  //   formData.append("title", data.title);
-  //   formData.append("description", data.description);
-  //   if (data.video) formData.append("video", data.video);
-  //   if (data.attachments.length) {
-  //     data.attachments.forEach((file) => formData.append("attachments", file));
-  //   }
-  //
-  //   const xhr = new XMLHttpRequest(); // Create a new XHR instance
-  //
-  //   // Set up progress tracking
-  //   xhr.upload.onprogress = (event) => {
-  //     if (event.lengthComputable) {
-  //       const percentCompleted = Math.round((event.loaded / event.total) * 100);
-  //       console.log(`Upload progress: ${percentCompleted}%`);
-  //       // Example: Update the state for progress or use it for a visual indicator
-  //       // You can replace this `console.log` with a setState call to update a progress bar
-  //     }
-  //   };
-  //
-  //   // Handle server response
-  //   xhr.onload = () => {
-  //     if (xhr.status === 200) {
-  //       console.log('Upload successful:', xhr.responseText);
-  //       setIsLoading(false);
-  //       closeDialog(); // Close the dialog
-  //       reset(); // Reset the form
-  //       setVideoPreview(null); // Clear the video preview
-  //     } else {
-  //       console.error('Upload failed:', xhr.status, xhr.statusText);
-  //       setIsLoading(false); // Hide the loader
-  //     }
-  //   };
-  //
-  //   // Handle errors
-  //   xhr.onerror = () => {
-  //     console.error('An error occurred during the request.');
-  //     setIsLoading(false); // Hide the loader
-  //   };
-  //
-  //   // Configure the XHR request
-  //   xhr.open("POST", `https://prime-beta-school-back-end.onrender.com/v1/api/course/${courseId}/chapter`, true); // Replace with your endpoint
-  //   xhr.setRequestHeader("Authorization", `Bearer <your_token>`); // Add authorization header if required
-  //
-  //   // Send the form data
-  //   xhr.send(formData);
-  // };
   const handleProgress = (progress) => {
     setUploadProgress(progress); // Update progress in real-time
   };
