@@ -59,7 +59,7 @@ function PopperIcon(
               width: 60,
               height: 60,
               cursor: "pointer",
-              backgroundColor: "rgba(255, 255, 255, 0.5)",
+              backgroundColor: "rgba(255, 255, 255, 1)",
               border: watch("icon")?.name === icon.fileName
                 ? "2px solid #4caf50"
                 : "2px solid transparent",

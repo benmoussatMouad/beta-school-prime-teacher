@@ -135,6 +135,14 @@ function CreateCoursDialog({ closeDialog, openDialog }) {
     setPopperAnchor(null);
   };
 
+  const togglePopper = (event) => {
+    if (isPopperOpen) {
+      handlePopperClose();
+    } else {
+      handlePopperOpen(event);
+    }
+  }
+
   const isPopperOpen = Boolean(popperAnchor);
 
 
@@ -215,7 +223,7 @@ function CreateCoursDialog({ closeDialog, openDialog }) {
                     p: 2,
                     background: rgba(black.main, 0.1),
                   }}
-                  onMouseEnter={handlePopperOpen}  // Open on mouse enter
+                  onMouseClick={handlePopperOpen}  // Open on mouse enter
                   onMouseLeave={handlePopperClose} // Close on mouse leave
                 >
                   <VuiTypography component="label" variant="button" fontWeight="bold" color="white" sx={{ mb: 2 }}>
@@ -225,6 +233,7 @@ function CreateCoursDialog({ closeDialog, openDialog }) {
                                  sx={{ mb: 2 }}>
                     {t("dialog.course.iconClickToSelectFile")}
                   </VuiTypography>
+
                   <input
                     type="file"
                     style={{ display: "none" }}
@@ -240,7 +249,7 @@ function CreateCoursDialog({ closeDialog, openDialog }) {
                         cursor: "pointer",
                         border: `2px solid ${black.main}`,
                         boxShadow: "0 4px 8px rgba(0,0,0,0.2)",
-                        backgroundColor: "rgba(255, 255, 255, 0.5)",
+                        backgroundColor: "rgba(255, 255, 255, 1)",
                       }}
                       onClick={() => document.querySelector("input[type='file']").click()}
                     />
@@ -261,6 +270,7 @@ function CreateCoursDialog({ closeDialog, openDialog }) {
                       <GiOpenBook color="white" size={50} />
                     </VuiBox>
                   )}
+                  <VuiButton mt={2} variant={'outlined'} color={"info"} onClick={togglePopper}>{isPopperOpen ? t("button.close") : t("choose-a-predefined-icon")}</VuiButton>
                   {errors.icon && (
                     <VuiTypography
                       sx={{ color: "red", fontSize: "0.8rem", mt: 1 }}>{errors.icon.message}</VuiTypography>
