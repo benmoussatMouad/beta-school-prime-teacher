@@ -41,7 +41,11 @@ export default {
 
       "&.Mui-selected": {
         margin: 5,
+        background: `${colors.inputColors.selectedBackground} !important`, // Set background color for selected elements
+        color: `${colors.white.main} !important`, // Set text color for selected elements
+        fontWeight: "bold",
       },
+
     },
   },
 };

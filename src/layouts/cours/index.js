@@ -23,7 +23,7 @@ import UpdateCourse from "./components/CourseDetails";
 
 import { Box, Skeleton } from "@mui/material";
 import VuiButton from "../../components/VuiButton";
-import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
+import { FaChevronLeft, FaChevronRight, FaTimes } from "react-icons/fa";
 import { convertSecondsToMinutes, formatSeconds } from "../../utils";
 import { useVisionUIController } from "../../context";
 import { useLocation } from "react-router-dom";
@@ -39,6 +39,11 @@ import ViewChapter from "../../examples/Dialogs/ViewChapter";
 import VuiProgress from "../../components/VuiProgress";
 import VuiBadge from "../../components/VuiBadge";
 import RevertCourse from "./components/RevertCourse";
+import { IoMdEye } from "react-icons/io";
+import MiniStatisticsCard from "../../examples/Cards/StatisticsCards/MiniStatisticsCard";
+import { IoTime } from "react-icons/io5";
+import { MdStar, MdTimer, MdWatch } from "react-icons/md";
+import { FaStar } from "react-icons/fa6";
 
 
 function CoursDetails() {
@@ -128,10 +133,11 @@ function CoursDetails() {
 
   return (
     <DashboardLayout user={context.user}>
-      <Header data={course} courseOwner={data.teacher.user} myOwnCourse={myOwnCourse} isLoading={isLoading} pageName={course?.title} />
+      <Header data={course} courseOwner={data.teacher.user} myOwnCourse={myOwnCourse} isLoading={isLoading}
+              pageName={course?.title} />
       <CreateChapter closeDialog={closeDialog} openDialog={openCreateDialog} courseId={course.id} />
       <UpdateChapter closeDialog={closeDialog} openDialog={openUpdateDialog.open}
-        chapterId={openUpdateDialog.coursId} />
+                     chapterId={openUpdateDialog.coursId} />
       <ViewChapter
         openDialog={openViewDialog.open}
         closeDialog={closeDialog}
@@ -192,17 +198,39 @@ function CoursDetails() {
                 </VuiTypography>
                 <VuiBox borderRadius={"lg"} sx={{ p: 3, mb: 1, border: "1px solid #234576" }}>
                   <VuiTypography color={"white"} variant="body2"
-                    sx={{ textAlign: "justify", mt: 1, lineHeight: 1.1 }}>
+                                 sx={{ textAlign: "justify", mt: 1, lineHeight: 1.1 }}>
                     {course.description}
                   </VuiTypography>
                 </VuiBox>
-                <VuiBadge badgeContent={`${t("currentEnrollment")}: ${course.currentEnrollment || "0"}`}
-                  color={"primary"} container variant="contained" size={"md"}
-                  sx={{ textAlign: "justify", mt: 1 }} />
-                <br />
-                <VuiBadge badgeContent={`${t("totalWatchTime")}: ${formatSeconds(course.totalWatchTime, t)}`}
-                  color={"info"} container variant="contained" size={"md"}
-                  sx={{ textAlign: "justify", mt: 1 }} />
+                <VuiBox
+                  sx={{
+                    display: "flex", // Makes the children appear in a row
+                    justifyContent: "space-around", // Adjust spacing between items
+                    alignItems: "center" // Adds spacing between cards (optional)
+                  }}
+                >
+                  <MiniStatisticsCard
+                    isLoading={isLoading}
+                    title={{ text: t("currentEnrollment") }}
+                    count={course.currentEnrollment || "0"}
+                    // percentage={{ color: "error", text: "-2%" }}
+                    icon={{ color: "info", component: <MdTimer size="20px" color="white" /> }}
+                  />
+                  <MiniStatisticsCard
+                    isLoading={isLoading}
+                    title={{ text: t("rating") }}
+                    count={(course.rating * 5 || "0") + "/5"}
+                    // percentage={{ color: "error", text: "-2%" }}
+                    icon={{ color: "info", component: <FaStar size="20px" color="white" /> }}
+                  />
+                  <MiniStatisticsCard
+                    isLoading={isLoading}
+                    title={{ text: t("totalWatchTime") }}
+                    count={formatSeconds(course.totalWatchTime, t)}
+                    // percentage={{ color: "error", text: "-2%" }}
+                    icon={{ color: "info", component: <MdTimer size="20px" color="white" /> }}
+                  />
+                </VuiBox>
               </Grid>
               <Grid item xs={12} lg={4} sx={{ py: 1 }}>
                 <VuiTypography color={"white"}>
@@ -252,7 +280,7 @@ function CoursDetails() {
                     fontSize: { xs: "0.8rem", md: "1rem" },
                     textAlign: { xs: "center", md: "left" },
                   }} size={"xs"} variant={"contained"} style={{ color: "white", fontSize: "0.9rem" }}
-                    key={index} badgeContent={t(`educationalBranches.${el}`)} />
+                            key={index} badgeContent={t(`educationalBranches.${el}`)} />
                 ))}
                 <VuiTypography color={"white"}>
                   {t("dialog.forms.teacherClasses")}
@@ -263,7 +291,7 @@ function CoursDetails() {
                     fontSize: { xs: "0.8rem", md: "1rem" },
                     textAlign: { xs: "center", md: "left" },
                   }} size={"xs"} style={{ color: "white", fontSize: "0.9rem" }}
-                    key={index} variant={"contained"} badgeContent={t(`teacherClass.${el}`)} />
+                            key={index} variant={"contained"} badgeContent={t(`teacherClass.${el}`)} />
                 ))}
               </Grid>
             </Grid>
@@ -309,7 +337,7 @@ function CoursDetails() {
                 >
                   {!course?.chapters.length ?
                     <VuiBox display="flex" justifyContent="center" sx={{ height: "300px" }} alignItems="flex-start"
-                      py={3}>
+                            py={3}>
                       <VuiTypography color={"white"}>
                         {t("demands.table.nodata")}
                       </VuiTypography>
@@ -405,7 +433,7 @@ function CoursDetails() {
                   course.status === "ACCEPTED" ? "success" :
                     "primary"} borderRadius="lg" sx={{ p: 3, mb: 1 }}>
             <Grid container alignItems="center" justifyContent="space-between"
-              sx={{ gap: { xs: "16px", sm: "12px", md: "8px" }, color: "white", textAlign: "center" }}>
+                  sx={{ gap: { xs: "16px", sm: "12px", md: "8px" }, color: "white", textAlign: "center" }}>
               <VuiTypography variant="h6" sx={{ fontWeight: "bold", width: "100%" }} color="white">
                 {renderNote()}
               </VuiTypography>
@@ -422,7 +450,7 @@ function CoursDetails() {
                     course.status === "ACCEPTED" ? "success" :
                       "primary"} borderRadius="lg" sx={{ p: 3, mb: 1 }}>
               <Grid container alignItems="center" justifyContent="space-between"
-                sx={{ gap: { xs: "16px", sm: "12px", md: "8px" }, color: "white", textAlign: "center" }}>
+                    sx={{ gap: { xs: "16px", sm: "12px", md: "8px" }, color: "white", textAlign: "center" }}>
                 <VuiTypography variant="h6" sx={{ fontWeight: "bold", width: "100%" }} color="white">
                   {renderNote()}
                 </VuiTypography>
@@ -433,7 +461,8 @@ function CoursDetails() {
         }
       </Grid>
       {
-        user.role === "ROOT" && (course.status === 'ACCEPTED' || course.status === 'REJECT') ? <RevertCourse coursId={coursId} /> : ""
+        user.role === "ROOT" && (course.status === "ACCEPTED" || course.status === "REJECT") ?
+          <RevertCourse coursId={coursId} /> : ""
       }
       {
         user.role === "ROOT" || myOwnCourse ? <DeleteCourse coursId={coursId} /> : ""

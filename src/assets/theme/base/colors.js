@@ -394,6 +394,7 @@ export default {
     boxShadow: "#b3c6e6", // Light shadow
     error: "#fd5c70",
     success: "#66d432",
+    selectedBackground: "#0075ff",
   },
 
   sliderColors: {

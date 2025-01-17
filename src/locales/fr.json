@@ -7,14 +7,6 @@
   "UNDER_CREATION": "Le cours est en mode création",
   "UNKNOWN_STATUS": "Le cours a un statut inconnu",
   "adminNote": "Note d'admin",
-  "payments": {
-    "table": {
-      "id": "ID",
-      "amount": "Montant",
-      "status": "Statut",
-      "paidAt": "Date de paiement"
-    }
-  },
   "allCourses": {
     "title": "Tous les cours"
   },
@@ -39,12 +31,12 @@
     "forgetButton01": "Réessayez dans",
     "forgetButton02": "Envoyer le lien de réinitialisation",
     "next": "Suivant",
+    "processing": "En cours",
     "recover": "Récupérer",
     "reject": "Rejeter",
     "reset": "Réinitialiser le mot de passe",
     "signin": "Se connecter",
-    "submit": "Soumettre",
-    "processing": "En cours"
+    "submit": "Soumettre"
   },
   "chapter": {
     "create": {
@@ -61,6 +53,12 @@
     "title": "Les chapitres"
   },
   "choose-a-predefined-icon": "Choisir une icône prédéfinie",
+  "commission": {
+    "current": "Commission actuelle",
+    "label": "Commission",
+    "update": "Mettre à jour",
+    "updated": "Commission mise à jour avec succès"
+  },
   "cours": {
     "description": "Détails du cours",
     "table": {
@@ -87,11 +85,11 @@
       "success": "Créer un cours avec succès !"
     },
     "details": {
+      "discountedPrice": "Prix réduit ",
       "priceDetails": "Informations de tarif",
       "schoolGains": "Gains de l'ecole (40%)",
       "teacherGains": "Vos Gains (60%)",
-      "totalPrice": "Prix total",
-      "discountedPrice": "Prix réduit "
+      "totalPrice": "Prix total"
     },
     "filter": {
       "level": "Niveau",
@@ -168,26 +166,50 @@
       "title": "Bienvenue !"
     }
   },
+  "debts": {
+    "detail": {
+      "amount": "Montant",
+      "commission": "Commission ",
+      "course": "Cours",
+      "courseTitle": "Titre du Cours",
+      "createdAt": "Date de Création",
+      "debtInfo": "Informations de la Dette",
+      "discount": "Réduction",
+      "netAmount": "Montant Net",
+      "paidAt": "Date de Paiement",
+      "payNow": "Payer Maintenant",
+      "paymentMethod": "Méthode de Paiement",
+      "status": "Statut",
+      "student": "Étudiant",
+      "teacherInfo": "Informations de l'Enseignant",
+      "title": "Détails de la Dette",
+      "totalAmount": "Montant Total",
+      "transactions": "Transactions"
+    },
+    "notfound": {
+      "title": " Aucune Dette Trouvée "
+    }
+  },
   "demands": {
     "table": {
       "action": "Action",
       "createdAt": "Créé le",
+      "debt": "Dettes",
       "email": "Email",
       "fullName": "Nom complet",
       "institution": "Institution",
       "isEmailVerified": "Statut Email",
       "nodata": "Il n'y a pas de données",
+      "pay": "Payer",
+      "phone": "Téléphone",
       "progress": "EN PROGRESSION",
       "role": "Rôle",
       "status": "Statut",
       "subject": "Sujet ",
       "title": "Demandes d'adhésion",
+      "total": "Total",
       "view": "Voir",
-      "yearsOfExperience": "Années d'expérience",
-      "phone": "Téléphone",
-      "debt": "Dettes",
-      "pay": "Payer",
-      "total": "Total"
+      "yearsOfExperience": "Années d'expérience"
     }
   },
   "dialog": {
@@ -325,19 +347,19 @@
       "question": "Quels sont les formats de fichiers pris en charge pour les cours ?"
     },
     "4": {
-      "answer": "Oui, vous pouvez modifier vos cours en accédant à la section « Mes cours » sur votre tableau de bord.",
+      "answer": "Pour modifier un cours, vous devez demander à l'administrateur de le repasser à l'état « En cours de création ».",
       "question": "Puis-je modifier un cours après l'avoir téléchargé ?"
     },
     "5": {
-      "answer": "Une fois publiés, vos cours seront visibles pour les étudiants dans les catégories correspondantes. Ils peuvent s'inscrire et commencer à apprendre immédiatement.",
+      "answer": "Une fois publiées, vos cours seront accessibles aux étudiants via leur application mobile dédiée. Dès qu'un cours est créé, il peut être recommandé par l'algorithme du système ou découvert directement par les étudiants.",
       "question": "Comment les étudiants peuvent-ils accéder à mes cours ?"
     },
     "6": {
-      "answer": "vous serez payé par l'école et vous devrez tenir compte de la commission qui sera soustraite",
+      "answer": "Sur la page de profil, vous pouvez voir le montant dû par l'administration. Ce montant est calculé à chaque fois qu'un étudiant achète un cours, après avoir pris en compte la réduction et la commission de l'école. Une fois que l'administrateur confirme qu'il vous a payé, le compteur sur la page 'Mon profil' sera réinitialisé à zéro. Vous pouvez consulter tous les paiements de l'école sur la page 'Transactions de l'école'. Vous pouvez également voir les cours achetés par les étudiants sur la page 'Ventes'.",
       "question": "Comment puis-je recevoir des paiements pour mes cours ?"
     },
     "7": {
-      "answer": "Oui, en tant qu'enseignant, vous avez la possibilité de fixer les prix de vos cours selon vos préférences.",
+      "answer": "Oui, en tant qu'enseignant, vous avez la possibilité de fixer les prix de vos cours selon vos préférences. Cependant, il est recommandé de définir des prix comme '12000' au lieu de '3499' pour éviter des problèmes de calcul lors de l'application des réductions et de la prise de commission de l'école.",
       "question": "Puis-je fixer mes propres prix pour mes cours ?"
     },
     "8": {
@@ -376,13 +398,13 @@
       "email": "L'adresse e-mail est requise.",
       "experince": "Les années d'expérience sont requises.",
       "firstName": "Le prénom est requis.",
+      "fullName": "Nom complet est requis",
       "lastName": "Le nom est requis.",
       "level": "Le niveau de l'étudiant est requis",
       "password": "Le mot de passe est requis.",
       "phone": "Le numéro est incorrecte",
       "school": "L'école est requise.",
-      "subject": "Le sujet est requis",
-      "fullName": "Nom complet est requis"
+      "subject": "Le sujet est requis"
     },
     "school": "École",
     "subject": "Sujet",
@@ -414,6 +436,15 @@
   "minute": "Min",
   "note": "Note",
   "operationSuccesful": "Opération réussie",
+  "payments": {
+    "table": {
+      "amount": "Montant",
+      "id": "ID",
+      "paidAt": "Date de paiement",
+      "status": "Statut"
+    }
+  },
+  "percentageTheReducesThePriceSchoolComissionWillBeTakenFromFinalPrice": "Pourcentage qui réduit le prix ; la commission de l'école sera déduite du prix final.",
   "placeholder": {
     "email": "Votre e-mail",
     "firstName": "Votre prénom",
@@ -426,7 +457,18 @@
     "years": "Vos années d'expérience"
   },
   "popup": {
+    "amount": "Montant",
+    "cancel": {
+      "cancel": "Annuler",
+      "confirm": "Confirmer",
+      "title": "Annuler le paiement"
+    },
     "class": "Classe",
+    "course": "Cours",
+    "createdAt": "Date de création",
+    "debt": "Dettes",
+    "debtCreatedAt": "Date de creation",
+    "debtDescription": "Description de la dette",
     "defaultName": "Utilisateur",
     "demand": {
       "block": "Voulez-vous bloquer cet l'étudiant?",
@@ -435,14 +477,23 @@
       "student": "Voulez-vous accepter l'étudiant"
     },
     "description": "Vous êtes sur le point de prendre une mesure pour {{name}}, qui est un(e) Professor {{role}}.",
+    "discount": "Réduction",
     "email": "Email",
     "fullName": "Nom complet",
+    "netAmount": "Montant Net",
     "noEmail": "Email non fourni",
     "noPhone": "Pas de numero",
+    "payment": {
+      "cancel": "Êtes-vous sûr de vouloir annuler la transaction ?",
+      "confirmation": "Voulez-vous vraiment confirmez le payement ?",
+      "title": "Payement"
+    },
     "phone": "Numero de telephone",
     "role": "Rôle",
     "status": "Statut",
+    "student": "Étudiant",
     "subject": "Matière",
+    "teacher": "Professeur",
     "teachers": {
       "description": {
         "makeAdmin": "Le clic de confirmation fera de l'enseignant un administrateur",
@@ -450,27 +501,7 @@
       }
     },
     "title": "Action pour {{name}}",
-    "wilaya": "Wilaya",
-    "payment": {
-      "title": "Payement",
-      "confirmation": "Voulez-vous vraiment confirmez le payement ?",
-      "cancel": "Êtes-vous sûr de vouloir annuler la transaction ?"
-    },
-    "debt": "Dettes",
-    "debtDescription": "Description de la dette",
-    "debtCreatedAt": "Date de creation",
-    "student": "Étudiant",
-    "course": "Cours",
-    "teacher": "Professeur",
-    "amount": "Montant",
-    "discount": "Réduction",
-    "netAmount": "Montant Net",
-    "createdAt": "Date de création",
-    "cancel": {
-      "title": "Annuler le paiement",
-      "confirm": "Confirmer",
-      "cancel": "Annuler"
-    }
+    "wilaya": "Wilaya"
   },
   "profile": {
     "accountDeletion": {
@@ -508,6 +539,7 @@
     "title": "Mettre à jour les informations",
     "welcome": "Bienvenue !"
   },
+  "rating": "Évaluation",
   "redirect_mobile": "En vous redirigeant vers l'app...",
   "resetPassword": {
     "description": "Entrez et confirmez votre nouveau mot de passe",
@@ -523,38 +555,42 @@
     "account-pages": "Pages de compte",
     "administrateurs": "Administrateurs",
     "allCourses": "Les Cours",
+    "allpayments": "Transactions de l'école",
     "cours": "Cours",
     "courses": "Mes Cours",
     "dashboard": "Tableau de bord",
+    "debt": "Dettes",
     "debts": "Dettes des enseignants",
-    "payments": "Versement de l'école",
     "demands": "Demandes d'adhésion",
+    "finances": "Finances",
+    "payments": "Versement de l'école",
     "pendingCourses": "Les Cours en attente",
     "profile": "Profil",
+    "sales": "Les Ventes",
+    "student-management": "Gestion des etudiants",
     "students": "Étudiants",
     "studentsDemands": "Demandes des nouveaux élèves",
     "support": "Support",
+    "teacher-management": "Gestion des enseignants",
+    "teacher-pages": "Pages d'enseignant",
     "teachers": "Les Enseignants",
-    "sales": "Les Ventes",
-    "debt": "Dettes",
-    "transaction": "Transactions en attente",
-    "allpayments": "Transactions de l'école"
+    "transaction": "Transactions en attente"
   },
   "sales": {
-    "title": "Ventes",
+    "endDate": "Date de fin",
+    "startDate": "Date de début",
+    "status": "Statut",
     "table": {
-      "id": "ID Transaction",
-      "course": "Cours",
-      "teacher": "Enseignant",
-      "student": "Étudiant",
       "amount": "Montant",
       "amountAfterCommission": "Montant après commission",
+      "course": "Cours",
+      "date": "Date",
+      "id": "ID Transaction",
       "status": "Statut",
-      "date": "Date"
+      "student": "Étudiant",
+      "teacher": "Enseignant"
     },
-    "startDate": "Date de début",
-    "endDate": "Date de fin",
-    "status": "Statut",
+    "title": "Ventes",
     "totalAmount": "Montant Total",
     "totalNetAmount": "Montant Net Total"
   },
@@ -609,25 +645,25 @@
     "resetPassword": "Le mot de passe a été mis à jour avec succès !",
     "sendVerifyEmail": "Vérifiez votre e-mail pour les instructions de vérification.",
     "signup": "Utilisateur enregistré avec succès !",
+    "supportSubmitted": "Votre support a été soumis avec succès !",
     "updateProfile": "Profil mis à jour avec succès !",
     "uploadVideo": "La vidéo a été téléchargée avec succès ",
-    "verifyEmail": "Votre e-mail a été vérifié avec succès !",
-    "supportSubmitted": "Votre support a été soumis avec succès !"
+    "verifyEmail": "Votre e-mail a été vérifié avec succès !"
   },
   "status": {
     "ACCEPTED": "Accepté",
     "BLOCKED": "Bloqué",
+    "FAILED": "Echoué",
     "IN_PROGRESS": "En cours",
     "NONE": "Aucun",
+    "PAID": "Payé",
     "PENDING": "En attente",
     "REGISTERED": "Enregistré",
     "REJECT": "Rejeté",
     "REJECTED": "Rejeté",
     "STATUS": "Status",
     "TO_REVIEW": "À revoir",
-    "UNDER_CREATION": "En cours de création",
-    "PAID": "Payé",
-    "FAILED": "Echoué"
+    "UNDER_CREATION": "En cours de création"
   },
   "students": {
     "loading": "Chargement des étudiants...",
@@ -715,9 +751,11 @@
     "TM3": "TM3"
   },
   "teachers": {
+    "debts": "Dettes des enseignants",
     "page": {
       "title": "Les enseignants"
     },
+    "payments": "Versement de l'école",
     "status": {
       "ACCEPTED": "Accepté",
       "BLOCKED": "Bloqué",
@@ -728,11 +766,22 @@
     "table": {
       "title": "Les enseignants",
       "wilaya": "Wilaya"
-    },
-    "payments": "Versement de l'école",
-    "debts": "Dettes des enseignants"
+    }
   },
-  "totalWatchTime": "Durée totale de visionnage",
+  "totalWatchTime": "Durée de visionnage",
+  "transactions": {
+    "actions": "Actions",
+    "amount": "Montant",
+    "cancel": "Annuler",
+    "confirm": "Confirmer",
+    "course": "Cours",
+    "date": "Date",
+    "discount": "Réduction",
+    "netAmount": "Montant Net",
+    "pendingCash": "Paiements en espèces en attente",
+    "student": "Étudiant",
+    "teacher": "Professeur"
+  },
   "typeHere": "Tapez ici",
   "wilaya": {
     "ADRAR": "Adrar",
@@ -794,45 +843,5 @@
     "TLEMCEN": "Tlemcen",
     "TOUGGOURT": "Touggourt"
   },
-  "commission": {
-    "label": "Commission",
-    "update": "Mettre à jour",
-    "current": "Commission actuelle",
-    "updated": "Commission mise à jour avec succès"
-  },
-  "debts": {
-    "detail": {
-      "title": "Détails de la Dette",
-      "teacherInfo": "Informations de l'Enseignant",
-      "debtInfo": "Informations de la Dette",
-      "transactions": "Transactions",
-      "amount": "Montant",
-      "status": "Statut",
-      "createdAt": "Date de Création",
-      "course": "Cours",
-      "student": "Étudiant",
-      "paymentMethod": "Méthode de Paiement",
-      "paidAt": "Date de Paiement",
-      "payNow": "Payer Maintenant",
-      "totalAmount": "Montant Total",
-      "netAmount": "Montant Net",
-      "commission": "Commission ",
-      "discount": "Réduction",
-      "courseTitle": "Titre du Cours"
-    },
-    "notfound": { "title": " Aucune Dette Trouvée " }
-  },
-  "transactions": {
-    "student": "Étudiant",
-    "course": "Cours",
-    "teacher": "Professeur",
-    "amount": "Montant",
-    "discount": "Réduction",
-    "netAmount": "Montant Net",
-    "date": "Date",
-    "actions": "Actions",
-    "confirm": "Confirmer",
-    "pendingCash": "Paiements en espèces en attente",
-    "cancel": "Annuler"
-  }
+  "youCanHaveMultipleChoices": "Vous pouvez avoir plusieurs choix"
 }

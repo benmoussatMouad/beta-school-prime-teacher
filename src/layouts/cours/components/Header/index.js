@@ -142,7 +142,8 @@ function Header({ pageName, data, courseOwner }) {
               justifyContent: { xs: "center", md: "flex-end" },
               flexDirection: { xs: "column", md: "row" },
             }}>
-
+              <VuiBadge color="primary" variant="gradient" container badgeContent={`${t(`subjects.${data.subject}`)}`} size="lg"
+                        sx={{ fontSize: { xs: "1rem", md: "1.2rem" } }} />
               <VuiAvatar src={courseOwner.profilePic?.url} alt="profile-image" variant="rounded" size="lg" shadow="sm" />
               <VuiTypography color={"white"} sx={{
                 ml: { xs: 0, md: 0 },

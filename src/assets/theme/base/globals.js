@@ -44,4 +44,19 @@ export default {
   "a.link:hover, .link:hover, a.link:focus, .link:focus": {
     color: `${info.main} !important`,
   },
+  "&::-webkit-scrollbar": {
+    width: "8px",
+  },
+  "&::-webkit-scrollbar-track": {
+    background: "#4f5179", // Track color
+    borderRadius: "4px",
+  },
+  "&::-webkit-scrollbar-thumb": {
+    backgroundColor: "#f0f0f0", // Thumb color
+    borderRadius: "4px",
+    border: "2px solid #0F1643",
+  },
+  "&::-webkit-scrollbar-thumb:hover": {
+    backgroundColor: "rgba(31,44,132,0.95)",
+  },
 };
