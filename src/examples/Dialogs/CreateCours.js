@@ -30,11 +30,11 @@ function CreateCoursDialog({ closeDialog, openDialog }) {
   const [popperAnchor, setPopperAnchor] = useState(null); // To manage Popper visibility
 
   const { mutate, isLoading } = useCreateCourse();
-  const { data } = useGetCourseIcons()
+  const { data } = useGetCourseIcons();
 
   const { t } = useTranslation();
 
-  const icons = data?.icons || []
+  const icons = data?.icons || [];
 
   const {
     register,
@@ -116,7 +116,6 @@ function CreateCoursDialog({ closeDialog, openDialog }) {
     }
 
 
-
     mutate(formData, {
       onSuccess: () => {
         closeDialog();
@@ -171,7 +170,7 @@ function CreateCoursDialog({ closeDialog, openDialog }) {
       ) : (
         <DialogTitle>
           <VuiTypography color="white" fontWeight="bold">
-            {t("dialog.chapter.title")}
+            {t("dialog.course.title")}
           </VuiTypography>
         </DialogTitle>
       )}
@@ -193,14 +192,14 @@ function CreateCoursDialog({ closeDialog, openDialog }) {
         },
       }}>
         {isLoading ? <Box sx={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          height: "300px",
-          minWidth: "250px",
-        }}>
-          <CircularProgress color={"info"} />
-        </Box> :
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            height: "300px",
+            minWidth: "250px",
+          }}>
+            <CircularProgress color={"info"} />
+          </Box> :
           <VuiBox as="form" onSubmit={handleSubmit(onSubmit)} sx={{ px: 2 }}>
             <Grid container spacing={3}>
               {/* Icon Upload */}
@@ -222,7 +221,8 @@ function CreateCoursDialog({ closeDialog, openDialog }) {
                   <VuiTypography component="label" variant="button" fontWeight="bold" color="white" sx={{ mb: 2 }}>
                     {t("dialog.course.icon")}
                   </VuiTypography>
-                  <VuiTypography component="caption" variant="caption" fontWeight="regular" color="white" sx={{ mb: 2 }}>
+                  <VuiTypography component="caption" variant="caption" fontWeight="regular" color="white"
+                                 sx={{ mb: 2 }}>
                     {t("dialog.course.iconClickToSelectFile")}
                   </VuiTypography>
                   <input
@@ -282,7 +282,7 @@ function CreateCoursDialog({ closeDialog, openDialog }) {
               <Grid item xs={12}>
                 <VuiBox>
                   <VuiTypography component="label" variant="button" fontWeight="medium" color="white"
-                    sx={{ mb: 1, display: "block" }}>
+                                 sx={{ mb: 1, display: "block" }}>
                     {t("dialog.forms.title")} <span style={{ color: "red" }}>*</span>
                   </VuiTypography>
                   <VuiInput
@@ -301,7 +301,7 @@ function CreateCoursDialog({ closeDialog, openDialog }) {
               <Grid item xs={12}>
                 <VuiBox>
                   <VuiTypography component="label" variant="button" fontWeight="medium" color="white"
-                    sx={{ mb: 1, display: "block" }}>
+                                 sx={{ mb: 1, display: "block" }}>
                     {t("dialog.forms.description")} <span style={{ color: "red" }}>*</span>
                   </VuiTypography>
                   <VuiInput
@@ -326,7 +326,7 @@ function CreateCoursDialog({ closeDialog, openDialog }) {
               <Grid item xs={12} sm={6}>
                 <VuiBox>
                   <VuiTypography component="label" variant="button" fontWeight="medium" color="white"
-                    sx={{ mb: 1, display: "block" }}>
+                                 sx={{ mb: 1, display: "block" }}>
                     {t("dialog.forms.price")} <span style={{ color: "red" }}>*</span>
                   </VuiTypography>
                   <VuiInput
@@ -359,7 +359,7 @@ function CreateCoursDialog({ closeDialog, openDialog }) {
               <Grid item xs={12} sm={6}>
                 <VuiBox>
                   <VuiTypography component="label" variant="button" fontWeight="medium" color="white"
-                    sx={{ mb: 1, display: "block" }}>
+                                 sx={{ mb: 1, display: "block" }}>
                     {t("dialog.forms.language")}
                   </VuiTypography>
                   <VuiInput
@@ -379,8 +379,12 @@ function CreateCoursDialog({ closeDialog, openDialog }) {
               <Grid item xs={12} sm={6}>
                 <VuiBox>
                   <VuiTypography component="label" variant="button" fontWeight="medium" color="white"
-                    sx={{ mb: 1, display: "block" }}>
+                                 sx={{ mb: 1, display: "block" }}>
                     {t("dialog.forms.educationalBranches")} <span style={{ color: "red" }}>*</span>
+                  </VuiTypography>
+                  <VuiTypography component="label" variant="caption" fontWeight="medium" color="white"
+                                 sx={{ mb: 1, display: "block", fontSize: "0.8rem" }}>
+                    {t("youCanHaveMultipleChoices")}
                   </VuiTypography>
                   <VuiSelect
                     multiple
@@ -413,10 +417,21 @@ function CreateCoursDialog({ closeDialog, openDialog }) {
               <Grid item xs={12} sm={6}>
                 <VuiBox>
                   <VuiTypography component="label" variant="button" fontWeight="medium" color="white"
-                    sx={{ mb: 1, display: "block" }}>
+                                 sx={{ mb: 1, display: "block" }}>
                     {t("dialog.forms.teacherClasses")} <span style={{ color: "red" }}>*</span>
                   </VuiTypography>
+                  <VuiTypography component="label" variant="caption" fontWeight="medium" color="white"
+                                 sx={{ mb: 1, display: "block", fontSize: "0.8rem" }}>
+                    {t("youCanHaveMultipleChoices")}
+                  </VuiTypography>
                   <VuiSelect
+                    sx={{
+                      borderColor: rgba(black.main, 0.1),
+                      borderRadius: borderRadius.md,
+                      "& .MuiChip-root": {
+                        backgroundColor: "white", // Set selected elements' text color to white
+                      },
+                    }}
                     multiple
                     {...register("teacherClasses", {
                       required: t("dialog.required.teacherClasses"),
@@ -449,8 +464,12 @@ function CreateCoursDialog({ closeDialog, openDialog }) {
                   <Grid item xs={12}>
                     <VuiBox>
                       <VuiTypography component="label" variant="button" fontWeight="medium" color="white"
-                        sx={{ mb: 1 }}>
+                                     sx={{ mb: 1 }}>
                         {t("dialog.forms.discount")}
+                      </VuiTypography>
+                      <VuiTypography component="label" variant="caption" fontWeight="medium" color="white"
+                                     sx={{ mb: 1, display: "block", fontSize: "0.8rem" }}>
+                        {t("percentageTheReducesThePriceSchoolComissionWillBeTakenFromFinalPrice")}
                       </VuiTypography>
                       <VuiBox display="flex" alignItems="center" sx={{ mb: 1 }}>
                         <input
