@@ -323,7 +323,9 @@
     "SECONDARY_MANAGEMENT_ECONOMIES": "ثانوي - تسيير واقتصاد",
     "SECONDARY_MATHEMATICS": "ثانوي - رياضيات",
     "SECONDARY_SCIENCE": "ثانوي - علوم تجريبية",
-    "SECONDARY_TECHNIQUE_MATH": "ثانوي - تقني-رياضي"
+    "SECONDARY_TECHNIQUE_MATH": "ثانوي - تقني-رياضي",
+    "SECONDARY_SPANISH": "ثانوي - الاسبانية",
+    "SECONDARY_GERMAN": "ثانوي - الألمانية"
   },
   "faq": {
     "1": {

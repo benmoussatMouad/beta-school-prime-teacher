@@ -322,7 +322,9 @@
     "SECONDARY_MANAGEMENT_ECONOMIES": "Secondaire - Gestion et Économie",
     "SECONDARY_MATHEMATICS": "Secondaire - Mathématiques",
     "SECONDARY_SCIENCE": "Secondaire - Sciences",
-    "SECONDARY_TECHNIQUE_MATH": "Secondaire - Technique et Mathématiques"
+    "SECONDARY_TECHNIQUE_MATH": "Secondaire - Technique et Mathématiques",
+    "SECONDARY_SPANISH": "Secondaire - Espagnol",
+    "SECONDARY_GERMAN": "Secondaire - Allemand"
   },
   "faq": {
     "1": {
