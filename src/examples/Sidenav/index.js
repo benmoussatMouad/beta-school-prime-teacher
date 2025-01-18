@@ -66,7 +66,7 @@ function Sidenav({ color, brandName, routes, user, ...rest }) {
 
   const logout = async () => {
     const refreshToken = getRefreshToken();
-    await mutate(refreshToken);
+    mutate(refreshToken);
   };
 
   const role = user?.user?.role || null;
@@ -96,7 +96,7 @@ function Sidenav({ color, brandName, routes, user, ...rest }) {
   }, []);
 
   // Render all the routes from the routes.js (All the visible items on the Sidenav)
-  const renderRoutes = routes.map(({ type, icon, noCollapse, key, route, href, isAdmin, isRoot, isNotRoot, onlyAdmin }) => {
+  const renderRoutes = routes.map(({ type, icon, noCollapse, key, route, href, isAdmin, isRoot, isTitle, isNotRoot, onlyAdmin }) => {
     let returnValue;
 
 
@@ -150,6 +150,16 @@ function Sidenav({ color, brandName, routes, user, ...rest }) {
         </NavLink>
       );
     } else if (type === "title") {
+      if (isTitle) {
+        if (role === "TEACHER") {
+          return null;
+        }
+
+        if (role === "ADMIN" && !isAdmin) {
+          return null;
+        }
+      }
+
       returnValue = (
         <VuiTypography
           key={key}
@@ -203,11 +213,11 @@ function Sidenav({ color, brandName, routes, user, ...rest }) {
           <VuiBox
             sx={
               ((theme) => sidenavLogoLabel(theme, { miniSidenav }),
-                {
-                  display: "flex",
-                  alignItems: "center",
-                  margin: "0 auto",
-                })
+              {
+                display: "flex",
+                alignItems: "center",
+                margin: "0 auto",
+              })
             }
           >
             <VuiBox
@@ -217,8 +227,8 @@ function Sidenav({ color, brandName, routes, user, ...rest }) {
               <img src={logo} style={{ width: "64px" }} alt={"beta-logo"} />
               <img src={logoLong} style={{ width: "180px" }} alt={"beta-logo"} />
               <VuiBadge
-                sx={{position: "relative", top: "-40px", right: "70px", fontSize: "15px !important"}}
-                badgeContent={"online"}  color="info"/>
+                sx={(theme) => ({ position: "relative", top: "-40px", right: `${theme.direction === "ltr" ? "-70px" : "70px"}`, fontSize: "15px !important" })}
+                badgeContent={"online"} color="info" />
               <VuiTypography variant="h6" color="white" fontWeight="bold" textTransform="uppercase">
                 {t("platformForTeachers")}
               </VuiTypography>

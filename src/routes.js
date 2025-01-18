@@ -83,7 +83,7 @@ const routes = [
     noCollapse: true,
     isProtected: true,
   },
-  { type: "title", title: "Teacher management Pages", key: "teacher-management", isRoot: true, isAdmin: true },
+  { type: "title", title: "Teacher management Pages", key: "teacher-management", isRoot: true, isAdmin: true, isTitle: true },
   {
     type: "collapse",
     name: "Les course des enseignants",
@@ -129,7 +129,7 @@ const routes = [
     isProtected: true,
     isRoot: true,
   },
-  { type: "title", title: "Teacher management Pages", key: "student-management", isRoot: true, isAdmin: true },
+  { type: "title", title: "Teacher management Pages", key: "student-management", isRoot: true, isAdmin: true, isTitle: true },
   {
     type: "collapse",
     name: "Demandes eleves",
@@ -152,7 +152,7 @@ const routes = [
     isProtected: true,
     isRoot: true,
   },
-  { type: "title", title: "Teacher management Pages", key: "finances", isRoot: true, isAdmin: true },
+  { type: "title", title: "Teacher management Pages", key: "finances", isRoot: true, isTitle: true },
   {
     type: "collapse",
     name: "Enseignants dettes",

@@ -210,7 +210,8 @@
       "title": "Demandes d'adhésion",
       "total": "Total",
       "view": "Voir",
-      "yearsOfExperience": "Années d'expérience"
+      "yearsOfExperience": "Années d'expérience",
+      "paidAt": "Date de Paiement"
     }
   },
   "dialog": {

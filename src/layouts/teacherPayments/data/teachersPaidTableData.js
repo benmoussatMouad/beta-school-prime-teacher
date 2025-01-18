@@ -27,6 +27,7 @@ import VuiBadge from "../../../components/VuiBadge";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import VuiButton from "components/VuiButton";
+import moment from "moment";
 
 function Teacher({ image, name }) {
   return (
@@ -51,6 +52,29 @@ function Function({ content, isWilaya }) {
     </VuiTypography>
   );
 }
+
+const getLatestPaidDate = (teacherPayments) => {
+  // Handle cases where teacherPayments is undefined or empty
+  if (!teacherPayments || teacherPayments.length === 0) {
+    return "N/A";
+  }
+
+  // Filter out payments without paidAt date
+  const validPayments = teacherPayments.filter(payment => payment.paidAt);
+
+  if (validPayments.length === 0) {
+    return "N/A";
+  }
+
+  // Find the latest paidAt date
+  const latestDate = validPayments.reduce((latest, current) => {
+    const currentDate = new Date(current.paidAt);
+    return currentDate > latest ? currentDate : latest;
+  }, new Date(validPayments[0].paidAt));
+
+  // Format the date using moment
+  return moment(latestDate).format("DD/MM/YYYY HH:mm");
+};
 
 
 export const teacherPaidTableData = (t, data) => {
@@ -96,6 +120,12 @@ export const teacherPaidTableData = (t, data) => {
         {item?.paymentStats?.totalAmount} DA
       </VuiTypography>
     ),
+    [t("demands.table.paidAt")]: (
+      <VuiTypography variant="caption" color="white" fontWeight="medium" display="flex" justifyContent="center">
+        {getLatestPaidDate(item.TeacherPayment)}
+      </VuiTypography>
+
+    ),
     [t("demands.table.action")]: item?.TeacherDebt?.length > 0 && item.TeacherDebt[0]?.id && (
       <VuiButton
         variant="contained"
@@ -120,6 +150,7 @@ export const teacherPaidTableData = (t, data) => {
       { name: t("demands.table.subject"), key: "subject", align: "center", sortable: true },
       { name: t("demands.table.debt"), key: "debt", align: "center", sortable: false },
       { name: t("demands.table.total"), key: "amount", align: "center", sortable: true },
+      { name: t("demands.table.paidAt"), key: "amount", align: "center", sortable: true },
       { name: t("demands.table.action"), key: "amount", align: "center", sortable: true },
     ],
     rows: rowsObject || [],

@@ -211,7 +211,8 @@
       "title": "طلبات الانضمام",
       "total": "المجموع",
       "view": "انظر",
-      "yearsOfExperience": "سنوات من الخبرة"
+      "yearsOfExperience": "سنوات من الخبرة",
+      "paidAt":"تاريخ الدفع"
     }
   },
   "dialog": {
