@@ -37,7 +37,7 @@
     "reset": "إعادة تعيين كلمة المرور",
     "signin": "تسجيل الدخول",
     "submit": "إرسال",
-    "delete":"حذف"
+    "delete": "حذف"
   },
   "chapter": {
     "create": {
@@ -212,7 +212,7 @@
       "total": "المجموع",
       "view": "انظر",
       "yearsOfExperience": "سنوات من الخبرة",
-      "paidAt":"تاريخ الدفع"
+      "paidAt": "تاريخ الدفع"
     }
   },
   "dialog": {
@@ -714,6 +714,8 @@
     "HISTORY_GEOGRAPHY": "التاريخ والجغرافيا",
     "ISLAMIC_STUDIES": "التربية الإسلامية",
     "MATHEMATICS": "الرياضيات",
+    "SPANISH": "الاسبانية",
+    "GERMAN": "الألمانية",
     "NONE": "لا يوجد",
     "PHYSICS": "الفيزياء",
     "SCIENCE": "علوم تجريبية"

@@ -54,6 +54,8 @@ export const Subjects = [
   "ARABIC",
   "FRENCH",
   "ENGLISH",
+  "SPANISH",
+  "GERMAN",
 ];
 
 export const EducationalBranches = [
@@ -104,6 +106,8 @@ export const FiltersSubjects = [
   "ARABIC",
   "FRENCH",
   "ENGLISH",
+  "SPANISH",
+  "GERMAN",
   "OTHER",
 ];
 

@@ -331,9 +331,12 @@ function UpdateCourse({ isLoading, data: courseData }) {
                 {...register("discount", {
                   valueAsNumber: true,
                 })}
-                onChange={(e) => {
-                  const value = Math.max(0, parseInt(e.target.value || 0)); // Prevent going below 0
-                  setValue("discount", value); // Update react-hook-form state
+                min={0}
+                max={100}
+                onInput={(e) => {
+                  const value = parseFloat(e.target.value);
+                  if (value < 0) e.target.value = 0;
+                  if (value > 100) e.target.value = 100;
                 }}
               />
               {errors.discount && (
