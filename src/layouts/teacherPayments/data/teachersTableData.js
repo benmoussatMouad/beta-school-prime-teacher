@@ -36,8 +36,8 @@ export const teacherTableData = (t, data) => {
   // Modify the rowsObject mapping
   const rowsObject = safeData.map((item) => ({
     [t("payments.table.id")]: (
-      <VuiTypography  variant="caption" color="white" fontWeight="medium">
-        {item.id}
+      <VuiTypography variant="caption" color="white" fontWeight="medium">
+        #000{item.teacherPaymentId}
       </VuiTypography>
     ),
     [t("payments.table.amount")]: (

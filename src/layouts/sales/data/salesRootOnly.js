@@ -75,7 +75,7 @@ export const salesRootTableData = (t, data, commission) => {
     return {
       [t("sales.table.id")]: (
         <VuiTypography variant="caption" color="white" fontWeight="medium">
-          {item.id}
+          #000{item.transactionId}
         </VuiTypography>
       ),
       [t("sales.table.course")]: (
