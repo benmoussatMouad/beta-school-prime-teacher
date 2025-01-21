@@ -31,7 +31,7 @@ function ViewChapter({ closeDialog, openDialog, chapterId }) {
   const isLoading = isFetchingChapter || isFetchingVideo;
 
   // Destructure chapter data
-  const { title, description } = chapterData || {};
+  const { title, description, previewVideoFile } = chapterData || {};
   const videoUrl = viewChapter?.url; // Use viewChapter.url for video playback
 
   return (
@@ -97,6 +97,10 @@ function ViewChapter({ closeDialog, openDialog, chapterId }) {
                   {t("dialog.no.video")}
                 </VuiTypography>
               )}
+              {/* Display whether there is a preview sample */}
+              <VuiTypography color={previewVideoFile ? "success" : "error"} variant="caption" mt={2}>
+                {previewVideoFile ? t("dialog.preview.available") : t("dialog.preview.notAvailable")}
+              </VuiTypography>
             </Grid>
             {/* Title Display */}
             <Grid item xs={12}>
@@ -118,7 +122,8 @@ function ViewChapter({ closeDialog, openDialog, chapterId }) {
               </VuiTypography>
             </Grid>
           </Grid>
-        )}
+        )
+        }
       </DialogContent>
 
       <DialogActions>

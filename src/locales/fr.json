@@ -291,7 +291,9 @@
       "video": "Aucune vidéo trouvée"
     },
     "preview": {
+      "available": "Un aperçu est disponible.",
       "no": "Non",
+      "notAvailable": "Cette video n'a pas d'aperçu",
       "yes": "Oui"
     },
     "rejectCourse": {
