@@ -28,6 +28,7 @@
     "cancel": "إلغاء",
     "close": "إغلاق",
     "confirm": "تأكيد",
+    "delete": "حذف",
     "forgetButton01": "حاول مرة أخرى خلال",
     "forgetButton02": "إرسال رابط إعادة التعيين",
     "next": "التالي",
@@ -36,8 +37,7 @@
     "reject": "رفض",
     "reset": "إعادة تعيين كلمة المرور",
     "signin": "تسجيل الدخول",
-    "submit": "إرسال",
-    "delete": "حذف"
+    "submit": "إرسال"
   },
   "chapter": {
     "create": {
@@ -202,6 +202,7 @@
       "institution": "الأكاديمية",
       "isEmailVerified": "الحالة البريد الإلكتروني",
       "nodata": "لا توجد بيانات",
+      "paidAt": "تاريخ الدفع",
       "pay": "الدفع",
       "phone": "رقم الهاتف",
       "progress": "قيد التنفيذ",
@@ -211,8 +212,7 @@
       "title": "طلبات الانضمام",
       "total": "المجموع",
       "view": "انظر",
-      "yearsOfExperience": "سنوات من الخبرة",
-      "paidAt": "تاريخ الدفع"
+      "yearsOfExperience": "سنوات من الخبرة"
     }
   },
   "dialog": {
@@ -273,6 +273,9 @@
       "language": "اللغة",
       "level": "مستويات الطلاب",
       "maxParticipants": "الحد الأقصى للمشاركين",
+      "preview": {
+        "toggle": "شمل مقتطف مجاني"
+      },
       "price": "السعر",
       "selectteacherClasses": "تحديد فصول المعلم",
       "subjects": "موضوع الدورة",
@@ -287,6 +290,10 @@
     },
     "no": {
       "video": "لم يتم العثور على فيديو"
+    },
+    "preview": {
+      "no": "لا",
+      "yes": "نعم"
     },
     "rejectCourse": {
       "description": "تأكيد رفض الطلب",
@@ -319,13 +326,13 @@
     "MIDDLE_GENERAL": "التعليم المتوسط العام",
     "PRIMARY_GENERAL": "التعليم الابتدائي العام",
     "SECONDARY_ARTS": "ثانوي - فنون",
+    "SECONDARY_GERMAN": "ثانوي - الألمانية",
     "SECONDARY_LITERATURE": "ثانوي - اداب",
     "SECONDARY_MANAGEMENT_ECONOMIES": "ثانوي - تسيير واقتصاد",
     "SECONDARY_MATHEMATICS": "ثانوي - رياضيات",
     "SECONDARY_SCIENCE": "ثانوي - علوم تجريبية",
-    "SECONDARY_TECHNIQUE_MATH": "ثانوي - تقني-رياضي",
     "SECONDARY_SPANISH": "ثانوي - الاسبانية",
-    "SECONDARY_GERMAN": "ثانوي - الألمانية"
+    "SECONDARY_TECHNIQUE_MATH": "ثانوي - تقني-رياضي"
   },
   "faq": {
     "1": {
@@ -677,6 +684,10 @@
       "error": "حدث خطأ!",
       "success": "تم حظر الطالب بنجاح"
     },
+    "delete": {
+      "error": "حدث خطأ!",
+      "success": " تم حذف الطالب بنجاح"
+    },
     "loading": "جاري تحميل الطلاب...",
     "noResults": "لا يوجد طلاب.",
     "recover": {
@@ -703,24 +714,20 @@
       "student": "الطالب",
       "wilaya": "الولاية"
     },
-    "title": "التلاميذ",
-    "delete": {
-      "success": " تم حذف الطالب بنجاح",
-      "error": "حدث خطأ!"
-    }
+    "title": "التلاميذ"
   },
   "subjects": {
     "ARABIC": "العربية",
     "ENGLISH": "الإنجليزية",
     "FRENCH": "الفرنسية",
+    "GERMAN": "الألمانية",
     "HISTORY_GEOGRAPHY": "التاريخ والجغرافيا",
     "ISLAMIC_STUDIES": "التربية الإسلامية",
     "MATHEMATICS": "الرياضيات",
-    "SPANISH": "الاسبانية",
-    "GERMAN": "الألمانية",
     "NONE": "لا يوجد",
     "PHYSICS": "الفيزياء",
-    "SCIENCE": "علوم تجريبية"
+    "SCIENCE": "علوم تجريبية",
+    "SPANISH": "الاسبانية"
   },
   "subscriptionCard": {
     "title": "سعر الاشتراك",
@@ -788,6 +795,7 @@
       "wilaya": "ولاية"
     }
   },
+  "thisMeansThatTheVideoWillHaveAFreeSampleTheSampleWillBeThrityPercentOfTheoriginal": "هذا يعني أن الفيديو سيحتوي على عينة مجانية. ستكون العينة ثلاثين بالمائة من الأصلية. وهذا يعني أن الطلاب يمكنهم مشاهدة 30% من هذا الفيديو من بدايته قبل شراء الدورة الكاملة. على سبيل المثال، إذا كان طول الفيديو 30 دقيقة، فستكون العينة مدتها 9 دقائق.",
   "totalWatchTime": " وقت المشاهدة",
   "transactions": {
     "actions": "الإجراءات",

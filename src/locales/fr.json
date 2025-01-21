@@ -28,6 +28,7 @@
     "cancel": "Annuler",
     "close": "Fermer",
     "confirm": "Confirmer",
+    "delete": "Supprimer",
     "forgetButton01": "Réessayez dans",
     "forgetButton02": "Envoyer le lien de réinitialisation",
     "next": "Suivant",
@@ -36,8 +37,7 @@
     "reject": "Rejeter",
     "reset": "Réinitialiser le mot de passe",
     "signin": "Se connecter",
-    "submit": "Soumettre",
-    "delete": "Supprimer"
+    "submit": "Soumettre"
   },
   "chapter": {
     "create": {
@@ -201,6 +201,7 @@
       "institution": "Institution",
       "isEmailVerified": "Statut Email",
       "nodata": "Il n'y a pas de données",
+      "paidAt": "Date de Paiement",
       "pay": "Payer",
       "phone": "Téléphone",
       "progress": "EN PROGRESSION",
@@ -210,8 +211,7 @@
       "title": "Demandes d'adhésion",
       "total": "Total",
       "view": "Voir",
-      "yearsOfExperience": "Années d'expérience",
-      "paidAt": "Date de Paiement"
+      "yearsOfExperience": "Années d'expérience"
     }
   },
   "dialog": {
@@ -272,6 +272,9 @@
       "language": "Langue",
       "level": "Niveaux des étudiants",
       "maxParticipants": "Max participants",
+      "preview": {
+        "toggle": "Include un aperçu gratuit"
+      },
       "price": "Prix",
       "selectteacherClasses": "Sélectionner l'enseignant Classes",
       "subjects": "Sujet du cours",
@@ -286,6 +289,10 @@
     },
     "no": {
       "video": "Aucune vidéo trouvée"
+    },
+    "preview": {
+      "no": "Non",
+      "yes": "Oui"
     },
     "rejectCourse": {
       "description": "Confirmer le rejet de la demande",
@@ -318,13 +325,13 @@
     "MIDDLE_GENERAL": "Éducation moyenne générale",
     "PRIMARY_GENERAL": "Éducation primaire générale",
     "SECONDARY_ARTS": "Secondaire - Arts",
+    "SECONDARY_GERMAN": "Secondaire - Allemand",
     "SECONDARY_LITERATURE": "Secondaire - Littérature",
     "SECONDARY_MANAGEMENT_ECONOMIES": "Secondaire - Gestion et Économie",
     "SECONDARY_MATHEMATICS": "Secondaire - Mathématiques",
     "SECONDARY_SCIENCE": "Secondaire - Sciences",
-    "SECONDARY_TECHNIQUE_MATH": "Secondaire - Technique et Mathématiques",
     "SECONDARY_SPANISH": "Secondaire - Espagnol",
-    "SECONDARY_GERMAN": "Secondaire - Allemand"
+    "SECONDARY_TECHNIQUE_MATH": "Secondaire - Technique et Mathématiques"
   },
   "faq": {
     "1": {
@@ -672,6 +679,10 @@
     "UNDER_CREATION": "En cours de création"
   },
   "students": {
+    "delete": {
+      "error": "Une erreur s'est produite!",
+      "success": "Etudiant supprimé avec succès"
+    },
     "loading": "Chargement des étudiants...",
     "noResults": "Aucun étudiant trouvé.",
     "status": {
@@ -694,25 +705,21 @@
       "student": "Étudiant",
       "wilaya": "Wilaya"
     },
-    "title": "Étudiants",
-    "delete": {
-      "success": "Etudiant supprimé avec succès",
-      "error": "Une erreur s'est produite!"
-    }
+    "title": "Étudiants"
   },
   "subjects": {
     "ARABIC": "Arabe",
     "ENGLISH": "Anglais",
     "FRENCH": "Français",
+    "GERMAN": "Allemand",
     "HISTORY_GEOGRAPHY": "Histoire et géographie",
     "ISLAMIC_STUDIES": "Études islamiques",
     "MATHEMATICS": "Mathématiques",
-    "SPANISH": "Espagnol",
-    "GERMAN": "Allemand",
     "NONE": "Aucun",
     "OTHER": "Autres",
     "PHYSICS": "Physique",
-    "SCIENCE": "Science"
+    "SCIENCE": "Science",
+    "SPANISH": "Espagnol"
   },
   "subscriptionCard": {
     "title": "Prix de l'abonnement",
@@ -780,6 +787,7 @@
       "wilaya": "Wilaya"
     }
   },
+  "thisMeansThatTheVideoWillHaveAFreeSampleTheSampleWillBeThrityPercentOfTheoriginal": "Cela signifie que la vidéo aura un échantillon gratuit. L'échantillon représentera trente pour cent de l'original. Cela signifie que les étudiants peuvent visionner 30 % de cette vidéo depuis le début avant d'acheter le cours complet. Par exemple, si la vidéo dure 30 minutes, l'échantillon sera de 9 minutes.",
   "totalWatchTime": "Durée de visionnage",
   "transactions": {
     "actions": "Actions",

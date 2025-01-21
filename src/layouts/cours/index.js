@@ -23,7 +23,7 @@ import UpdateCourse from "./components/CourseDetails";
 
 import { Box, Skeleton } from "@mui/material";
 import VuiButton from "../../components/VuiButton";
-import { FaChevronLeft, FaChevronRight, FaTimes } from "react-icons/fa";
+import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import { convertSecondsToMinutes, formatSeconds } from "../../utils";
 import { useVisionUIController } from "../../context";
 import { useLocation } from "react-router-dom";
@@ -39,10 +39,8 @@ import ViewChapter from "../../examples/Dialogs/ViewChapter";
 import VuiProgress from "../../components/VuiProgress";
 import VuiBadge from "../../components/VuiBadge";
 import RevertCourse from "./components/RevertCourse";
-import { IoMdEye } from "react-icons/io";
 import MiniStatisticsCard from "../../examples/Cards/StatisticsCards/MiniStatisticsCard";
-import { IoTime } from "react-icons/io5";
-import { MdStar, MdTimer, MdWatch } from "react-icons/md";
+import { MdTimer } from "react-icons/md";
 import { FaStar } from "react-icons/fa6";
 
 
@@ -219,7 +217,7 @@ function CoursDetails() {
                   <MiniStatisticsCard
                     isLoading={isLoading}
                     title={{ text: t("rating") }}
-                    count={(course.rating * 5 || "0") + "/5"}
+                    count={((course.rating * 5).toFixed(1) || "0") + "/5"}
                     // percentage={{ color: "error", text: "-2%" }}
                     icon={{ color: "info", component: <FaStar size="20px" color="white" /> }}
                   />

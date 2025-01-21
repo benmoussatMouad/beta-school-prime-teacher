@@ -1,5 +1,14 @@
 import React, { useRef, useState } from "react";
-import { CircularProgress, Dialog, DialogActions, DialogContent, DialogTitle, Grid } from "@mui/material";
+import {
+  CircularProgress,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
+  FormControl, FormControlLabel,
+  Grid, Radio,
+  RadioGroup,
+} from "@mui/material";
 import linearGradient from "../../assets/theme/functions/linearGradient";
 import rgba from "../../assets/theme/functions/rgba";
 import VuiBox from "../../components/VuiBox";
@@ -16,6 +25,8 @@ import AttachFileIcon from "@mui/icons-material/AttachFile";
 import VideoPlayer from "../VideoPlayer/VideoPlayer";
 import { useCreateChapter } from "../../api/chapters/createChapter";
 import { showSnackBar, useVisionUIController } from "../../context";
+import { Switch } from "react-router-dom";
+import VuiSwitch from "../../components/VuiSwitch";
 
 const { black, gradients } = colors;
 const { card } = gradients;
@@ -46,6 +57,7 @@ function CreateChapter({ closeDialog, openDialog, courseId }) {
     defaultValues: {
       title: "",
       description: "",
+      hasPreview: false,
       video: null,
       attachments: [],
     },
@@ -80,7 +92,7 @@ function CreateChapter({ closeDialog, openDialog, courseId }) {
     if (!data.video) {
       return; // Ensure there's a video file
     }
-
+    console.log("has preview", data.hasPreview);
     setIsLoading(true); // Show loading spinner or progress bar
     setUploadProgress(0);
 
@@ -94,6 +106,7 @@ function CreateChapter({ closeDialog, openDialog, courseId }) {
     const formData = new FormData();
     formData.append("title", data.title);
     formData.append("description", data.description);
+    if (data.hasPreview) formData.append("hasPreview", data.hasPreview);
     if (data.video) formData.append("video", data.video);
     if (data.attachments.length) {
       data.attachments.forEach((file) => formData.append("attachments", file));
@@ -216,6 +229,44 @@ function CreateChapter({ closeDialog, openDialog, courseId }) {
                     <VuiTypography color="error" variant="caption">{errors.description.message}</VuiTypography>}
                 </Grid>
 
+
+                {/* Has Preview Toggle */}
+                <Grid item xs={12} textAlign="start" >
+                  <VuiTypography component="label" variant="button" color="white" fontWeight="medium">
+                    {t("dialog.forms.preview.toggle")}
+                  </VuiTypography>
+                  <VuiBox sx={{
+                    display: "flex",
+                    flexDirection: "row",
+                    justifyContent: "start",
+                    alignItems: "center",
+                    gap: 2,
+                    mx: 2
+                  }}>
+                    <FormControlLabel
+                      control={
+                        <VuiSwitch
+                          color="info" // Set to default theme color
+                          checked={Boolean(watch("hasPreview"))} // Bind it to 'hasPreview'
+                          onChange={(e) => setValue("hasPreview", e.target.checked)} // Update state when toggled
+                        />
+                      }
+                      label={
+                        <VuiTypography variant="caption" color="white">
+                          {t(watch("hasPreview") ? "dialog.preview.yes" : "dialog.preview.no")}
+                        </VuiTypography>
+                      } // Dynamic label
+                    />
+                  </VuiBox>
+                  {errors.hasPreview && (
+                    <VuiTypography color="error" variant="caption">
+                      {errors.hasPreview.message}
+                    </VuiTypography>
+                  )}
+                  <VuiTypography paragraph variant={"caption"} color="white" fontWeight="regular">
+                    {t("thisMeansThatTheVideoWillHaveAFreeSampleTheSampleWillBeThrityPercentOfTheoriginal")}
+                  </VuiTypography>
+                </Grid>
                 {/* Video Upload */}
                 <Grid sx={{ display: "flex", flexDirection: "column", gap: 1 }} item xs={12} textAlign="center">
                   <VuiTypography component="label" variant="button" color="white" fontWeight="medium">
