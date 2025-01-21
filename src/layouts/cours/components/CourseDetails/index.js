@@ -143,6 +143,14 @@ function UpdateCourse({ isLoading, data: courseData }) {
     setPopperAnchor(event.currentTarget);
   };
 
+  const togglePopper = (event) => {
+    if (isPopperOpen) {
+      handlePopperClose();
+    } else {
+      handlePopperOpen(event);
+    }
+  }
+
   // Close Popover with a slight delay to account for hover transitions
   const handlePopperClose = () => {
     setPopperAnchor(null);
@@ -160,7 +168,7 @@ function UpdateCourse({ isLoading, data: courseData }) {
       <VuiBox as={"form"} onSubmit={handleSubmit(onSubmit)}>
         {/* Icon Upload */}
         <VuiBox
-          onMouseEnter={handlePopperOpen}
+          // onMouseEnter={handlePopperOpen}
           display="flex"
           flexDirection="column"
           alignItems="center"
@@ -168,10 +176,13 @@ function UpdateCourse({ isLoading, data: courseData }) {
           <VuiTypography component="label" variant="button" color="white" fontWeight="medium" sx={{ mb: 2 }}>
             {t("dialog.course.icon")}
           </VuiTypography>
+          <VuiTypography component="label" paragraph variant="caption" color="white" fontWeight="regular" sx={{ mb: 2 }}>
+            {t("clickToChoseYourOwn")}
+          </VuiTypography>
           {iconPreview ? (
             <VuiAvatar
               src={iconPreview}
-              sx={{ width: 100, height: 100, cursor: "pointer" }}
+              sx={{ width: 100, height: 100, cursor: "pointer", backgroundColor: '#fff' }}
               onClick={() => document.getElementById("avatar-file-input").click()}
             />
           ) : (
@@ -189,6 +200,7 @@ function UpdateCourse({ isLoading, data: courseData }) {
             accept="image/*"
             onChange={handleAvatarChange}
           />
+          <VuiButton mt={3} variant={'contained'} color={"info"} onClick={togglePopper}>{isPopperOpen ? t("button.close") : t("choose-a-predefined-icon")}</VuiButton>
           {errors.icon && (
             <VuiTypography sx={{ color: "red", fontSize: "0.7rem" }}>
               {errors.icon.message}
@@ -199,7 +211,7 @@ function UpdateCourse({ isLoading, data: courseData }) {
             handlePredefinedIconClick={handlePredefinedIconClick}
             popperAnchor={popperAnchor}
             isPopperOpen={isPopperOpen}
-            handlePopperClose={handlePopperClose}
+            // handlePopperClose={handlePopperClose}
             icons={icons}
           />
         </VuiBox>

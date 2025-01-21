@@ -39,17 +39,14 @@ import boxShadows from "../../../../assets/theme/base/boxShadows";
 import linearGradient from "../../../../assets/theme/functions/linearGradient";
 import rgba from "../../../../assets/theme/functions/rgba";
 import { useTranslation } from "react-i18next";
-import { MdDelete, MdEdit, MdPlayArrow } from "react-icons/md";
+import { MdDelete, MdEdit } from "react-icons/md";
 import { useDeleteChapter } from "../../../../api/chapters/deleteChapter";
 import { saveAs } from "file-saver";
 import { useDeleteAttachment } from "../../../../api/chapters/deleteAttachment";
-import bgCard from "assets/images/welcome-profile.png"
-import backgroundImage from "../../../../assets/images/sidenav/sidenav-card-background.png";
-import { FaCirclePlay } from "react-icons/fa6";
 import { FaPlay } from "react-icons/fa";
 
 const { black, white, gradients } = colors;
-const { card } = gradients;
+const { card, info } = gradients;
 const { borderWidth, borderRadius } = borders;
 const { xxl } = boxShadows;
 
@@ -116,7 +113,7 @@ function ChapterCard(
   return (
     <VuiBox
       sx={{
-        background: `url(${bgCard})`,
+        background: info.main,
         padding: "10px",
         borderRadius: "15px",
         display: "flex",

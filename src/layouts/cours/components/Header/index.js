@@ -142,7 +142,7 @@ function Header({ pageName, data, courseOwner }) {
               justifyContent: { xs: "center", md: "flex-end" },
               flexDirection: { xs: "column", md: "row" },
             }}>
-              <VuiBadge color="primary" variant="gradient" container badgeContent={`${t(`subjects.${data.subject}`)}`} size="lg"
+              <VuiBadge color="info" variant="gradient" container badgeContent={`${t(`subjects.${data.subject}`)}`} size="lg"
                         sx={{ fontSize: { xs: "1rem", md: "1.2rem" } }} />
               <VuiAvatar src={courseOwner.profilePic?.url} alt="profile-image" variant="rounded" size="lg" shadow="sm" />
               <VuiTypography color={"white"} sx={{
@@ -152,7 +152,7 @@ function Header({ pageName, data, courseOwner }) {
               }} variant="caption">
                 {i18n.language === "fr" ? `${courseOwner.lastName} ${courseOwner.firstName}` : `${courseOwner.firstNameAr || courseOwner.lastName} ${courseOwner.lastNameAr || courseOwner.firstName}`}
               </VuiTypography>
-              <VuiBadge color="primary" variant="gradient" container badgeContent={`${data.price}DA`} size="lg"
+              <VuiBadge color="info" variant="gradient" container badgeContent={`${data.price}DA`} size="lg"
                         sx={{ fontSize: { xs: "1rem", md: "1.2rem" } }} />
             </VuiBox>
           </Grid>
