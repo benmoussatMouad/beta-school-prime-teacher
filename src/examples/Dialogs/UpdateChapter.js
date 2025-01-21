@@ -1,5 +1,13 @@
 import React, { useEffect, useRef, useState } from "react";
-import { CircularProgress, Dialog, DialogActions, DialogContent, DialogTitle, Grid } from "@mui/material";
+import {
+  CircularProgress,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
+  FormControlLabel,
+  Grid,
+} from "@mui/material";
 import linearGradient from "../../assets/theme/functions/linearGradient";
 import rgba from "../../assets/theme/functions/rgba";
 import VuiBox from "../../components/VuiBox";
@@ -20,6 +28,7 @@ import { getAccessToken } from "../../utils";
 import { useViewChapter } from "../../api/chapters/viewChapter";
 import { IoIosWarning } from "react-icons/io";
 import { MdCancel } from "react-icons/md";
+import VuiSwitch from "../../components/VuiSwitch";
 
 const { black, gradients } = colors;
 const { card } = gradients;
@@ -54,6 +63,7 @@ function UpdateChapter({ closeDialog, openDialog, chapterId }) {
     defaultValues: {
       title: "",
       description: "",
+      hasPreview: false,
       video: null,
       attachments: [],
     },
@@ -115,6 +125,7 @@ function UpdateChapter({ closeDialog, openDialog, chapterId }) {
     if (data.title) formData.append("title", data.title); // Include only updated fields
     if (data.description) formData.append("description", data.description);
     if (data.video) formData.append("video", data.video);
+    if (data.hasPreview && data.video) formData.append("hasPreview", data.hasPreview);
     if (data.attachments.length) {
       data.attachments.forEach((file) => {
         formData.append(`attachments`, file); // Attach each selected file
@@ -269,6 +280,44 @@ function UpdateChapter({ closeDialog, openDialog, chapterId }) {
                   </VuiButton>
                   {uploadedVideo && (
                     <>
+                      {/* Has Preview Toggle */}
+                      <Grid item xs={12} textAlign="start" >
+                        <VuiTypography component="label" variant="button" color="white" fontWeight="medium">
+                          {t("dialog.forms.preview.toggle")}
+                        </VuiTypography>
+                        <VuiBox sx={{
+                          display: "flex",
+                          flexDirection: "row",
+                          justifyContent: "start",
+                          alignItems: "center",
+                          gap: 2,
+                          mx: 2
+                        }}>
+                          <FormControlLabel
+                            control={
+                              <VuiSwitch
+                                color="info" // Set to default theme color
+                                checked={Boolean(watch("hasPreview"))} // Bind it to 'hasPreview'
+                                onChange={(e) => setValue("hasPreview", e.target.checked)} // Update state when toggled
+                              />
+                            }
+                            label={
+                              <VuiTypography variant="caption" color="white">
+                                {t(watch("hasPreview") ? "dialog.preview.yes" : "dialog.preview.no")}
+                              </VuiTypography>
+                            } // Dynamic label
+                          />
+                        </VuiBox>
+                        {errors.hasPreview && (
+                          <VuiTypography color="error" variant="caption">
+                            {errors.hasPreview.message}
+                          </VuiTypography>
+                        )}
+                        <VuiTypography paragraph variant={"caption"} color="white" fontWeight="regular">
+                          {t("thisMeansThatTheVideoWillHaveAFreeSampleTheSampleWillBeThrityPercentOfTheoriginal")}
+                        </VuiTypography>
+                      </Grid>
+
                       <VuiTypography variant="caption" color="info">{uploadedVideo.name}</VuiTypography>
                       {/* Add Delete Button */}
                       <VuiButton
