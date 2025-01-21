@@ -44,6 +44,8 @@ import { useDeleteChapter } from "../../../../api/chapters/deleteChapter";
 import { saveAs } from "file-saver";
 import { useDeleteAttachment } from "../../../../api/chapters/deleteAttachment";
 import { FaPlay } from "react-icons/fa";
+import { IoMdEye } from "react-icons/io";
+import { FaEye } from "react-icons/fa6";
 
 const { black, white, gradients } = colors;
 const { card, info } = gradients;
@@ -59,6 +61,8 @@ function ChapterCard(
     description,
     action,
     duration,
+    rating,
+    views,
     id,
     ressources,
     openToEdit,
@@ -93,15 +97,15 @@ function ChapterCard(
 
   // Perform the delete action
   const handleDelete = async () => {
-    setIsLoading(true)
+    setIsLoading(true);
     mutate(id, {
       onSuccess: () => {
         setIsDialogOpen(false); // Close the dialog on success
-        setIsLoading(false)
+        setIsLoading(false);
       },
       onError: () => {
         setIsDialogOpen(false);
-        setIsLoading(false)
+        setIsLoading(false);
       },
     });
   };
@@ -253,10 +257,23 @@ function ChapterCard(
               </VuiButton>}
             </VuiBox>)}
           </Popover>
+          <VuiBox mr={1} sx={{ direction: "ltr", textAlign: "right"}} display="flex" alignSelf="center"
+                  justifyContent="flex-start">
+            <VuiTypography variant={"caption"} color={"white"}>
+              {duration}.{t("minute")}
+            </VuiTypography>
+          </VuiBox>
           <VuiBox sx={{ textAlign: "right", width: "100%" }} display="flex" alignSelf="center"
                   justifyContent="flex-end">
             <VuiTypography variant={"caption"} color={"white"}>
-              {duration} {t("minute")}
+              {rating} ⭐
+            </VuiTypography>
+          </VuiBox>
+          <VuiBox mr={2} sx={{ direction: "ltr", textAlign: "right", width: "100%" }}
+                  display="flex"
+                  alignSelf="center">
+            <VuiTypography variant={"caption"} color={"white"}>
+              {views}.{t("views")}
             </VuiTypography>
           </VuiBox>
         </VuiBox>
